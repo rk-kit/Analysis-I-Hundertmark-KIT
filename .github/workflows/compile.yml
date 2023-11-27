@@ -1,0 +1,36 @@
+name: Compile PDF
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  compile:
+    name: Compile PDF and push to repo
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+           sudo apt install texlive-latex-base
+           sudo apt install texlive-latex-extra --no-install-recommends
+           sudo apt install texlive-lang-german
+
+      - name: Compile Skript.pdf
+        run: |
+          pdflatex Skript.tex
+          pdflatex Skript.tex
+
+      - name: Commit Skript.pdf
+        run: |
+          git config --global user.name github-actions
+          git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add Skript.pdf
+          git commit -m 'Automated action: Compile pdf [skip ci]'
+          git push
