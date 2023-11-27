@@ -1,0 +1,283 @@
+%%%%%%%%%%%%%%%%%%%%%%%%
+% 14. November 2023
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\thispagestyle{pagenumberonly}
+
+\subsection{Summenzeichen, Produktzeichen}
+\begin{definition}
+    Seien $m\leq n$, $m,n\in\naturalnumbers_{0}$. Für jedes $k\in\naturalnumbers_0$, $m\leq k\leq n$, sei $a_k\in\realnumbers$.\\
+    Dann setzt man:
+    \begin{align*}
+        \sum_{k=m}^{n}a_k &= a_m+a_{m+1}+a_{m+2}+\dots+a_{n}
+        \intertext{und}
+        \prod_{k=m}^{n} &= a_m\cdot a_{m+1}\cdot a_{m+2}\cdot \dots\cdot a_{n}
+    \end{align*}
+    Für $n\in\naturalnumbers_0$, $n<m$ setzt man $\prod_{k=m}^{n}a_k = 1$.
+\end{definition}
+\begin{definition}[Fakultät]
+    Sei $n\in\naturalnumbers$, dann gilt:
+    \begin{align*}
+        n! &= 1 \cdot 2\cdot 3 \cdot \dots \cdot n
+        \intertext{und wir definieren}
+        0! &= 1
+    \end{align*}
+    Alternativ lässt sich rekursiv definieren:
+    \begin{align*}
+        0! &\definedas 1\\
+        n! &= (n-1)! \cdot n
+    \end{align*}
+\end{definition}
+
+\begin{satz} % Satz 3
+    Die Anzahl aller möglichen Anordnungen einer $n$-elementigen Menge $\set{A_1, \dots, A_n}$ ist gleich $n!$.\\
+    Wenn wir beispielsweise die Menge $\set{1,2,3}$ betrachten. Mögliche Anordnungen: $\set{1,2,3}$, $\set{1,3,2}$, $\set{2,1,3}$, $\set{2,3,1}$, $\set{3,1,2}$, $\set{3,2,1}$. Somit gibt es 6 Möglichkeiten, was $3!$ entspricht.
+    \begin{proof}[Induktionsbeweis]
+        ~\\
+        \begin{induktionsanfang}
+            $n=1$, es gibt eine Anordnung $\set{A_1}$ und es gilt $1! = 1$
+        \end{induktionsanfang}
+        \\
+        \begin{induktionsschritt}
+            Die Gesamtzahl aller Anordnungen von $\set{A_1, \dots, A_{n+1}}$ ist gleich
+            \begin{align*}
+                &(n+1)\cdot [\text{Gesamtzahl von Anordnungen von }\set{A_1, \dots, A_n}]\\
+                \annot{=}{I-Ann} &(n+1) \cdot n! = (n+1)!\qedhere
+            \end{align*}
+        \end{induktionsschritt}
+    \end{proof}
+\end{satz}
+
+\subsection{Binomischer Lehrsatz}
+\begin{definition}[Binomialkoeffizient]
+    Für $n,k\in\naturalnumbers_0$ setzt man:
+    \begin{align*}
+        \binom{n}{k} &\definedas \frac{n\cdot(n-1)\cdot\dots\cdot(n-k+1)}{k!} = \frac{n!}{k!\cdot(n-k)!} \tag{$n$ über $k$}
+    \end{align*}
+\end{definition}
+\begin{bemerkung}[Spezielle Binomialkoeffizienten]
+    $\binom{n}{0} = 1, \binom{n}{n} = 1, \binom{n}{k} = 0$ für $k>n$
+\end{bemerkung}
+
+\begin{satz}
+    \label{satz:teilmengen-anzahl}
+    Die Anzahl der $k$-elementigen Teilmengen einer $n$-elementigen Menge $\set{A_1, \dots, A_n}$ ist gleich $\binom{n}{k}$.
+\end{satz}
+
+\begin{hilfsatz}
+    \label{hilfsatz:binom-add}
+    $\forall k,n\in\naturalnumbers$ gilt $\binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}$.
+    \begin{proof}
+        \begin{align*}
+            \binom{n-1}{k} + \binom{n-1}{k-1} &= \frac{(n-1)!}{k!\cdot(n-1-k)!} + \frac{(n-1)!}{(k-1)!\cdot(n-1-k+1)!}\\
+            &= \frac{(n-1)!\cdot(n-k)}{k!\cdot(n-k)!} + \frac{(n-1)!\cdot k}{k!\cdot(n-k)!}\\
+            &= \frac{(n-1)!\cdot\interv{n-k+k}}{k!\cdot(n-k)!}\\
+            &= \frac{n!}{k!\cdot(n-k)!} \annot{=}{Def.} \binom{n}{k}\qedhere
+        \end{align*}
+    \end{proof}
+\end{hilfsatz}
+\begin{proof}[Beweis von Satz~\ref{satz:teilmengen-anzahl} (Induktion nach $n$)]
+    ~\\
+    \begin{induktionsanfang}
+        $n=1$, $\set{A_1}$. Wenn $k=0$, dann gibt es eine Möglichkeit und es gilt $\binom{1}{0} = 1$. Wenn $k=1$, gibt es auch eine Möglichkeit und es gilt $\binom{1}{1} = 1$.\\
+    \end{induktionsanfang}
+    \\
+    \begin{induktionsschritt}
+        $n\rightarrow n+1$\\
+        Die Behauptung sei für $M_n=\set{A_1, \dots, A_n}$ schon bewiesen. Wir betrachten $M_n+1 = \set{A_1, \dots, A_{n+1}}$. Für $k=0$ und $k=n+1$ ist die Behauptung offensichtlich.\\
+        Für $1\leq k \leq n$ gehört jede $k$-elementige Teilmenge von $M_{n+1}$ zu genau einer der folgenden Klassen:
+        \begin{enumerate}
+            \item $T_0$ besteht aus $k$-elementigen Teilmengen, die $A_{n+1}$ nicht enthalten.
+            \item $T_1$ besteht aus denjenigen Teilmengen, die $A_{n+1}$ enthalten.
+        \end{enumerate}
+        \noindent In $T_0$ gibt es nach Induktionsannahme $\binom{n}{k}$ Elemente.\\
+        In $T_1$ gibt es $\binom{n}{k-1}$ Elemente\footnotemark.\\
+        Insgesamt:
+        \begin{equation*}
+            \binom{n}{k}+\binom{n}{k-1}\annot{=}{\ref{hilfsatz:binom-add}}\binom{n+1}{k}\qedhere
+        \end{equation*}
+    \end{induktionsschritt}
+    \footnotetext{Wir wissen, dass $A_{n+1}$ bereits ein Element der Teilmenge ist. Damit müssen wir noch $k-1$ aus $n$ Elemente auswählen. Die Formel dafür folgt aus der Induktionsannahme}
+\end{proof}
+
+\begin{satz}[Binomischer Lehrsatz]
+    \label{satz:binom-lehrsatz}
+    Sei $x,y\in\realnumbers$ und $n\in\naturalnumbers$. Dann gilt:
+    \begin{align*}
+    (x+y)
+        ^{n} &= \sum_{k=0}^{n} \binom{n}{k}\cdot x^{n-k}\cdot y^k
+    \end{align*}
+\end{satz}
+\begin{beispiel}[Folgerung der binomischen Formel aus dem binomischen Lehrsatz]
+    Es sei $n=2$. Es gilt $\binom{2}{0}=1$, $\binom{2}{1}=2$, $\binom{2}{2}=1$. Daraus folgt:
+    \begin{align*}
+    (x+y)
+        ^{2} &= x^2+2xy+y^2
+    \end{align*}
+\end{beispiel}
+\begin{proof}[Beweis von Satz~\ref{satz:binom-lehrsatz}]
+    ~\\IA: $n=0$
+    \begin{align*}
+    (x+y)
+        ^0&=1\\
+        \sum_{k=0}^0\binom{0}{k}\cdot x^{k}\cdot y^{0-k} &= \binom{0}{k}\cdot 1\cdot 1 = 1
+    \end{align*}
+    Induktionsschritt: $n\rightarrow n+1$
+    \begin{align*}
+    (x+y)
+        ^{n+1} &= (x+y)^n\cdot (x+y) = (x+y)^n \cdot x + (x+y)^n\cdot y\\
+        (x+y)^n\cdot x &\annot{=}{I-An} \sum_{k=0}^{n}\binom{n}{k}\cdot x^{n-k}\cdot y^k\cdot x\\
+        &=1\cdot x^{n+1} + \sum_{k=1}^{n} \binom{n}{k}\cdot x^{n+1-k}\cdot y^{k}\\
+        (x+y)^n\cdot y &= \sum_{k=0}^{n}\binom{n}{k}\cdot x^{n-k}\cdot y^{k+1}\tag{$l\definedas k+1$}\\
+        &= \sum_{l=1}^{n+1} \binom{n}{l-1}\cdot x^{n+1-l}\cdot y^{l}\\
+        &= \sum_{k=1}^{n+1} \binom{n}{k+1}\cdot x^{n+1-k} \cdot y^{k}\\[10pt]
+        \impl (x+y)^{n+1} &= x^{n+1} + \sum_{k=1}^{n} \interv{\binom{n}{k}+\binom{n}{k+1}} \cdot x^{n+1-k}\cdot y^k + y^{n+1}\\
+        &\annot{=}{\ref{hilfsatz:binom-add}} \sum_{k=0}^{n+1} \binom{n+1}{k}\cdot x^{n+1-k}\cdot y^{k}\qedhere
+    \end{align*}
+\end{proof}
+
+\begin{bemerkung}
+    Sei $x>0$, dann gilt $(1+x)^n = 1+\underbrace{\binom{n}{1}x}_{n\cdot x} + \underbrace{\sum \dots}_{>0} > 1 + n\cdot x$
+\end{bemerkung}
+
+\subsection{Bernoullische Ungleichung}
+
+\begin{satz}
+    Es sei $n\in\naturalnumbers$ und $a\in\realnumbers$, $a > -1$. Dann gilt
+    \begin{align*}
+    (1+a)
+        ^n \geq 1+na
+    \end{align*}
+    \begin{proof}
+        Wir verwenden vollständige Induktion:\\
+        \begin{induktionsanfang}
+            $n=1 \impl 1+a = 1+a$
+        \end{induktionsanfang}
+        \\
+        \begin{induktionsschritt}
+            $n\rightarrow n+1$
+            \begin{align*}
+            (1+a)
+                ^{n+1} = (1+a)^n\cdot (1+a) \annot{\geq}{I-Ann} (1+na)\cdot(1+a) = 1+na+a+na^2\geq 1+(n+1)\cdot a
+            \end{align*}
+        \end{induktionsschritt}
+    \end{proof}
+\end{satz}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% 16. November 2023
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+\subsection{Wurzeln}
+
+\begin{satz}
+    Für jedes $c\in\realnumbers$, $c>0$, gibt es genau ein $x>0$, so dass $x^2 = c$ ist.
+    \begin{proof}
+        \textit{Eindeutigkeit}\\
+        $x_1>0$, $x_2>0$: $\pair{x_1}^2 = \pair{x_2}^2 = c \impl 0 = (\pair{x_1}^2-\pair{x_2}^2) = (x_1-x_2) \cdot \underbrace{(x_1+x_2)}_{>0} \impl x_1 = x_2$\\
+        \textit{Existenz}\\
+        Wir definieren $M\definedas\set{z\in\realnumbers|~z\geq 0, z^2 \leq c}$. Dann gilt $0\in M \impl M\neq \emptyset$\\[10pt]
+        $M$ ist beschränkt, weil $(1+c)^2=1+2c+c^2 > c$, \quad$z\in M \impl z < 1 + c$\\
+        Somit $\exists \sup M$ und wir definieren $x\definedas \sup M$. Zu zeigen: $x^2 = c$\\[10pt]
+        Wir nehmen an, dass $x^2<c$ und setzen $\varepsilon \definedas \min\set{1, \frac{c-x^2}{2x+1}} \impl 0 < \varepsilon \leq 1 \impl \varepsilon^2 < \varepsilon$\\
+        $(x+\varepsilon)^2 = x^2 + 2\varepsilon x + \varepsilon^2 < x^2+\varepsilon\pair{2x+1}\leq x^2+c-x^2=c$\\
+        $\impl x+\varepsilon\in M$ (Widerspruch) $\impl x^2 \geq c$\\[10pt]
+        Wir nehmen an, dass $x^2 > c$, $\varepsilon \definedas\min\set{\frac{x^2-c}{2x}, \frac{x}{2}}$, $\varepsilon > 0$, $x-\varepsilon \geq x-\frac{x}{2}>0$\\
+        $\pair{x-\varepsilon}^2 = x^2 - 2 x\varepsilon + \varepsilon^2 > x^2-2x\varepsilon \geq x^2-x^2+c\impl (x-\varepsilon)^2 > c \impl x\neq \sup M$ (Widerspruch)\\[10pt]
+        $\impl x^2 = c$
+    \end{proof}
+\end{satz}
+
+\begin{bemerkung}
+    $x=\sqrt {c}$, $x=c^{\frac{1}{2}}$, $x$ ist die Quadratwurzel von $c$
+\end{bemerkung}
+
+\begin{satz}
+    Für $n\in\naturalnumbers$ und für jedes $c\in\realnumbers$, $c\geq 0$ gibt es genau ein $x \geq 0$, $x\in\realnumbers$, so dass $x^n = c$.
+    \begin{proof}
+        \textit{Eindeutigkeit}\\
+        $x_1>0$, $x_2>0$, $\pair{x_1}^n-\pair{x_2}^n = c$, $0=\pair{\pair{x_1}^n-\pair{x_2}^n} = \pair{x_1 - x_2}\cdot\pair{\sum_{k=0}^{n-1} \pair{x_1}^{n-k+1}\cdot \pair{x_2}^k}$\\
+        $\impl x_1 = x_2$
+    \end{proof}
+    \noindent Die Existenz ist Aufgabe auf dem Übungsblatt.
+\end{satz}
+
+\begin{definition}[Spezielle Potenzen]
+    $m,n\in\naturalnumbers$\quad $x^\frac{m}{n}\definedas \pair{x^\frac{1}{m}}^n$, $x^0 = 1$, $0^m = 0$ mit $m\neq 0$, $0^0 = 1$
+\end{definition}
+
+\subsection{Absolutbetrag}
+
+\begin{definition}[Betrag]
+    $\abs{a} \definedas \left\{ \begin{array}{lr}
+                                    a  & a>0 \\
+                                    0  & a=0 \\
+                                    -a & a<0
+    \end{array}\right.$
+\end{definition}
+
+\begin{satz}[Eigenschaften des Betrags]
+    \theoremescape
+    \begin{enumerate}[label=(\roman*)]
+        \item $\abs{a} \geq 0$, $\abs{a} = 0 \equivalent a = 0$
+        \item $\abs{\lambda\cdot a} = \abs{\lambda}\cdot\abs{a}$, $\forall \lambda, a \in \realnumbers$
+        \item $\abs{a+b}\leq \abs{a}+\abs{b}$ (Dreiecksungleichung) %%% 5.14
+    \end{enumerate}
+    \begin{proof}[Beweis von (iii)]
+        \begin{align*}
+            \abs{a+b}^2 = &\pair{a+b}^2 = a^2 + 2ab + b^2\\
+            \leq &\abs{a}^2 + 2\abs{a}\abs{b} + \abs{b}^2 = \pair{\abs{a}+\abs{b}}^2\\
+            \impl &\abs{a+b}\leq\abs{a}+\abs{b}\qedhere
+        \end{align*}
+    \end{proof}
+\end{satz}
+
+\begin{definition}[Geometrische Betrachtung des Betrags]
+    Man nennt $\abs{a-b}$ den Abstand zweier Punkte $a,b\in\realnumbers$ auf der Zahlengerade.
+\end{definition}
+
+\begin{satz}[Eigenschaften von Differenzen im Betrag]
+    \label{satz:diff-abs}
+    \theoremescape
+    \begin{enumerate}[label=(\roman*)]
+        \item $\abs{a-b}\geq 0$, $\abs{a-b} = 0\equivalent a = b$
+        \item $\abs{a-b} = \abs{b-a}$
+        \item $\abs{a-b}\leq \abs{a-c} + \abs{b-c}$ $\forall c\in\realnumbers$ %%% 5.15
+    \end{enumerate}
+    \begin{proof}[Beweis von (iii)]
+        \begin{align*}
+            \abs{a-b} &= \abs{a-c+c-b} \leq \abs{a-c}+\abs{c-b} = \abs{a-c}+\abs{b-c}\qedhere
+        \end{align*}
+    \end{proof}
+\end{satz}
+
+\begin{satz} %%% 5.16
+    $\forall a,b\in\realnumbers$ gilt $\abs{\abs{a}-\abs{b}}\leq\abs{a-b}$
+    \begin{proof}
+        \begin{align*}
+            \abs{a} = \abs{a-b+b} &\leq \abs{a-b} + \abs{b}\\
+            \impl \abs{a}-\abs{b} &\leq \abs{a-b}\\
+            \abs{b}-\abs{a} &\leq \abs{b-a} = \abs{a-b}\\[10pt]
+            \impl \abs{a-b}&\geq\abs{\abs{a}-\abs{b}}\qedhere
+        \end{align*}
+    \end{proof}
+\end{satz}
+
+\begin{folgerung}
+    \theoremescape
+    \begin{enumerate}[label=(\roman*)]
+        \item $\abs{a-b}\geq \abs{a}-\abs{b}$
+        \item $\abs{a+b} = \abs{a-\pair{-b}} \geq \abs{a} - \abs{-b}$
+    \end{enumerate}
+\end{folgerung}
+
+\begin{bemerkung}
+    Durch Induktion leitet man her, dass:
+    \begin{align*}
+        \abs{\sum_{i=1}^{n} a_i} &\leq \sum_{i=1}^{n} \abs{a_i}\quad a_i \in\realnumbers
+    \end{align*}
+\end{bemerkung}
+
+\newpage

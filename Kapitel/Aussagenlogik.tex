@@ -1,0 +1,72 @@
+%%%%%%%%%%%%%%%%%%%%%%%%
+% 26. Oktober 2023
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\thispagestyle{pagenumberonly}
+
+\begin{definition}[Aussage]
+    Eine Aussage ist eine Behauptung sprachlich oder mittels Formeln, welche entweder wahr oder falsch ist.
+\end{definition}
+
+\begin{beispiel}[Zulässige Aussagen]
+    \theoremescape
+    \begin{enumerate}[label=(\roman*)]
+        \item Bielefeld existiert (w)
+        \item $2+2=5$ (f)
+        \item Es gibt unendlich viele Primzahlen (w)
+    \end{enumerate}
+\end{beispiel}
+
+\begin{definition}[Aussageform]
+    Eine Aussage, die von mindestens einer Variablen abhängt, nennt sich Aussageform.
+    Wir schreiben zum Beispiel $H(x)$ für eine Aussage für die Variable $x$.
+\end{definition}
+
+\begin{beispiel}[Mögliche Aussageformen]
+    \theoremescape
+    \begin{enumerate}[label=(\roman*)]
+        \item $H(x) \definedasequiv \pair{x^2-3x+2=0}$
+        \item $G(x) \definedasequiv \pair{x=1\lor x=2}$
+    \end{enumerate}
+\end{beispiel}
+
+\begin{konzept}[Beweisstruktur]
+    \begin{equation*}
+        \begin{split}
+            p\\
+            \text{Vorraussetzung}\\
+            \text{hinreichend für }q
+        \end{split}
+        \begin{split}
+            \qquad\impl\qquad
+        \end{split}
+        \begin{split}
+            q\\
+            \text{Behauptung}\\
+            \text{notwendig für }p
+        \end{split}
+    \end{equation*}
+    \noindent Beweis: $p\impl r_1 \impl r_2 \impl r_3 \impl \dots\impl r_n \impl q$. ($r_1,\dots, r_n$ sind bereits bekannte wahre Aussagen oder Axiome)
+\end{konzept}
+
+\begin{satz}[Regeln der Aussagenlogik]
+    Seien $p,q,r$ Aussagen.
+    Dann sind folgende Aussagen wahr:
+    \begin{enumerate}[label=(\roman*)]
+        \item $p \lor \neg p$ \aligntoright{(Tertium non datur)}{0.1}\\
+        $p \impl p$\\
+        $\neg (p \land \neg p)$
+        \item $p\land q \equivalent q \land p$ \aligntoright{(Kommutativität)}{0.1}\\
+        $p\lor q \equivalent q \lor p$
+        \item $(p\land q) \land r \equivalent p \land (q\land r)$ \aligntoright{(Assoziativität)}{0.1}\\
+        $(p\lor q) \lor r \equivalent p \lor (q\land r)$
+        \item $\neg(p\land q) \equivalent \neg p \lor \neg q$ \aligntoright{(De Morgan)}{0.1}\\
+        $\neg(p\lor q) \equivalent \neg p \land \neg q$
+        \item $p\impl q \equivalent \neg p \lor q$ \aligntoright{(Definition der Implikation)}{0.1}
+        \item $(p\equivalent q) \equivalent (p\impl q) \land (q\impl p)$ \aligntoright{(Definition der Äquivalenz)}{0.1}\\
+        $(p\equivalent q) \equivalent (p\land q) \lor (\neg p \land \neg q)$
+        \item $(p\equivalent q) \land (q\equivalent r) \impl (p \equivalent r)$ \aligntoright{(Transitivität)}{0.1}
+    \end{enumerate}
+\end{satz}
+
+\newpage

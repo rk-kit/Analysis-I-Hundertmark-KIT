@@ -1,0 +1,648 @@
+\documentclass[11pt, twoside, a4paper]{article}
+
+% Setup
+\usepackage[margin=2.4cm, top=3.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+
+% Package imports
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage[pagestyles]{titlesec}
+\usepackage{fancyhdr}
+\usepackage{colonequals}
+\usepackage{caption}
+\usepackage{tikz}
+\usepackage{fnum}
+
+% Theorems
+\newtheorem{blockelement}{Blockelement}[subsection]
+\newtheoremstyle{plain}{}{}{}{}{\bfseries}{.}{ }{}
+\theoremstyle{plain}
+\newtheorem{bemerkung}[blockelement]{Bemerkung}
+\newtheorem{definition}[blockelement]{Definition}
+\newtheorem{lemma}[blockelement]{Lemma}
+\newtheorem{satz}[blockelement]{Satz}
+\newtheorem{notation}[blockelement]{Notation}
+\newtheorem{korollar}[blockelement]{Korollar}
+\newtheorem{uebung}[blockelement]{Übung}
+\newtheorem{beispiel}[blockelement]{Beispiel}
+\newtheorem{folgerung}[blockelement]{Folgerung}
+\newtheorem{axiom}[blockelement]{Axiom}
+\newtheorem{beobachtung}[blockelement]{Beobachtung}
+\newtheorem{konzept}[blockelement]{Konzept}
+\newtheorem{visualisierung}[blockelement]{Visualisierung}
+\newtheorem{hilfsatz}[blockelement]{Hilfsatz}
+
+% Paranthese
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\pair}[1]{\left(#1\right)}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\linterv}[1]{\left(#1\right]}
+\newcommand{\rinterv}[1]{\left[#1\right)}
+\newcommand{\interv}[1]{\left[#1\right]}
+
+% Shorten commands
+\newcommand{\equivalent}[0]{\Leftrightarrow{}}
+\newcommand{\impl}[0]{\Rightarrow{}}
+\newcommand{\definedas}[0]{\coloneqq}
+\newcommand{\definedasequiv}[0]{\ratio\Leftrightarrow{}}
+\newcommand{\infinity}[0]{\infty}
+\newcommand{\exclude}[0]{\setminus}
+\renewcommand{\emptyset}{\varnothing}
+\newcommand{\annot}[2]{\overset{\text{#2}}{#1}}
+\newcommand{\nn}[0]{\\[2\baselineskip]}
+\newcommand{\anf}[1]{\glqq{}#1\grqq}
+\newcommand{\OBDA}{o.B.d.A.}
+\newcommand{\theoremescape}{\leavevmode}
+\newcommand{\fromto}{\rightarrow{}}
+\newcommand{\naturalnumbers}{\mathbb{N}}
+\newcommand{\realnumbers}{\mathbb{R}}
+\newcommand{\aligntoright}[2]{\hfill#1\hspace{#2\textwidth}~}
+
+% Envs
+\newenvironment{induktionsanfang}{
+    \rule{0pt}{3ex}\noindent
+    \begin{minipage}[t]{0.11\textwidth}
+    {I-Anfang}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.89\textwidth}
+    }
+    {
+    \end{minipage}
+}
+\newenvironment{induktionsschritt}{
+    \rule{0pt}{3ex}\noindent
+    \begin{minipage}[t]{0.11\textwidth}
+    {I-Schritt}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.89\textwidth}
+    }
+    {
+    \end{minipage}
+}
+
+% Section style
+\titleformat*{\section}{\LARGE\bfseries}
+\titleformat*{\subsection}{\large\bfseries}
+
+% Page styles
+\newpagestyle{pagenumberonly}{
+    \sethead{}{}{}
+    \setfoot[][][\thepage]{\thepage}{}{}
+}
+\newpagestyle{headfootdefault}{
+    \sethead[][][\thesubsection~\textit{\subsectiontitle}]{\thesection~\textit{\sectiontitle}}{}{}
+    \setfoot[][][\thepage]{\thepage}{}{}
+}
+\pagestyle{headfootdefault}
+
+\begin{document}
+    \title{\vspace{3cm} Skript zur Vorlesung\\Analysis I\\bei Prof. Dr. Dirk Hundertmark}
+    \author{Karlsruher Institut für Technologie}
+    \date{Wintersemester 2023/24}
+    \maketitle
+    \begin{center}
+        Dieses Skript ist inoffiziell. Es besteht kein\\ Anspruch auf Vollständigkeit oder Korrektheit.
+    \end{center}
+    \thispagestyle{empty}
+    \newpage
+
+    \tableofcontents
+    \newpage
+
+
+    \section{Aussagenlogik}
+    \input{Kapitel/Aussagenlogik}
+
+
+    \section{Mengen}
+    \input{Kapitel/Mengen}
+
+
+    \section{Die Axiome der Reellen Zahlen}
+    \input{Kapitel/Reelle_Zahlen}
+
+
+    \section{Die natürlichen Zahlen $\naturalnumbers$ und vollständige Induktion}
+    \input{Kapitel/Natuerliche_Zahlen}
+
+
+    \section{Summe, Produkt, Wurzeln}
+    \input{Kapitel/Summe_Produkt_Wurzeln}
+
+
+    \section{Folgen und Grenzwerte}
+
+    \subsection{Konvergenz}
+    \thispagestyle{pagenumberonly}
+
+    \begin{definition}[Reelle Folge]
+        Eine reelle Folge ist eine Abbildung $\naturalnumbers\fromto\realnumbers$. Alternative Notation: $\pair{a_n}n\in\naturalnumbers$, $\pair{a_1, a_2, \dots}$
+    \end{definition}
+
+    \begin{beispiel}
+        $a_n = \frac{1}{n}$, $n\geq 1$\quad $\pair{1,\frac{1}{2},\frac{1}{3}, \dots}$
+    \end{beispiel}
+
+    \begin{definition}[Konvergenzkriterium]
+        Sei $\pair{a_n}_{n\in\naturalnumbers}$ eine Folge reeller Zahlen. Die Folge heißt konvergent gegen $a\in\realnumbers$, falls gilt:
+        \begin{align*}
+            \forall \varepsilon > 0 ~\exists n_0\in\naturalnumbers: \abs{a_n-a} &< \varepsilon\text{ für alle $n>n_0$}
+            \intertext{$a$ heißt Grenzwert von $\pair{a_n}n\in\naturalnumbers$ und man schreibt}
+            \lim_{n\fromto \infty} a_n &= a
+        \end{align*}
+    \end{definition}
+
+    \begin{beispiel}[Nachweis von Konvergenz]
+        Es sei
+        \begin{align*}
+            \pair{a_n}_{n\in\naturalnumbers}&=1+\frac{(-1)^n}{2n}
+            \intertext{wir definieren $\varepsilon$ und $n_0$}
+            \varepsilon > 0,&\quad n_0 = \frac{1}{2\varepsilon}\\
+            \intertext{und wenden das Konvergenzkriterium an}
+            \abs{a_n-1} = \abs{1+\frac{(-1)^n}{2n}-1} &= \abs{\frac{(-1)^n}{2n}} < \frac{\abs{(-1)^n}}{\abs{\frac{2}{2\varepsilon}}} = \varepsilon\\
+            \impl \lim_{n\fromto\infty} a_n &=1
+        \end{align*}
+    \end{beispiel}
+
+    \begin{bemerkung}[\anf{Fast alle Elemente}]
+        Wir sagen, dass fast alle Element der Folge $(a_n)_{n\in\naturalnumbers}$ eine Eigenschaft (E) haben, wenn es höchstens eine endliche Anzahl von $a_n$ existiert, die die Eigenschaft (E) nicht erfüllen.
+    \end{bemerkung}
+
+    \begin{definition}[Alternativ formuliertes Konvergenzkriterium]
+        Sei $(a_n)_{n\in\naturalnumbers}$ eine Folge, dann heißt diese Folge konvergent gegen $a\in\realnumbers$, wenn $\forall \varepsilon > 0$ und fast alle $a_n$ gilt: $\abs{a_n-a}<\varepsilon$
+    \end{definition}
+
+    \begin{definition}[Nullfolge]
+        Eine Folge, die gegen $0$ konvergiert, heißt Nullfolge.
+    \end{definition}
+
+    \begin{definition}[Divergenz]
+        Eine nicht-konvergente Folge heißt divergent.
+    \end{definition}
+
+    \begin{definition}[$\varepsilon$-Umgebung]
+        Für $\varepsilon > 0$, $a\in\realnumbers$ versteht man unter der $\varepsilon$-Umgebung von $a$ das Intervall $\left]a-\varepsilon, a+\varepsilon\right[$
+    \end{definition}
+
+    \subsection{Geometrische Bedeutung der Konvergenz}
+
+    \begin{visualisierung}
+        ~
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \draw (0,0) -- (10,0);
+                \draw (5,-0.25) node[below] {$a$} -- (5,0.25);
+                \draw (3.8,-0.4) -- (3.9, -0.4) node[below] {$a-\varepsilon$}  -- (4,-0.4) -- (4,0.4) -- (3.8, 0.4);
+                \draw (6.2,-0.4) -- (6.1, -0.4) node[below] {$a+\varepsilon$}  -- (6,-0.4) -- (6,0.4) -- (6.2, 0.4);
+                \foreach \x in {1, 2.2, 3, 3.9, 4.3, 4.6, 4.8, 4.9, 4.94, 4.96, 4.98, 5.005, 5.01, 5.04, 5.1, 5.35, 5.85, 6.4}
+                \draw (\x,-0.15) -- (\x,0.15);
+            \end{tikzpicture}
+            \caption{Geometrische Darstellung einer\\ konvergenten Folge und ihrer $\varepsilon$-Umgebung}
+        \end{figure}
+    \end{visualisierung}
+
+    %%%%%%%%%%%%%%%%%%%%%%%%
+    % 21. November 2023
+    %%%%%%%%%%%%%%%%%%%%%%%%
+
+    \subsection{Eigenschaften von Folgen und Konvergenzen}
+
+    \begin{definition}[Beschränktheit von Folgen]
+        Eine Folge $(a_n)_n$ heißt nach oben beschränkt, falls es ein $k\in\realnumbers$ gibt mit
+        \begin{align*}
+            \forall n\in \naturalnumbers\colon a_n \leq k\tag{$k$ ist obere Schranke für $(a_n)_n$}
+        \end{align*}
+        Beschränktheit nach unten wird analog definiert.\\
+        $(a_n)_n$ heißt beschränkt, falls ein $k\geq 0$ existiert mit
+        \begin{align*}
+            \forall n\in\naturalnumbers\colon -k \leq a_n \leq k\quad \text{bzw.}\quad \forall n\in\naturalnumbers\colon \abs{a_n} \leq k
+        \end{align*}
+    \end{definition}
+
+    \begin{satz}
+        \label{satz:konv-folg-beschr}
+        Jede konvergente Folge $(a_n)_n$ ist beschränkt.
+        \begin{proof}
+            Sei $a$ der Grenzwert von $(a_n)_n$\quad $\pair{\lim_{n\fromto\infty} a_n = a}$.\\
+            Das heißt für $\varepsilon = 1 \impl \exists N\in\naturalnumbers\colon \abs{a_n-a} < 1\quad\forall n\geq N$\\
+            $\abs{a_n} = \abs{a_n-a+a} \leq \underbrace{\abs{a_n-a}}_{<1} + \abs{a} < 1+\abs{a} \quad \forall n\geq N$\\
+            Setze $k\definedas \max\pair{\abs{a_1}, \abs{a_2}, \dots, \abs{a_{N-1}}, 1+\abs{a}} \geq 0$\\
+            $\impl \abs{a_n} \leq k \quad\forall n\in\naturalnumbers$\qedhere
+        \end{proof}
+    \end{satz}
+
+    \begin{satz}[Eindeutigkeit des Grenzwerts]
+        Der Grenzwert einer konvergenten Folge $(a_n)_n$ ist eindeutig.
+        \begin{proof}
+            Annahme: $a_n\fromto a$ und $a_n\fromto b$ mit  $a\neq b$. Dann gilt \OBDA, dass $a<b$.\\
+            Wir setzen $\varepsilon = \frac{b-a}{2} > 0$.
+            \begin{align*}
+                \impl &\exists N_1 \in\naturalnumbers: \abs{a_n-a} < \varepsilon \quad \forall n\geq N_1\\
+                \impl &\exists N_2 \in\naturalnumbers: \abs{a_n-b} < \varepsilon \quad \forall n\geq N_2\\[10pt]
+                &N\definedas \max\pair{N_1, N_2}\\
+                \impl &\forall n\geq N\colon a_n < a+\varepsilon = a + \frac{b-a}{2} = \frac{b+a}{2} = b-\varepsilon\\
+                &\forall n\geq N: a_n > b-\varepsilon = \frac{b+a}{2}\\[10pt]
+                \impl &a_n <\frac{b+a}{2} < a_n \quad \forall n\geq N\qquad\text{ (Widerspruch)}\qedhere
+            \end{align*}
+        \end{proof}
+    \end{satz}
+
+    \begin{satz}[Eigenschaften von konvergenten Folgen]
+        Seien $(x_n)_n, (y_n)_n$ konvergente reelle Folgen mit $x_n\fromto a$, $y_n\fromto b$ für $n\fromto\infty$. Dann gilt:
+        \begin{enumerate}[label=(\alph*)]
+            \item $x_n+y_n\fromto a+b$\quad ($\lim\pair{x_n+y_n}=\lim x_n + \lim y_n$).
+            \item $x_n\cdot y_n \fromto a\cdot b$\quad ($\lim\pair{x_n\cdot y_n} = \lim x_n \cdot \lim y_n$).
+            \item $\lambda\cdot y_n \fromto \lambda\cdot b$\quad ($\lim\pair{\lambda\cdot y_n} = \lambda \cdot \lim y_n$). ($\lambda\in\realnumbers$)
+            \item Ist $b\neq 0$, so ist $y_n \neq 0$ für fast alle $n\in\naturalnumbers$ und $\frac{x_n}{y_n}$ ist für fast alle $n$ definiert und $\lim\pair{\frac{x_n}{y_n}} = \frac{\lim x_n}{\lim y_n} = \frac{a}{b}$.
+            \item $\abs{x_n} \fromto \abs{a}$\quad ($\lim_{n\fromto \infty} \abs{x_n} = \abs{\lim_{n\fromto \infty} x_n}$)
+            \item Ist $x_n \leq y_n$ für fast alle $n\in\naturalnumbers$ $\impl a = \lim_{n\fromto \infty} x_n \leq b = \lim_{n\fromto \infty} y_n$.
+        \end{enumerate}
+
+        \begin{proof}
+            \theoremescape
+            \begin{enumerate}[label=(\alph*)]
+                \item Nach Satz~\ref{satz:diff-abs} gilt
+                \begin{align*}
+                    \abs{x_n+y_n - (a+b)} = \abs{x_n - a + (y_n-b)} &\leq \abs{x_n - a} + \abs{y_n-b}
+                    \intertext{Aufgrund der Konvergenz der Folgen gilt}
+                    \forall \varepsilon > 0~\exists N_1: \abs{x_n - a} &< \frac{\varepsilon}{2} \quad \forall n\geq N_1\\
+                    \forall \varepsilon > 0~\exists N_2: \abs{y_n - b} &< \frac{\varepsilon}{2} \quad \forall n\geq N_2\\
+                    \intertext{Wir wählen $N=\max\pair{N_1, N_2}$}
+                    \impl \abs{\pair{x_n+y_n}-(a+b)} \leq \abs{x_n - a} + \abs{y_n-b} &\leq \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon\quad \forall n\geq N
+                \end{align*}
+                \item Umformen, um eine passende Ungleichung zu erreichen
+                \begin{align*}
+                    x_n \cdot y_n - ab &= \pair{x_n-a+a} \cdot y_n - ab\\
+                    &= \pair{x_n-a}\cdot y_n + a \cdot y_n - ab\\
+                    &= \pair{x_n-a}\cdot y_n + a\cdot \pair{y_n-b}\\[10pt]
+                    \impl \abs{x_n\cdot y_n - ab} &= \abs{\pair{x_n-a}\cdot y_n + a\cdot \pair{y_n-b}}\\
+                    &\leq \abs{x_n-a}\cdot\abs{y_n}+\abs{a}\cdot\abs{y_n-b}
+                \end{align*}
+                Nach Satz~\ref{satz:konv-folg-beschr} ist $y_n$ beschränkt
+                \begin{align*}
+                    \exists k\geq 0\colon \abs{y_n} &\leq k \quad\forall n\in\naturalnumbers
+                    \intertext{Nach der Konvergenz der Folgen gilt außerdem}
+                    \forall \varepsilon >0~\exists N_1, N_2\colon \abs{x_n-a} &< \frac{\varepsilon}{2(k+1)}\quad\forall n\geq N_1\\
+                    \abs{y_n-b} &< \frac{\varepsilon}{2(\abs{a}+1)}\quad\forall n\geq N_2\\[10pt]
+                    \impl \forall n\geq \max\pair{N_1, N_2}: \abs{x_n\cdot y_n-ab} &\leq \frac{\varepsilon}{2(k+1)}\cdot k + \abs{a}\cdot\frac{\varepsilon}{2(\abs{a}+1)} \leq \varepsilon
+                \end{align*}
+                \item Setze $y_n=\lambda \fromto \lambda$ und verwende (b)
+                \item Wir wählen $\varepsilon\definedas\frac{\abs{b}}{2}$
+                \begin{align*}
+                    \exists N\in\naturalnumbers\colon \abs{y_n-b} &< \varepsilon = \frac{\abs{b}}{2}\quad\forall n\geq \naturalnumbers.\\[10pt]
+                    \forall n\geq N\colon\quad\abs{y_n} &= \abs{y_n-b+b} = \abs{b+(y_n-b)}\\
+                    &\geq \abs{b} - \abs{y_r-b} > \abs{b} - \frac{\abs{b}}{2} + \frac{\abs{b}}{2}\\
+                    &> 0
+                \end{align*}
+                $\impl y_n \neq 0$ für fast alle $n$ und somit $\frac{x_n}{y_n}$ wohldefiniert für fast alle $n\in\naturalnumbers$
+                \begin{align*}
+                    \intertext{Wir betrachten den Spezialfall $x_n = 1$}
+                    \abs{\frac{1}{y_n} - \frac{1}{b}} &= \abs{\frac{b-y_n}{y_n\cdot b}} = \frac{\abs{b-y_n}}{\abs{y_n}\cdot\abs{b}}.\\
+                    \intertext{Wir wissen schon, dass $\exists N_1\colon \abs{y_n} \geq \frac{\abs{b}}{2} \quad\forall n\geq N_1$}
+                    \impl \forall n\geq N_1: \abs{\frac{1}{y_n}-\frac{1}{b}} &\leq \frac{\abs{y_n-b}}{\abs{y_n}\cdot\abs{b}} \leq \frac{2\cdot\abs{y_n-b}}{\abs{b}\cdot \abs{b}}\\
+                    \forall \varepsilon > 0~\exists N_2\colon \abs{y_n-b} &< \frac{\abs{b}^2}{2}\cdot\varepsilon\\
+                    \impl \forall n\geq \max\pair{N_1, N_2}\colon \abs{\frac{1}{y_n}-\frac{1}{b}} &< \frac{2}{\abs{b}^2} \cdot \frac{\abs{b}^2}{2} \cdot \varepsilon = \varepsilon
+                    \intertext{Jetzt wenden wir (b) an und dann gilt}
+                    \lim_{n\fromto \infty} \frac{x_n}{y_n} = \lim_{n\fromto \infty} \pair{x_n\cdot\frac{1}{y_n}} &= \lim x_n \cdot \lim\frac{1}{y_n} = a\cdot \frac{1}{b} = \frac{a}{b}
+                \end{align*}
+                \item Wir zeigen mit der Umkehrung der Dreiecksungleichung
+                \begin{align*}
+                    \abs{\abs{x_n}-\abs{a}} \annot{\leq}{Dreiecks.} \abs{x_n-a}\\
+                    \impl \abs{x_n} \fromto \abs{a}
+                \end{align*}
+                \item Angenommen $a > b$. Wir wählen $\varepsilon=\frac{a-b}{2}$.
+                \begin{align*}
+                    \impl \exists N_1: \abs{x_n-a} < \varepsilon \quad\forall n\geq N_1\\
+                    \impl \exists N_2: \abs{y_n-b} < \varepsilon \quad\forall n\geq N_2\\
+                    \intertext{Für $n\geq \max\pair{N_1,N_2}$ folgt}
+                    x_n > a-\varepsilon = a + \frac{a-b}{2} = \frac{a+b}{2} = b+\frac{a-b}{2} = b + \varepsilon > y_n\\
+                    \impl x_n > y_n
+                \end{align*}
+            \end{enumerate}
+        \end{proof}
+    \end{satz}
+
+    \newpage
+
+    \begin{satz}[Sandwich Satz]
+        Seien $(a_n)_n$, $(b_n)_n$, $(c_n)_n$ Folgen mit $\lim a_n = a$, $\lim \pair{b_n-a_n} = 0$ und $a_n \leq c_n \leq b_n$ für fast alle $n\in\naturalnumbers$.\\
+        Dann folgt, dass $(c_n)_n$ und $(b_n)_n$ jeweils gegen $a$ konvergieren.
+        \begin{proof}
+            ~\\
+            1. Schritt: $\lim b_n = a$.\\[10pt]
+            Sei $\varepsilon > 0$. Da $a_n\fromto a$, $\exists N_1: \abs{a_n-a} < \frac{\varepsilon}{2}\quad\forall n\geq N_1$\\
+            $0\leq b_n-a_n$ ist Nullfolge $\impl \exists N_2: \abs{b_n-a_n} < \frac{\varepsilon}{2}\quad\forall n\geq N_2$\\
+            \begin{align*}
+                \abs{b_n-a} &= \abs{b_n-a_n+a_n-a}\\
+                &\leq \abs{b_n - a_n} + \abs{a_n-a}\\
+                &\leq \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon\quad \forall n\geq \max\pair{N_1, N_2}
+            \end{align*}
+            \noindent 2. Schritt: $\lim c_n = a$.
+            \begin{align*}
+                \lim a_n &= a = \lim b_n\\
+                \impl \forall\varepsilon > 0~\exists N_1, N_2\colon &\abs{a_n-a} < \varepsilon \quad\forall n\geq N_1\\
+                \text{ und } &\abs{b_n-a} < \varepsilon \quad\forall n\geq N_2\\
+                a-\varepsilon &< a_n < a + \varepsilon\quad\forall n\geq N_1\\
+                a-\varepsilon &< b_n < a + \varepsilon\quad\forall n\geq N_2\\
+                \intertext{Auch gilt $a_n \leq c_n \leq b_n \quad\forall n\geq N_3$ und wir definieren $N\definedas\max\pair{N_1, N_2, N_3}$}
+                \impl a-\varepsilon &< a_n \leq c_n \leq b_n < a + \varepsilon\quad\forall n\geq N
+            \end{align*}
+            Das heißt $\abs{c_n-a} < \varepsilon\quad\forall n\geq N$. Das heißt $\lim c_n = a$\qedhere
+        \end{proof}
+    \end{satz}
+
+    \subsection{Monotone Konvergenz}
+
+    Wir sind bisher immer davon ausgegangen, dass wir den Grenzwert einer Folge bereits kennen. Das folgende Unterkapitel beschäftigt sich damit, die Konvergenz einer Folge nachzuweisen, wenn deren Grenzwert nicht bekannt ist.
+
+    \begin{definition}[Monotonie]
+        Eine reelle Folge $(a_n)_n$ heißt
+        \begin{enumerate}[label=(\roman*)]
+            \item monoton wachsend, wenn $a_n \leq a_{n+1}\quad\forall n\in\naturalnumbers$
+            \item streng monoton wachsend, wenn $a_n < a_{n+1}\quad\forall n\in\naturalnumbers$
+            \item monoton fallend, wenn $a_n \geq a_{n+1}\quad\forall n\in\naturalnumbers$
+            \item streng monoton fallend, wenn $a_n > a_{n+1}\quad\forall n\in\naturalnumbers$
+        \end{enumerate}
+        \noindent Wir nennen $(a_n)_n$ (streng) monoton, falls sie (streng) monoton wachsend oder fallend ist.
+    \end{definition}
+
+    \begin{satz}[Monotone Konvergenz]
+        \label{satz:monoton-konv}
+        Eine monoton wachsende Folge $(a_n)_n$ konvergiert genau dann, wenn $(a_n)_n$ nach oben beschränkt ist.\\
+        Und eine monoton fallende Folge $(a_n)_n$ konvergiert genau dann, wenn sie nach unten beschränkt ist.
+    \end{satz}
+
+    \begin{lemma}[Hilfaussage für monotone Konvergenz]
+        ~\label{lemma:hilf-monoton-konv}
+        Jede nach oben (bzw. unten) beschränkte Folge besitzt eine kleinste obere (bzw. größte untere) Schranke.
+        \begin{proof}
+            Sei $(a_n)_n$ nach oben beschränkt und $S\definedas\set{c\in\realnumbers|~a_n \leq c~\forall n} \neq \emptyset\footnote{Folgt aus der Beschränktheit}.$\\
+            Dann ist $S$ nach unten beschränkt, da $a_1 \leq c\quad\forall c\in S$\\
+            $\impl a\definedas \inf S$ existiert\\[10pt]
+            Behauptung: $a$ ist obere Schranke für $(a_n)_n$, das heißt $a\in S$.\\[10pt]
+            Angenommen $a\notin S$ ($a$ ist keine obere Schranke)\\
+            $\impl \exists n_0 \in\naturalnumbers\colon a_{n_0} > a$.\\
+            Wir setzen $\varepsilon\definedas a_{n_0} - a > 0$. Und $\exists c\in S\colon c < a + \varepsilon = a + a_{n_0} - a = a_{n_0}$. Widerspruch zu $c\in S$.\\[10pt]
+            Das heißt $a$ ist obere Schranke für $(a_n)_n$.
+        \end{proof}
+    \end{lemma}
+
+    \begin{proof}[Beweis von Satz~\ref{satz:monoton-konv}]
+        Angenommen $(a_n)_n$ ist monoton wachsend und nach oben beschränkt.
+        \begin{align*}
+            &a\definedas\sup_{n\in\naturalnumbers} a_n\\
+            \impl &a_n \leq a\quad\forall n\in\naturalnumbers
+            \intertext{Sei $\varepsilon > 0 \impl a-\varepsilon$ keine obere Schranke für $(a_n)_n$ mehr.}
+            \impl &\exists N\in\naturalnumbers\colon a_N \geq a-\varepsilon\\
+            \intertext{Sei $n\geq N$. Dann gilt:}
+            &a_N \leq a_{N+1} \leq a_{N+2} \leq \dots \leq a_{N+k} = a_n\\
+            \impl &\forall n\geq N: a-\varepsilon < a_n\\
+            \impl &\abs{a_n-a} < \varepsilon\qedhere
+        \end{align*}
+    \end{proof}
+
+    \begin{proof}[Alternativer Beweis]
+        \footnote{Dieser Beweis bezieht sich laut Vorlesung auf Lemma 14, welches allerdings nicht existiert. Gemeint ist vermutlich Satz 14 (hier Satz~\ref{satz:monoton-konv}) oder Lemma 15 (hier Lemma~\ref{lemma:hilf-monoton-konv})}
+        ~\\
+        Sei $(a_n)_n$ eine Folge mit $a_n = f(a), f:\naturalnumbers\fromto\realnumbers$\\
+        $Bild(f) = f(\naturalnumbers)$ nach oben beschränkt\\
+        $a\definedas\sup\pair{f\pair{\naturalnumbers}}\geq a_n \quad\forall n$
+    \end{proof}
+
+    \newpage
+
+    %%%%%%%%%%%%%%%%%%%%%%%%
+    % 23. November 2023
+    %%%%%%%%%%%%%%%%%%%%%%%%
+
+    \begin{beispiel}
+        \theoremescape
+        \begin{enumerate}
+            \item Berechnen von $\sqrt {c}$ für $c>0$.
+            \begin{align*}
+                x^2 = c &\equivalent x = \frac{c}{x}\qquad x >0\\
+                &\equivalent x=\frac{1}{2}\pair{x+\frac{c}{x}}
+            \end{align*}
+            Folge $x_n$: Wählen $x_0 > 0$. Für $n\in\naturalnumbers$ sei $x_n=\frac{1}{2}\pair{x_{n-1}+\frac{c}{x_{n-1}}}$\\
+            Behauptung 1: $x_n \geq \sqrt{c}\quad\forall n\in\naturalnumbers$\\
+            Bew.:
+            \begin{align*}
+                x_1 &= \frac{1}{2}\pair{x_0+\frac{c}{x_0}}\\
+                \intertext{haben AGM\footnotemark: $\forall a,b\geq 0\colon ab\leq \pair{\frac{a+b}{2}}^2$}
+                0 &\leq x^2-2xy+y^2 \equivalent xy \leq \frac{x^2+y^2}{2}
+                \intertext{Setzen $x=\sqrt{a}$ und $y=\sqrt{b}$, $\sqrt{ab} \leq\frac{ab}{2}$}
+                (x_1)^2 \geq \frac{1}{2}\pair{x_0-\frac{c}{x_0}}^2 \geq x_0\cdot\frac{c}{x_0} = c\\
+                x_1 &\geq \sqrt{c}\\
+                \intertext{Falls }
+            \end{align*}
+            \footnotetext{Arithmetisch-geometrisches Mittel}
+            Behauptung 2: $(x_n)_n$ ist monoton fallend.\\
+            \textit{Beweis}
+            \begin{align*}
+                x_{n+1} &= \frac{1}{2}\pair{x_n+\frac{c}{x_n}}
+                \intertext{haben für $n\geq 1$: $(x_n)^2 = \pair{\frac{1}{2}(x_{n+1} + \frac{c}{x_{n+1}})}^2 \geq c$}\\
+                \impl x_n &\geq \frac{c}{x_n}\\
+                \impl x_{n+1} &\geq \frac{1}{2}\pair{x_n+\frac{c}{x_n}}\leq \frac{1}{2}\pair{x_n+x_n} = x_n
+            \end{align*}
+            Nach dem Satz der monotonen Konvergenz ist $x\definedas\lim_{n\fromto\infty} x_n$ entspricht?? $\geq\sqrt {c}$\\
+            $=\lim_{n\fromto\infty} x_{n+1}$
+            \begin{align*}
+                x &= \lim x_n = \lim \frac{1}{2}\pair{x_{n+1} + \frac{c}{x_{n+1}}} = \frac{1}{2}\pair{x+\frac{c}{x}}\\
+                \equivalent x &= \sqrt {c}
+            \end{align*}
+
+
+
+            \item $x_n = \frac{1}{n}\fromto 0$
+            \begin{align*}
+                \abs{\frac{1}{n}-0} &= \frac{1}{n} \tag{geg. $\varepsilon > 0$ nach $n\in\naturalnumbers$, $N>\frac{1}{\varepsilon} \equivalent \varepsilon > \frac{1}{N}$}
+                \impl \forall n\geq N\colon \abs{\frac{1}{n}-0} = \frac{1}{n} \leq \frac{1}{N}< \varepsilon
+            \end{align*}
+            Ähnlich funktioniert $x_n = \frac{1}{\sqrt {c}}$
+            \item $x_n\definedas \frac{1+2+3+\dots+n}{2} \fromto \frac{1}{2}$ für $n\fromto\infty$\\
+            Bew: $1+2+3+\dots+n = \frac{n\cdot(n+1)}{2} \impl x_n = \frac{\frac{n\cdot(n+1)}{2}}{n^2} = \frac{n^2+n}{2n^2} = \frac{1+\frac{1}{n}}{2} \fromto \frac{1}{2}$
+            \item Sei $0\leq q< 1$. $x_n \definedas q^n \fromto 0$\\
+            Bew: Ist $q=0\impl x_n = 0^n = 0 \fromto 0$.\\
+            Also sei $0<q<1 \impl \frac{1}{q}> 1$\\
+            $h\definedas\frac{1}{q}-1>0\quad \frac{1}{q}= 1 + h$, $q=\frac{1}{1+h}$\\
+            $\impl x_n = q^n \leq \pair{\frac{1}{1+h}}^n = \frac{1}{\pair{1+h}}^n$\\
+            Nach Bernoulli: $\pair{1+h}^n\geq 1+nh$\\
+            $\impl q^n = \frac{1}{()}$
+            \item Sei $-1<q<1\impl x_n \definedas q^n \fromto 0$. (Übung)
+            \item Sei $a>0$, $x_n\definedas a^\frac{1}{n} = \sqrt[n]{a} \fromto 1$\\
+            Bew: 1. Fall $a = 1\impl x_n = 1$\\
+            2. Fall $a> 1 \impl a^\frac{1}{n} > a^\frac{a}{n}=1$\\
+            $h_m = a^\frac{1}{m} - 1 > 0$ und $a+h_m = a^\frac{a}{m}$\\
+            $q=\pair{a+b_n}^n \geq 1+ab_1 \geq a_{b1}$\\
+            $\impl h_n < \frac{a}{n}$\\
+            $\abs{a^\frac{1}{n}-1} = h_n < \frac{a}{n}\impl \lim a^\frac{1}{n}= 1$\\
+            3. Fall $0<a<1$\\
+            \begin{align*}
+                b &= \frac{1}{a} > 1\\
+                \impl \lim b^\frac{1}{n} &= 1\\
+                &=\lim \frac{1}{a^\frac{1}{n}} &\impl \lim a^{\frac{1}{n}} = 1
+            \end{align*}
+            \item $x_n = \sqrt[n]{n} = n^\frac{1}{n}\fromto 1$
+            \begin{align*}
+                n \geq 2 \impl \frac{1}{n^n} > 1\qquad h_n \definedas n^{\frac{1}{n}} - 1\\
+                \impl n = \pair{n^\frac{1}{n}}^n = \pair{1+h_n}^n \geq 1+n\cdot h_n > n\cdot h_n \impl h_n \leq \frac{h}{n} = 1
+            \end{align*}
+            Aber: Binomialsatz
+            \begin{align*}
+                \pair{1+h_n}^n &= \underbrace{\sum_{k=0}^{n} \binom{n}{k}\pair{h_n}^k}_{\geq 0} \geq \binom{n}{0}\cdot \pair{h_n}^0 \binom{n}{1}\cdot \pair{h_n}^1 + \binom{n}{2}\cdot \pair{h_n}^2\\
+                &= 1 + n\cdot h_n + \frac{n\cdot(n+1)}{2}(h_n)^2\\
+                > \frac{n(n+1)}{2}\cdot h_n^2\\
+                \impl h_n^2 < \frac{2n}{n(n-1)} = \frac{2}{n-1}\\
+                0 < h_n < \sqrt{\frac{2}{n-1}} \fromto 0\\
+                \impl \lim h_n &= 0 \equivalent \lim n^{\frac{1}{n}} = 1
+            \end{align*}
+        \end{enumerate}
+    \end{beispiel}
+
+    \begin{definition}
+        Eine reelle Folge $(x_n)_n$ strebt gegen unendlich, falls $\forall k \geq 0~\exists N\in\naturalnumbers\colon x_n \geq k\quad \forall n> N$\\
+        ($\equivalent \forall k \geq 0$ ist $x_n < k$ für endlich viele $n\in\naturalnumbers$).\\
+        $(x_n)_n$ strebt gegen $-\infty$, falls $(-x_n)_n$ gegen $\infty$ strebt.
+    \end{definition}
+
+    $x_n=n$ divergiert gegen $\infty$
+
+    \begin{satz}
+        Falls $x_n\fromto \infty$ folgt $\frac{1}{x_n}\fromto 0$.\\
+        Ist $(x_n)_n$ Nullfolge mit $x_n > 0$ für fast alle $n\in\naturalnumbers$, so ist $\frac{1}{x_n}\fromto \infty$\\
+        Falls $x < 0$ für fast alle $n$, so folgt $\frac{1}{x_n} \fromto -\infty$
+        \begin{proof}
+            Sei $x_n\fromto \infty$\\
+            $\impl \forall \varepsilon > 0~\exists N\in\naturalnumbers\colon x_n > \frac{1}{2}\quad\forall n \geq N$\\
+            $\impl 0 < \frac{1}{x_n} < \varepsilon\quad \forall n \geq N$, das heißt $\frac{1}{x_n}\fromto 0$\\
+            (Rest Übung)
+        \end{proof}
+    \end{satz}
+
+    \begin{beispiel}
+        $\frac{n}{2^n}\fromto 0$ (Sogar $\forall k\in\naturalnumbers\colon \frac{n^k}{2^n} \fromto 0$)
+
+        \begin{proof}
+            Zu zeigen: $x_n = \frac{2^n}{n}\fromto \infty$\\
+            $2^n = (1+1)^n = \\sum_{k=0}^{n} \binom{n}{k}\geq \binom{n}{2} = \frac{n(n+1)}{2}$\\
+            $\impl x_n = \frac{2^n}{n}\geq \frac{\frac{n(n-1)}{2}}{1} = \frac{1}{2}(n+1)$\\
+            $\impl x_n \fromto \infty$, $\frac{1}{x_n}\fromto 0$
+        \end{proof}
+    \end{beispiel}
+
+    \begin{beispiel}[Die Eulersche Zahl]
+        \begin{align*}
+            a_n &\definedas (1+\frac{1}{n})^n\\
+            b_n &\definedas (1 + \frac{1}{n})^{n+1}\\
+            \impl a_n & b_n\quad\forall n \in\naturalnumbers\\
+            \intertext{Behauptung:}
+            a_n &< a_{n+1}\text{ und } b_n > b_{n+1} \quad \forall n
+        \end{align*}
+        \begin{proof}
+            Sei $n\geq 2$
+            \begin{align*}
+                \frac{a_n}{a_{n-1}} &= \frac{\pair{1+\frac{1}{n}}^n}{\pair{1+\frac{1}{n-1}}^{n-1}}\\
+                &= \pair{1+\frac{1}{n-1}} \cdot \frac{\pair{1+\frac{1}{n}}^n}{\pair{1+\frac{1}{n-1}}^n}\\
+                &= \frac{n}{n-1} \cdot \pair{\frac{\frac{n+1}{n}}{\frac{n}{n-1}}}^n = \frac{n}{n-1}\cdot \pair{\frac{(n+1)\cdot (n-1)}{n^2}}^n\\
+                &= \frac{n}{n-1}\cdot \pair{\frac{n^2-1}{n^2}}^n\\
+                &= \frac{n}{n-1}\cdot\pair{1-\frac{1}{n^2}}^n\\
+                &\geq \frac{n}{n-1}\cdot\pair{1-\frac{n}{n^2}} = \frac{n}{n-1}\cdot\pair{1-\frac{1}{n}}\\
+                &= 1 \impl a_n > a_{n-1} \quad \forall n\geq 2\\
+                ???\\
+                \intertext{Mit dem Satz der monotonen Konvergenz folgt:}
+                \impl a_1 < a_2 < \dots < a_n < b_n < b_{n+1} < \dots < b_1\\
+                \impl e\definedas \lim a_n = \lim \pair{1+\frac{1}{n}}^n\text{ existiert}\\
+                b\definedas \lim b_n\text{ existiert, sogar $b=e$}
+                \text{Da } 1 < \frac{b_n}{a_n} = \frac{\pair{1+\frac{1}{n}}^{n-1}}{\pair{1+\frac{1}{n}}^{n}} = 1 + \frac{1}{n} \fromto 1\\
+                1 &= \lim \frac{b_n}{a_n} = \frac{\lim b_n}{\lim a_n} = \frac{b}{e} \impl b = e\\
+                \pair{1+\frac{1}{n}}^n < e < \pair{1-\frac{1}{n}}^{n-1}
+            \end{align*}
+        \end{proof}
+    \end{beispiel}
+
+    \newpage
+
+    \subsection{Häufungswerte und Teilfolgen}
+
+    Wir möchten eine Folge $(a_n)_n$ \anf{massieren}.
+    \begin{align*}
+        a_n &= f(n), \quad f: \naturalnumbers \fromto \realnumbers
+    \end{align*}
+
+    \noindent Wir wollen die Folgeglieder umordnen oder auch beliebige weglassen. Wie machen wir das und wie lässt sich das ausdrücken?
+
+    \begin{definition}[Umordnung]
+        Sei $(a_n)_n$ eine reelle Folge. Eine Umordnung ist gegeben durch eine Bijektion
+        \begin{align*}
+            \sigma: \naturalnumbers\fromto \naturalnumbers\\
+            b_n \definedas a_{\sigma(n)} \tag{Umordnung von $a_n$}
+        \end{align*}
+    \end{definition}
+
+    \begin{definition}[Ausdünnung]
+        Es sei $\kappa: \naturalnumbers\fromto\naturalnumbers$ streng monoton wachsend
+        \begin{align*}
+            b_n \definedas a_{\kappa(n)}\tag{Teilfolge von $a_n$}
+        \end{align*}
+    \end{definition}
+
+    \begin{satz}[Konvergenz von Teilfolgen und Umordnungen]
+        Für jede konvergente reelle Folge $(a_n)_n$ konvergiert jede Umordnung und jede Teilfolge gegen den selben Grenzwert.
+
+        \begin{proof}
+            \footnotemark
+        \end{proof}
+    \end{satz}
+
+    \footnotetext{Wurde in der Vorlesung am 23. November aus Zeitgründen nicht mehr ausgeführt.}
+
+    \begin{definition}[Häufungswert]
+        Sei $(a_n)_n$ reelle Folge. Eine reelle Zahl $a$ heißt Häufungswert (oder Häufungspunkt) von $a_n$, falls $\forall \varepsilon >0$ unendlich viele $a_n$ in $\pair{a-\varepsilon, a+\varepsilon}$ liegen. Das heißt:
+        \begin{align*}
+            a-\varepsilon < a_n < a+ \varepsilon\text{ für unendlich viele $n$}
+        \end{align*}
+        Das heißt $\forall L\in\naturalnumbers~\exists n> L\colon a-\varepsilon < a_n < a+\varepsilon$
+    \end{definition}
+
+    \begin{beispiel}
+        \theoremescape
+        \begin{enumerate}
+            \item $a_n=\frac{1}{n}$ hat Häufungswert 0
+            \item $a_n=(-1)^n$ hat Häufungswerte $1$, $-1$
+            \item $a_n=n$ hat keinen Häufungswert
+            \item $a_n=(-1)^n+\frac{1}{n}$ hat Häufungswerte 1, -1
+        \end{enumerate}
+    \end{beispiel}
+
+    \begin{satz}[Häufungswertkriterium über Teilfolgen]
+        Eine reelle Zahl $a$ ist genau dann Häufungswert einer Folge $(a_n)_n$, wenn eine Teilfolgen von $a_n$ existiert, die gegen $a$ konvergiert.
+
+        \begin{proof}
+            \anf{$\impl$}: $a$ sei Häufungswert von $a_n$. Das heißt
+            \begin{align*}
+                \forall \varepsilon > 0~\forall L\in\naturalnumbers~\exists n>L\colon a-\varepsilon < a_n < a+\varepsilon
+            \end{align*}
+            \begin{enumerate}[label=\arabic*)]
+                \item Wir wählen $\varepsilon = 1 \impl \exists n_1\in\naturalnumbers\colon a-1 < a_{n_1} < a+1$
+                \item Wir wählen $\varepsilon = \frac{1}{2}$, $L=n_1 + 1 \impl \exists n_2 > L > n_1\colon a-\frac{1}{2} < a_{n_2} < a + \frac{1}{2}$
+                \item Wir wählen $\varepsilon = \frac{1}{3} \impl \exists n_3 > n_2\colon a - \frac{1}{3} < a_{n_3} < a + \frac{1}{3}$
+                \item[$j$)] Wir wählen $\varepsilon = \frac{1}{j+1} \impl \exists n_{j+1} > n_j\colon a-\frac{1}{j+1} < a_{n_{j+1}} < a + \frac{1}{j+1}\qquad \impl n_j < n_{j+1} \forall j \in \naturalnumbers$
+            \end{enumerate}
+            \noindent Wir definieren $\kappa\pair{j} \definedas n_j$ und $b_j \definedas a_{\kappa(j)}$ ist eine Teilfolge.\\
+            \anf{$\Leftarrow$}: Es gilt $a-\frac{1}{j} < b_j < a + \frac{1}{j}$ und nach dem
+        \end{proof}
+    \end{satz}
+
+\end{document}
