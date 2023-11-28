@@ -601,11 +601,37 @@
         Für jede konvergente reelle Folge $(a_n)_n$ konvergiert jede Umordnung und jede Teilfolge gegen den selben Grenzwert.
 
         \begin{proof}
-            \footnotemark
+            \footnotemark Sei $a_n$ konvergent gegen $a$ und $\kappa: \naturalnumbers\fromto\naturalnumbers$ monoton wachsend ($\kappa(n+1) > \kappa(n)$).\\
+            $\impl \kappa(j) \geq j\quad\forall j \in\naturalnumbers$\footnotemark\\
+            \begin{align*}
+                b_j \definedas a_{\kappa(j)}\\
+                a_n \fromto 0: \forall \varepsilon > 0~\exists N\in\naturalnumbers\colon a-\varepsilon < a_n < a + \varepsilon\quad\forall n \geq N\\
+                \impl \forall j\geq N\colon a-\varepsilon < a_{\kappa(j)} < a + \varepsilon\quad\forall j \geq N\\
+                \impl \lim_{j\fromto\infty} a_{\kappa(j)} = a\quad\text{D.h. } \lim_{j\fromto\infty} b_j = a
+            \end{align*}
+            Umordnung: Sei $\sigma: \naturalnumbers\fromto\naturalnumbers$ Bijektion.
+            \begin{align*}
+                b_j \definedas a_{\sigma(j)}\\
+                \intertext{Haben $\forall \varepsilon > 0~\exists N\in\naturalnumbers\colon a-\varepsilon < a_n < a+\varepsilon$}
+                a_n = f(a)\\
+                b_n = f\circ \sigma(n)\\
+                \intertext{Wir betrachten das Urbild}
+                A\definedas \sigma^{-1}\pair{\set{1,2,3, \dots, N}}\subseteq \naturalnumbers\\
+                \intertext{A hat endlich viele Elemente}
+                L\definedas \max\pair{A}\\
+                j \geq L \impl \sigma(j) \geq N\\
+                \impl \forall j\geq L\colon a-\varepsilon < a_{\sigma(j)} < a + \varepsilon\\
+                \lim_{j\fromto\infty} a_{\sigma(j)} = a
+            \end{align*}
         \end{proof}
     \end{satz}
 
-    \footnotetext{Wurde in der Vorlesung am 23. November aus Zeitgründen nicht mehr ausgeführt.}
+    \begin{uebung}
+        Weisen Sie nach, dass sich der Grenzwert einer Folge nicht verändert, wenn man endlich viele Elemente ändert.
+    \end{uebung}
+
+    \footnotetext{Wurde in der Vorlesung am 23. November aus Zeitgründen nicht mehr ausgeführt. Vorlesung am 28. November}
+    \footnotetext{Lässt sich per Induktion nachweisen}
 
     \begin{definition}[Häufungswert]
         Sei $(a_n)_n$ reelle Folge. Eine reelle Zahl $a$ heißt Häufungswert (oder Häufungspunkt) von $a_n$, falls $\forall \varepsilon >0$ unendlich viele $a_n$ in $\pair{a-\varepsilon, a+\varepsilon}$ liegen. Das heißt:
@@ -643,5 +669,177 @@
             \anf{$\Leftarrow$}: Es gilt $a-\frac{1}{j} < b_j < a + \frac{1}{j}$ und nach dem
         \end{proof}
     \end{satz}
+
+    \newpage
+
+    %%%%%%%%%%%%%%%%%%%%%%%%
+    % 28. November 2023
+    %%%%%%%%%%%%%%%%%%%%%%%%
+
+    \subsection{Größter und kleinster Häufungswert - Limes superior und Limes inferior}
+
+    Es sei $(a_n)_n\in\naturalnumbers$ eine beschränkte reelle Folge.
+    \begin{align*}
+        x_n \definedas \sup_{l\geq n} a_l
+    \end{align*}
+    ist monoton fallend, weil
+    \begin{align*}
+        \sup_{l\geq n} a_l = \max(a_n, \sup_{l\geq n-1} a_l) \geq \sup_{l\geq n-1} a_l = x_{n+1}
+    \end{align*}
+    $(x_n)_n\in\naturalnumbers$ ist monoton fallend und nach unten beschränkt.\\
+    $\annot{\impl}{Mont. Konv.} x = \lim x_{1} = \lim_{n\fromto\infty} \sup_{l\geq n} a_l = \inf \sup_{l\geq n} a_l$
+    existiert.\\
+    Genauso: $y_n\definedas \inf_{l\geq n} a_l \impl y_n < y_{n+1}$ und $y_n$ ist nach oben beschränkt.\\
+    $y = \lim y_n = \lim \inf a_l = \sup \inf a_j$ existiert.
+
+    \begin{definition}
+        Sei $(a_n)_n\in\naturalnumbers$ eine beschränkte reelle Folge.
+        \begin{align*}
+            \lim_{n\fromto\infty}\sup a_j \definedas \lim_{n\fromto\infty} \sup a_l = \inf \sup a_l \tag{Limes superior}\\
+            \tag{Limes inferior}
+        \end{align*}
+        \begin{align*}
+            y_n < x_n\quad \inf_{l\geq n} a_l \leq \sup_{l\geq n} a_l
+        \end{align*}
+    \end{definition}
+
+    \begin{beispiel}
+        \begin{align*}
+            a_n = (-1)^n \impl \liminf a_n = -1\\
+            \limsup a_n = 1\nn
+            \limsup (-a_n) = - \liminf_{n\fromto\infty} a_n\\
+            \liminf (-a_n) = -\limsup a_n
+        \end{align*}
+    \end{beispiel}
+
+    \begin{lemma}[Charakterisierung von $\limsup$, $\liminf$]
+        Sei $a_n$ beschränkte reelle Folge. Dann gilt
+        \begin{align*}
+            a^{*} = \limsup_{n\fromto\infty} a_n \equivalent \forall \varepsilon > 0\text{ ist } a_n < a^{*} + \varepsilon\text{ für fast alle $n$}\\
+            \text{und } a_n > a^{*} -\varepsilon\text{ für unendlich viele $n$}\\
+            a_{*} = \liminf_{n\fromto\infty} a_n \equivalent \forall \varepsilon > 0\text{ ist } a_n > a_{*} - \varepsilon\text{ für fast alle $n$}\\
+            \text{und } a_n < a_{*} + \varepsilon\text{ für unendlich viele $n$}
+        \end{align*}
+        \begin{proof}[Beweis für ersten Teil des Lemmas, zweiter analog.]
+            \anf{$\impl$}:
+            \begin{align*}
+                a^{*} = \limsup_{n\fromto\infty} a_n = \inf_{n\in\naturalnumbers} \sup_{l\geq n} a_l\\
+                \intertext{Angenommen $\exists \varepsilon > 0\colon a_l \geq a^{*} +\varepsilon$ für unendlich viele $l$}
+                \impl \forall n\in\naturalnumbers\colon \sup_{l\geq n} a_l \geq a^{*} + \varepsilon\\
+                \impl a^{*} = \inf_{n\in\naturalnumbers} \sup_{l\geq n} a_l \geq a^{*} + \varepsilon\text{ Widerspruch}
+                \intertext{Angenommen $\exists \varepsilon > 0\colon a_n \leq a^{*} -\varepsilon$ für fast alle $n$}
+                \impl \sup_{l\geq n} a_l \leq a^{*} - \varepsilon_0\\
+                \impl a^{*} = \lim_{n\fromto\infty} \sup_{l\geq n} a_l \leq a^{*} - \varepsilon_0\text{ Widerspruch}
+            \end{align*}
+            \anf{$\Leftarrow$}: Sei $a^{*}\in\realnumbers$
+            \begin{align*}
+                \forall \varepsilon > 0\colon a_n < a^{*} + \varepsilon\text{ für fast alle $n$}\\
+                \text{und } a_n > a^{*} - \varepsilon\text{ für fast alle $n$}\\
+                \impl \exists k\in\naturalnumbers\colon a_l < a^{*} + \varepsilon\quad\forall l\geq k\\
+                \impl \forall n\geq K\colon \sup_{l\geq n} a_l \leq a^{*} + \varepsilon\\
+                \text{und } \sup_{l\geq n} a_l > a^{*} - \varepsilon\\
+                \impl \forall n \geq K\colon a^{*} - \varepsilon < \sup_{l\geq n} a_l \leq a^{*} + \varepsilon\\
+                \impl a^{*} - \varepsilon \leq \lim_{n\fromto\infty} \sup_{l\geq n} a_l \leq a^{*} + \varepsilon\quad \forall \varepsilon > 0\\
+                \impl \limsup_{n\fromto\infty} a_n &= a^{*}\qedhere
+            \end{align*}
+        \end{proof}
+    \end{lemma}
+
+    \begin{satz}\label{satz:limsup-haeufungspunkt}
+        Sei $a_n$ eine beschränkte reelle Folge. Dann gilt
+        \begin{align*}
+            \limsup a_n, \liminf a_n \in H(a_n)\text{ = Menge der Häufungspunkte der Folge $a_n$}
+        \end{align*}
+        Insbesondere ist $H(a_n) \neq \emptyset$.\\
+        Ferner ist $\forall x \in H(a_n): \liminf a_n \leq x \leq \limsup a_{n}$
+
+        \begin{proof}
+            [Beweis. Linke Tafel]
+        \end{proof}
+    \end{satz}
+
+    \begin{notation}
+        Es sei $a_n$ nicht nach oben beschränkt. Dann setzten wir
+        \begin{align*}
+            \limsup a_n &\definedas +\infty
+        \end{align*}
+        und ist $a_n$ nicht nach unten beschränkt. Dann setzen wir
+        \begin{align*}
+            \liminf a_n &\definedas -\infty
+        \end{align*}
+    \end{notation}
+    
+    \begin{korollar}[Konvergenzkriterium nach limes superior und limes inferior]
+        Eine reelle Folge $a_n$ konvergiert genau dann, wenn $a_n$ ist beschränkt und $\limsup a_n = \liminf a_n$.
+        \begin{proof}
+            \anf{$\impl$}: Jede konvergente Folge ist beschränkt.\\
+            $a_n$ konvergiert gegen $a$ genau dann, wenn $H(a_n) = \set{a}$\\
+            $\impl \liminf a_n = a = \limsup a_n$ (weil $\limsup$ größter und $\liminf$ kleinster Häufungswert)\\
+            \anf{$\Leftarrow$}: Sei $\liminf a_n = \limsup a_n = a$\\
+            $\annot{\impl}{Lem 2} \forall \varepsilon > 0\colon a_n < a+\varepsilon \text{ für fast alle $n$}$\\
+            und $a_n > a-\varepsilon $ für fast alle $n$\\
+            $\impl \lim a_n = a$
+        \end{proof}
+    \end{korollar}
+
+    \begin{uebung}
+        Zeigen Sie: Wenn $\liminf$ und $\limsup$ als reelle Zahlen existieren, dann ist die Folge beschränkt.
+    \end{uebung}
+
+    \begin{satz}[Satz von Bolzano-Weierstraß] % Satz 5
+        \label{satz:bolzano-weierstrass}
+        Jede beschränkte reelle Folge $a_n$ besitzt mindestens einen Häufungspunkt.
+
+        \begin{proof}
+            $a^* \definedas \limsup a_n$ ist ein Häufungspunkt von $a_n$ nach Satz~\ref{satz:limsup-haeufungspunkt}.
+        \end{proof}
+    \end{satz}
+
+    \begin{korollar}
+        Jede beschränkte reelle Folge $a_n$ hat eine konvergente Teilfolge.
+        \begin{proof}
+            Nach Satz~\ref{satz:bolzano-weierstrass} ist $H(a_n) \neq\emptyset$ und nach Satz ?? gibt es zu jedem Häufungspunkt eine konvergente Teilfolge.
+        \end{proof}
+    \end{korollar}
+
+    \subsection{Das Konvergenzkriterium von Cauchy}
+
+    \begin{definition}[Cauchy-Folge]
+        Eine reelle Folge $a_n$ heißt Cauchy-Folge, falls
+        \begin{align*}
+            \forall\varepsilon > 0~\exists N\in\naturalnumbers\colon \abs{a_n - a_m} < \varepsilon\quad\forall n,m \geq N
+            \equivalent \forall \varepsilon > 0~\exists N\in\naturalnumbers\colon \abs{a_n - a_m} < \varepsilon\quad\forall n\geq m\geq N
+        \end{align*}
+    \end{definition}
+
+    \begin{lemma}
+        Jede konvergente reelle Folge $a_n$ ist eine Cauchy-Folge.
+        \begin{proof}
+            $a_n\fromto a$\\
+            $\forall \varepsilon > 0~\exists N\in\naturalnumbers\colon \abs{a_n-a} < \frac{\varepsilon}{2}\quad\forall n\geq N$\\
+            $\impl$ Sei $n,m\geq N \impl \abs{a_n-a_m} = \abs{a_n-a+a-a_m}$\\
+            $\leq \abs{a_n-a} + \abs{a-a_m} < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon$ \qedhere
+        \end{proof}
+    \end{lemma}
+
+    \begin{lemma}
+        Jede reelle Cauchy-Folge ist beschränkt.
+        \begin{proof}
+            Sei $\varepsilon = 1\impl \exists N\colon \abs{a_n-a_m} < 1 \forall n,m\geq N$\\
+            $\impl \forall n,m\geq N\colon\abs{a_n} = \abs{a_n-a_m+a_m} \leq \abs{a_n-a_m} + \abs{a_m} < 1 + \abs{a_m}$\\
+            $\impl \forall n\geq N\colon \abs{a_n} < 1 + \abs{a_N} \impl \abs{a_n} \leq \max\pair{\abs{a_1}, \abs{a_2},\dots, \abs{a_{N-1}}, 1+\abs{a_N}}$
+        \end{proof}
+    \end{lemma}
+
+    \begin{lemma} % Lemma 4
+        Eine reelle Cauchy-Folge $a_n$ konvergiert genau dann, wenn sie eine konvergente Teilfolge hat.
+
+        \begin{proof}
+            \anf{$\impl$}: Klar, weil jede Teilfolge einer konvergenten Teilfolge konvergiert. (Vermerk einfügen)\\
+            \anf{$\Leftarrow$}: Sei $b_j$ eine Teilfolge von $a_n$
+            $\impl b_j = a_{n_j}\quad n_1 < n_2 < \dots < n_j < n_{j+1} < \dots$
+            Behauptung: $\lim b_j = \lim a_n$
+        \end{proof}
+    \end{lemma}
 
 \end{document}
