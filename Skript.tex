@@ -20,6 +20,7 @@
 \usepackage{colonequals}
 \usepackage{caption}
 \usepackage{tikz}
+\usepackage{nccrules}
 
 % Theorems
 \newtheorem{blockelement}{Blockelement}[subsection]
@@ -39,6 +40,7 @@
 \newtheorem{konzept}[blockelement]{Konzept}
 \newtheorem{visualisierung}[blockelement]{Visualisierung}
 \newtheorem{hilfsatz}[blockelement]{Hilfsatz}
+\newtheorem{anwendung}[blockelement]{Anwendung}
 
 % Paranthese
 \newcommand{\set}[1]{\left\{#1\right\}}
@@ -831,7 +833,8 @@
         \end{align*}
     \end{definition}
 
-    \begin{lemma} % Lemma 1
+    \begin{lemma} % Lemma 2
+        \label{lemma:konv-cauchy}
         Jede konvergente reelle Folge $a_n$ ist eine Cauchy-Folge.
         \begin{proof}
             $a_n\fromto a$
@@ -843,7 +846,8 @@
         \end{proof}
     \end{lemma}
 
-    \begin{lemma}
+    \begin{lemma} % Lemma 3
+        \label{lemma:beschr-cauchy}
         Jede reelle Cauchy-Folge ist beschränkt.
         \begin{proof}
             Es sei $\varepsilon = 1$
@@ -863,17 +867,211 @@
     \begin{lemma} % Lemma 4
         Eine reelle Cauchy-Folge $a_n$ konvergiert genau dann, wenn sie eine konvergente Teilfolge hat.
 
+
+        %%%%%%%%%%%%%%%%%%%%%%%%
+        % 30. November 2023
+        %%%%%%%%%%%%%%%%%%%%%%%%
+
         \begin{proof}
             ~\\
             \anf{$\impl$}: Klar, weil nach Satz~\ref{satz:konv-teilfolgen-umordnungen} jede Teilfolge einer konvergenten Teilfolge konvergiert.\\
             \anf{$\Leftarrow$}: Sei $b_j$ eine Teilfolge von $a_n$
             $\impl b_j = a_{n_j}\quad n_1 < n_2 < \dots < n_j < n_{j+1} < \dots$\\
             $a\definedas \lim b_j$\\
-            Behauptung: $\lim a_n = a$
-            \begin{center}
-            [Rest in nächster Vorlesung]
-            \end{center}
+            Behauptung: $\lim a_n = a$\\[10pt]
+            \noindent Wissen:
+            \begin{align*}
+                \forall\varepsilon>0~\exists N_1 \in\naturalnumbers&\colon \abs{a-a_{n_j}} < \frac{\varepsilon}{2}\quad\forall j\geq N_1\\
+                \exists N_2 \in\naturalnumbers&\colon \abs{a_n-a_m} < \frac{\varepsilon}{2}\quad\forall m\geq n\geq N_2\\[10pt]
+                \impl \abs{a_n-a} &= \abs{a_n-a_{n_j} + a_{n_j} - a}\\
+                &\leq \abs{a_n-a_{n_j}} + \abs{a_{n_j}-a}
+                \intertext{Wir wählen $j\geq\max\pair{N_1,N_2}$}
+                \impl \abs{a_n-a} &\leq \abs{a_n-a_{n_j}} + \abs{a_{n_j}-a}\\
+                &<\frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon \quad\forall n\geq N\\
+                \impl \lim_{n\fromto\infty} a_n &= a\qedhere
+            \end{align*}
         \end{proof}
     \end{lemma}
+
+    \begin{satz} % Satz 5
+        Jede reelle Folge konvergiert genau dann, wenn sie eine Cauchy-Folge ist.
+
+        \begin{proof}
+            \anf{$\impl$}: Folgt direkt aus Lemma~\ref{lemma:konv-cauchy}\\
+            \anf{$\Leftarrow$}: Sei $(a_n)$ eine Cauchy-Folge $\annot{\impl}{Lemma~\ref{lemma:beschr-cauchy}} (a_n)_n$ ist beschränkt $\annot{\impl}{Satz~\ref{satz:bolzano-weierstrass}} a_n$ hat eine konvergente Teilfolge $\annot{\impl}{Lem 4} a_n$ konvergent
+        \end{proof}
+    \end{satz}
+
+    \newpage
+
+    \subsection{Dichtheit von $\mathbb{Q}$ in $\mathbb{R}$}
+
+    $\mathbb{Q}\definedas\set{\frac{m}{n}|~m\in\mathbb{Z} \land n\in\naturalnumbers}$ (rationale Zahlen)\\
+    $\mathbb{Q}\subseteq \realnumbers\quad \mathbb{Q}\neq\mathbb{R}$, da $\sqrt{2}\notin \mathbb{Q}$.\\
+    $\mathbb{R}\exclude\realnumbers$ (irrationale Zahlen)
+
+    \begin{bemerkung}
+        $\realnumbers\exclude\mathbb{Q}$ ist sehr viel größer als $\mathbb{Q}$. (Später)
+    \end{bemerkung}
+
+    \noindent Ziel: $\forall x\in\realnumbers~\exists (a_n)_{n\in\naturalnumbers}, a_n\in\mathbb{Q}$ mit $\lim_{n\fromto\infty} a_n =x$
+
+    \begin{definition} % Definition 1
+        Sei $A\subseteq B (\subseteq \realnumbers)$. $A$ heißt dicht in $B$, falls $\exists (a_n)_{n\in\naturalnumbers}, a_n \in A~\forall n\in\naturalnumbers$ (schreiben $(a_n)\subseteq A$) mit $\lim_{n\fromto\infty} a_n = b$.\\
+        $\forall \varepsilon > 0$
+    \end{definition}
+
+    \begin{lemma} % Lemma 2
+        \theoremescape
+        \begin{enumerate}[label=(\roman*)]
+            \item $\forall x,y\in\realnumbers$ mit $y-x>1~\exists m\in\mathbb{Z}$ mit $x < m < y$
+            \item $\forall x,y\in\realnumbers$ mit $y>x~\exists q\in\mathbb{Q}\colon x<q<y$
+        \end{enumerate}
+        \begin{proof}
+            Sei $y>x+1$. Wir definieren $A\definedas\set{p\in\mathbb{Z}|~p>x} \subseteq \mathbb{Z}$ nach unten beschränkt und $A\neq \emptyset$ (Satz von Archimedes)\\
+            $\annot{\impl}{Wohlord. für ganze Zahlen} m\definedas\min A$ existiert, $m\in A$\\
+            $m-1\notin A, m-1\in \mathbb{Z}$
+            $\impl x < m$ und $m-1 \leq x$\\
+            $\impl m\leq x+1< x+(y-x) = y$\\
+            $\impl x<m<y \impl (i)$\nn
+
+            Sei $y>x\equivalent y-x>0$\\
+            $\annot{\impl}{Archim.} \exists n\in\naturalnumbers\colon nx < m < ny$\\
+            $\equivalent x < \frac{m}{n}< y$\\
+            Wähle $y=\frac{m}{n} \impl b)$
+        \end{proof}
+    \end{lemma}
+
+    \begin{anwendung}
+        $\forall x\in\naturalnumbers~\exists (a_n)_n\in\mathbb{Q}$ mit $q_n\fromto x$
+        \begin{proof}
+            Für $n\in\naturalnumbers$ wähle $y=x+\frac{1}{n}$
+            \begin{align*}
+                \annot{\impl}{Lemma 2} \exists a_n\in\mathbb{Q}\colon x < q_n < y = x + \frac{1}{n}\\
+                x < q_n < x + \frac{1}{n} \fromto x\\
+                \annot{\impl}{Sandwich} q_n \fromto x
+            \end{align*}
+        \end{proof}
+    \end{anwendung}
+
+    Leichte Verbesserung:
+
+    \begin{lemma} % Lemma 3
+        $\forall x\in\realnumbers~\forall n\in\naturalnumbers~\exists m_n\in\mathbb{Z}\colon$
+        \begin{align*}
+            \frac{m_n-1}{n} < x < \frac{m_n}{n}
+        \end{align*}
+        \begin{proof}
+            ???. Betrachte $A_n\definedas\set{p\in\mathbb{Z}|~p>nx}\subseteq\mathbb{Z}$. Behauptung: $m_n\definedas ?? A_n$ macht es
+        \end{proof}
+    \end{lemma}
+
+    \begin{bemerkung}
+        Sei $a > 0 \impl \forall n\in\naturalnumbers\colon a^{\frac{1}{n}} = \sqrt[n]{a}$ existiert.\\
+        $n\in\naturalnumbers\colon a^n = \prod_{j=1}^n a\quad a^{-n} \definedas \frac{1}{a^n}\quad a^0 = 1$\\
+        $\impl a^m$ definiert $\forall m\in\mathbb{Z}$\\
+        Definiere $m\in\mathbb{Z}$, $n\in\naturalnumbers$, $a^\frac{m}{n}\definedas \pair{a^\frac{1}{m}}^m$\\
+        Ist wohldefiniert. Das heißt $q=\frac{m_1}{n_1} = \frac{m_2}{n_2}$\\
+        $\pair{a^\frac{1}{n}}^{m_2} = a^\frac{m_1}{n_1} = a^\frac{m_2}{n_2} = \pair{a^\frac{1}{n_2}}^{m_2}$\\
+        Für $x\in\realnumbers$ wähle $a_n\in\mathbb{Q}$, $q_n\fromto x$ und definiere $a^x \definedas\lim_{n\fromto\infty} a^{q_n}$\\
+        Zu überprüfen: $a^x\cdot a^y = a^{x+y}$, $a^{x}b^x = (ab)^x$, $a^{-x} = \frac{1}{a^x}$
+    \end{bemerkung}
+
+    \newpage
+
+    \subsection{Reihen (und Konvergenz von Reihen)}
+
+    Bedeutung von endlichen Summen ist klar.\\
+    Frage: Gegeben eine reelle Folge $a_n$. Was ist $a_1 + a_2 + a_3 + \dots = \sum_{n=1}^{\infty} a_n$
+
+    \begin{definition}[]
+        Das Symbol
+        \begin{align*}
+            \sum_{n=1}^{\infty} a_n\tag{Sei $a_n$ eine reelle Folge}
+        \end{align*}
+        hat eine doppelte Bedeutung.\\
+        a) Es steht für die Folge der Partialsummen $s_n\definedas \sum_{j=1}^{n} a_j\quad\forall n\in\naturalnumbers$\\
+        b) Die Reihe $\sum_{n=1}^{\infty} a_n$ konvergent, falls der Grenzwert der Partialsummen $\lim_{n\fromto\infty} s_n$ existiert.\\
+        Setzen
+        \begin{align*}
+            \sum_{n=1}^{\infty} a_n \definedas \lim_{n\fromto\infty} s_n
+        \end{align*}
+        Wert der Reihe $\sum_{n=1}^{\infty} a_n$\\
+        c) Konvergiert $s_n$ nicht, so heißt $\sum_{n=1}^{\infty} a_n$ divergent.\\
+        Falls $s_n$ bestimmt divergiert so setzen wir
+        \begin{align*}
+            \sum_{n=1}^{\infty} a_n &\definedas \infty \tag{Wenn $\lim_{n\fromto\infty} s_n = \infty$}\\
+            \sum_{n=1}^{\infty} a_n &\definedas -\infty \tag{Wenn $\lim_{n\fromto\infty} s_n = -\infty$}
+        \end{align*}
+    \end{definition}
+
+    \begin{satz}[Monotone Konvergenz für Reihen] % Satz 2
+        \label{satz:mont-konv-reihen}
+        Sei $a_n$ eine reelle Folge mit $\forall n\colon a_n\geq 0$. Dann konvergiert die Reihe $\sum_{j=1}^{\infty} a_j$ genau dann, wenn die Folge der Partialsummen $s_n$ nach oben beschränkt ist.
+
+        \begin{proof}
+            Beachte $s_{n+1} = \sum_{j=1}^{n+1} a_j = \sum_{j=1}^n a_j + a_{n+1} \geq \sum_{j=1}^{n} a_j = s_n$ und wende Satz~\ref{satz:monoton-konv} an.
+        \end{proof}
+    \end{satz}
+
+    \begin{korollar} % Korollar 3
+        Für eine Reihe $\sum_{n=1}^{infty} a_n$ mit $a_n\geq 0$ gilt entweder
+        \begin{align*}
+            \sum_{n=1}^{\infty} a_n &< \infty
+            \intertext{oder}
+            \sum_{n=1}^{\infty} a_n &= \infty
+        \end{align*}
+
+        \begin{proof}
+            Folgt direkt aus Satz~\ref{satz:mont-konv-reihen}.
+        \end{proof}
+    \end{korollar}
+
+    \begin{bemerkung}
+        Oft hat man Reihen der Form
+        \begin{align*}
+            \sum_{n=0}^{\infty} a_n &= a_0+a_1+a_2+\dots\\
+            s_n&\definedas \sum_{j=0}^{n} a_j \tag{$n\in\naturalnumbers_0$}\\
+            \intertext{oder}
+            s_n &\definedas a_0 + \sum_{j=1}^{\infty} a_j\tag{$n\in\naturalnumbers$}\\
+            \sum_{n=0}^{\infty} a_n &\definedas \lim s_n\text{ sofern der Limes existiert}\\
+            v\in\mathbb{Z}\quad a_v, a_{v+1}, a_{v+2}, \dots\\
+            \sum_{n=v}^{\infty} a_n &= a_n + a_{n+1} + \dots\\
+            s_n &\definedas \sum_{j=v}^{n} a_j\text{ def Folge $(s_n)_{n\geq v}$}
+        \end{align*}
+    \end{bemerkung}
+
+    \begin{beispiel}[Geometrische Reihe und Folge]
+        \begin{align*}
+            q\neq 1 \impl \sum_{j=0}^{n} q^j = \frac{1-q^{n+1}}{1-q}\quad\forall n\in\naturalnumbers_0\\
+            \text{Ist } \abs{q} < 1\colon \sum_{n=0}^{\infty} q^n\text{ konvergiert und } \sum_{n=0}^{\infty} q^n = \frac{1}{1-q}\tag{geometrische Reihe}
+        \end{align*}
+        \footnote{Wir setzen $0^0 = 1$}\\
+        Zum Beispiel $q=\frac{1}{2}$
+
+        \begin{align*}
+            \sum_{j=0}^{n} q^n &= \frac{1-q^{n+1}}{1-q}\\
+            \equivalent \pair{1-q}\cdot \sum_{j=0}^{n} q^n &= 1-q^{n+1}\\
+            \frac{1}{2}\sum_{j=0}^{n} \pair{\frac{1}{2}}^j &= 1 - \pair{\frac{1}{2}}^{n+1}\\
+            \impl 1 - \pair{\frac{1}{2}}^{n+1} &= \sum_{j=0}^{n} \frac{1}{2}\cdot\pair{\frac{1}{2}}^j\\
+            &= \sum_{j=0}^{n} \pair{\frac{1}{2}}^{j+1} = \sum_{j=1}^{n+1} \pair{\frac{1}{2}}^j
+        \end{align*}
+        Das heißt es sollte gelten
+        \begin{align*}
+            \sum_{j=1}^{n} \pair{\frac{1}{2}}^j &= 1-\pair{\frac{1}{2}}^n\quad \forall n\in\naturalnumbers
+        \end{align*}
+
+        \begin{proof}[Für $q\geq 1$]
+            \begin{align*}
+                s_n &\definedas \sum_{j=0}^{n} q^n\\
+                s_n &= q\cdot \sum_{j=0}^{n} q^j = \sum_{j=0}^{n} q^{j+1}\\
+                &= \sum_{l=1}^{n+1} q^l = \sum_{j=1}^{n+1} q^j\\
+                \impl (1-q) s_n = s_n - q\cdot s_n &= \sum_{j=0}^{n}  q^j - \sum_{j=1}^{n+1} q^j\tag{Reißverschlusssumme}\\
+                q^0 - q^{n+1} &= 1 - q^{n+1}\\
+                \impl s_n &= \frac{1-q^{n+1}}{1-q}
+            \end{align*}
+        \end{proof}
+    \end{beispiel}
+
 
 \end{document}
