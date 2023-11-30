@@ -3,6 +3,7 @@ name: Compile PDF
 on:
   push:
     branches: [master]
+    paths: ['**.tex']
   workflow_dispatch:
 
 jobs:
