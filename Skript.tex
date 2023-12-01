@@ -20,7 +20,6 @@
 \usepackage{colonequals}
 \usepackage{caption}
 \usepackage{tikz}
-\usepackage{nccrules}
 
 % Theorems
 \newtheorem{blockelement}{Blockelement}[subsection]
@@ -865,6 +864,7 @@
     \end{lemma}
 
     \begin{lemma} % Lemma 4
+        \label{lemma:cauchy-konv-teilfolge}
         Eine reelle Cauchy-Folge $a_n$ konvergiert genau dann, wenn sie eine konvergente Teilfolge hat.
 
 
@@ -874,12 +874,10 @@
 
         \begin{proof}
             ~\\
-            \anf{$\impl$}: Klar, weil nach Satz~\ref{satz:konv-teilfolgen-umordnungen} jede Teilfolge einer konvergenten Teilfolge konvergiert.\\
-            \anf{$\Leftarrow$}: Sei $b_j$ eine Teilfolge von $a_n$
-            $\impl b_j = a_{n_j}\quad n_1 < n_2 < \dots < n_j < n_{j+1} < \dots$\\
-            $a\definedas \lim b_j$\\
-            Behauptung: $\lim a_n = a$\\[10pt]
-            \noindent Wissen:
+            \anf{$\impl$}: Klar, weil nach Satz~\ref{satz:konv-teilfolgen-umordnungen} jede Teilfolge einer konvergenten Teilfolge konvergiert.\\[10pt]
+            \anf{$\Leftarrow$}: Sei $b_j$ eine Teilfolge von $a_n$ mit $b_j = a_{n_j}$ und $n_1 < n_2 < \dots < n_j < n_{j+1} < \dots$\\
+            Es sei $a\definedas \lim b_j$. Behauptung: $\lim a_n = a$\\[10pt]
+            \noindent Wir wissen:
             \begin{align*}
                 \forall\varepsilon>0~\exists N_1 \in\naturalnumbers&\colon \abs{a-a_{n_j}} < \frac{\varepsilon}{2}\quad\forall j\geq N_1\\
                 \exists N_2 \in\naturalnumbers&\colon \abs{a_n-a_m} < \frac{\varepsilon}{2}\quad\forall m\geq n\geq N_2\\[10pt]
@@ -897,8 +895,8 @@
         Jede reelle Folge konvergiert genau dann, wenn sie eine Cauchy-Folge ist.
 
         \begin{proof}
-            \anf{$\impl$}: Folgt direkt aus Lemma~\ref{lemma:konv-cauchy}\\
-            \anf{$\Leftarrow$}: Sei $(a_n)$ eine Cauchy-Folge $\annot{\impl}{Lemma~\ref{lemma:beschr-cauchy}} (a_n)_n$ ist beschränkt $\annot{\impl}{Satz~\ref{satz:bolzano-weierstrass}} a_n$ hat eine konvergente Teilfolge $\annot{\impl}{Lem 4} a_n$ konvergent
+            \anf{$\impl$}: Folgt direkt aus Lemma~\ref{lemma:konv-cauchy}\\[10pt]
+            \anf{$\Leftarrow$}: Sei $(a_n)_{n\in\naturalnumbers}$ eine Cauchy-Folge $\annot{\impl}{Lemma~\ref{lemma:beschr-cauchy}} (a_n)$ ist beschränkt $\annot{\impl}{Satz~\ref{satz:bolzano-weierstrass}} (a_n)$ hat eine konvergente Teilfolge $\annot{\impl}{Lemma~\ref{lemma:cauchy-konv-teilfolge}} (a_n)$ konvergent
         \end{proof}
     \end{satz}
 
@@ -982,27 +980,31 @@
     \subsection{Reihen (und Konvergenz von Reihen)}
 
     Bedeutung von endlichen Summen ist klar.\\
-    Frage: Gegeben eine reelle Folge $a_n$. Was ist $a_1 + a_2 + a_3 + \dots = \sum_{n=1}^{\infty} a_n$
+    Frage: Gegeben eine reelle Folge $a_n$. Was ist $\pair{a_1 + a_2 + a_3 + \dots = \sum_{n=1}^{\infty} a_n}$?
 
-    \begin{definition}[]
+    \begin{definition}[Reihen als Partialsummen] % Definition 1
         Das Symbol
         \begin{align*}
             \sum_{n=1}^{\infty} a_n\tag{Sei $a_n$ eine reelle Folge}
         \end{align*}
-        hat eine doppelte Bedeutung.\\
-        a) Es steht für die Folge der Partialsummen $s_n\definedas \sum_{j=1}^{n} a_j\quad\forall n\in\naturalnumbers$\\
-        b) Die Reihe $\sum_{n=1}^{\infty} a_n$ konvergent, falls der Grenzwert der Partialsummen $\lim_{n\fromto\infty} s_n$ existiert.\\
-        Setzen
-        \begin{align*}
-            \sum_{n=1}^{\infty} a_n \definedas \lim_{n\fromto\infty} s_n
-        \end{align*}
-        Wert der Reihe $\sum_{n=1}^{\infty} a_n$\\
-        c) Konvergiert $s_n$ nicht, so heißt $\sum_{n=1}^{\infty} a_n$ divergent.\\
-        Falls $s_n$ bestimmt divergiert so setzen wir
-        \begin{align*}
-            \sum_{n=1}^{\infty} a_n &\definedas \infty \tag{Wenn $\lim_{n\fromto\infty} s_n = \infty$}\\
-            \sum_{n=1}^{\infty} a_n &\definedas -\infty \tag{Wenn $\lim_{n\fromto\infty} s_n = -\infty$}
-        \end{align*}
+        wird folgendermaßen verwendet:
+
+        \begin{enumerate}[label=\alph*)]
+            \item Es steht für die Folge der Partialsummen:
+            \begin{align*}
+                s_n&\definedas \sum_{j=1}^{n} a_j\quad\forall n\in\naturalnumbers
+            \end{align*}
+            \item Die Reihe $\sum_{n=1}^{\infty} a_n$ konvergiert, falls der Grenzwert der Partialsummen $\lim_{n\fromto\infty} s_n$ existiert.\\
+            Wir setzen
+            \begin{align*}
+                \sum_{n=1}^{\infty} a_n &\definedas \lim_{n\fromto\infty} s_n
+            \end{align*}
+            \item Konvergiert $(s_n)_n$ nicht, so heißt $\sum_{n=1}^{\infty} a_n$ divergent. Falls $s_n$ bestimmt divergiert so setzen wir
+            \begin{align*}
+                \sum_{n=1}^{\infty} a_n &\definedas \infty \tag{Wenn $\lim_{n\fromto\infty} s_n = \infty$}\\
+                \sum_{n=1}^{\infty} a_n &\definedas -\infty \tag{Wenn $\lim_{n\fromto\infty} s_n = -\infty$}
+            \end{align*}
+        \end{enumerate}
     \end{definition}
 
     \begin{satz}[Monotone Konvergenz für Reihen] % Satz 2
@@ -1010,12 +1012,18 @@
         Sei $a_n$ eine reelle Folge mit $\forall n\colon a_n\geq 0$. Dann konvergiert die Reihe $\sum_{j=1}^{\infty} a_j$ genau dann, wenn die Folge der Partialsummen $s_n$ nach oben beschränkt ist.
 
         \begin{proof}
-            Beachte $s_{n+1} = \sum_{j=1}^{n+1} a_j = \sum_{j=1}^n a_j + a_{n+1} \geq \sum_{j=1}^{n} a_j = s_n$ und wende Satz~\ref{satz:monoton-konv} an.
+            Betrachte
+            \begin{align*}
+                s_{n+1} &= \sum_{j=1}^{n+1} a_j = \sum_{j=1}^n a_j + a_{n+1} \geq \sum_{j=1}^{n} a_j = s_n
+            \end{align*}
+            und wende Satz~\ref{satz:monoton-konv} an.
         \end{proof}
     \end{satz}
 
+    \newpage
+
     \begin{korollar} % Korollar 3
-        Für eine Reihe $\sum_{n=1}^{infty} a_n$ mit $a_n\geq 0$ gilt entweder
+        Für eine Reihe $\sum_{n=1}^{\infty} a_n$ mit $a_n\geq 0$ gilt entweder
         \begin{align*}
             \sum_{n=1}^{\infty} a_n &< \infty
             \intertext{oder}
@@ -1031,10 +1039,10 @@
         Oft hat man Reihen der Form
         \begin{align*}
             \sum_{n=0}^{\infty} a_n &= a_0+a_1+a_2+\dots\\
-            s_n&\definedas \sum_{j=0}^{n} a_j \tag{$n\in\naturalnumbers_0$}\\
+            s_n&\definedas \sum_{j=0}^{n} a_j \tag{$n\in\naturalnumbers_0$}
             \intertext{oder}
             s_n &\definedas a_0 + \sum_{j=1}^{\infty} a_j\tag{$n\in\naturalnumbers$}\\
-            \sum_{n=0}^{\infty} a_n &\definedas \lim s_n\text{ sofern der Limes existiert}\\
+            \sum_{n=0}^{\infty} a_n &\definedas \lim s_n\tag{Sofern $\lim$ existiert}\\
             v\in\mathbb{Z}\quad a_v, a_{v+1}, a_{v+2}, \dots\\
             \sum_{n=v}^{\infty} a_n &= a_n + a_{n+1} + \dots\\
             s_n &\definedas \sum_{j=v}^{n} a_j\text{ def Folge $(s_n)_{n\geq v}$}
