@@ -66,6 +66,7 @@
 \newcommand{\naturalnumbers}{\mathbb{N}}
 \newcommand{\realnumbers}{\mathbb{R}}
 \newcommand{\aligntoright}[2]{\hfill#1\hspace{#2\textwidth}~}
+\newcommand{\horizontalline}[0]{\par\noindent\rule{0.05\textwidth}{0.1pt}\\}
 
 % Envs
 \newenvironment{induktionsanfang}{
@@ -904,22 +905,36 @@
 
     \subsection{Dichtheit von $\mathbb{Q}$ in $\mathbb{R}$}
 
-    $\mathbb{Q}\definedas\set{\frac{m}{n}|~m\in\mathbb{Z} \land n\in\naturalnumbers}$ (rationale Zahlen)\\
-    $\mathbb{Q}\subseteq \realnumbers\quad \mathbb{Q}\neq\mathbb{R}$, da $\sqrt{2}\notin \mathbb{Q}$.\\
-    $\mathbb{R}\exclude\realnumbers$ (irrationale Zahlen)
+    Wir kennen bereits folgende Mengen:
 
-    \begin{bemerkung}
-        $\realnumbers\exclude\mathbb{Q}$ ist sehr viel größer als $\mathbb{Q}$. (Später)
+    \begin{align*}
+        \mathbb{Q}&\definedas\set{\frac{m}{n}\middle|~m\in\mathbb{Z} \land n\in\naturalnumbers}\tag{Rationale Zahlen}\\
+        \mathbb{Q}&\subseteq \realnumbers\quad \mathbb{Q}\neq\mathbb{R}\text{, da } \sqrt{2}\notin \mathbb{Q}\\
+        \mathbb{R}&\exclude\mathbb{Q} \tag{Irrationale Zahlen}
+    \end{align*}
+
+    \begin{bemerkung}[Größenvergleich der irrationalen und rationalen Zahlen]
+        $\realnumbers\exclude\mathbb{Q}$ ist sehr viel größer als $\mathbb{Q}$. (Wird später noch behandelt)
     \end{bemerkung}
 
-    \noindent Ziel: $\forall x\in\realnumbers~\exists (a_n)_{n\in\naturalnumbers}, a_n\in\mathbb{Q}$ mit $\lim_{n\fromto\infty} a_n =x$
-
-    \begin{definition} % Definition 1
-        Sei $A\subseteq B (\subseteq \realnumbers)$. $A$ heißt dicht in $B$, falls $\exists (a_n)_{n\in\naturalnumbers}, a_n \in A~\forall n\in\naturalnumbers$ (schreiben $(a_n)\subseteq A$) mit $\lim_{n\fromto\infty} a_n = b$.\\
-        $\forall \varepsilon > 0$
+    \begin{definition}[Dichte Teilmenge] % Definition 1
+        Sei $A\subseteq B (\subseteq \realnumbers)$. $A$ heißt dicht in $B$, falls
+        \begin{align*}
+            \forall b\in B~\exists (a_n)_{n\in\naturalnumbers}, (a_n \in A~\forall n\in\naturalnumbers)\text{ mit }\lim_{n\fromto\infty} a_n = b
+        \end{align*}
+        Das heißt für jedes Element $b$ von $B$ existiert eine Folge in $A$, die gegen $b$ konvergiert.
     \end{definition}
 
-    \begin{lemma} % Lemma 2
+    \begin{notation}
+        Statt $\forall n\in\naturalnumbers\colon a_n \in A$ schreiben wir auch $(a_n)_n\subseteq A$.
+    \end{notation}
+    \horizontalline
+    \noindent Wir wollen nun zeigen, dass $\mathbb{Q}$ dicht in $\realnumbers$ ist. Ziel:
+    \begin{align*}
+        \forall x\in\realnumbers~\exists (a_n)_{n\in\naturalnumbers}, a_n\in\mathbb{Q}\text{ mit }\lim_{n\fromto\infty} a_n =x
+    \end{align*}
+
+    \begin{lemma}[Zwischenwerte von reellen Zahlen] % Lemma 2
         \theoremescape
         \begin{enumerate}[label=(\roman*)]
             \item $\forall x,y\in\realnumbers$ mit $y-x>1~\exists m\in\mathbb{Z}$ mit $x < m < y$
