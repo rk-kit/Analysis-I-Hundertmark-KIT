@@ -338,6 +338,7 @@
     \newpage
 
     \begin{satz}[Sandwich Satz]
+        \label{satz:sandwich}
         Seien $(a_n)_n$, $(b_n)_n$, $(c_n)_n$ Folgen mit $\lim a_n = a$, $\lim \pair{b_n-a_n} = 0$ und $a_n \leq c_n \leq b_n$ für fast alle $n\in\naturalnumbers$.\\
         Dann folgt, dass $(c_n)_n$ und $(b_n)_n$ jeweils gegen $a$ konvergieren.
         \begin{proof}
@@ -922,7 +923,7 @@
         \begin{align*}
             \forall b\in B~\exists (a_n)_{n\in\naturalnumbers}, (a_n \in A~\forall n\in\naturalnumbers)\text{ mit }\lim_{n\fromto\infty} a_n = b
         \end{align*}
-        Das heißt für jedes Element $b$ von $B$ existiert eine Folge in $A$, die gegen $b$ konvergiert.
+        Das heißt für jedes $b\in B$ existiert eine Folge in $A$, die gegen $b$ konvergiert.
     \end{definition}
 
     \begin{notation}
@@ -935,59 +936,77 @@
     \end{align*}
 
     \begin{lemma}[Zwischenwerte von reellen Zahlen] % Lemma 2
+        \label{lemma:zwisch-reelle-zahlen}
         \theoremescape
         \begin{enumerate}[label=(\roman*)]
             \item $\forall x,y\in\realnumbers$ mit $y-x>1~\exists m\in\mathbb{Z}$ mit $x < m < y$
             \item $\forall x,y\in\realnumbers$ mit $y>x~\exists q\in\mathbb{Q}\colon x<q<y$
         \end{enumerate}
         \begin{proof}
-            Sei $y>x+1$. Wir definieren $A\definedas\set{p\in\mathbb{Z}|~p>x} \subseteq \mathbb{Z}$ nach unten beschränkt und $A\neq \emptyset$ (Satz von Archimedes)\\
-            $\annot{\impl}{Wohlord. für ganze Zahlen} m\definedas\min A$ existiert, $m\in A$\\
-            $m-1\notin A, m-1\in \mathbb{Z}$
-            $\impl x < m$ und $m-1 \leq x$\\
-            $\impl m\leq x+1< x+(y-x) = y$\\
-            $\impl x<m<y \impl (i)$\nn
-
-            Sei $y>x\equivalent y-x>0$\\
-            $\annot{\impl}{Archim.} \exists n\in\naturalnumbers\colon nx < m < ny$\\
-            $\equivalent x < \frac{m}{n}< y$\\
-            Wähle $y=\frac{m}{n} \impl b)$
+            \theoremescape
+            \begin{enumerate}[label=(\roman*)]
+                \item Sei $y>x+1$. Wir definieren
+                \begin{align*}
+                    A&\definedas\set{p\in\mathbb{Z}|~p>x} \subseteq \mathbb{Z}
+                    \intertext{$A$ ist nach unten beschränkt und ach Satz~\ref{satz:von-archimedes} gilt $A\neq \emptyset$. Nach Satz~\ref{satz:wohlordnungsprinzip} erweitert auf $\mathbb{Z}$ folgt}
+                    \impl m&\definedas\min(A)\text{ existiert,}\quad m\in A\\
+                    \impl m-1&\notin A,\quad m-1\in \mathbb{Z}\\
+                    \impl x &< m,\quad m-1 \leq x\\
+                    \impl m&\leq x+1< x+(y-x) = y\\
+                    \impl x&<m<y
+                \end{align*}
+                \item Sei $y>x\equivalent y-x>0$
+                \begin{align*}
+                    \annot{\impl}{\ref{satz:von-archimedes}} \exists n\in\naturalnumbers\colon n\cdot\pair{y-x}&>1\\
+                    \annot{\impl}{(i)} \exists m\in \mathbb{Z}\colon nx &< m < ny\\
+                    \equivalent x &< \frac{m}{n}< y\\
+                    \text{Wähle }q&=\frac{m}{n}\qedhere
+                \end{align*}
+            \end{enumerate}
         \end{proof}
     \end{lemma}
 
-    \begin{anwendung}
-        $\forall x\in\naturalnumbers~\exists (a_n)_n\in\mathbb{Q}$ mit $q_n\fromto x$
+    \begin{folgerung}[Dichtheit von $\mathbb{Q}$ in $\realnumbers$]
+        Anwendung: $\forall x\in\realnumbers~\exists (a_n)_n\in\mathbb{Q}$ mit $q_n\fromto x$
         \begin{proof}
             Für $n\in\naturalnumbers$ wähle $y=x+\frac{1}{n}$
             \begin{align*}
-                \annot{\impl}{Lemma 2} \exists a_n\in\mathbb{Q}\colon x < q_n < y = x + \frac{1}{n}\\
-                x < q_n < x + \frac{1}{n} \fromto x\\
-                \annot{\impl}{Sandwich} q_n \fromto x
+                \annot{\impl}{Lemma~\ref{lemma:zwisch-reelle-zahlen}} \exists q_n\in\mathbb{Q}\colon x &< q_n < y = x + \frac{1}{n}\\
+                x &< q_n < x + \frac{1}{n}\quad (\fromto x)
+                \intertext{Nach dem Sandwich-Satz~(\ref{satz:sandwich}) gilt}
+                \impl q_n &\fromto x
             \end{align*}
         \end{proof}
-    \end{anwendung}
-
-    Leichte Verbesserung:
+    \end{folgerung}
 
     \begin{lemma} % Lemma 3
         $\forall x\in\realnumbers~\forall n\in\naturalnumbers~\exists m_n\in\mathbb{Z}\colon$
         \begin{align*}
-            \frac{m_n-1}{n} < x < \frac{m_n}{n}
+            \frac{m_n-1}{n} \leq x < \frac{m_n}{n}
         \end{align*}
-        \begin{proof}
-            ???. Betrachte $A_n\definedas\set{p\in\mathbb{Z}|~p>nx}\subseteq\mathbb{Z}$. Behauptung: $m_n\definedas ?? A_n$ macht es
-        \end{proof}
+        \begin{uebung}
+            Beweisen Sie das vorherige Lemma.\\
+            \textit{Hinweis}: Betrachte $A_n\definedas\set{p\in\mathbb{Z}|~p>nx}\subseteq\mathbb{Z}$. Behauptung: $m_n\definedas \min A_n$ ermöglicht den Beweis.
+        \end{uebung}
     \end{lemma}
 
-    \begin{bemerkung}
-        Sei $a > 0 \impl \forall n\in\naturalnumbers\colon a^{\frac{1}{n}} = \sqrt[n]{a}$ existiert.\\
-        $n\in\naturalnumbers\colon a^n = \prod_{j=1}^n a\quad a^{-n} \definedas \frac{1}{a^n}\quad a^0 = 1$\\
-        $\impl a^m$ definiert $\forall m\in\mathbb{Z}$\\
-        Definiere $m\in\mathbb{Z}$, $n\in\naturalnumbers$, $a^\frac{m}{n}\definedas \pair{a^\frac{1}{m}}^m$\\
-        Ist wohldefiniert. Das heißt $q=\frac{m_1}{n_1} = \frac{m_2}{n_2}$\\
-        $\pair{a^\frac{1}{n}}^{m_2} = a^\frac{m_1}{n_1} = a^\frac{m_2}{n_2} = \pair{a^\frac{1}{n_2}}^{m_2}$\\
-        Für $x\in\realnumbers$ wähle $a_n\in\mathbb{Q}$, $q_n\fromto x$ und definiere $a^x \definedas\lim_{n\fromto\infty} a^{q_n}$\\
-        Zu überprüfen: $a^x\cdot a^y = a^{x+y}$, $a^{x}b^x = (ab)^x$, $a^{-x} = \frac{1}{a^x}$
+    \begin{bemerkung}[Siehe Walter: Analysis 1, Kapitel 3.8 und 4.8]
+        Sei $a > 0$
+        \begin{align*}
+            \impl\forall n\in\naturalnumbers\colon a^{\frac{1}{n}} = \sqrt[n]{a}\text{ existiert}
+            \intertext{Da $a^n \definedas \prod_{j=1}^n a\quad a^{-n} \definedas \frac{1}{a^n}\quad a^0 \definedas 1$ für $n\in\naturalnumbers$ gilt}
+            a^m\text{ definiert }\forall m\in\mathbb{Z}
+        \end{align*}
+        \underline{Definiere}: $m\in\mathbb{Z}$, $n\in\naturalnumbers$, $a^\frac{m}{n}\definedas \pair{a^\frac{1}{m}}^m$\\
+        Check Wohldefiniertheit. Das heißt ist $q=\frac{m_1}{n_1} = \frac{m_2}{n_2}$ muss gelten
+        \begin{align*}
+            \pair{a^\frac{1}{n}}^{m_2} = a^\frac{m_1}{n_1} = a^\frac{m_2}{n_2} = \pair{a^\frac{1}{n_2}}^{m_2}
+        \end{align*}
+        Für $x\in\realnumbers$ wähle $a_n\in\mathbb{Q}$, $q_n\fromto x$ und definiere
+        \begin{align*}
+            a^x \definedas\lim_{n\fromto\infty} a^{q_n}
+        \end{align*}
+        Check: $a^x\cdot a^y = a^{x+y}$, $a^{x}b^x = (ab)^x$, $a^{-x} = \frac{1}{a^x}$ usw.
     \end{bemerkung}
 
     \newpage
