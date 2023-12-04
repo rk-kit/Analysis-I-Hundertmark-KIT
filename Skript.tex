@@ -682,7 +682,7 @@
     % 28. November 2023
     %%%%%%%%%%%%%%%%%%%%%%%%
 
-    \subsection{[*] Größter und kleinster Häufungswert - Limes superior und Limes inferior}
+    \subsection{Größter und kleinster Häufungswert - Limes superior und Limes inferior}
 
     Es sei $(a_n)_{n\in\naturalnumbers}$ eine beschränkte reelle Folge.
     \begin{align*}
@@ -692,7 +692,7 @@
     \begin{align*}
         \sup_{l\geq n} a_l = \max(a_n, \sup_{l\geq n+1} a_l) \geq \sup_{l\geq n+1} a_l = x_{n+1}
     \end{align*}
-    $(x_n)_n\in\naturalnumbers$ ist monoton fallend und nach unten beschränkt.
+    $(x_n)_{n\in\naturalnumbers}$ ist monoton fallend und nach unten beschränkt.
     \begin{align*}
         \annot{\impl}{\ref{satz:monoton-konv}} x = \lim x_{n} = \lim_{n\fromto\infty} \sup_{l\geq n} a_l = \inf \sup_{l\geq n} a_l
     \end{align*}
@@ -702,7 +702,7 @@
         y = \lim y_n = \lim_{n\fromto\infty} \inf_{l\geq n} a_l = \sup \inf_{l\geq n} a_j
     \end{align*}
 
-    \begin{definition}[Limes superior und inferior]
+    \begin{definition}[Limes superior und inferior] % Definition 1
         Sei $(a_n)_{n\in\naturalnumbers}$ eine beschränkte reelle Folge.
         \begin{align*}
             \limsup_{n\fromto\infty} a_n \definedas \lim_{n\fromto\infty} \sup_{l\geq n} a_l = \inf \sup_{l\geq n} a_l \tag{Limes superior}\\
@@ -714,7 +714,7 @@
             \impl \liminf_{n\fromto\infty} a_n &\leq \limsup_{n\fromto\infty} a_n
             \intertext{und}
             \limsup_{n\fromto\infty} \pair{-a_n} &= -\liminf_{n\fromto\infty} a_n\\
-            \liminf_{n\fromto\infty} \pair{-a_n} &= -\limsup_{n\fromto\infty} a_n\\
+            \liminf_{n\fromto\infty} \pair{-a_n} &= -\limsup_{n\fromto\infty} a_n
         \end{align*}
     \end{definition}
 
@@ -728,14 +728,23 @@
     \end{beispiel}
     \newpage
 
-    \begin{lemma}[Charakterisierung von $\limsup$ und $\liminf$]
+    \begin{lemma}[Charakterisierung von $\limsup$ und $\liminf$] % Lemma 2
         \label{lemma:limsup-charak}
         Sei $(a_n)_{n\in\naturalnumbers}$ beschränkte reelle Folge. Dann gilt:
         \begin{align*}
-            a^{*} = \limsup a_n \equivalent \forall \varepsilon > 0\text{ ist } a_n &< a^{*} + \varepsilon\text{ für fast alle $n$}\\
-            \text{und } a_n &> a^{*} -\varepsilon\text{ für unendlich viele $n$}\\[10pt]
-            a_{*} = \liminf a_n \equivalent \forall \varepsilon > 0\text{ ist } a_n &> a_{*} - \varepsilon\text{ für fast alle $n$}\\
-            \text{und } a_n &< a_{*} + \varepsilon\text{ für unendlich viele $n$}
+            a^{*} = \limsup a_n\quad\equivalent\quad \forall \varepsilon > 0~
+            &
+            \begin{array}{l}
+                \text{ist } a_n < a^{*} + \varepsilon\text{ für fast alle $n$} \\
+                \text{und } a_n > a^{*} -\varepsilon\text{ für unendlich viele $n$}
+            \end{array}
+            \\[10pt]
+            a_{*} = \liminf a_n\quad\equivalent\quad \forall \varepsilon > 0~
+            &
+            \begin{array}{l}
+                \text{ist } a_n > a_{*} - \varepsilon\text{ für fast alle $n$} \\
+                \text{und } a_n < a_{*} + \varepsilon\text{ für unendlich viele $n$}
+            \end{array}
         \end{align*}
         \begin{proof}[Beweis für ersten Teil des Lemmas, zweiter analog.]
             \anf{$\impl$}:
@@ -762,24 +771,43 @@
         \end{proof}
     \end{lemma}
 
-    \begin{satz}[Eigenschaften von $\limsup$ und $\liminf$]
+    \begin{satz}[Eigenschaften von $\limsup$ und $\liminf$] % Satz 3
         \label{satz:limsup-haeufungspunkt}
         Sei $a_n$ eine beschränkte reelle Folge und $H(a_n)$ die Menge der Häufungspunkte von $a_n$. Dann gilt
         \begin{align*}
-            \limsup a_n, \liminf a_n \in H(a_n)
+            \limsup a_n, \liminf a_n \in H(a_n)\tag{1}
         \end{align*}
         Insbesondere ist $H(a_n) \neq \emptyset$. Ferner ist
 
         \begin{align*}
-            \forall x \in H(a_n): \liminf a_n \leq x \leq \limsup a_{n}
+            \forall x \in H(a_n): \liminf a_n \leq x \leq \limsup a_{n}\tag{2}
         \end{align*}
 
-        \begin{proof}
-        [Beweis. Linke Tafel]
+        \begin{proof}[Beweis von (1)]
+            \begin{align*}
+                a^{*} &\definedas\limsup a_n\\
+                \annot{\impl}{\ref{lemma:limsup-charak}} \forall\varepsilon > 0\colon a_n &< a^* + \varepsilon\text{ für fast alle } n\\
+                a_n &> a^*-\varepsilon\text{ für unendlich viele }n\\[10pt]
+                \impl \forall\varepsilon > 0\colon a^* - \varepsilon &< a_n < a^* + \varepsilon\text{ für unendlich viele } n\\
+                \impl &a^*\text{ ist Häufungswert von } (a_n)_n\qedhere
+            \end{align*}
         \end{proof}
-    \end{satz}
+        \noindent Analog lässt sich der Beweis auch für $\liminf a_n$ führen.
 
-    \newpage
+        \begin{proof}[Beweis von (2)]
+            Sei $a$ Häufungswert von $(a_n)_n$.
+            Annahme: $a>a^*\definedas\limsup a_n$:
+            \begin{align*}
+                &\impl a-\varepsilon < a_n < a + \varepsilon\text{ für unendlich viele } n
+                \intertext{Wähle $\varepsilon = \frac{a-a^*}{2}$}
+                &\impl a - \frac{a-a^*}{2} < a_n < a + \frac{a-a^*}{2}\\
+                &\impl a_n > a - \frac{a-a^*}{2} = \frac{a+a^*}{2} = a^* + \varepsilon\text{ für unendlich viele }n
+                \intertext{Widerspruch zu Lemma~\ref{lemma:limsup-charak}}
+                &\impl a \leq \limsup a_n\qedhere
+            \end{align*}
+        \end{proof}
+        \noindent Mit $-a_n$ lässt sich analog zeigen, dass $a\geq \liminf a_n\quad\forall$ Häufungspunkte $a$ von $(a_n)_n$.
+    \end{satz}
 
     \begin{notation}[Limes superior/inferior von unbeschränkten Folgen]
         Es sei $a_n$ nicht nach oben beschränkt. Dann setzten wir
