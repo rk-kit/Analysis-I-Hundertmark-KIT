@@ -4,7 +4,7 @@
 
 \begin{notation}[Konkrete Beschreibung von Mengen]
     Eine Menge ist informell formuliert eine Ansammlung von Objekten.
-    Wenn wir diese Objekte konkret angeben, schreiben wir $M = \set{1, 2, 3}$.\\
+    Um diese Objekte konkret anzugeben, schreiben wir $M = \set{1, 2, 3}$.\\
     Eine andere Möglichkeit, eine Menge anzugeben ist über die Eigenschaften der Elemente.
     Wir schreiben: $M=\set{x|~H(x)}$. Das bedeutet, dass ein Element $x$ genau dann ein Element der Menge ist, wenn $H(x)$ gilt.
     Wir schreiben $x\in M \equivalent H(x)$.
@@ -35,13 +35,13 @@
 
 \subsection{Operationen mit Mengen}
 
-\begin{definition}
+\begin{definition}[Mengenoperationen]
     Seien $A, B$ Mengen. Dann gilt:
     \begin{align*}
-        A\cap B &\definedas \set{x|~x\in A \land x\in B}\\
-        A\cup B &\definedas \set{x|~x\in A \lor x\in B}\\
-        A\exclude B &\definedas \set{x|~x\in A \land x\notin B}\\[10pt]
-        \text{Wenn } A\subseteq M&: A^{C} = A^{C}_{M} \definedas M\exclude A
+        A\cap B &\definedas \set{x|~x\in A \land x\in B}\tag{Schnitt}\\
+        A\cup B &\definedas \set{x|~x\in A \lor x\in B}\tag{Vereinigung}\\
+        A\exclude B &\definedas \set{x|~x\in A \land x\notin B}\tag{Differenz}\\[10pt]
+        \text{Wenn } A\subseteq M&: A^{C} = A^{C}_{M} \definedas M\exclude A\tag{Komplement}
     \end{align*}
     Allgemein gilt: $A$ und $B$ disjunkt $\equivalent A\cap B = \emptyset$
 \end{definition}
@@ -70,7 +70,7 @@
 % 31. Oktober 2023
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{lemma}
+\begin{lemma}[Kommutativität des Schnitts]
     $A\cap B = B \cap A$
     \begin{proof}
         \begin{align*}
@@ -81,7 +81,7 @@
     \end{proof}
 \end{lemma}
 
-\begin{lemma}
+\begin{lemma}[Distributivität]
     $A\cup (B \cap C) = (A\cup B) \cap (A\cup C)$
     \begin{proof}
         \begin{align*}
@@ -124,7 +124,6 @@
         \forall x \in A~\exists y \in B: H(x,y) \equivalent \text{Für alle $x\in A$ existiert ein $y \in B$, so dass $H(x,y)$ wahr ist}
     \end{align*}
 \end{definition}
-\vspace{0.2cm}
 
 \begin{folgerung}[Negation von Quantoren]
     Es seien $A,B$ Mengen und $H(x,y)$ Aussageform mit $x\in A$ und $y \in B$. Dann gilt:
@@ -160,7 +159,7 @@
 \end{definition}
 
 \begin{definition}[Kartesisches Produkt]
-    So ist $A \times B \definedas \set{\pair{a,b}|~a\in A \land b \in B}$ wieder eine Menge genannt das Kartesische Produkt von $A$ und $B$.
+    Somit ist $A \times B \definedas \set{\pair{a,b}|~a\in A \land b \in B}$ wieder eine Menge genannt das Kartesische Produkt von $A$ und $B$.
 \end{definition}
 
 \begin{beispiel}
@@ -195,7 +194,7 @@
 
 
 \begin{definition}[Äquivalenzrelation]
-    Sei $R=\pair{A, A, G}$ eine Relation. Dann gilt:
+    Sei $R=\pair{A, A, G}$ eine Relation. Dann definieren wir unterschiedliche Eigenschaften, die die Relation haben kann:
     \begin{enumerate}[label=(\roman*)]
         \item $R$ ist reflexiv:\quad $\forall a\in A: aRa\quad\pair{\forall a \in A: (a,a) \in G}$
         \item $R$ ist symmetrisch:\quad $\forall a_1, a_2\in A: a_{1}Ra_2\equivalent a_{2}Ra_1$
@@ -210,7 +209,7 @@
     \begin{align*}
     [a]
         _{R} \definedas \set{b\in A|~aRb}
-    \end{align*} ist die Äquivalenzklasse von $a$. Wir schreiben auch $a\sim R_b$ für $aRb$ oder $a = b$ modulo $R$.
+    \end{align*} ist die Äquivalenzklasse von $a$. Wir schreiben auch $a\sim_R b$ für $aRb$ oder $a = b$ modulo $R$.
 \end{notation}
 
 \begin{beobachtung}
@@ -218,7 +217,7 @@
     \theoremescape
     \begin{enumerate}[label=(\roman*)]
         \item $\forall a\in A: [a]_R \neq \emptyset$
-        \item Reflexivität: $aRa \impl a\in [a]_R$
+        \item $aRa \impl a\in [a]_R$
         \item $a_1, a_2\in [a]_R \impl a_1 \sim_R a, a_2 \sim_R a \annot{\impl}{sym.} a_1 \sim_R a, a \sim_R a_2 \annot{\impl}{trans.} a_1\sim_R a_2$
     \end{enumerate}
 \end{beobachtung}
@@ -241,10 +240,10 @@
 \end{korollar}
 
 \begin{definition}[Zerlegung einer Menge]
-    Sei $A\neq \emptyset$ Menge. Dann ist eine Zerlegung $F = \set{A_j}_{j\in J}, A_j\subseteq A$ mit folgenden Eigenschaften definiert:
+    Sei $A\neq \emptyset$ eine Menge. Dann ist eine Zerlegung $F = \set{A_j}_{j\in J}, A_j\subseteq A$ mit folgenden Eigenschaften definiert:
     \begin{enumerate}
-        \item $\forall j\in J: A_j\neq \emptyset$
-        \item $j_1, j_2\in J, j_1\neq j_2: A_{j1} \cap A_{j2} = \emptyset$
+        \item $\forall j\in J\colon A_j\neq \emptyset$
+        \item $j_1, j_2\in J, j_1\neq j_2\colon A_{j1} \cap A_{j2} = \emptyset$
         \item $\bigcup_{j\in J}A_j = A$
     \end{enumerate}
 \end{definition}

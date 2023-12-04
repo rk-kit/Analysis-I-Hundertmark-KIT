@@ -119,6 +119,8 @@
     \newpage
 
     \tableofcontents
+    ~\\
+    Alle mit [*] markierten Kapitel sind noch nicht korrekturgelesen und bedürfen eventuell noch Änderungen.
     \newpage
 
 
@@ -142,7 +144,7 @@
     \input{Kapitel/Summe_Produkt_Wurzeln}
 
 
-    \section{Folgen und Grenzwerte}
+    \section{[*] Folgen und Grenzwerte}
 
     \subsection{Konvergenz}
     \thispagestyle{pagenumberonly}
@@ -365,7 +367,7 @@
         \end{proof}
     \end{satz}
 
-    \subsection{Monotone Konvergenz}
+    \subsection{[*] Monotone Konvergenz}
 
     Wir sind bisher immer davon ausgegangen, dass wir den Grenzwert einer Folge bereits kennen. Das folgende Unterkapitel beschäftigt sich damit, die Konvergenz einer Folge nachzuweisen, wenn deren Grenzwert nicht bekannt ist.
 
@@ -385,6 +387,8 @@
         Eine monoton wachsende Folge $(a_n)_n$ konvergiert genau dann, wenn $(a_n)_n$ nach oben beschränkt ist.\\
         Und eine monoton fallende Folge $(a_n)_n$ konvergiert genau dann, wenn sie nach unten beschränkt ist.
     \end{satz}
+
+    \newpage
 
     \begin{lemma}[Hilfaussage für monotone Konvergenz]
         ~\label{lemma:hilf-monoton-konv}
@@ -420,7 +424,7 @@
         ~\\
         Sei $(a_n)_n$ eine Folge mit $a_n = f(a), f:\naturalnumbers\fromto\realnumbers$\\
         $Bild(f) = f(\naturalnumbers)$ nach oben beschränkt\\
-        $a\definedas\sup\pair{f\pair{\naturalnumbers}}\geq a_n \quad\forall n$
+        $a\definedas\sup\pair{f\pair{\naturalnumbers}}\geq a_n \quad\forall n\in\naturalnumbers$
     \end{proof}
 
     \newpage
@@ -576,7 +580,7 @@
 
     \newpage
 
-    \subsection{Häufungswerte und Teilfolgen}
+    \subsection{[*] Häufungswerte und Teilfolgen}
 
     Wir möchten eine Folge $(a_n)_n$ \anf{massieren}.
     \begin{align*}
@@ -678,7 +682,7 @@
     % 28. November 2023
     %%%%%%%%%%%%%%%%%%%%%%%%
 
-    \subsection{Größter und kleinster Häufungswert - Limes superior und Limes inferior}
+    \subsection{[*] Größter und kleinster Häufungswert - Limes superior und Limes inferior}
 
     Es sei $(a_n)_{n\in\naturalnumbers}$ eine beschränkte reelle Folge.
     \begin{align*}
@@ -838,7 +842,7 @@
         \label{lemma:konv-cauchy}
         Jede konvergente reelle Folge $a_n$ ist eine Cauchy-Folge.
         \begin{proof}
-            $a_n\fromto a$
+            Es sei $(a_n)_n\fromto a$ eine reelle Folge.
             \begin{align*}
                 \forall \varepsilon > 0~\exists N\in\naturalnumbers\colon &\abs{a_n-a} < \frac{\varepsilon}{2}\quad\forall n\geq N\\
                 \impl\text{ Sei }n,m\geq N \impl &\abs{a_n-a_m} = \abs{a_n-a+a-a_m}\\
@@ -876,7 +880,7 @@
 
         \begin{proof}
             ~\\
-            \anf{$\impl$}: Klar, weil nach Satz~\ref{satz:konv-teilfolgen-umordnungen} jede Teilfolge einer konvergenten Teilfolge konvergiert.\\[10pt]
+            \anf{$\impl$}: Klar, weil nach Satz~\ref{satz:konv-teilfolgen-umordnungen} jede Teilfolge einer konvergenten Folge konvergiert.\\[10pt]
             \anf{$\Leftarrow$}: Sei $b_j$ eine Teilfolge von $a_n$ mit $b_j = a_{n_j}$ und $n_1 < n_2 < \dots < n_j < n_{j+1} < \dots$\\
             Es sei $a\definedas \lim b_j$. Behauptung: $\lim a_n = a$\\[10pt]
             \noindent Wir wissen:
@@ -898,13 +902,13 @@
 
         \begin{proof}
             \anf{$\impl$}: Folgt direkt aus Lemma~\ref{lemma:konv-cauchy}\\[10pt]
-            \anf{$\Leftarrow$}: Sei $(a_n)_{n\in\naturalnumbers}$ eine Cauchy-Folge $\annot{\impl}{Lemma~\ref{lemma:beschr-cauchy}} (a_n)$ ist beschränkt $\annot{\impl}{Satz~\ref{satz:bolzano-weierstrass}} (a_n)$ hat eine konvergente Teilfolge $\annot{\impl}{Lemma~\ref{lemma:cauchy-konv-teilfolge}} (a_n)$ konvergent
+            \anf{$\Leftarrow$}: Sei $(a_n)_{n\in\naturalnumbers}$ eine Cauchy-Folge $\annot{\impl}{Lemma~\ref{lemma:beschr-cauchy}} (a_n)_n$ ist beschränkt $\annot{\impl}{Satz~\ref{satz:bolzano-weierstrass}} (a_n)_n$ hat eine konvergente Teilfolge $\annot{\impl}{Lemma~\ref{lemma:cauchy-konv-teilfolge}} (a_n)_n$ ist konvergent
         \end{proof}
     \end{satz}
 
     \newpage
 
-    \subsection{Dichtheit von $\mathbb{Q}$ in $\mathbb{R}$}
+    \subsection{[*] Dichtheit von $\mathbb{Q}$ in $\mathbb{R}$}
 
     Wir kennen bereits folgende Mengen:
 
@@ -948,7 +952,7 @@
                 \item Sei $y>x+1$. Wir definieren
                 \begin{align*}
                     A&\definedas\set{p\in\mathbb{Z}|~p>x} \subseteq \mathbb{Z}
-                    \intertext{$A$ ist nach unten beschränkt und ach Satz~\ref{satz:von-archimedes} gilt $A\neq \emptyset$. Nach Satz~\ref{satz:wohlordnungsprinzip} erweitert auf $\mathbb{Z}$ folgt}
+                    \intertext{$A$ ist nach unten beschränkt und nach Satz~\ref{satz:von-archimedes} gilt $A\neq \emptyset$. Nach Satz~\ref{satz:wohlordnungsprinzip} erweitert auf $\mathbb{Z}$ folgt}
                     \impl m&\definedas\min(A)\text{ existiert,}\quad m\in A\\
                     \impl m-1&\notin A,\quad m-1\in \mathbb{Z}\\
                     \impl x &< m,\quad m-1 \leq x\\
@@ -1080,7 +1084,8 @@
         \end{align*}
     \end{bemerkung}
 
-    \begin{beispiel}[Geometrische Folge und Reihe]\footnote{Wir setzen $0^0 = 1$}
+    \begin{beispiel}[Geometrische Folge und Reihe]
+        \footnote{Wir setzen $0^0 = 1$}
         \begin{align*}
             q\neq 1 \impl \sum_{j=0}^{n} q^j = \frac{1-q^{n+1}}{1-q}\quad\forall n\in\naturalnumbers_0\\
             \text{Ist } \abs{q} < 1\colon \sum_{n=0}^{\infty} q^n\text{ konvergiert und } \sum_{n=0}^{\infty} q^n = \frac{1}{1-q}\tag{geometrische Reihe}
@@ -1097,8 +1102,9 @@
         \begin{align*}
             \sum_{j=1}^{n} \pair{\frac{1}{2}}^j &= 1-\pair{\frac{1}{2}}^n\quad \forall n\in\naturalnumbers
         \end{align*}
-        Dass dieser Zusammenhang gelten muss, lässt sich einfach veranschaulichen. Die linke Seite der Gleichung kann als Summe über Teilflächen des Einheitsquadrats\footnote{Original: \anf{Kuchen}} visualisiert werden.\\
-        Es wird eine Hälfte, dann ein Viertel, dann ein Achtel (usw.) des Quadrats hinzugefügt. Der zurückbleibende Flächeninhalt ist immer genauso groß wie das zuletzt hinzugefügte Stück. Dieser Term wird durch den rechten Teil der Gleichung beschrieben.
+
+        \noindent Dass dieser Zusammenhang gelten muss, lässt sich einfach veranschaulichen. Die linke Seite der Gleichung kann als Summe über Teilflächen des Einheitsquadrats\footnote{Original: \anf{Kuchen}} visualisiert werden.\\
+        Erst wird eine Hälfte, dann ein Viertel, dann ein Achtel (usw.) des Quadrats hinzugefügt. Der zurückbleibende Flächeninhalt ist immer genauso groß wie das zuletzt hinzugefügte Stück. Dieser Term wird durch den rechten Teil der Gleichung beschrieben.
 
         \begin{proof}[Beweis der Reihenformel]
             \begin{align*}
@@ -1106,7 +1112,7 @@
                 q\cdot s_n &= q\cdot \sum_{j=0}^{n} q^j = \sum_{j=0}^{n} q^{j+1}\\
                 &= \sum_{j=1}^{n+1} q^j\tag{Indexshift}\\
                 \impl (1-q)\cdot s_n = s_n - q\cdot s_n &= \sum_{j=0}^{n}  q^j - \sum_{j=1}^{n+1} q^j\tag{Reißverschlusssumme}\\
-                 = q^0 - q^{n+1} &= 1 - q^{n+1}\\
+                = q^0 - q^{n+1} &= 1 - q^{n+1}\\
                 \impl s_n &= \frac{1-q^{n+1}}{1-q}\qedhere
             \end{align*}
         \end{proof}

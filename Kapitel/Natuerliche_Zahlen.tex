@@ -1,5 +1,5 @@
 \thispagestyle{pagenumberonly}
-Frage: Was sind die natürlichen Zahlen? (zum Beispiel 1, $2\definedas 1+1$, 3$\definedas 2+1$, 4$\definedas 3+1$, usw.)
+Frage: Was sind die natürlichen Zahlen? (zum Beispiel $1$, $2\definedas 1+1$, $3\definedas 2+1$, $4\definedas 3+1$, usw.)
 
 \subsection{Induktive Mengen}
 \begin{definition}[Induktive Menge]
@@ -47,6 +47,8 @@ Frage: Was sind die natürlichen Zahlen? (zum Beispiel 1, $2\definedas 1+1$, 3$\
     \end{proof}
 \end{satz}
 
+\newpage
+
 %%%%%%%%%%%%%%%%%%%%%%%%
 % 9. November 2023
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -62,7 +64,7 @@ Frage: Was sind die natürlichen Zahlen? (zum Beispiel 1, $2\definedas 1+1$, 3$\
     Dann ist $B_n$ wahr $\forall n\in\naturalnumbers$.
     \begin{proof}
         Definiere: $M\definedas\set{n\in\naturalnumbers|~B_n\text{ ist wahr}} \subseteq \naturalnumbers$.\\
-        Zu zeigen: $M=\naturalnumbers$. Also reicht nach Satz~\ref{satz:induktionsprinzip} zu zeigen, dass $M$ induktiv ist.
+        Zu zeigen: $M=\naturalnumbers$. Also reicht es nach Satz~\ref{satz:induktionsprinzip} zu zeigen, dass $M$ induktiv ist.
         \begin{enumerate}
             \item $1\in\naturalnumbers$, da $B_1$ wahr ist.
             \item Ist $n\in M$ dann ist $B_n$ wahr $\impl$ $B_n+1$ ist wahr $\impl$ $n+1\in M$ $\impl$ $M$ ist induktiv $\impl$ $M=\naturalnumbers$ \qedhere
@@ -71,7 +73,7 @@ Frage: Was sind die natürlichen Zahlen? (zum Beispiel 1, $2\definedas 1+1$, 3$\
 \end{satz}
 
 \begin{bemerkung}[Starke Induktion]
-    Die starke Induktion ist eine Variante der vollständigen Induktion. Sie ist definiert durch:
+    Die starke Induktion ist eine Variante der vollständigen Induktion. Bei dieser beweist man folgendes:
     \begin{enumerate}
         \item $B_1$ ist wahr.
         \item für alle $n\in\naturalnumbers$ gilt $B_1, B_2, B_3, \dots, B_n$ ist wahr $\impl$ $B_{n+1}$ ist wahr.
@@ -113,6 +115,8 @@ Frage: Was sind die natürlichen Zahlen? (zum Beispiel 1, $2\definedas 1+1$, 3$\
         \noindent Also ist $B_n$ wahr für $n=k+1$. Nach dem Prinzip der vollständigen Induktion folgt $\forall n\in\naturalnumbers:~B_n$ ist wahr, d.h. $1+2+\dots+n=\frac{n\cdot(n+1)}{2}$\qedhere
     \end{proof}
 \end{beispiel}
+
+\newpage
 
 \begin{satz}[Eigenschaften von $\naturalnumbers$]
     \label{satz:n-eigenschaften}
@@ -181,7 +185,7 @@ Frage: Was sind die natürlichen Zahlen? (zum Beispiel 1, $2\definedas 1+1$, 3$\
     Es gibt kein $n\in\naturalnumbers$ mit $0<n<1$. Ferner gilt $\forall n\in\naturalnumbers$ gibt es keine natürliche Zahl $m\in\naturalnumbers$ mit $n<m<n+1$ oder mit $n-1<m<n$.
 \end{korollar}
 \begin{uebung}
-    Beweisen Sie dies.
+    Beweisen Sie das vorherige Korollar.
 \end{uebung}
 \begin{notation}[Zahlenmengen]
     \begin{align*}

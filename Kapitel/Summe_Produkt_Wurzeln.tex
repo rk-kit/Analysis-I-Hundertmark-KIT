@@ -172,13 +172,12 @@
 
 \subsection{Wurzeln}
 
-\begin{satz}
+\begin{satz}[Existenz und Eindeutigkeit der Quadratwurzel]
     Für jedes $c\in\realnumbers$, $c>0$, gibt es genau ein $x>0$, so dass $x^2 = c$ ist.
     \begin{proof}
         \textit{Eindeutigkeit}\\
         $x_1>0$, $x_2>0$: $\pair{x_1}^2 = \pair{x_2}^2 = c \impl 0 = (\pair{x_1}^2-\pair{x_2}^2) = (x_1-x_2) \cdot \underbrace{(x_1+x_2)}_{>0} \impl x_1 = x_2$\\
-        \textit{Existenz}\\
-        Wir definieren $M\definedas\set{z\in\realnumbers|~z\geq 0, z^2 \leq c}$. Dann gilt $0\in M \impl M\neq \emptyset$\\[10pt]
+        \textit{Existenz.} Wir definieren $M\definedas\set{z\in\realnumbers|~z\geq 0, z^2 \leq c}$. Dann gilt $0\in M \impl M\neq \emptyset$\\[10pt]
         $M$ ist beschränkt, weil $(1+c)^2=1+2c+c^2 > c$, \quad$z\in M \impl z < 1 + c$\\
         Somit $\exists \sup M$ und wir definieren $x\definedas \sup M$. Zu zeigen: $x^2 = c$\\[10pt]
         Wir nehmen an, dass $x^2<c$ und setzen $\varepsilon \definedas \min\set{1, \frac{c-x^2}{2x+1}} \impl 0 < \varepsilon \leq 1 \impl \varepsilon^2 < \varepsilon$\\
@@ -194,7 +193,7 @@
     $x=\sqrt {c}$, $x=c^{\frac{1}{2}}$, $x$ ist die Quadratwurzel von $c$
 \end{bemerkung}
 
-\begin{satz}
+\begin{satz}[Existenz und Eindeutigkeit der Wurzel]
     Für $n\in\naturalnumbers$ und für jedes $c\in\realnumbers$, $c\geq 0$ gibt es genau ein $x \geq 0$, $x\in\realnumbers$, so dass $x^n = c$.
     \begin{proof}
         \textit{Eindeutigkeit}\\

@@ -137,9 +137,7 @@ Diese Anordnung genügt folgenden Axiomen:
     \begin{proof}
         \begin{align*}
             a &<b\\
-            \impl 0 = a + \pair{-a} &< b + \pair{-a} = b - a\\
-        \end{align*}
-        \begin{align*}
+            \impl 0 = a + \pair{-a} &< b + \pair{-a} = b - a\\[10pt]
             b-a &>0\\
             \impl a &< a + \pair{b-a} = b\qedhere
         \end{align*}
@@ -164,6 +162,7 @@ Diese Anordnung genügt folgenden Axiomen:
         \item $a>0 \equivalent \frac{1}{a}>0$
         \item $a^2 < b^2 \land a > 0 \land b > 0 \impl a < b$
     \end{enumerate}
+    \newpage
     \begin{proof}
         \theoremescape
         \begin{enumerate}[label=(II.\arabic*)]
@@ -205,7 +204,7 @@ Diese Anordnung genügt folgenden Axiomen:
         Jede solche Zahl $k$ heißt obere Schranke von $M$.
         \item $M$ heißt \textbf{nach unten beschränkt}, falls ein $k\in\realnumbers$ existiert mit $\forall x\in M:x\geq k$.
         Jede solche Zahl $k$ heißt untere Schranke von $M$.
-        \item $M$ heißt beschränkt, falls ein $k\geq 0$ existiert mit $-k\leq x \leq k\quad \forall x\in M$
+        \item $M$ heißt \textbf{beschränkt}, falls ein $k\geq 0$ existiert mit $-k\leq x \leq k\quad \forall x\in M$
     \end{enumerate}
 \end{definition}
 
@@ -237,9 +236,9 @@ Diese Anordnung genügt folgenden Axiomen:
 \begin{beispiel}
     \theoremescape
     \begin{align*}
-        M &= \interv{0,1} = \set{x|~0\leq x \leq 1}\\
+        M &\definedas \interv{0,1} = \set{x|~0\leq x \leq 1}\\
         \sup M &= 1 \qquad \inf M = 0\nn
-        A &= \pair{0,1} = \set{x|~0< x < 1}\\
+        A &\definedas \pair{0,1} = \set{x|~0< x < 1}\\
         \sup A &= 1 \qquad \inf A = 0\\
     \end{align*}
 \end{beispiel}
@@ -256,25 +255,25 @@ Diese Anordnung genügt folgenden Axiomen:
     \end{align*}
 \end{notation}
 
-\begin{satz}
+\begin{satz}[Eigenschaften des Supremums]
     \label{satz:sup}
     Sei $M\subseteq \realnumbers$
-    \begin{enumerate}[label=(\arabic*)]
+    \begin{enumerate}[label=(\roman*)]
         \item Ist $\sup M < \infty$, so folgt $\forall \varepsilon > 0~\exists x\in M$ mit $\sup\pair{M} -\varepsilon < x$
         \item Ist $\sup M = \infty$, so gilt $\forall k\geq 0~\exists x\in M$ mit $x> k$
     \end{enumerate}
     \begin{proof}
         \theoremescape
         \begin{enumerate}
-            \item Wir setzen $a\definedas \sup M$. Sei $a<\infty$. Wäre (1) falsch, so folgt $\exists \varepsilon>0~\forall x\in M:a-\varepsilon > x$.\\Das heißt $a-\varepsilon$ ist eine obere Schranke für $M$. Aber $a-\varepsilon < a$; (Widerspruch)
+            \item Wir setzen $a\definedas \sup M$. Sei $a<\infty$. Wäre (i) falsch, so folgt $\exists \varepsilon>0~\forall x\in M:a-\varepsilon > x$.\\Das heißt $a-\varepsilon$ ist eine obere Schranke für $M$. Aber $a-\varepsilon < a$; (Widerspruch)
             \item Ist $a=\infty$, so hat $M$ keine obere Schranke. Nach Def. folgt für jedes $k\in\realnumbers$ existiert ein $x\in M: x > k$\qedhere
         \end{enumerate}
     \end{proof}
 \end{satz}
-\begin{satz}
+\begin{satz}[Eigenschaften des Infimums]
     \label{satz:inf}
     Sei $M\subseteq \realnumbers$
-    \begin{enumerate}
+    \begin{enumerate}[label=(\roman*)]
         \item Ist $\inf M > -\infty$, so folgt $\forall \varepsilon > 0~\exists x\in M$ mit $x < \inf\pair{M}+ \varepsilon$
         \item Ist $\inf M = -\infty$, so gilt $\forall k\geq 0~\exists x\in M$ mit $x< -k$
     \end{enumerate}
