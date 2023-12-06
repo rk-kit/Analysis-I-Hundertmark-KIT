@@ -120,7 +120,7 @@
 
     \tableofcontents
     ~\\
-    Alle mit [*] markierten Kapitel sind noch nicht korrekturgelesen und bedürfen eventuell noch Änderungen.
+    Alle mit [*] markierten Kapitel sind noch nicht korrektur gelesen und bedürfen eventuell noch Änderungen.
     \newpage
 
 
@@ -459,7 +459,7 @@
             \textit{Beweis}
             \begin{align*}
                 x_{n+1} &= \frac{1}{2}\pair{x_n+\frac{c}{x_n}}
-                \intertext{haben für $n\geq 1$: $(x_n)^2 = \pair{\frac{1}{2}(x_{n+1} + \frac{c}{x_{n+1}})}^2 \geq c$}\\
+                \intertext{haben für $n\geq 1$: $(x_n)^2 = \pair{\frac{1}{2}\pair{x_{n+1} + \frac{c}{x_{n+1}}}}^2 \geq c$}\\
                 \impl x_n &\geq \frac{c}{x_n}\\
                 \impl x_{n+1} &\geq \frac{1}{2}\pair{x_n+\frac{c}{x_n}}\leq \frac{1}{2}\pair{x_n+x_n} = x_n
             \end{align*}
@@ -1289,42 +1289,42 @@
         \label{satz:cauchy-verdichtung}
         Sei $(a_n)_n$ eine monoton fallende Nullfolge. Dann gilt
         \begin{align*}
-            \sum_{n=0}^{\infty} a_n\text{ konvergiert}\\
-            \equivalent \sum_{n=0}^{\infty} 2^n\cdot a_{\pair{2^n}}\text{ konvergiert}\tag{Verdichtete Reihe}
+            &\sum_{n=0}^{\infty} a_n\text{ konvergiert}\\
+            \equivalent &\sum_{n=0}^{\infty} 2^n\cdot a_{\pair{2^n}}\text{ konvergiert}\tag{Verdichtete Reihe}
         \end{align*}
         \begin{proof}
-            1. Schritt. Zu zeigen: $a_n\geq 0~\forall n\in\naturalnumbers$.
+            \anf{$\Leftarrow$} 1. Schritt. Zu zeigen: $a_n\geq 0\quad\forall n\in\naturalnumbers$.
             \begin{align*}
-                a_n\geq a_{n+1} \geq a_{n+2} \geq \dots geq a_{n+l} \fromto 0\\
-                \impl a_n \geq 0\quad\forall n\in\naturalnumbers
+                a_n&\geq a_{n+1} \geq a_{n+2} \geq \dots \geq a_{n+l} \fromto 0\text{ für } l\fromto\infty\\
+                \impl a_n &\geq 0\quad\forall n\in\naturalnumbers
             \end{align*}
             2. Schritt:
             \begin{align*}
                 s_n &\definedas \sum_{j=0}^{n} a_j\\
-                t_n &\definedas \sum_{\nu=0}^{n} 2^{\nu} \cdot a_{2^\nu}
-                \intertext{Jedes $n\in\naturalnumbers$ können wir eindeutig schreiben als $n=2^\nu + l$ mit $\nu\in\naturalnumbers,~0\leq l \leq 2^\nu$. Sei $1\leq n< 2^k$ für ein $k\in\naturalnumbers_0$}
-                s_n &= \sum_{j=0}^{n} = a_0 + \sum_{j=1}^{n} a_j\\
-                &\leq a_0 + \sum_{j=1}^{2^k-1} a_j = a_0 + \sum_{\nu=0}^{k-1} \pair{\sum_{l=0}^{2^\nu - 1} \underbrace{a_{2^\nu + l}}_{\leq a_{2^\nu}}}\\
-                &\leq a_0 + \sum_{\nu=0}^{k-1} \pair{\sum_{l=0}^{2^\nu-1} a_{2^\nu}}\\
-                &= a_0 + \sum_{\nu = 0}^{k-1} 2^{\nu}\cdot a_{2^\nu}\\
-                &= a_0 + t_{k-1}
+                t_n &\definedas \sum_{\nu=0}^{n} 2^{\nu} \cdot a_{\pair{2^\nu}}
+                \intertext{Jedes $\overline{n}\in\naturalnumbers$ können wir eindeutig schreiben als $\overline{n}=2^\nu + l$ mit $\nu\in\naturalnumbers_0,~0\leq l < 2^\nu$~\footnotemark.\endgraf \noindent Sei $1\leq n< 2^k$ für ein $k\in\naturalnumbers_0$}
+                s_n &= \sum_{j=0}^{n} a_j = a_0 + \sum_{j=1}^{n} a_j\\
+                &\leq a_0 + \sum_{j=1}^{2^k-1} a_j = a_0 + \sum_{\nu=0}^{k-1} \pair{\sum_{l=0}^{2^\nu - 1} \underbrace{a_{\pair{2^\nu + l}}}_{\leq a_{\pair{2^\nu}}}}\\
+                &\leq a_0 + \sum_{\nu=0}^{k-1} \pair{\sum_{l=0}^{2^\nu-1} a_{\pair{2^\nu}}}\\
+                &= a_0 + \sum_{\nu = 0}^{k-1} 2^{\nu}\cdot a_{\pair{2^\nu}}\\
+                &= a_0 + t_{k-1}\\[10pt]
+                \impl &\forall n < 2^k\text{ gilt }s_n\leq a_0 + t_{k-1}
             \end{align*}
-            $\impl \forall n < 2^k$ gilt $s_n\leq a_0 + t_{k-1}$.\\
+            \footnotetext{Es lässt sich zeigen, dass $l$ und $\nu$ in diesem Fall eindeutig sind.}
             Angenommen
             \begin{align*}
-                \sum_{\nu = 0}^{\infty} 2^{\nu} \cdot a_{2^\nu}&\text{ konvergent}\\
-                \equivalent \lim_{n\fromto\infty} t_n &= t\text{ existiert}\\
-                \impl s_n \leq a_0 + \lim_{k\fromto\infty} t_{k-1} &= a_0 + t\quad\forall n\in\naturalnumbers
-                \intertext{Da $s_n\leq s_{n+1} \impl \lim_{n\fromto\infty} s_n$ existiert}
+                \sum_{\nu = 0}^{\infty} 2^{\nu} \cdot a_{2^\nu}\text{ konvergent} &\equivalent \lim_{n\fromto\infty} t_n = t\text{ existiert}\\
+                &\impl s_n \leq a_0 + \lim_{k\fromto\infty} t_{k-1} = a_0 + t\quad\forall n\in\naturalnumbers
+                \intertext{Somit ist $a_0 + l$ eine obere Schranke von $(s_n)_n$. Da $s_n\leq s_{n+1} \annot{\impl}{\ref{satz:monoton-konv}} \lim_{n\fromto\infty} s_n$ existiert}
                 \impl \sum_{n=0}^{\infty} a_n&\text{ konvergent}
             \end{align*}
-            Umgekehrt: Sei $n\geq 2^k$
+            \anf{$\impl$} Sei $n\geq 2^k$
             \begin{align*}
-                s_n &= \sum_{j=0}^{n} a_j \geq \sum_{j=0}^{2^n} a_j\\
-                &= \sum_{\nu=0}^{k} \pair{\sum_{l=0}^{2^k-1} \underbrace{a_{2^\nu + l}}_{\geq a_{2^\nu+1}}}\\
-                &\geq \sum_{\nu=0}^{k} \pair{\sum_{l=0}^{2^\nu-1} a_{2^\nu+1}} = \sum_{\nu=0}^{k} 2^{\nu}\cdot a_{2^\nu} + 1\\
-                &= \sum_{\nu = 1}^{k+} 2^{\nu-1} a_{2^\nu} = \frac{1}{2}\sum_{\nu=1}^{k+1} 2^{\nu} a_{2^\nu}\\
-                &= \frac{1}{2}\pair{\sum_{\nu=0}^{k+1} 2^\nu a_{2^\nu} - a_0}
+                s_n &= \sum_{j=0}^{n} a_j \geq \sum_{j=0}^{2^k} a_j\\
+                &= \sum_{\nu=0}^{k} \pair{\sum_{l=0}^{2^\nu-1} \underbrace{a_{\pair{2^\nu + l}}}_{\geq a_{\pair{2^\nu+1}}}}\\
+                &\geq \sum_{\nu=0}^{k} \pair{\sum_{l=0}^{2^\nu-1} a_{\pair{2^\nu+1}}} = \sum_{\nu=0}^{k} 2^{\nu}\cdot a_{\pair{2^\nu}} + 1\\
+                &= \sum_{\nu = 1}^{k+1} 2^{\nu-1} a_{\pair{2^\nu}} = \frac{1}{2}\sum_{\nu=1}^{k+1} 2^{\nu} a_{\pair{2^\nu}}\\
+                &= \frac{1}{2}\pair{\sum_{\nu=0}^{k+1} 2^\nu a_{\pair{2^\nu}} - a_0}\\
                 &= t_{k+1} - a_0\\
                 \impl t_k \leq t_{k+1} &\leq s_n + a_0\quad\forall 2^k \geq n\\
                 \impl t_k &\leq \lim_{n\fromto\infty} s_n + a_0 = s + a_0 < \infty\\
@@ -1334,12 +1334,19 @@
         \end{proof}
     \end{satz}
 
-    \begin{beispiel}
+    \begin{beispiel}[Cauchyscher Verdichtungssatz als Konvergenzkriterium]
+        Es sei
         \begin{align*}
             a_n &= \frac{1}{n^\alpha}\\
-            2^{n} \cdot a_{2^\nu} &= \frac{2^n}{(2^n)^\alpha} = \frac{2^n}{2^{n\cdot\alpha}}\\
-            &= 2^{n-n\cdot\alpha} = 2^{(1-\alpha)\cdot n} = \dots
+            2^{n} \cdot a_{\pair{2^\nu}} &= \frac{2^n}{(2^n)^\alpha} = \frac{2^n}{2^{n\cdot\alpha}}\\
+            &= 2^{n-n\cdot\alpha} = 2^{(1-\alpha)\cdot n} = \pair{2^{1-\alpha}}^n = q^n
+            \intertext{Damit $q^n$ und damit auch $(a_n)_n$ konvergiert muss wie bereits gezeigt gelten}
+            q &\definedas 2^{1-\alpha} < 1 \equivalent 1-\alpha < 0 \equivalent \alpha > 1
+            \intertext{Es sei}
+            a_n &= \frac{1}{n}\\
+            2^n \cdot a_{\pair{2^\nu}} &= 2^n \cdot \frac{1}{2^n} = 1\impl (a_n)_n\text{ konvergiert}
         \end{align*}
     \end{beispiel}
 
+    % \renewcommand{\thepage}{(Noch in Bearbeitung)}
 \end{document}
