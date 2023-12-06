@@ -183,7 +183,7 @@
     \end{bemerkung}
 
     \begin{definition}[Alternativ formuliertes Konvergenzkriterium]
-        Sei $(a_n)_{n\in\naturalnumbers}$ eine Folge, dann heißt diese Folge konvergent gegen $a\in\realnumbers$, wenn $\forall \varepsilon > 0$ und fast alle $a_n$ gilt: $\abs{a_n-a}<\varepsilon$
+        Sei $(a_n)_{n\in\naturalnumbers}$ eine Folge, dann heißt diese Folge konvergent gegen $a\in\realnumbers$, wenn $\forall \varepsilon > 0$ und für fast alle $a_n$ gilt: $\abs{a_n-a}<\varepsilon$
     \end{definition}
 
     \begin{definition}[Nullfolge]
@@ -263,6 +263,7 @@
     \end{satz}
 
     \begin{satz}[Eigenschaften von konvergenten Folgen]
+        \label{satz:konvergenzsaetze}
         Seien $(x_n)_n, (y_n)_n$ konvergente reelle Folgen mit $x_n\fromto a$, $y_n\fromto b$ für $n\fromto\infty$. Dann gilt:
         \begin{enumerate}[label=(\alph*)]
             \item $x_n+y_n\fromto a+b$\quad ($\lim\pair{x_n+y_n}=\lim x_n + \lim y_n$).
@@ -1149,36 +1150,39 @@
         % 05. Dezember 2023
         %%%%%%%%%%%%%%%%%%%%%%%%
 
-        \begin{proof}
+        \begin{proof}[Beweis der Konvergenz für $\abs{q} < 1$]
             \begin{align*}
                 s_n\definedas \sum_{j=0}^{n} q^j &= \frac{1-q^{n+1}}{1-q}\\
-                \intertext{Mit $\abs{q}<1$}
-                \impl \lim_{n\fromto\infty} q^n &= 0 = \lim_{n\fromto\infty} a^{n+1}\\
-                \impl \lim s_n &= \frac{1-\lim_{n\fromto\infty} q^{n+1}}{1-q} = \frac{1-0}{1-q} = \frac{1}{1-q}\qedhere % TODO: Grenzwert-sätze
+                \lim_{n\fromto\infty} q^n &= 0 = \lim_{n\fromto\infty} q^{n+1}\tag{Weil $\abs{q} < 1$}\\
+                \annot{\impl}{\ref{satz:konvergenzsaetze}} \lim s_n &= \frac{1-\lim_{n\fromto\infty} q^{n+1}}{1-q} = \frac{1-0}{1-q} = \frac{1}{1-q}\qedhere
             \end{align*}
         \end{proof}
         \begin{bemerkung}
-            Ist $\abs{q}\geq 1$, dann ist $1+q+q^2+q^3+\dots + q^n \geq 1+n\fromto\infty$.
+            Ist $\abs{q}\geq 1$, dann ist $1+\underbrace{q}_{\geq 1}+\underbrace{q^2}_{\geq 1}+\underbrace{q^3}_{\geq 1}+\dots + \underbrace{q^n}_{\geq 1} \geq 1+n\fromto\infty$.
         \end{bemerkung}
     \end{beispiel}
 
+    % TODO: Wahrscheinlichkeitstheoretische Anschauung
     \newpage
 
     \begin{beispiel}[Harmonische Reihe]
         \begin{align*}
-            \sum_{n=1}^{\infty} \frac{1}{n}
+            s_n &\definedas \sum_{j=1}^{n} \frac{1}{j}
         \end{align*}
-        $s_n$ ist monoton wachsend, aber nicht nach oben beschränkt. $\impl \lim_{n\fromto\infty} s_n = \infty \impl \sum_{n=1}^{\infty} \frac{1}{n} = \infty$.
+        $(s_n)_n$ ist monoton wachsend, aber nicht nach oben beschränkt. Das heißt $\lim_{n\fromto\infty} s_n = \infty \impl \sum_{n=1}^{\infty} \frac{1}{n} = \infty$.
 
         \begin{proof}
             \begin{align*}
                 s_{2n} - s_n &= \sum_{j=n+1}^{2n} \frac{1}{j} \geq \sum_{j=n+1}^{n} \frac{1}{2n} = n \cdot\frac{1}{2n} = \frac{1}{2}\\
-                \impl s_2 - s_1 \geq \frac{1}{2}\impl s_2 \geq s_1 + \frac{1}{2} = 1 + \frac{1}{2}\geq \frac{1}{2}\\
-                s_4 - s_2 \geq \frac{1}{2} \impl s_4 \geq s_2 + \frac{1}{2} > \frac{1}{2} + \frac{1}{2} = 1\\
-                s_8 - s_4 \geq \frac{1}{2} \impl s_8 \geq s_8 \geq s_4 + \frac{1}{2} = \frac{3}{2}\\
-                \annot{\impl}{Induktion} s_{2^n} > \frac{n}{2}\quad\forall n\in\naturalnumbers
+                \impl s_2 - s_1 &\geq \frac{1}{2}\\
+                \impl s_2 &\geq s_1 + \frac{1}{2} = 1 + \frac{1}{2} > \frac{1}{2}\\
+                s_4 - s_2 &\geq \frac{1}{2}\\
+                \impl s_4 &\geq s_2 + \frac{1}{2} > \frac{1}{2} + \frac{1}{2} = 1\\
+                s_8 - s_4 &\geq \frac{1}{2}\\
+                \impl s_8 &\geq s_4 + \frac{1}{2} \geq \frac{3}{2}\\
+                \annot{\impl}{Induktion} s_{\pair{2^j}} &> \frac{j}{2}\quad\forall j\in\naturalnumbers
             \end{align*}
-            \noindent Also ist $s_{2^j}$ nicht nach oben beschränkt $\impl$ $(s_n)_n$ nicht nach oben beschränkt.
+            \noindent Also ist $s_{\pair{2^j}}$ nicht nach oben beschränkt $\impl$ $(s_n)_n$ nicht nach oben beschränkt.
             \begin{align*}
                 \annot{\impl}{\ref{satz:monoton-konv}} \sum_{n=1}^{\infty} \frac{1}{n} = \lim_{n\fromto\infty} s_n &= +\infty\qedhere
             \end{align*}
@@ -1196,79 +1200,97 @@
         \end{align*}
         \begin{proof}
             \begin{align*}
-                % a,b -> s,t
-                s_n &\definedas \sum_{j=1}^{\infty} a_n \quad a_n \definedas \sum_{j=1}^{\infty} b_n\\
+                s_n &\definedas \sum_{j=1}^{n} a_n \quad t_n \definedas \sum_{j=1}^{n} b_n\\
                 d_n &\definedas \sum_{j=1}^{n} \pair{\lambda\cdot a_n + \mu\cdot b_n} =   \lambda \cdot \sum_{n=1}^{n} a_n + \mu\cdot \sum_{n=1}^{n} b_n\\
-                &= \lambda s_n + \mu b_n \fromto \lambda s + \mu b\\
-                s &= \lim_{n\fromto\infty} s_n\quad d &= \lim_{n\fromto\infty} b_n
-            \end{align*}
-        \end{proof}
-    \end{satz}
-
-    \begin{satz}[Majoranten-Kriterium] % Satz 7
-        Gegeben $0\leq a_n \leq b_n\quad\forall n\in\naturalnumbers$. Konvergieren $\sum_{n=1}^{\infty} b_n\quad n\in\naturalnumbers$, so konvergiert auch $\sum_{n=1}^{\infty} a_n$ und
-        \begin{align*}
-            0\leq \sum_{n=1}^{\infty} a_n \leq \sum_{n=1}^{\infty} b_n
-        \end{align*}
-        \begin{proof}
-            \begin{align*}
-                s_n &= \sum_{j=1}^{n} a_j\\
-                t_n &= \sum_{j=1}^{n} b_j\\
-                \impl s_{n+1} &= s_n + a_{n+1} \geq s_n\\
-                t_{n+1} = t_n + b_{n+1} \geq t_n\\
-                \impl (s_n)_n, (t_n)_n\text{ konvergieren}\\
-                \intertext{Mit der Konvergenz von $s_n$ und $(t_n)_n$ monoton wachsend folgt mit Satz~\ref{satz:monoton-konv}}
-                \impl (t_n)_n\text{ ist beschränkt}\\
-                \impl \exists M\geq 0\colon t_n \leq M\quad\forall n\in\naturalnumbers\\
-                0\leq a_n \leq b_n \impl 0\leq s_n \leq t_n \leq M \quad\forall n\in\naturalnumbers\\
-                \impl (s_n)_n\text{ ist nach oben beschränkt und monoton wachsend}\\
-                \annot{\impl}{\ref{satz:monoton-konv}} \lim s_n\text{ existiert }, \quad s = \lim s_n \leq \lim t_n = \sum_{n=1}^{\infty} b_n
+                &= \lambda\cdot s_n + \mu\cdot t_n \fromto \lambda\cdot s + \mu\cdot t\tag{Mit $s$ und $t$ als Limes}
             \end{align*}
         \end{proof}
     \end{satz}
 
     \newpage
 
-    \begin{satz}[Minoranten-Kriterium] % Satz 8
-        Sei $0\leq b_n \leq a_n~\forall n\in\naturalnumbers$ und
+    \begin{satz}[Majoranten-Kriterium] % Satz 7
+        \label{satz:majoranten-kriterium}
+        Gegeben zwei Folgen $0\leq a_n \leq b_n~\forall n\in\naturalnumbers$. Konvergiert
         \begin{align*}
-            \sum_{n=1}^{\infty} b_n &= \infty\\
-            \impl \sum_{n=1}^{\infty} a_n&\text{ konvergiert auch gegen }\infty
+            \sum_{n=1}^{\infty} b_n\quad\text{so konvergiert auch}\quad\sum_{n=1}^{\infty} a_n
+        \end{align*}
+        und es gilt
+        \begin{align*}
+            0\leq \sum_{n=1}^{\infty} a_n \leq \sum_{n=1}^{\infty} b_n
         \end{align*}
         \begin{proof}
             \begin{align*}
-                t_n &= \sum_{j=1}^{n} b_n \quad s_n = \sum_{j=1}^{n} a_n\\
-                (s_n)_n, (t_n)_n&\text{ sind monoton wachsend}\\
-                t_n &\leq s_n \quad\forall n\in\naturalnumbers\\
-                \impl \sum_{n=1}^{\infty} b_n &= \infty \equivalent t_n \text{ wächst über alle Grenzen}\\
-                \impl (s_n)_n&\text{ wächst über alle Grenzen}\\
-                \impl \lim_{n\fromto\infty} s_n &= \infty\\
-                &= \sum_{n=1}^{\infty} a_n\qedhere
+                &s_n = \sum_{j=1}^{n} a_j\quad t_n = \sum_{j=1}^{n} b_j\\
+                \impl &s_{n+1} = s_n + a_{n+1} \geq s_n\\
+                &t_{n+1} = t_n + b_{n+1} \geq t_n\\
+                \impl &(s_n)_n,~(t_n)_n\text{ sind monoton wachsend}\\
+                \intertext{Mit der Konvergenz von $(t_n)_n$ und $(t_n)_n$ monoton wachsend folgt mit Satz~\ref{satz:mont-konv-reihen}}
+                \impl &(t_n)_n\text{ ist beschränkt}\\
+                \impl &\exists M\geq 0\colon t_n \leq M\quad\forall n\in\naturalnumbers\\
+                0\leq a_n \leq b_n \impl &0\leq s_n \leq t_n \leq M \quad\forall n\in\naturalnumbers\\
+                \impl &(s_n)_n\text{ ist nach oben beschränkt und monoton wachsend}\\
+                \annot{\impl}{\ref{satz:mont-konv-reihen}} &\lim_{n\fromto\infty} s_n\text{ existiert }\\
+                \quad s &\definedas \lim_{n\fromto\infty} s_n \leq \lim_{n\fromto\infty} t_n = \sum_{n=1}^{\infty} b_n\qedhere\\
+                \intertext{Außerdem gilt:}
+                t_n - s_n &= \sum_{j=1}^{n} b_j - \sum_{j=1}^{n} a_j = \sum_{j=1}^{n} n \pair{b_j-a_j} \geq 0
             \end{align*}
         \end{proof}
     \end{satz}
 
-    \begin{beispiel}
-        $a_n\geq \frac{c}{n}~c>0, \forall n\in\naturalnumbers$\\
-        $\impl \sum_{n=1}^{\infty} a_n = \infty$\\
-        Ist $0\leq a_n \leq c\cdot q^n\quad c>0, 0\leq q < 1$
+    \begin{satz}[Minoranten-Kriterium] % Satz 8
+        Sei $0\leq b_n \leq a_n~\forall n\in\naturalnumbers$ und
         \begin{align*}
+            \sum_{n=1}^{\infty} b_n &= \infty\\
+            \impl \sum_{n=1}^{\infty} a_n&\text{ divergiert auch bestimmt gegen }\infty
+        \end{align*}
+        \begin{proof}
+            \begin{align*}
+                t_n &= \sum_{j=1}^{n} b_n \quad s_n = \sum_{j=1}^{n} a_n
+                \intertext{Analog zum Beweis des Majoranten-Kriteriums gilt:}
+                (s_n)_n,~(t_n)_n&\text{ sind monoton wachsend und }t_n \leq s_n \quad\forall n\in\naturalnumbers
+                \intertext{Dann lässt sich folgern}
+                \sum_{n=1}^{\infty} b_n = \infty &\equivalent (t_n)_n \text{ wächst über alle Grenzen}\\
+                &\impl (s_n)_n\text{ wächst über alle Grenzen}\\
+                &\impl \lim_{n\fromto\infty} s_n = \infty = \sum_{n=1}^{\infty} a_n\qedhere
+            \end{align*}
+        \end{proof}
+    \end{satz}
+
+    \begin{beispiel}[Anwendung des Minoranten-Kriteriums]
+        Es sei
+        \begin{align*}
+            a_n\geq \frac{c}{n}\quad\forall n\in\naturalnumbers\tag{$c>0$}
+            \intertext{Nach Minorantenkriterium und der Divergenz der harmonischen Reihe gilt}
+            \impl \sum_{n=1}^{\infty} a_n = \infty
+        \end{align*}
+    \end{beispiel}
+    \begin{beispiel}[Anwendung des Majoranten-Kriteriums]
+        Es sei wieder $c>0$. Dann folgt aus
+        \begin{align*}
+            0\leq a_n \leq c\cdot q^n\land 0\leq q < 1
+            \intertext{nach Majoranten-Kriterium und dem Konvergenzkriterium der geometrischen Reihe, dass}
             \impl \sum_{n=1}^{\infty} a_n\text{ konvergiert}\tag{$b_n=c\cdot q^n$}
         \end{align*}
     \end{beispiel}
 
-    \begin{bemerkung}
-        Konvergenz/Divergenz von Reihen (und Folgen) ändert sich nicht, wenn man endlich viele Summanden (Folgeglieder) abändert.\\
-        Für das Majoranten-Kriterium reicht $0\leq a_n \leq b_n$ für fast alle $n\in\naturalnumbers$ und $\sum_{n=1}^{\infty} b_n$ konvergiert $\impl$ $\sum_{n=1}^{\infty} a_n$ konvergiert.\\
-        Das lässt sich analog auch für das Minoranten-Kriterium formulieren.
+    \begin{bemerkung}[Abgeschwächtes Majoranten-Kriterium]
+        Die Konvergenz/Divergenz von Reihen (und Folgen) ändert sich nicht, wenn man endlich viele Summanden (Folgeglieder) abändert.\\
+        Für das Majoranten-Kriterium reicht also, dass $0\leq a_n \leq b_n$ für fast alle $n\in\naturalnumbers$, damit
+        \begin{align*}
+            \sum_{n=1}^{\infty} b_n\text{ konvergiert }\impl \sum_{n=1}^{\infty} a_n\text{ konvergiert}
+        \end{align*}
+        Das gleiche gilt analog für das Minoranten-Kriterium
     \end{bemerkung}
 
-    \begin{satz}[Cauchysche Verdichtungssatz] % Satz 9
+    \newpage
+
+    \begin{satz}[Cauchyscher Verdichtungssatz] % Satz 9
         \label{satz:cauchy-verdichtung}
         Sei $(a_n)_n$ eine monoton fallende Nullfolge. Dann gilt
         \begin{align*}
             \sum_{n=0}^{\infty} a_n\text{ konvergiert}\\
-            \equivalent \sum_{n=0}^{\infty} 2^n\cdot a_{2^n}\text{ konvergiert}\tag{Verdichtete Reihe}
+            \equivalent \sum_{n=0}^{\infty} 2^n\cdot a_{\pair{2^n}}\text{ konvergiert}\tag{Verdichtete Reihe}
         \end{align*}
         \begin{proof}
             1. Schritt. Zu zeigen: $a_n\geq 0~\forall n\in\naturalnumbers$.
