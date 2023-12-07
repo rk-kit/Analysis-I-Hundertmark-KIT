@@ -67,6 +67,7 @@
 \newcommand{\realnumbers}{\mathbb{R}}
 \newcommand{\aligntoright}[2]{\hfill#1\hspace{#2\textwidth}~}
 \newcommand{\horizontalline}[0]{\par\noindent\rule{0.05\textwidth}{0.1pt}\\}
+\newcommand{\ntoinfty}[0]{n\fromto\infty}
 
 % Envs
 \newenvironment{induktionsanfang}{
@@ -1348,5 +1349,264 @@
         \end{align*}
     \end{beispiel}
 
-    % \renewcommand{\thepage}{(Noch in Bearbeitung)}
+    %%%%%%%%%%%%%%%%%%%%%%%%
+    % 7. Dezember 2023
+    %%%%%%%%%%%%%%%%%%%%%%%%
+
+    \renewcommand{\thepage}{(Noch in Bearbeitung)}
+
+    \begin{definition}[Alternierende Reihen] % Definition 10
+        Sei $(a_n)_n$ eine reelle Folge nicht-negativer reeller Zahlen. Dann heißt
+        \begin{align*}
+            \sum_{n=1}^{\infty} (-1)^{n+1} \cdot a_n = a_1 - a_2 + a_3 - a_4 \dots
+        \end{align*}
+        alternierende Reihe oder $a_n\geq 0$, $n\in\naturalnumbers_0$.
+        \begin{align*}
+            \sum_{n=0}^{\infty} (-1)^n\cdot a_n = a_0 - a_1 + a_2 - a_3 \dots
+        \end{align*}
+    \end{definition}
+
+    \begin{satz}[Leibnitz-Kriterium] % Satz 11
+        Sei $(a_n)_n$ eine monoton fallende Nullfolge. Dann konvergiert
+        \begin{align*}
+            \sum_{n=1}^{\infty} (-1)^{n+1} \cdot a_n
+        \end{align*}
+
+        \begin{proof}
+            Idee: Wir unterscheiden zwischen geraden und ungeraden $n$.
+            \begin{align*}
+                s_n &\definedas \sum_{j=1}^{n} (-1)^{j+1} \cdot a_j\\
+                s_{2(n+1)} &= \sum_{j=1}^{2n+2} (-1)^{j+1} \cdot a_j\\
+                &= \sum_{j=1}^{2n} (-1)^{j+1} \cdot a_j + (-1)^{(2n+1)+1} \cdot a_{2n+1} + (-1)^{(2n+2)+1} \cdot a_{2n+2}\\
+                &= s_{2n} + \underbrace{a_{2n+1} - a_{2n+2}}_{\geq 0}\\
+                &\geq s_{2n}
+                \intertext{$\impl (s_{2n})_n$ ist monoton wachsend}
+                s_{2(n+1)+1} &= s_{2n+3}\\
+                &= \sum_{j=1}^{2n+3} (-1)^{j+1} \cdot a_j\\
+                &= s_{2n+1} + (-1)^{(2n+2)+1} \cdot a_{2n+2} + (-1)^{(2n+3)+1} \cdot a_{2n+3}\\
+                &= s_{2n+1} - a_{2n+2} + a_{2n+3}\\
+                &\leq s_{2n+1}
+                \intertext{$\impl (s_{2n+1})_n$ ist monoton fallend und}
+                s_{2n+1} - s_{2n} &= \sum_{j=1}^{2n+1} (-1)^{j-1} \cdot a_j - \sum_{j=1}^{2n} (-1)^{j+1} a_j\\
+                &= (-1)^{(2n+1)+1} \cdot a_{2n+1} = a_{2n+1} \geq 0
+                \intertext{$\impl \abs{s_{2n+1}-s_{2n}} = a_{2n+1}\fromto 0$ konvergieren und $s_{2n+1} \geq s_{2n}$}
+                0 \leq a_{1} ???\\
+                \annot{\impl}{\ref{satz:monoton-konv}} s_g &\definedas \lim_{n\fromto\infty} s_{2n}\text{ existiert}\\
+                s_u &\definedas \lim_{n\fromto\infty} s_{2n-1}\text{ existiert}\\
+                \text{und } s_g &= s_u\\
+                \impl (s_n)_n\text{ konvergiert gegen $s=s_g=s_u$}
+            \end{align*}
+        \end{proof}
+        \begin{uebung}
+            Weisen Sie nach, dass eine Folge konvergiert, wenn die Teilfolgen der geraden und der ungeraden Folgeglieder konvergieren und die Differenz eine Nullfolge ist.
+        \end{uebung}
+    \end{satz}
+
+    \begin{beispiel}
+        \begin{align*}
+            &\sum_{n=1}^{\infty} \pair{-1}^{n+1} \cdot \frac{1}{\sqrt{1}}\text{ konvergiert}\\
+            \text{aber } &\sum_{n=1}^{\infty} \frac{1}{\sqrt {n}} \text{ divergiret}\\
+            &\sum_{n=1}^{\infty} (-1)^{n} \cdot \frac{1}{n}\text{ konvergiert}\\
+            &\sum_{n=2}^{\infty} (-1)^n \cdot \frac{1}{\log\pair{n}}\text{ konvergiert}
+        \end{align*}
+    \end{beispiel}
+
+    \begin{satz}[Cauchy-Kriterium] % Satz 12
+        Sei $(a_n)_n$ eine Folge reeller Zahlen. Dann konvergiert
+        \begin{align*}
+            \sum_{n=1}^{\infty} a_n
+        \end{align*}
+        genau dann, wenn
+        \begin{align*}
+            \forall \varepsilon > 0~\exists N_{\varepsilon}\in\naturalnumbers\colon \abs{\sum_{j=n+1}^{m} a_j} <\varepsilon\quad\forall m>n\geq N_{\varepsilon}
+            \intertext{Das heißt ????}
+        \end{align*}
+        \begin{proof}
+            \begin{align*}
+                s_n &\definedas \sum_{j=1}^{n} a_j\\
+                \intertext{$(s_n)_n$ konvergiert genau dann, wenn es eine Cauchy-Folge ist. Das heißt}
+                \forall\varepsilon > 0~\exists N_{\varepsilon}\in\naturalnumbers\colon &\abs{\sum_{j=n+1}^{m} a_j} = \abs{s_{m} - s_{n}} < \varepsilon\quad\forall m> n \geq N_{\varepsilon}\\
+                s_m - s_n &= \sum_{j=1}^{m} a_j = \sum_{j=1}^{n} a_j\\
+                &= \sum_{j=n+1}^{m} a_j\qedhere
+            \end{align*}
+        \end{proof}
+    \end{satz}
+
+    \begin{korollar} % Korollar 12
+        Ist die reelle Reihe $\sum_{n=1}^{\infty} a_n$ konvergent, so ist $(a_n)_n$ eine Nullfolge.
+        \begin{proof}
+            Satz 12 $\impl$
+            \begin{align*}
+                \forall \varepsilon > 0~\exists N_{\varepsilon}\in\naturalnumbers\colon \abs{\sum_{j=n+1}^{n+p} a_j} < \varepsilon\quad\forall n\geq N_2, p\in\naturalnumbers\\
+                \intertext{Wähle $p=1$}
+                \sum_{j=n+1}^{n+1} a_{j} = a_{j+1}\\
+                \impl \abs{a_{n+1}} < \varepsilon\quad \forall n\geq N_{\varepsilon}
+            \end{align*}
+        \end{proof}
+    \end{korollar}
+
+    \subsection{Absolut konvergente Reihen und Umordnungen}
+
+    \begin{definition}[Absolute Konvergenz] % Definition 1
+        Eine Reihe
+        \begin{align*}
+            \sum_{n=1}^{\infty} a_j
+        \end{align*}
+        heißt absolut konvergent, falls
+        \begin{align*}
+            \sum_{j=1}^{\infty} \abs{a_j}
+        \end{align*}
+        konvergiert. Das heißt falls
+        \begin{align*}
+            \sum_{n=1}^{\infty} \abs{n} < \infty
+        \end{align*}
+    \end{definition}
+
+    \begin{satz} % Satz 2
+        Ist
+        \begin{align*}
+            \sum_{n}^{\infty} a_n
+        \end{align*}
+        absolut konvergent, so ist sie auch konvergent und
+        \begin{align*}
+            \abs{\sum_{n=1}^{\infty} a_n} \leq \sum_{n=1}^{\infty} \abs{a_n}
+        \end{align*}
+
+        \begin{proof}
+            Haben für $m>n$
+            \begin{align*}
+                \abs{\sum_{j=n+1}^{m} a_j} \leq \sum_{j=n+1}^{m} \abs{a_j}
+            \end{align*}
+            Nehmen an: $\sum_{n=1}^{\infty} \abs{a_n}$ konvergiert. Das heißt Cauchy ist erfüllt.
+            \begin{align*}
+                \impl \forall \varepsilon > 0~\exists N_{\varepsilon}\colon \sum_{j=n+1}^{\infty} \abs{a_j} < \varepsilon \quad\forall m> n\geq N_{\varepsilon}\\
+                \impl \abs{\sum_{j=n+1}^{m} a_j} < \varepsilon\quad\forall m>n\geq N_{\varepsilon} % ???
+            \end{align*}
+        \end{proof}
+    \end{satz}
+
+    \begin{beispiel}
+        \begin{align*}
+            \sum_{n=1}^{\infty} (-1)^{n+1}\cdot \frac{1}{n}
+        \end{align*}
+        ist konvergent, aber nicht absolut konvergent.
+    \end{beispiel}
+
+    \begin{definition}[Majorante] % Def 3
+        Die Reihe
+        \begin{align*}
+            \sum_{n=1}^{\infty} c_n~c_n\geq 0~\forall n\in\naturalnumbers
+        \end{align*}
+        ist eine Majorante der Reihe $\sum_{n}^{\infty} a_n$ falls
+        \begin{align*}
+            \abs{a_n} &\leq c_n\text{ für fast alle }n\in\naturalnumbers
+            \intertext{Das heißt}
+            \exists n_0\in\naturalnumbers\colon \abs{a_n} < \varepsilon_{n_0}\quad\forall n\geq n_0
+        \end{align*}
+    \end{definition}
+
+    \begin{satz}[Majoranten-Konvergenz-Kriterium für Reihen] % Satz 4
+        Hat die Reihe
+        \begin{align*}
+            \sum_{n=1}^{\infty} a_n
+        \end{align*}
+        eine konvergente Majorante $\sum_{n=1}^{\infty} c_n$, so ist die Reihe selber absolut konvergent und somit auch konvergent.
+        \begin{proof}
+            Folgt aus Satz 2 und Satz 11 $(c_n\geq 0 \& \sum_{n}^{\infty} c_n\text{ konvergiert}\impl \sum_{n=1}^{\infty} c_n < \infty)$
+        \end{proof}
+    \end{satz}
+
+    \begin{satz}[Quotientenkriterium] % Satz 5
+        Sei
+        \begin{align*}
+            s_n &\definedas \sum_{n=0}^{\infty} a_n
+        \end{align*}
+        eine Reihe mit $a_n\neq 0$. Ferner gebe es ein $0\leq q < 1$ so dass
+        \begin{align*}
+            \frac{\abs{a_{n+1}}}{\abs{a_n}} \leq q\text{ für fast alle } n\in\naturalnumbers\\
+            \impl \sum_{n=0}^{\infty} a_n\text{ absolut konvergent}
+        \end{align*}
+
+        \begin{proof}
+            Haben $n_0\in\naturalnumbers$
+            \begin{align*}
+                \frac{\abs{a_{n+1}}}{\abs{a_n}} \leq q\quad\forall n\geq n_0
+                \intertext{$p\in\naturalnumbers$, $n=n_0+p$}
+                \abs{a_{n+1}} \leq q\cdot\abs{a_n} \leq q^2 \cdot \abs{a_{n-1}} \leq q^3 \cdot \abs{a_{n-2}}\\
+                \leq \dots \leq q^{p+1} \cdot\abs{a_{n_0}} = q^{n-n_0} \cdot\abs{a_{n_0}}\\
+                = q^{n} \cdot q^{-n_0} \cdot\abs{a_{n_0}}\\
+                \leadsto \abs{a_n} \leq \underbrace{q^n \cdot K}_{\definedas c_n}\\
+                K = q^{-n_0} \cdot \abs{a_{n_0}}\\
+                \abs{a_{n_0}} \leq c_n\quad\forall n\geq n_0\\
+                \intertext{und}
+                \sum_{n+c}^{\infty} c_n &= \sum_{n+c}^{\infty} K\cdot q^{n} = K\cdot \sum_{n+c}^{\infty} q^{n} < \infty
+                \intertext{Da $0< q < 1$}
+                \impl \sum_{n=c}^{\infty} a_n\text{ hat die konvergente Majorante } K \cdot \sum_{n=c}^{\infty} q^{n}
+                \intertext{Das lässt sich aus Satz 4 folgern}
+            \end{align*}
+            \begin{align*}
+                \text{Ist } \liminf_{n\fromto\infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} > 1\\
+                \impl \forall \varepsilon > 0~\exists n_0\colon \frac{\abs{a_{n+1}}}{\abs{a_n}} \geq \overline{q} - \varepsilon = \frac{\overline{q}+1}{2} \geq q > 1
+                \intertext{Wählen $\varepsilon=\frac{\overline{q}-1}{2} > 0$}
+                \impl \frac{\abs{a_n+1}}{\abs{a_n}} \geq q > 1\quad\forall n\geq n_0\\
+                \impl \abs{a_{n+1}} \geq q^{n+1} \cdot q^{n_0}\cdot\abs{a_{n_0}}\\
+                \impl \abs{a_n} \geq q^n\cdot K\\
+                K = q^{?}\cdot \abs{q_{n_0}} \fromto\infty\\
+                \impl \sum_{}^{} a_j\text{ divergiert nach Korollar 13 in Kapitel 11}
+            \end{align*}
+        \end{proof}
+    \end{satz}
+
+    \begin{bemerkung}
+        \begin{align*}
+            ?? \equivalent \limsup_{n\fromto\infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} < 1\\
+            \text{Ist } \limsup_{n\fromto\infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} > 1\impl \sum_{n=0}^{\infty} a_0\text{ divergent}\\
+            \text{Ist } \limsup_{n\fromto\infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} = 1\impl \text{Keine Aussage über absolute Konvergenz von } \sum_{n=0}^{\infty} a_n\text{ möglich}
+        \end{align*}
+    \end{bemerkung}
+
+    \begin{beispiel}
+        \begin{align*}
+            a_n &= \frac{1}{n}\\
+            \frac{\abs{a_{n+1}}}{\abs{a_n}} = \frac{a_{n+1}}{a_n} = \frac{n}{n+1}
+            \intertext{und}
+            \sum_{n=1}^{\infty} \frac{1}{n}\text{ divergiert (harmonische Reihe)}
+        \end{align*}
+    \end{beispiel}
+    \begin{beispiel}
+        \begin{align*}
+            a_n &= \frac{1}{n^2}\\
+            \frac{a_{n+1}}{a_n} = \frac{n^2}{(n+1)^2} = \pair{\frac{n}{n+1}}^2 = \pair{1-\frac{1}{n+1}}^2 \fromto 1
+        \end{align*}
+        aber $\sum a_p$ konvergiert absolut.
+        \begin{align*}
+            \pair{1-\frac{1}{n}}^2 = 1 - \frac{2}{n+1}+ \pair{\frac{1}{n+1}}^2\\
+            = 1 - \frac{2}{n+1}\cdot\pair{1-\frac{1}{??}} \leq 1- \frac{?}{?}
+        \end{align*}
+        ???
+    \end{beispiel}
+
+    \begin{beispiel}
+        Die Reihe
+        \begin{align*}
+            \sum_{n=0}^{\infty} \frac{1}{n!}
+        \end{align*}
+        ist absolut konvergent.
+        \begin{align*}
+            a_n &= \frac{1}{n!}\\
+            \frac{a_{n+1}}{a_n} = \frac{n!}{(n+1)!} = \frac{1}{n+1}\fromto 0
+        \end{align*}
+        Behauptung:
+        \begin{align*}
+            \sum_{n=0}^{\infty} \frac{1}{n!} &= e\tag{Eulersche Zahl}\\
+            e &= \lim_{\ntoinfty} \pair{1+\frac{1}{n}}^n = \sum_{k=0}^{n}\binom{n}{k} \pair{\frac{1}{n}}^k\\
+            &= \sum_{k=0}^{n} \frac{n\cdot(n-1)\cdot(n-k+1)}{k!\cdot n^k}\\
+            &= \sum_{k=0}^{n} \frac{1}{k!} \cdot \prod_{j=0}^{k-1} \frac{n-j}{n}\\
+            &\leq \sum_{k=0}^{n} \frac{1}{k!} = \sum_{k=0}^{\infty} \frac{1}{k!}\\
+            \impl e \leq \sum_{n=0}^{\infty} \frac{1}{n!}
+        \end{align*}
+    \end{beispiel}
+
+
+
 \end{document}
