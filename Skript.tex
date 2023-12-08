@@ -928,6 +928,7 @@
     \end{lemma}
 
     \begin{satz} % Satz 5
+        \label{satz:jede-konv-cauchy}
         Jede reelle Folge konvergiert genau dann, wenn sie eine Cauchy-Folge ist.
 
         \begin{proof}
@@ -937,6 +938,7 @@
     \end{satz}
 
     \newpage
+
 
     \section{[*] Dichtheit von $\mathbb{Q}$ in $\mathbb{R}$}
 
@@ -1044,6 +1046,7 @@
     \end{bemerkung}
 
     \newpage
+
 
     \section{[*] Reihen (und Konvergenz von Reihen)}
 
@@ -1355,14 +1358,12 @@
     % 7. Dezember 2023
     %%%%%%%%%%%%%%%%%%%%%%%%
 
-    \renewcommand{\thepage}{(Noch in Bearbeitung)}
-
-    \begin{definition}[Alternierende Reihen] % Definition 10
+    \begin{definition}[Alternierende Reihe] % Definition 10
         Sei $(a_n)_n$ eine reelle Folge nicht-negativer reeller Zahlen. Dann heißt
         \begin{align*}
             \sum_{n=1}^{\infty} (-1)^{n+1} \cdot a_n = a_1 - a_2 + a_3 - a_4 \dots
         \end{align*}
-        alternierende Reihe oder $a_n\geq 0$, $n\in\naturalnumbers_0$.
+        alternierende Reihe. Alternativ $a_n\geq 0$, $n\in\naturalnumbers_0$.
         \begin{align*}
             \sum_{n=0}^{\infty} (-1)^n\cdot a_n = a_0 - a_1 + a_2 - a_3 \dots
         \end{align*}
@@ -1382,21 +1383,22 @@
                 &= \sum_{j=1}^{2n} (-1)^{j+1} \cdot a_j + (-1)^{(2n+1)+1} \cdot a_{2n+1} + (-1)^{(2n+2)+1} \cdot a_{2n+2}\\
                 &= s_{2n} + \underbrace{a_{2n+1} - a_{2n+2}}_{\geq 0}\\
                 &\geq s_{2n}
-                \intertext{$\impl (s_{2n})_n$ ist monoton wachsend}
-                s_{2(n+1)+1} &= s_{2n+3}\\
-                &= \sum_{j=1}^{2n+3} (-1)^{j+1} \cdot a_j\\
+                \intertext{Also ist $(s_{2n})_n$ monoton wachsend}
+                s_{2(n+1)+1} &= s_{2n+3} = \sum_{j=1}^{2n+3} (-1)^{j+1} \cdot a_j\\
                 &= s_{2n+1} + (-1)^{(2n+2)+1} \cdot a_{2n+2} + (-1)^{(2n+3)+1} \cdot a_{2n+3}\\
-                &= s_{2n+1} - a_{2n+2} + a_{2n+3}\\
+                &= s_{2n+1} \underbrace{- a_{2n+2} + a_{2n+3}}_{\leq 0}\\
                 &\leq s_{2n+1}
-                \intertext{$\impl (s_{2n+1})_n$ ist monoton fallend und}
-                s_{2n+1} - s_{2n} &= \sum_{j=1}^{2n+1} (-1)^{j-1} \cdot a_j - \sum_{j=1}^{2n} (-1)^{j+1} a_j\\
+            \end{align*}
+            Also ist $(s_{2n+1})_n$ ist monoton fallend und
+            \begin{align*}
+                s_{2n+1} - s_{2n} &= \sum_{j=1}^{2n+1} (-1)^{j+1} \cdot a_j - \sum_{j=1}^{2n} (-1)^{j+1}\cdot a_j\\
                 &= (-1)^{(2n+1)+1} \cdot a_{2n+1} = a_{2n+1} \geq 0
-                \intertext{$\impl \abs{s_{2n+1}-s_{2n}} = a_{2n+1}\fromto 0$ konvergieren und $s_{2n+1} \geq s_{2n}$}
-                0 \leq a_{1} ???\\
+                \intertext{$\impl \abs{s_{2n+1}-s_{2n}} = a_{2n+1}$ und $s_{2n+1} \geq s_{2n}$}
+                0 \leq a_1 - a_2 &= s_2 \leq s_{2n} \leq s_{2n+1} \leq s_1 = a_1\\
                 \annot{\impl}{\ref{satz:monoton-konv}} s_g &\definedas \lim_{n\fromto\infty} s_{2n}\text{ existiert}\\
                 s_u &\definedas \lim_{n\fromto\infty} s_{2n-1}\text{ existiert}\\
                 \text{und } s_g &= s_u\\
-                \impl (s_n)_n\text{ konvergiert gegen $s=s_g=s_u$}
+                \impl (s_n)_n&\text{ konvergiert gegen $s=s_g=s_u$}\qedhere
             \end{align*}
         \end{proof}
         \begin{uebung}
@@ -1406,14 +1408,15 @@
 
     \begin{beispiel}
         \begin{align*}
-            &\sum_{n=1}^{\infty} \pair{-1}^{n+1} \cdot \frac{1}{\sqrt{1}}\text{ konvergiert}\\
-            \text{aber } &\sum_{n=1}^{\infty} \frac{1}{\sqrt {n}} \text{ divergiret}\\
+            &\sum_{n=1}^{\infty} \pair{-1}^{n+1} \cdot \frac{1}{\sqrt{n}}\text{ konvergiert}\\
+            \text{aber } &\sum_{n=1}^{\infty} \frac{1}{\sqrt {n}} \text{ divergiert}\\
             &\sum_{n=1}^{\infty} (-1)^{n} \cdot \frac{1}{n}\text{ konvergiert}\\
             &\sum_{n=2}^{\infty} (-1)^n \cdot \frac{1}{\log\pair{n}}\text{ konvergiert}
         \end{align*}
     \end{beispiel}
 
     \begin{satz}[Cauchy-Kriterium] % Satz 12
+        \label{satz:cauchy-kriterium}
         Sei $(a_n)_n$ eine Folge reeller Zahlen. Dann konvergiert
         \begin{align*}
             \sum_{n=1}^{\infty} a_n
@@ -1421,14 +1424,13 @@
         genau dann, wenn
         \begin{align*}
             \forall \varepsilon > 0~\exists N_{\varepsilon}\in\naturalnumbers\colon \abs{\sum_{j=n+1}^{m} a_j} <\varepsilon\quad\forall m>n\geq N_{\varepsilon}
-            \intertext{Das heißt ????}
         \end{align*}
         \begin{proof}
             \begin{align*}
                 s_n &\definedas \sum_{j=1}^{n} a_j\\
-                \intertext{$(s_n)_n$ konvergiert genau dann, wenn es eine Cauchy-Folge ist. Das heißt}
-                \forall\varepsilon > 0~\exists N_{\varepsilon}\in\naturalnumbers\colon &\abs{\sum_{j=n+1}^{m} a_j} = \abs{s_{m} - s_{n}} < \varepsilon\quad\forall m> n \geq N_{\varepsilon}\\
-                s_m - s_n &= \sum_{j=1}^{m} a_j = \sum_{j=1}^{n} a_j\\
+                \intertext{$(s_n)_n$ konvergiert nach Satz~\ref{satz:jede-konv-cauchy} genau dann, wenn es eine Cauchy-Folge ist. Das heißt}
+                \forall\varepsilon > 0~\exists N_{\varepsilon}\in\naturalnumbers\colon &\abs{s_{m} - s_{n}} < \varepsilon\quad\forall m> n \geq N_{\varepsilon}\\
+                \abs{s_m - s_n} &= \sum_{j=1}^{m} a_j = \sum_{j=1}^{n} a_j\\
                 &= \sum_{j=n+1}^{m} a_j\qedhere
             \end{align*}
         \end{proof}
@@ -1437,15 +1439,19 @@
     \begin{korollar} % Korollar 12
         Ist die reelle Reihe $\sum_{n=1}^{\infty} a_n$ konvergent, so ist $(a_n)_n$ eine Nullfolge.
         \begin{proof}
-            Satz 12 $\impl$
+            Nach Satz~\ref{satz:cauchy-kriterium} $\impl$
             \begin{align*}
-                \forall \varepsilon > 0~\exists N_{\varepsilon}\in\naturalnumbers\colon \abs{\sum_{j=n+1}^{n+p} a_j} < \varepsilon\quad\forall n\geq N_2, p\in\naturalnumbers\\
+                \forall \varepsilon > 0~\exists N_{\varepsilon}\in\naturalnumbers\colon &\abs{\sum_{j=n+1}^{n+p} a_j} < \varepsilon\quad\forall n\geq N_{\varepsilon}, p\in\naturalnumbers\\
                 \intertext{Wähle $p=1$}
-                \sum_{j=n+1}^{n+1} a_{j} = a_{j+1}\\
-                \impl \abs{a_{n+1}} < \varepsilon\quad \forall n\geq N_{\varepsilon}
+                \sum_{j=n+1}^{n+1} a_{j} &= a_{j+1}\\
+                \impl \abs{a_{n+1}} &< \varepsilon\quad \forall n\geq N_{\varepsilon}\\
+                \impl \lim_{\ntoinfty} a_{n+1} &= 0\\
+                \impl \lim_{\ntoinfty} a_{n} &= 0\qedhere
             \end{align*}
         \end{proof}
     \end{korollar}
+
+    \renewcommand{\thepage}{(Noch in Bearbeitung)}
 
     \subsection{[*] Absolut konvergente Reihen und Umordnungen}
 
@@ -1608,7 +1614,6 @@
             \impl e \leq \sum_{n=0}^{\infty} \frac{1}{n!}
         \end{align*}
     \end{beispiel}
-
 
 
 \end{document}
