@@ -53,6 +53,7 @@
 \newcommand{\equivalent}[0]{\Leftrightarrow{}}
 \newcommand{\impl}[0]{\Rightarrow{}}
 \newcommand{\definedas}[0]{\coloneqq}
+\newcommand{\definedasbackwards}[0]{\eqqcolon}
 \newcommand{\definedasequiv}[0]{\ratio\Leftrightarrow{}}
 \newcommand{\infinity}[0]{\infty}
 \newcommand{\exclude}[0]{\setminus}
@@ -1369,7 +1370,7 @@
         \end{align*}
     \end{definition}
 
-    \begin{satz}[Leibnitz-Kriterium] % Satz 11
+    \begin{satz}[Leibniz-Kriterium] % Satz 11
         Sei $(a_n)_n$ eine monoton fallende Nullfolge. Dann konvergiert
         \begin{align*}
             \sum_{n=1}^{\infty} (-1)^{n+1} \cdot a_n
@@ -1437,6 +1438,7 @@
     \end{satz}
 
     \begin{korollar} % Korollar 12
+        \label{korollar:folge-von-reihe-nullfolge}
         Ist die reelle Reihe $\sum_{n=1}^{\infty} a_n$ konvergent, so ist $(a_n)_n$ eine Nullfolge.
         \begin{proof}
             Nach Satz~\ref{satz:cauchy-kriterium} $\impl$
@@ -1451,49 +1453,41 @@
         \end{proof}
     \end{korollar}
 
-    \renewcommand{\thepage}{(Noch in Bearbeitung)}
-
-    \subsection{[*] Absolut konvergente Reihen und Umordnungen}
+    \subsection{Absolut konvergente Reihen und Umordnungen}
 
     \begin{definition}[Absolute Konvergenz] % Definition 1
-        Eine Reihe
+        Eine Reihe$\sum_{n=1}^{\infty} a_n$ heißt absolut konvergent, falls
         \begin{align*}
-            \sum_{n=1}^{\infty} a_j
-        \end{align*}
-        heißt absolut konvergent, falls
-        \begin{align*}
-            \sum_{j=1}^{\infty} \abs{a_j}
+            \sum_{n=1}^{\infty} \abs{a_n}
         \end{align*}
         konvergiert. Das heißt falls
         \begin{align*}
-            \sum_{n=1}^{\infty} \abs{n} < \infty
+            \sum_{n=1}^{\infty} \abs{a_n} < \infty
         \end{align*}
     \end{definition}
 
-    \begin{satz} % Satz 2
-        Ist
-        \begin{align*}
-            \sum_{n}^{\infty} a_n
-        \end{align*}
-        absolut konvergent, so ist sie auch konvergent und
+    \begin{satz}[Absolute Konvergenz als Konvergenzkriterium] % Satz 2
+        \label{satz:absolut-konvergenz-konvergenkriterium}
+        Ist eine Folge $\sum_{n}^{\infty} a_n$ absolut konvergent, so ist sie auch konvergent und
         \begin{align*}
             \abs{\sum_{n=1}^{\infty} a_n} \leq \sum_{n=1}^{\infty} \abs{a_n}
         \end{align*}
 
         \begin{proof}
-            Haben für $m>n$
+            Wir haben für $m>n$
             \begin{align*}
                 \abs{\sum_{j=n+1}^{m} a_j} \leq \sum_{j=n+1}^{m} \abs{a_j}
             \end{align*}
-            Nehmen an: $\sum_{n=1}^{\infty} \abs{a_n}$ konvergiert. Das heißt Cauchy ist erfüllt.
+            Wir nehmen an, dass $\sum_{n=1}^{\infty} \abs{a_n}$ konvergiert. Das heißt Cauchy ist erfüllt.
             \begin{align*}
-                \impl \forall \varepsilon > 0~\exists N_{\varepsilon}\colon \sum_{j=n+1}^{\infty} \abs{a_j} < \varepsilon \quad\forall m> n\geq N_{\varepsilon}\\
-                \impl \abs{\sum_{j=n+1}^{m} a_j} < \varepsilon\quad\forall m>n\geq N_{\varepsilon} % ???
+                \impl \forall \varepsilon > 0~\exists N_{\varepsilon}\colon \sum_{j=n+1}^{m} \abs{a_j} &< \varepsilon \quad\forall m> n\geq N_{\varepsilon}\\
+                \impl \abs{\sum_{j=n+1}^{m} a_j} &< \varepsilon\quad\forall m>n\geq N_{\varepsilon}\\
+                \impl \sum_{j=1}^{\infty} a_j&\text{ konvergiert}\qedhere
             \end{align*}
         \end{proof}
     \end{satz}
 
-    \begin{beispiel}
+    \begin{beispiel}[Konvergenz ohne absolute Konvergenz]
         \begin{align*}
             \sum_{n=1}^{\infty} (-1)^{n+1}\cdot \frac{1}{n}
         \end{align*}
@@ -1503,28 +1497,26 @@
     \begin{definition}[Majorante] % Def 3
         Die Reihe
         \begin{align*}
-            \sum_{n=1}^{\infty} c_n~c_n\geq 0~\forall n\in\naturalnumbers
+            \sum_{n=1}^{\infty} c_n\quad c_n\geq 0~\forall n\in\naturalnumbers
         \end{align*}
         ist eine Majorante der Reihe $\sum_{n}^{\infty} a_n$ falls
         \begin{align*}
             \abs{a_n} &\leq c_n\text{ für fast alle }n\in\naturalnumbers
             \intertext{Das heißt}
-            \exists n_0\in\naturalnumbers\colon \abs{a_n} < \varepsilon_{n_0}\quad\forall n\geq n_0
+            \exists n_0\in\naturalnumbers\colon \abs{a_n} &< c_n\quad\forall n\geq n_0
         \end{align*}
     \end{definition}
 
     \begin{satz}[Majoranten-Konvergenz-Kriterium für Reihen] % Satz 4
-        Hat die Reihe
-        \begin{align*}
-            \sum_{n=1}^{\infty} a_n
-        \end{align*}
-        eine konvergente Majorante $\sum_{n=1}^{\infty} c_n$, so ist die Reihe selber absolut konvergent und somit auch konvergent.
+        \label{satz:majorante-reihen}
+        Hat die Reihe $\sum_{n=1}^{\infty} a_n$ eine konvergente Majorante $\sum_{n=1}^{\infty} c_n$, so ist diese Reihe absolut konvergent und somit auch konvergent.
         \begin{proof}
-            Folgt aus Satz 2 und Satz 11 $(c_n\geq 0 \& \sum_{n}^{\infty} c_n\text{ konvergiert}\impl \sum_{n=1}^{\infty} c_n < \infty)$
+            Folgt aus Satz~\ref{satz:absolut-konvergenz-konvergenkriterium} und Satz~\ref{satz:majoranten-kriterium}.
         \end{proof}
     \end{satz}
 
     \begin{satz}[Quotientenkriterium] % Satz 5
+        \label{satz:quotientenkriterium}
         Sei
         \begin{align*}
             s_n &\definedas \sum_{n=0}^{\infty} a_n
@@ -1536,65 +1528,68 @@
         \end{align*}
 
         \begin{proof}
-            Haben $n_0\in\naturalnumbers$
+            Wir haben $n_0\in\naturalnumbers$
             \begin{align*}
-                \frac{\abs{a_{n+1}}}{\abs{a_n}} \leq q\quad\forall n\geq n_0
-                \intertext{$p\in\naturalnumbers$, $n=n_0+p$}
-                \abs{a_{n+1}} \leq q\cdot\abs{a_n} \leq q^2 \cdot \abs{a_{n-1}} \leq q^3 \cdot \abs{a_{n-2}}\\
-                \leq \dots \leq q^{p+1} \cdot\abs{a_{n_0}} = q^{n-n_0} \cdot\abs{a_{n_0}}\\
-                = q^{n} \cdot q^{-n_0} \cdot\abs{a_{n_0}}\\
-                \leadsto \abs{a_n} \leq \underbrace{q^n \cdot K}_{\definedas c_n}\\
-                K = q^{-n_0} \cdot \abs{a_{n_0}}\\
-                \abs{a_{n_0}} \leq c_n\quad\forall n\geq n_0\\
+                \frac{\abs{a_{n+1}}}{\abs{a_n}} &\leq q\quad\forall n\geq n_0\\[10pt]
+                \abs{a_{n+1}} \leq q\cdot\abs{a_n} &\leq q^2 \cdot \abs{a_{n-1}} \leq q^3 \cdot \abs{a_{n-2}}\\[10pt]
+                \leq \dots &\leq q^{p+1} \cdot\abs{a_{n_0}} = q^{n-n_0+1} \cdot\abs{a_{n_0}}\tag{$p\in\naturalnumbers$, $n=n_0+p$}\\[10pt]
+                &= q^{n+1} \cdot q^{-n_0} \cdot\abs{a_{n_0}}\\[10pt]
+                \impl \abs{a_n} &\leq \underbrace{q^n \cdot K}_{\definedasbackwards c_n}\tag{$K \definedas q^{-n_0} \cdot \abs{a_{n_0}}$}\\
+                \impl \abs{a_{n_0}} &\leq c_n\quad\forall n\geq n_0\\
                 \intertext{und}
-                \sum_{n+c}^{\infty} c_n &= \sum_{n+c}^{\infty} K\cdot q^{n} = K\cdot \sum_{n+c}^{\infty} q^{n} < \infty
+                \sum_{n=0}^{\infty} c_n &= \sum_{n=0}^{\infty} K\cdot q^{n} = K\cdot \sum_{n=0}^{\infty} q^{n} < \infty
                 \intertext{Da $0< q < 1$}
-                \impl \sum_{n=c}^{\infty} a_n\text{ hat die konvergente Majorante } K \cdot \sum_{n=c}^{\infty} q^{n}
-                \intertext{Das lässt sich aus Satz 4 folgern}
+                \impl \sum_{n=c}^{\infty} &a_n\text{ hat die konvergente Majorante } K \cdot \sum_{n=c}^{\infty} q^{n}
             \end{align*}
-            \begin{align*}
-                \text{Ist } \liminf_{n\fromto\infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} > 1\\
-                \impl \forall \varepsilon > 0~\exists n_0\colon \frac{\abs{a_{n+1}}}{\abs{a_n}} \geq \overline{q} - \varepsilon = \frac{\overline{q}+1}{2} \geq q > 1
-                \intertext{Wählen $\varepsilon=\frac{\overline{q}-1}{2} > 0$}
-                \impl \frac{\abs{a_n+1}}{\abs{a_n}} \geq q > 1\quad\forall n\geq n_0\\
-                \impl \abs{a_{n+1}} \geq q^{n+1} \cdot q^{n_0}\cdot\abs{a_{n_0}}\\
-                \impl \abs{a_n} \geq q^n\cdot K\\
-                K = q^{?}\cdot \abs{q_{n_0}} \fromto\infty\\
-                \impl \sum_{}^{} a_j\text{ divergiert nach Korollar 13 in Kapitel 11}
-            \end{align*}
+            Damit lässt sich aus Satz~\ref{satz:majorante-reihen} folgern, dass die Reihe konvergiert.
         \end{proof}
     \end{satz}
 
-    \begin{bemerkung}
-        \begin{align*}
-            ?? \equivalent \limsup_{n\fromto\infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} < 1\\
-            \text{Ist } \limsup_{n\fromto\infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} > 1\impl \sum_{n=0}^{\infty} a_0\text{ divergent}\\
-            \text{Ist } \limsup_{n\fromto\infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} = 1\impl \text{Keine Aussage über absolute Konvergenz von } \sum_{n=0}^{\infty} a_n\text{ möglich}
-        \end{align*}
+    \begin{bemerkung}[Quotientenkriterium über $\limsup$]
+        \theoremescape
+        \begin{enumerate}[label=(\roman*)]
+            \item Ist $\limsup_{n\fromto\infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} < 1 \equivalent$ Quotientenkriterium
+            \item Ist $\limsup_{n\fromto\infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} > 1\impl \sum_{n=0}^{\infty} a_0$ divergent
+            \item Ist $\limsup_{n\fromto\infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} = 1\impl \text{Keine Aussage über absolute Konvergenz von } \sum_{n=0}^{\infty} a_n$ möglich
+        \end{enumerate}
+        \begin{proof}[Beweis (ii).]
+            \begin{align*}
+                \text{Ist } \overline{q}\definedas\liminf_{n\fromto\infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} &> 1\\[8pt]
+                \impl \forall \varepsilon > 0~\exists n_0\colon \frac{\abs{a_{n+1}}}{\abs{a_n}} \geq \overline{q} - \varepsilon = \frac{\overline{q}+1}{2} &\geq q > 1\tag{Wähle $\varepsilon=\frac{\overline{q}-1}{2} > 0$}\\[8pt]
+                \impl \frac{\abs{a_n+1}}{\abs{a_n}} &\geq q > 1\quad\forall n\geq n_0
+                \intertext{Wir wenden ein ähnliches Prinzip wie im vorherigen Beweis an}
+                \impl \abs{a_{n+1}} &\geq q^{n+1} \cdot q^{-n_0}\cdot\abs{a_{n_0}}\\[8pt]
+                \impl \abs{a_n} &\geq q^n\cdot K\tag{$K=q^{-n_0}\cdot\abs{a_{n_0}}$}\\[8pt]
+                \impl \sum a_j\text{ divergiert nach}&\text{ Korollar~\ref{korollar:folge-von-reihe-nullfolge}}\qedhere
+            \end{align*}
+        \end{proof}
     \end{bemerkung}
 
-    \begin{beispiel}
+    \begin{beispiel}[Divergenz bei nicht-eindeutigem Quotientenkriterium]
+        $a_n \definedas \frac{1}{n}$
         \begin{align*}
-            a_n &= \frac{1}{n}\\
-            \frac{\abs{a_{n+1}}}{\abs{a_n}} = \frac{a_{n+1}}{a_n} = \frac{n}{n+1}
-            \intertext{und}
-            \sum_{n=1}^{\infty} \frac{1}{n}\text{ divergiert (harmonische Reihe)}
+            \frac{\abs{a_{n+1}}}{\abs{a_n}} = \frac{a_{n+1}}{a_n} &= \frac{n}{n+1} = 1 + \frac{1}{n} \fromto 1
+            \intertext{Und}
+            \sum_{n=1}^{\infty} \frac{1}{n}&\text{ divergiert (Harmonische Reihe)}
         \end{align*}
-    \end{beispiel}
-    \begin{beispiel}
-        \begin{align*}
-            a_n &= \frac{1}{n^2}\\
-            \frac{a_{n+1}}{a_n} = \frac{n^2}{(n+1)^2} = \pair{\frac{n}{n+1}}^2 = \pair{1-\frac{1}{n+1}}^2 \fromto 1
-        \end{align*}
-        aber $\sum a_p$ konvergiert absolut.
-        \begin{align*}
-            \pair{1-\frac{1}{n}}^2 = 1 - \frac{2}{n+1}+ \pair{\frac{1}{n+1}}^2\\
-            = 1 - \frac{2}{n+1}\cdot\pair{1-\frac{1}{??}} \leq 1- \frac{?}{?}
-        \end{align*}
-        ???
     \end{beispiel}
 
-    \begin{beispiel}
+    \begin{beispiel}[Konvergenz bei nicht-eindeutigem Quotientenkriterium]
+        $a_n \definedas \frac{1}{n^2}$
+        \begin{align*}
+            \frac{a_{n+1}}{a_n} = \frac{n^2}{(n+1)^2} &= \pair{\frac{n}{n+1}}^2 = \pair{1-\frac{1}{n+1}}^2 \fromto 1
+            \intertext{Aber}
+            \sum_{n=1}^{\infty} &a_n
+            \intertext{konvergiert absolut:}
+            \pair{1-\frac{1}{n}}^2 &= 1 - \frac{2}{n+1}+ \pair{\frac{1}{n+1}}^2\\
+            &= 1 - \frac{2}{n+1}\cdot\pair{1-\frac{1}{2(n+1)}}\\
+            &\leq 1- \frac{s-\delta}{n+1}\tag{Für $\delta>0$ und fast alle $n$}
+        \end{align*}
+    \end{beispiel}
+
+    \newpage
+
+    \begin{beispiel}[Eulersche Zahl über Reihendarstellung]
         Die Reihe
         \begin{align*}
             \sum_{n=0}^{\infty} \frac{1}{n!}
@@ -1602,18 +1597,27 @@
         ist absolut konvergent.
         \begin{align*}
             a_n &= \frac{1}{n!}\\
-            \frac{a_{n+1}}{a_n} = \frac{n!}{(n+1)!} = \frac{1}{n+1}\fromto 0
+            \frac{a_{n+1}}{a_n} &= \frac{n!}{(n+1)!} = \frac{1}{n+1}\fromto 0
         \end{align*}
         Behauptung:
         \begin{align*}
-            \sum_{n=0}^{\infty} \frac{1}{n!} &= e\tag{Eulersche Zahl}\\
-            e &= \lim_{\ntoinfty} \pair{1+\frac{1}{n}}^n = \sum_{k=0}^{n}\binom{n}{k} \pair{\frac{1}{n}}^k\\
-            &= \sum_{k=0}^{n} \frac{n\cdot(n-1)\cdot(n-k+1)}{k!\cdot n^k}\\
-            &= \sum_{k=0}^{n} \frac{1}{k!} \cdot \prod_{j=0}^{k-1} \frac{n-j}{n}\\
-            &\leq \sum_{k=0}^{n} \frac{1}{k!} = \sum_{k=0}^{\infty} \frac{1}{k!}\\
-            \impl e \leq \sum_{n=0}^{\infty} \frac{1}{n!}
+            \sum_{n=0}^{\infty} \frac{1}{n!} &= e\tag{Eulersche Zahl}
         \end{align*}
+        \begin{proof}
+            Wir wenden die bereits gezeigt Formel für $e$ an:
+            \begin{align*}
+                e &= \lim_{\ntoinfty} \pair{1+\frac{1}{n}}^n\\[10pt]
+                \pair{1+\frac{1}{n}}^n &= \sum_{k=0}^{n}\binom{n}{k} \pair{\frac{1}{n}}^k\\
+                &= \sum_{k=0}^{n} \frac{n\cdot(n-1)\cdot(n-k+1)}{k!\cdot n^k}\\
+                &= \sum_{k=0}^{n} \frac{1}{k!} \cdot \prod_{j=0}^{k-1} \frac{n-j}{n}\\
+                &\leq \sum_{k=0}^{n} \frac{1}{k!} \leq \sum_{k=0}^{\infty} \frac{1}{k!}\\[10pt]
+                \impl e &\leq \sum_{n=0}^{\infty} \frac{1}{n!}
+            \end{align*}
+            \begin{center}
+            [Der zweite Teil des Beweises wird in der nächsten Vorlesung behandelt.]
+            \end{center}
+        \end{proof}
     \end{beispiel}
 
-
+    % \renewcommand{\thepage}{(Noch in Bearbeitung)}
 \end{document}
