@@ -10,3 +10,4 @@
 *.nav
 *.synctex(busy)
 *.auxlock
+*.tmp

@@ -64,8 +64,8 @@
     Die Anzahl der $k$-elementigen Teilmengen einer $n$-elementigen Menge $\set{A_1, \dots, A_n}$ ist gleich $\binom{n}{k}$.
 \end{satz}
 
-\begin{hilfsatz}
-    \label{hilfsatz:binom-add}
+\begin{lemma}
+    \label{lemma:binom-add}
     $\forall k,n\in\naturalnumbers$ gilt $\binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}$.
     \begin{proof}
         \begin{align*}
@@ -75,7 +75,7 @@
             &= \frac{n!}{k!\cdot(n-k)!} \annot{=}{Def.} \binom{n}{k}\qedhere
         \end{align*}
     \end{proof}
-\end{hilfsatz}
+\end{lemma}
 \begin{proof}[Beweis von Satz~\ref{satz:teilmengen-anzahl} (Induktion nach $n$)]
     ~\\
     \begin{induktionsanfang}
@@ -94,7 +94,7 @@
         In $T_1$ gibt es $\binom{n}{k-1}$ Elemente\footnotemark.\\
         Insgesamt:
         \begin{equation*}
-            \binom{n}{k}+\binom{n}{k-1}\annot{=}{\ref{hilfsatz:binom-add}}\binom{n+1}{k}\qedhere
+            \binom{n}{k}+\binom{n}{k-1}\annot{=}{\ref{lemma:binom-add}}\binom{n+1}{k}\qedhere
         \end{equation*}
     \end{induktionsschritt}
     \footnotetext{Wir wissen, dass $A_{n+1}$ bereits ein Element der Teilmenge ist. Damit müssen wir noch $k-1$ aus $n$ Elemente auswählen. Die Formel dafür folgt aus der Induktionsannahme}
@@ -132,7 +132,7 @@
         &= \sum_{l=1}^{n+1} \binom{n}{l-1}\cdot x^{n+1-l}\cdot y^{l}\\
         &= \sum_{k=1}^{n+1} \binom{n}{k+1}\cdot x^{n+1-k} \cdot y^{k}\\[10pt]
         \impl (x+y)^{n+1} &= x^{n+1} + \sum_{k=1}^{n} \interv{\binom{n}{k}+\binom{n}{k+1}} \cdot x^{n+1-k}\cdot y^k + y^{n+1}\\
-        &\annot{=}{\ref{hilfsatz:binom-add}} \sum_{k=0}^{n+1} \binom{n+1}{k}\cdot x^{n+1-k}\cdot y^{k}\qedhere
+        &\annot{=}{\ref{lemma:binom-add}} \sum_{k=0}^{n+1} \binom{n+1}{k}\cdot x^{n+1-k}\cdot y^{k}\qedhere
     \end{align*}
 \end{proof}
 

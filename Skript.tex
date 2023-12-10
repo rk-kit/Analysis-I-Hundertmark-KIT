@@ -38,7 +38,6 @@
 \newtheorem{beobachtung}[blockelement]{Beobachtung}
 \newtheorem{konzept}[blockelement]{Konzept}
 \newtheorem{visualisierung}[blockelement]{Visualisierung}
-\newtheorem{hilfsatz}[blockelement]{Hilfsatz}
 \newtheorem{anwendung}[blockelement]{Anwendung}
 
 % Paranthese
@@ -583,7 +582,7 @@
 
     \newpage
 
-    \subsection{[*] Häufungswerte und Teilfolgen}
+    \subsection{Häufungswerte und Teilfolgen}
 
     Wir möchten eine Folge $(a_n)_n$ \anf{massieren}.
     \begin{align*}
@@ -661,7 +660,7 @@
 
     \begin{satz}[Häufungswertkriterium über Teilfolgen]
         \label{satz:haeufungswert-teilfolge}
-        Eine reelle Zahl $a$ ist genau dann Häufungswert einer Folge $(a_n)_n$, wenn eine Teilfolgen von $a_n$ existiert, die gegen $a$ konvergiert.
+        Eine reelle Zahl $a$ ist genau dann Häufungswert einer Folge $(a_n)_n$, wenn eine Teilfolge von $a_n$ existiert, die gegen $a$ konvergiert.
 
         \begin{proof}
             \anf{$\impl$}: $a$ sei Häufungswert von $a_n$. Das heißt
@@ -672,11 +671,17 @@
                 \item Wir wählen $\varepsilon = 1 \impl \exists n_1\in\naturalnumbers\colon a-1 < a_{n_1} < a+1$
                 \item Wir wählen $\varepsilon = \frac{1}{2}$, $L=n_1 + 1 \impl \exists n_2 > L > n_1\colon a-\frac{1}{2} < a_{n_2} < a + \frac{1}{2}$
                 \item Wir wählen $\varepsilon = \frac{1}{3} \impl \exists n_3 > n_2\colon a - \frac{1}{3} < a_{n_3} < a + \frac{1}{3}$
-                \item[$j$)] Wir wählen $\varepsilon = \frac{1}{j+1} \impl \exists n_{j+1} > n_j\colon a-\frac{1}{j+1} < a_{n_{j+1}} < a + \frac{1}{j+1}\qquad \impl n_j < n_{j+1} \forall j \in \naturalnumbers$
+                \item[$j$)] Wir wählen $\varepsilon = \frac{1}{j+1} \impl \exists n_{j+1} > n_j\colon a-\frac{1}{j+1} < a_{n_{j+1}} < a + \frac{1}{j+1}\qquad \impl n_j < n_{j+1}\quad\forall j \in \naturalnumbers$
             \end{enumerate}
-            \noindent Wir definieren $\kappa\pair{j} \definedas n_j$ und $b_j \definedas a_{\kappa(j)}$ ist eine Teilfolge.\\
-            \anf{$\Leftarrow$}: Es gilt $a-\frac{1}{j} < b_j < a + \frac{1}{j}$ und nach dem
+            \noindent Wir definieren $\kappa\pair{j} \definedas n_j$ und $b_j \definedas a_{\kappa(j)}$ als eine Teilfolge von $(a_n)_n$. Es gilt
+            \begin{align*}
+                a-\frac{1}{j} < b_j < a + \frac{1}{j}\quad\forall j\in\naturalnumbers
+            \end{align*}
+            und nach Satz~\ref{satz:sandwich} konvergiert $(b_j)_j$ gegen $a$.\qedhere
         \end{proof}
+        \begin{uebung}
+            Beweisen Sie mittels Konvergenzkriterien und der Definition von Häufungswerten die Rückrichtung des vorherigen Satzes.
+        \end{uebung}
     \end{satz}
 
     \newpage
@@ -1453,7 +1458,7 @@
         \end{proof}
     \end{korollar}
 
-    \subsection{Absolut konvergente Reihen und Umordnungen}
+    \subsection{[*] Absolut konvergente Reihen und Umordnungen}
 
     \begin{definition}[Absolute Konvergenz] % Definition 1
         Eine Reihe$\sum_{n=1}^{\infty} a_n$ heißt absolut konvergent, falls
