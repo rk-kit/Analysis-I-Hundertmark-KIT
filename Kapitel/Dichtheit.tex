@@ -1,0 +1,108 @@
+\subsection{Dichtheit im Allgemeinen}
+\thispagestyle{pagenumberonly}
+
+Wir kennen bereits folgende Mengen:
+
+\begin{align*}
+    \mathbb{Q}&\definedas\set{\frac{m}{n}\middle|~m\in\mathbb{Z} \land n\in\naturalnumbers}\tag{Rationale Zahlen}\\
+    \mathbb{Q}&\subseteq \realnumbers\quad \mathbb{Q}\neq\mathbb{R}\text{, da } \sqrt{2}\notin \mathbb{Q}\\
+    \mathbb{R}&\exclude\mathbb{Q} \tag{Irrationale Zahlen}
+\end{align*}
+
+\begin{bemerkung}[Größenvergleich der irrationalen und rationalen Zahlen]
+    $\realnumbers\exclude\mathbb{Q}$ ist sehr viel größer als $\mathbb{Q}$. (Wird später noch behandelt)
+\end{bemerkung}
+
+\begin{definition}[Dichte Teilmenge] % Definition 1
+    Sei $A\subseteq B (\subseteq \realnumbers)$. $A$ heißt dicht in $B$, falls
+    \begin{align*}
+        \forall b\in B~\exists (a_n)_{n\in\naturalnumbers}, (a_n \in A~\forall n\in\naturalnumbers)\text{ mit }\lim_{n\fromto\infty} a_n = b
+    \end{align*}
+    Das heißt für jedes $b\in B$ existiert eine Folge in $A$, die gegen $b$ konvergiert.
+\end{definition}
+
+\begin{notation}
+    Statt $\forall n\in\naturalnumbers\colon a_n \in A$ schreiben wir auch $(a_n)_n\subseteq A$.
+\end{notation}
+
+\subsection{Dichtheits-Begriff für rationale und reelle Zahlen}
+Wir wollen nun zeigen, dass $\mathbb{Q}$ dicht in $\realnumbers$ ist. Ziel:
+\begin{align*}
+    \forall x\in\realnumbers~\exists (a_n)_{n\in\naturalnumbers}, a_n\in\mathbb{Q}\text{ mit }\lim_{n\fromto\infty} a_n =x
+\end{align*}
+
+\begin{lemma}[Zwischenwerte von reellen Zahlen] % Lemma 2
+    \label{lemma:zwisch-reelle-zahlen}
+    \theoremescape
+    \begin{enumerate}[label=(\roman*)]
+        \item $\forall x,y\in\realnumbers$ mit $y-x>1~\exists m\in\mathbb{Z}$ mit $x < m < y$
+        \item $\forall x,y\in\realnumbers$ mit $y>x~\exists q\in\mathbb{Q}\colon x<q<y$
+    \end{enumerate}
+    \begin{proof}
+        \theoremescape
+        \begin{enumerate}[label=(\roman*)]
+            \item Sei $y>x+1$. Wir definieren
+            \begin{align*}
+                A&\definedas\set{p\in\mathbb{Z}|~p>x} \subseteq \mathbb{Z}
+                \intertext{$A$ ist nach unten beschränkt und nach Satz~\ref{satz:von-archimedes} gilt $A\neq \emptyset$. Nach Satz~\ref{satz:wohlordnungsprinzip} erweitert auf $\mathbb{Z}$ folgt}
+                \impl m&\definedas\min(A)\text{ existiert,}\quad m\in A\\
+                \impl m-1&\notin A,\quad m-1\in \mathbb{Z}\\
+                \impl x &< m,\quad m-1 \leq x\\
+                \impl m&\leq x+1< x+(y-x) = y\\
+                \impl x&<m<y
+            \end{align*}
+            \item Sei $y>x\equivalent y-x>0$
+            \begin{align*}
+                \annot{\impl}{\ref{satz:von-archimedes}} \exists n\in\naturalnumbers\colon n\cdot\pair{y-x}&>1\\
+                \annot{\impl}{(i)} \exists m\in \mathbb{Z}\colon nx &< m < ny\\
+                \equivalent x &< \frac{m}{n}< y\\
+                \text{Wähle }q&=\frac{m}{n}\qedhere
+            \end{align*}
+        \end{enumerate}
+    \end{proof}
+\end{lemma}
+
+\begin{folgerung}[Dichtheit von $\mathbb{Q}$ in $\realnumbers$]
+    Anwendung: $\forall x\in\realnumbers~\exists (a_n)_n\in\mathbb{Q}$ mit $q_n\fromto x$
+    \begin{proof}
+        Für $n\in\naturalnumbers$ wähle $y=x+\frac{1}{n}$
+        \begin{align*}
+            \annot{\impl}{Lemma~\ref{lemma:zwisch-reelle-zahlen}} \exists q_n\in\mathbb{Q}\colon x &< q_n < y = x + \frac{1}{n}\\
+            x &< q_n < x + \frac{1}{n}\quad (\fromto x)
+            \intertext{Nach dem Sandwich-Satz~(\ref{satz:sandwich}) gilt}
+            \impl q_n &\fromto x\qedhere
+        \end{align*}
+    \end{proof}
+\end{folgerung}
+
+\begin{lemma} % Lemma 3
+    $\forall x\in\realnumbers~\forall n\in\naturalnumbers~\exists m_n\in\mathbb{Z}\colon$
+    \begin{align*}
+        \frac{m_n-1}{n} \leq x < \frac{m_n}{n}
+    \end{align*}
+    \begin{uebung}
+        Beweisen Sie das vorherige Lemma.\\
+        \textit{Hinweis}: Betrachte $A_n\definedas\set{p\in\mathbb{Z}|~p>nx}\subseteq\mathbb{Z}$. Behauptung: $m_n\definedas \min A_n$ ermöglicht den Beweis.
+    \end{uebung}
+\end{lemma}
+
+\begin{bemerkung}[Definition von irrationalen Exponenten über Folgen. Siehe Walter: Analysis 1, Kapitel 3.8 und 4.8]
+    Sei $a > 0$
+    \begin{align*}
+        \impl\forall n\in\naturalnumbers\colon a^{\frac{1}{n}} = \sqrt[n]{a}\text{ existiert}
+        \intertext{Da $a^n \definedas \prod_{j=1}^n a\quad a^{-n} \definedas \frac{1}{a^n}\quad a^0 \definedas 1$ für $n\in\naturalnumbers$ gilt}
+        a^m\text{ definiert }\quad\forall m\in\mathbb{Z}
+    \end{align*}
+    Definiere: $m\in\mathbb{Z}$, $n\in\naturalnumbers$, $a^\frac{m}{n}\definedas \pair{a^\frac{1}{m}}^m$\\
+    Überprüfe Wohldefiniertheit. Das heißt ist $q=\frac{m_1}{n_1} = \frac{m_2}{n_2}$ muss gelten
+    \begin{align*}
+        \pair{a^\frac{1}{n}}^{m_2} = a^\frac{m_1}{n_1} = a^\frac{m_2}{n_2} = \pair{a^\frac{1}{n_2}}^{m_2}
+    \end{align*}
+    Wir haben also eine Definition für rationale Exponenten. Um auch irrationale Exponenten abbilden zu können, gehen wir wie folgt vor. Für $x\in\realnumbers$ wähle $(q_n)_n\subseteq\mathbb{Q}$, $q_n\fromto x$ und definiere
+    \begin{align*}
+        a^x \definedas\lim_{n\fromto\infty} a^{q_n}
+    \end{align*}
+    Überprüfe: $a^x\cdot a^y = a^{x+y}$, $a^{x}b^x = (ab)^x$, $a^{-x} = \frac{1}{a^x}$ usw.
+\end{bemerkung}
+
+\newpage
