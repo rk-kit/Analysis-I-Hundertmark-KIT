@@ -438,7 +438,8 @@
     \begin{beispiel}
         \theoremescape
         \begin{enumerate}
-            \item Berechnen von $\sqrt {c}$ für $c>0$.
+            \item % 1.
+            Berechnen von $\sqrt {c}$ für $c>0$.
             \begin{align*}
                 x^2 = c &\equivalent x = \frac{c}{x}\qquad x >0\\
                 &\equivalent x=\frac{1}{2}\pair{x+\frac{c}{x}}
@@ -471,17 +472,22 @@
                 \equivalent x &= \sqrt {c}
             \end{align*}
 
-
-
-            \item $x_n = \frac{1}{n}\fromto 0$
+            \item % 2.
+            $x_n = \frac{1}{n}\fromto 0$
             \begin{align*}
-                \abs{\frac{1}{n}-0} &= \frac{1}{n} \tag{geg. $\varepsilon > 0$ nach $n\in\naturalnumbers$, $N>\frac{1}{\varepsilon} \equivalent \varepsilon > \frac{1}{N}$}
+                \abs{\frac{1}{n}-0} &= \frac{1}{n}
+                \intertext{geg. $\varepsilon > 0$ nach $n\in\naturalnumbers$, $N>\frac{1}{\varepsilon} \equivalent \varepsilon > \frac{1}{N}$}
                 \impl \forall n\geq N\colon \abs{\frac{1}{n}-0} = \frac{1}{n} \leq \frac{1}{N}< \varepsilon
             \end{align*}
             Ähnlich funktioniert $x_n = \frac{1}{\sqrt {c}}$
-            \item $x_n\definedas \frac{1+2+3+\dots+n}{2} \fromto \frac{1}{2}$ für $n\fromto\infty$\\
-            Bew: $1+2+3+\dots+n = \frac{n\cdot(n+1)}{2} \impl x_n = \frac{\frac{n\cdot(n+1)}{2}}{n^2} = \frac{n^2+n}{2n^2} = \frac{1+\frac{1}{n}}{2} \fromto \frac{1}{2}$
-            \item Sei $0\leq q< 1$. $x_n \definedas q^n \fromto 0$\\
+            \item % 3.
+            \begin{align*}
+                x_n&\definedas \frac{1+2+3+\dots+n}{n^2} \fromto \frac{1}{2}\text{ für }n\fromto\infty
+                \intertext{Mit Gaußscher Summenformel ($1+2+3+\dots+n = \frac{n\cdot(n+1)}{2}$)}
+                \impl x_n &= \frac{\frac{n\cdot(n+1)}{2}}{n^2} = \frac{n^2+n}{2n^2} = \frac{1+\frac{1}{n}}{2} \fromto \frac{1}{2}
+            \end{align*}
+            \item % 4.
+            Sei $0\leq q< 1$. $x_n \definedas q^n \fromto 0$\\
             Bew: Ist $q=0\impl x_n = 0^n = 0 \fromto 0$.\\
             Also sei $0<q<1 \impl \frac{1}{q}> 1$\\
             $h\definedas\frac{1}{q}-1>0\quad \frac{1}{q}= 1 + h$, $q=\frac{1}{1+h}$\\
