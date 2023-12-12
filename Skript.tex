@@ -1497,8 +1497,6 @@
 
     \newpage
 
-    \renewcommand{\thepage}{(Noch in Bearbeitung)}
-
     \begin{beispiel}[Eulersche Zahl über Reihendarstellung]
         Die Reihe
         \begin{align*}
@@ -1525,69 +1523,91 @@
                 \intertext{Noch zu zeigen: $e'\leq e$}
                 \pair{1+\frac{1}{n}}^n &= \sum_{k=0}^{n} \frac{1}{k!} \cdot \prod_{j=0}^{k-1} 1-\frac{j}{n}\\
                 &\geq \sum_{k=0}^{m} \frac{1}{k!}\cdot \prod_{j=0}^{k-1} \pair{1-\frac{j}{n}}\tag{$\forall n>m$}\\
-                \intertext{Halte $m\in\naturalnumbers$ fest}
+                \intertext{Wir halten $m\in\naturalnumbers$ fest}
                 \impl e &= \lim_{\ntoinfty} \pair{1+\frac{1}{n}}^n \geq \lim_{\ntoinfty} \sum_{k=0}^{m} \frac{1}{k!}\cdot \prod_{j=0}^{k-1} \pair{1-\frac{j}{n}}\\
-                &= \sum_{k=0}^{m} \frac{1}{k!} \cdot \prod_{j=0}^{k-1} \lim_{\ntoinfty} \pair{1-\frac{j}{n}}
-                \intertext{Der Limes ist 1:}
+                &= \sum_{k=0}^{m} \frac{1}{k!} \cdot \prod_{j=0}^{k-1} \underbrace{\lim_{\ntoinfty} \pair{1-\frac{j}{n}}}_{=1}\\
                 &= \sum_{n=0}^{m} \frac{1}{k!}\tag{$\forall m\in\naturalnumbers$}\\
                 \impl e&\geq \lim_{\ntoinfty} \sum_{k=0}^{m} \frac{1}{k!} = \sum_{k=0}^{\infty} \frac{1}{k!} = e\\
                 \impl e &\leq e' \land e'\leq e\\
                 \impl e &= e'\qedhere
             \end{align*}
         \end{proof}
+
+        %%%%%%%%%%%%%%%%%%%%%%%%
+        % 12. Dezember 2023
+        %%%%%%%%%%%%%%%%%%%%%%%%
+
+        \begin{bemerkung}[Ännäherung von $e$ über Reihen]
+            \begin{align*}
+                s_n &\definedas \sum_{k=0}^{n} \frac{1}{k!}\\
+                r_{n,p} &\definedas \sum_{k=n+1}^{n+p} \frac{1}{k!}\\
+                r_{n,p} &= \sum_{k=n+1}^{n+p} \frac{1}{k!} = \frac{1}{(n+1)!} + \frac{1}{(n+2)!} + \dots + \frac{1}{(n+p)!}\\
+                &= \frac{1}{(n+1)!}\cdot\interv{1+\frac{1}{n+2}+\frac{1}{(n+2)\cdot(n+3)} + \dots + \frac{1}{(n+2)\cdot(n+3)\cdot\ldots\cdot(n+p)}}\\
+                &> \frac{1}{(n+1)!}
+                \intertext{Wir betrachten den zweiten Faktor}
+                &1+\frac{1}{n+2}+\frac{1}{(n+2)\cdot(n+3)} + \dots + \frac{1}{(n+2)\cdot(n+3)\cdot\ldots\cdot(n+p)}\\
+                &< 1 + \frac{1}{2} + \frac{1}{2\cdot 3}+\dots + \frac{1}{2\cdot 3 \cdot\ldots\cdot p}\\
+                &= \sum_{k=0}^{p} \frac{1}{k!} - 1 < \sum_{k=0}^{\infty} \frac{1}{k!} - 1 = e-1
+                \intertext{Wir kombinieren die Abschätzung über beide Faktoren und erhalten}
+                \impl &\frac{1}{(n+1)!} < r_{n,p} < \frac{e-1}{(n+1)!}\\
+                \equivalent &\frac{1}{(n+1)!} < s_{n+p} - s_{n} < \frac{e-1}{(n+1)!}\\
+                &s_{n+p} - s_{n} \fromto e - s_n\text{ für }p\fromto\infty\\
+                \impl &\frac{1}{(n+1)!} \leq e - s_n \leq \frac{e-1}{(n+1)!}
+                \intertext{Wir erhalten also ein Verfahren, um einen Näherungswert für $e$ zu bestimmen}
+                &2,5 \leq e \leq 3\quad(n=1)\\
+                &2,66 \leq e \leq 2,8\quad(n=2)\\
+                \vdots\\
+                &e = 2,71828182\ldots
+            \end{align*}
+        \end{bemerkung}
     \end{beispiel}
 
-    \begin{bemerkung}
+
+    \begin{bemerkung}[Ausblick: Definition von Exponentialfunktionen über Reihen]
         \begin{align*}
-            \sum_{n=0}^{\infty} \frac{x^n}{n!} &\definedasbackwards a_n\\
+            a_n &\definedas\sum_{n=0}^{\infty} \frac{x^n}{n!}\\
             \frac{\abs{a_{n+1}}}{\abs{a_n}} &= \abs{\frac{x^{n+1}\cdot n!}{(n+1)!\cdot x^n}} = \frac{\abs{x}}{n+1}\fromto 0
         \end{align*}
+        Diese Konvergenz werden wir in einem späteren Kapitel nutzen, um die Exponentialfunktion über
+        \begin{align*}
+            \exp(x) &= \sum_{k=0}^{\infty} \frac{x^n}{n!} = e^x
+        \end{align*}
+        zu definieren.
     \end{bemerkung}
 
-    \begin{satz}[Lambert 1707] % Satz 7
-        $e$ ist irrational.
+    \begin{satz}[Nach Lambert 1707] % Satz 7
+        Die eulersche Zahl $e$ ist irrational.
         \begin{proof}
             Wir haben
             \begin{align*}
-                \frac{1}{(n+1)!} \leq e-s_n \leq \frac{e-1}{(n+1)!} < \frac{2}{(n+1)!}
-                \intertext{Angenommen $e=\frac{p}{q}$~$p$,$q\in\naturalnumbers$. Wir nehmen $n=q$}
+                \frac{1}{(n+1)!} &\leq e-s_n \leq \frac{e-1}{(n+1)!} < \frac{2}{(n+1)!}
+                \intertext{Angenommen $e=\frac{p}{q}$\quad$p,q\in\naturalnumbers$. Wir nehmen $p=q\cdot m$}
                 \impl \frac{1}{(q+1)!} &\leq \frac{p}{q} - s_q < \frac{2}{(q+1)!}\\
-                0 &< \frac{1}{q+1} \leq \frac{p}{q}\cdot q! - q!\cdot s_q < \frac{2}{q+1}\\
+                0 &< \frac{1}{q+1} \leq \frac{p}{q}\cdot q! - q!\cdot s_q < \frac{2}{q+1}<1
+                \intertext{Es lässt sich zeigen, dass der dritte Term eine ganze Zahl ist:}
+                \frac{p}{q}\cdot q! &= p\cdot(q-1)!\in\naturalnumbers\\
                 q!\cdot s_q &= q! \cdot \sum_{k=0}^{q} \frac{1}{k!}\in\naturalnumbers
             \end{align*}
+            Damit ergibt sich ein Widerspruch, weil keine ganze Zahl zwischen $0$ und $1$ liegt.
         \end{proof}
     \end{satz}
 
-    \begin{beispiel}
-        \begin{align*}
-            s_n &\definedas \sum_{k=0}^{n} \frac{1}{k!}\\
-            r_{n,p} &\definedas \sum_{k=n+1}^{n+p} \frac{1}{k!}\\
-            r_{n,p} &= \sum_{k=n+1}^{n+p} \frac{1}{k!} = \frac{1}{(n+1)!} + \frac{1}{(n+2)!} + \dots + \frac{1}{(n+p)!}\\
-            &= \frac{1}{(n+1)!}\cdot\interv{1+\frac{1}{n+2}+\frac{1}{(n+2)\cdot(n+3)} + \dots + \frac{1}{(n+2)\cdot(n+3)\cdot\dots\cdot(n+p)}}\\
-            &> \frac{1}{(n+1)!}\\
-            &1+\frac{1}{n+2}+\frac{1}{(n+2)\cdot(n+3)} + \dots + \frac{1}{(n+2)\cdot(n+3)\cdot\dots\cdot(n+p)}\\
-            &< 1 + \frac{1}{2} + \frac{1}{2\cdot 3}+\dots + \frac{1}{2\cdot 3 \cdot\dots\cdot p}\\
-            &= \sum_{k=0}^{\infty} \frac{1}{k!} - 1 < ??? = e-1\\
-            \impl \frac{1}{(n+1)!} &< r_{n,p} < \frac{e-1}{(n+1)!}\\
-            \frac{1}{(n+1)!} &< s_{n+p} - s_{n} < \frac{e-1}{(n+1)!}\\
-            s_{n+p} - s_{n} &\fromto e - s_n
-        \end{align*}
-    \end{beispiel}
+    \newpage
 
-    \begin{satz}[Wurzelkriterium]
-        \label{satz:wurzelkriterium} % Satz 8
+    \begin{satz}[Wurzelkriterium] % Satz 8
+        \label{satz:wurzelkriterium}
         Sei $(a_n)_n$ eine reelle Folge.
-        \begin{enumerate}
+        \begin{enumerate}[label=(\roman*)]
             \item Ist $\limsup_{\ntoinfty} \sqrt[n]{\abs{a_n}} < 1$, dann konvergiert $\sum_{n=0}^{\infty} a_n$ absolut.
             \item Ist $\limsup_{\ntoinfty} \sqrt[n]{\abs{a_n}} > 1$, dann ist $\sum_{n=0}^{\infty} a_n$ divergent.
             \item Ist $\limsup_{\ntoinfty} \sqrt[n]{\abs{a_n}} = 1$, so ist keine Aussage möglich.
         \end{enumerate}
         \begin{proof}[Beweis (iii)]
             \begin{align*}
-                a_n &= \frac{1}{n^p}\\
-                \sqrt[n]{\abs{a_n}} = \pair{\frac{1}{\sqrt[n]{n}}}^p \fromto \pair{\frac{1}{1}}^p = 1\tag{$n\fromto\infty$}\\
-                \sum_{n=1}^{\infty} \frac{1}{n^p}\text{ divergiert für $p=1$, konvergiert für $p>1$}
-                \impl \text{ keine Aussage möglich}
+                a_n &\definedas \frac{1}{n^p}\\
+                \sqrt[n]{\abs{a_n}} &= \pair{\frac{1}{\sqrt[n]{n}}}^p \fromto \pair{\frac{1}{1}}^p = 1\tag{$n\fromto\infty$}\\
+                \sum_{n=1}^{\infty} \frac{1}{n^p}&\text{ divergiert für $p=1$ und konvergiert für $p>1$}\\
+                \impl &\text{ keine Aussage möglich}\qedhere
             \end{align*}
         \end{proof}
         \begin{proof}[Beweis (i)]
@@ -1595,27 +1615,30 @@
             \begin{align*}
                 \hat{q}&\definedas \limsup \sqrt[n]{\abs{a_n}} < 1
                 \intertext{Wähle $\varepsilon\definedas \frac{1-\hat{q}}{2} > 0$}
-                \impl \sqrt[n]{\abs{a_n}} < \hat{q} + \varepsilon = \frac{1+\hat{q}}{2}\text{für fast alle $n$}\\
-                \impl \exists n_{0}\in\naturalnumbers\colon \sqrt[n]{\abs{a_n}} \leq q\quad\forall n\geq n_0\\
-                \equivalent \abs{a_n} \leq q^n\quad\forall n\geq n_0\\
-                \intertext{Das heißt $\sum_{n=0}^{\infty} q^n$ ist konvergente Majorante für $\sum a_n$}
-                \impl \sum_{n=0}^{\infty} a_n\text{ ist absolut konvergent}
+                \annot{\impl}{\ref{lemma:limsup-charak}} \sqrt[n]{\abs{a_n}} &< \hat{q} + \varepsilon = \frac{1+\hat{q}}{2}\text{ für fast alle $n$}\\
+                \impl \exists n_{0}\in\naturalnumbers\colon \sqrt[n]{\abs{a_n}} &\leq q\quad\forall n\geq n_0\\
+                \equivalent \abs{a_n} &\leq q^n\quad\forall n\geq n_0\\
+                \intertext{Das heißt $\sum_{n=0}^{\infty} q^n$ ist eine konvergente Majorante für $\sum a_n$}
+                \impl \sum_{n=0}^{\infty} a_n&\text{ ist absolut konvergent}\qedhere
             \end{align*}
         \end{proof}
         \begin{proof}[Beweis (ii)]
             Sei
             \begin{align*}
-                \hat{q}&\definedas \limsup \sqrt[n]{\abs{a_n}} > 1\\
+                \hat{q}&\definedas \limsup_{\ntoinfty} \sqrt[n]{\abs{a_n}} > 1\\
                 \varepsilon &\definedas \frac{\hat{q}-1}{2}>0\\
                 q&\definedas \hat{q}-\varepsilon = \frac{1+\hat{q}}{2} > 1\\
-                \impl \sqrt[n]{\abs{a_n}} > \hat{q}-\varepsilon = q > 1\tag{für unendlich viele $n$}\\
-                \impl \abs{a_n} > q^n\tag{für unendlich viele $n$}
-                \impl (a_n)_n\text{ keine Nullfolge somit konvergiert $\sum a_n$ nicht}
+                \impl \sqrt[n]{\abs{a_n}} &> \hat{q}-\varepsilon \definedasbackwards q > 1\tag{für unendlich viele $n$}\\
+                \impl \abs{a_n} &> q^n\tag{für unendlich viele $n$}\\
+                \impl (a_n)_n&\text{ keine Nullfolge}
             \end{align*}
+            Somit konvergiert $\sum a_n$ nicht.
         \end{proof}
     \end{satz}
 
     \newpage
+
+    \renewcommand{\thepage}{(Noch in Bearbeitung)}
 
     \begin{definition}[Umordnung von Reihen] % Definition 9
         Seien
