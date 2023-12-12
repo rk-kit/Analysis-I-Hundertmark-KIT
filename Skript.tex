@@ -1453,11 +1453,11 @@
         \end{proof}
     \end{satz}
 
-    \begin{bemerkung}[Quotientenkriterium über $\limsup$]
+    \begin{bemerkung}[Quotientenkriterium über $\limsup$ und $\liminf$]
         \theoremescape
         \begin{enumerate}[label=(\roman*)]
             \item Ist $\limsup_{n\fromto\infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} < 1 \equivalent$ Quotientenkriterium
-            \item Ist $\limsup_{n\fromto\infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} > 1\impl \sum_{n=0}^{\infty} a_0$ divergent
+            \item Ist $\liminf_{n\fromto\infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} > 1\impl \sum_{n=0}^{\infty} a_n$ divergent
             \item Ist $\limsup_{n\fromto\infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} = 1\impl \text{Keine Aussage über absolute Konvergenz von } \sum_{n=0}^{\infty} a_n$ möglich
         \end{enumerate}
         \begin{proof}[Beweis (ii).]
@@ -1550,10 +1550,10 @@
             Wir haben
             \begin{align*}
                 \frac{1}{(n+1)!} \leq e-s_n \leq \frac{e-1}{(n+1)!} < \frac{2}{(n+1)!}
-            \intertext{Angenommen $e=\frac{p}{q}$~$p$,$q\in\naturalnumbers$. Wir nehmen $n=q$}
-            \impl \frac{1}{(q+1)!} &\leq \frac{p}{q} - s_q < \frac{2}{(q+1)!}\\
-            0 &< \frac{1}{q+1} \leq \frac{p}{q}\cdot q! - q!\cdot s_q < \frac{2}{q+1}\\
-            q!\cdot s_q &= q! \cdot \sum_{k=0}^{q} \frac{1}{k!}\in\naturalnumbers
+                \intertext{Angenommen $e=\frac{p}{q}$~$p$,$q\in\naturalnumbers$. Wir nehmen $n=q$}
+                \impl \frac{1}{(q+1)!} &\leq \frac{p}{q} - s_q < \frac{2}{(q+1)!}\\
+                0 &< \frac{1}{q+1} \leq \frac{p}{q}\cdot q! - q!\cdot s_q < \frac{2}{q+1}\\
+                q!\cdot s_q &= q! \cdot \sum_{k=0}^{q} \frac{1}{k!}\in\naturalnumbers
             \end{align*}
         \end{proof}
     \end{satz}
