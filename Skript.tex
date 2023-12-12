@@ -1497,6 +1497,8 @@
 
     \newpage
 
+    \renewcommand{\thepage}{(Noch in Bearbeitung)}
+
     \begin{beispiel}[Eulersche Zahl über Reihendarstellung]
         Die Reihe
         \begin{align*}
@@ -1509,7 +1511,7 @@
         \end{align*}
         Behauptung:
         \begin{align*}
-            \sum_{n=0}^{\infty} \frac{1}{n!} &= e\tag{Eulersche Zahl}
+            e'\definedas\sum_{n=0}^{\infty} \frac{1}{n!} &= e\tag{Eulersche Zahl}
         \end{align*}
         \begin{proof}
             Wir wenden die bereits gezeigt Formel für $e$ an:
@@ -1520,12 +1522,170 @@
                 &= \sum_{k=0}^{n} \frac{1}{k!} \cdot \prod_{j=0}^{k-1} \frac{n-j}{n}\\
                 &\leq \sum_{k=0}^{n} \frac{1}{k!} \leq \sum_{k=0}^{\infty} \frac{1}{k!}\\[10pt]
                 \impl e &\leq \sum_{n=0}^{\infty} \frac{1}{n!}
+                \intertext{Noch zu zeigen: $e'\leq e$}
+                \pair{1+\frac{1}{n}}^n &= \sum_{k=0}^{n} \frac{1}{k!} \cdot \prod_{j=0}^{k-1} 1-\frac{j}{n}\\
+                &\geq \sum_{k=0}^{m} \frac{1}{k!}\cdot \prod_{j=0}^{k-1} \pair{1-\frac{j}{n}}\tag{$\forall n>m$}\\
+                \intertext{Halte $m\in\naturalnumbers$ fest}
+                \impl e &= \lim_{\ntoinfty} \pair{1+\frac{1}{n}}^n \geq \lim_{\ntoinfty} \sum_{k=0}^{m} \frac{1}{k!}\cdot \prod_{j=0}^{k-1} \pair{1-\frac{j}{n}}\\
+                &= \sum_{k=0}^{m} \frac{1}{k!} \cdot \prod_{j=0}^{k-1} \lim_{\ntoinfty} \pair{1-\frac{j}{n}}
+                \intertext{Der Limes ist 1:}
+                &= \sum_{n=0}^{m} \frac{1}{k!}\tag{$\forall m\in\naturalnumbers$}\\
+                \impl e&\geq \lim_{\ntoinfty} \sum_{k=0}^{m} \frac{1}{k!} = \sum_{k=0}^{\infty} \frac{1}{k!} = e\\
+                \impl e &\leq e' \land e'\leq e\\
+                \impl e &= e'\qedhere
             \end{align*}
-            \begin{center}
-            [Der zweite Teil des Beweises wird in der nächsten Vorlesung behandelt.]
-            \end{center}
         \end{proof}
     \end{beispiel}
 
-    % \renewcommand{\thepage}{(Noch in Bearbeitung)}
+    \begin{bemerkung}
+        \begin{align*}
+            \sum_{n=0}^{\infty} \frac{x^n}{n!} &\definedasbackwards a_n\\
+            \frac{\abs{a_{n+1}}}{\abs{a_n}} &= \abs{\frac{x^{n+1}\cdot n!}{(n+1)!\cdot x^n}} = \frac{\abs{x}}{n+1}\fromto 0
+        \end{align*}
+    \end{bemerkung}
+
+    \begin{satz}[Lambert 1707] % Satz 7
+        $e$ ist irrational.
+        \begin{proof}
+            Wir haben
+            \begin{align*}
+                \frac{1}{(n+1)!} \leq e-s_n \leq \frac{e-1}{(n+1)!} < \frac{2}{(n+1)!}
+            \intertext{Angenommen $e=\frac{p}{q}$~$p$,$q\in\naturalnumbers$. Wir nehmen $n=q$}
+            \impl \frac{1}{(q+1)!} &\leq \frac{p}{q} - s_q < \frac{2}{(q+1)!}\\
+            0 &< \frac{1}{q+1} \leq \frac{p}{q}\cdot q! - q!\cdot s_q < \frac{2}{q+1}\\
+            q!\cdot s_q &= q! \cdot \sum_{k=0}^{q} \frac{1}{k!}\in\naturalnumbers
+            \end{align*}
+        \end{proof}
+    \end{satz}
+
+    \begin{beispiel}
+        \begin{align*}
+            s_n &\definedas \sum_{k=0}^{n} \frac{1}{k!}\\
+            r_{n,p} &\definedas \sum_{k=n+1}^{n+p} \frac{1}{k!}\\
+            r_{n,p} &= \sum_{k=n+1}^{n+p} \frac{1}{k!} = \frac{1}{(n+1)!} + \frac{1}{(n+2)!} + \dots + \frac{1}{(n+p)!}\\
+            &= \frac{1}{(n+1)!}\cdot\interv{1+\frac{1}{n+2}+\frac{1}{(n+2)\cdot(n+3)} + \dots + \frac{1}{(n+2)\cdot(n+3)\cdot\dots\cdot(n+p)}}\\
+            &> \frac{1}{(n+1)!}\\
+            &1+\frac{1}{n+2}+\frac{1}{(n+2)\cdot(n+3)} + \dots + \frac{1}{(n+2)\cdot(n+3)\cdot\dots\cdot(n+p)}\\
+            &< 1 + \frac{1}{2} + \frac{1}{2\cdot 3}+\dots + \frac{1}{2\cdot 3 \cdot\dots\cdot p}\\
+            &= \sum_{k=0}^{\infty} \frac{1}{k!} - 1 < ??? = e-1\\
+            \impl \frac{1}{(n+1)!} &< r_{n,p} < \frac{e-1}{(n+1)!}\\
+            \frac{1}{(n+1)!} &< s_{n+p} - s_{n} < \frac{e-1}{(n+1)!}\\
+            s_{n+p} - s_{n} &\fromto e - s_n
+        \end{align*}
+    \end{beispiel}
+
+    \begin{satz}[Wurzelkriterium]
+        \label{satz:wurzelkriterium} % Satz 8
+        Sei $(a_n)_n$ eine reelle Folge.
+        \begin{enumerate}
+            \item Ist $\limsup_{\ntoinfty} \sqrt[n]{\abs{a_n}} < 1$, dann konvergiert $\sum_{n=0}^{\infty} a_n$ absolut.
+            \item Ist $\limsup_{\ntoinfty} \sqrt[n]{\abs{a_n}} > 1$, dann ist $\sum_{n=0}^{\infty} a_n$ divergent.
+            \item Ist $\limsup_{\ntoinfty} \sqrt[n]{\abs{a_n}} = 1$, so ist keine Aussage möglich.
+        \end{enumerate}
+        \begin{proof}[Beweis (iii)]
+            \begin{align*}
+                a_n &= \frac{1}{n^p}\\
+                \sqrt[n]{\abs{a_n}} = \pair{\frac{1}{\sqrt[n]{n}}}^p \fromto \pair{\frac{1}{1}}^p = 1\tag{$n\fromto\infty$}\\
+                \sum_{n=1}^{\infty} \frac{1}{n^p}\text{ divergiert für $p=1$, konvergiert für $p>1$}
+                \impl \text{ keine Aussage möglich}
+            \end{align*}
+        \end{proof}
+        \begin{proof}[Beweis (i)]
+            Sei
+            \begin{align*}
+                \hat{q}&\definedas \limsup \sqrt[n]{\abs{a_n}} < 1
+                \intertext{Wähle $\varepsilon\definedas \frac{1-\hat{q}}{2} > 0$}
+                \impl \sqrt[n]{\abs{a_n}} < \hat{q} + \varepsilon = \frac{1+\hat{q}}{2}\text{für fast alle $n$}\\
+                \impl \exists n_{0}\in\naturalnumbers\colon \sqrt[n]{\abs{a_n}} \leq q\quad\forall n\geq n_0\\
+                \equivalent \abs{a_n} \leq q^n\quad\forall n\geq n_0\\
+                \intertext{Das heißt $\sum_{n=0}^{\infty} q^n$ ist konvergente Majorante für $\sum a_n$}
+                \impl \sum_{n=0}^{\infty} a_n\text{ ist absolut konvergent}
+            \end{align*}
+        \end{proof}
+        \begin{proof}[Beweis (ii)]
+            Sei
+            \begin{align*}
+                \hat{q}&\definedas \limsup \sqrt[n]{\abs{a_n}} > 1\\
+                \varepsilon &\definedas \frac{\hat{q}-1}{2}>0\\
+                q&\definedas \hat{q}-\varepsilon = \frac{1+\hat{q}}{2} > 1\\
+                \impl \sqrt[n]{\abs{a_n}} > \hat{q}-\varepsilon = q > 1\tag{für unendlich viele $n$}\\
+                \impl \abs{a_n} > q^n\tag{für unendlich viele $n$}
+                \impl (a_n)_n\text{ keine Nullfolge somit konvergiert $\sum a_n$ nicht}
+            \end{align*}
+        \end{proof}
+    \end{satz}
+
+    \newpage
+
+    \begin{definition}[Umordnung von Reihen] % Definition 9
+        Seien
+        \begin{align*}
+            \sum_{n=0}^{\infty} a_n\quad \sum_{n=0}^{\infty} b_n
+        \end{align*}
+        Reihen mit Gliedern $a_n, b_n\in\realnumbers$, $n\in\naturalnumbers_0$. Wir nennen $\sum_{n=0}^{\infty} b_n$ eine Umordnung von $\sum_{n=0}^{\infty} a_n$, falls eine Bijektion
+        \begin{align*}
+            \sigma: \naturalnumbers_0 \fromto \naturalnumbers_0
+        \end{align*}
+        existiert mit $b_n = a_{\sigma(n)}~\forall n\in\naturalnumbers_0$.\\
+        Ähnlich für Reihen
+        \begin{align*}
+            \sum_{n=1}^{\infty} a_n\quad \sum_{n=1}^{\infty} b_n
+        \end{align*}
+        $\sum_{n=1}^{\infty} b_n$ Umordnung von $\sum_{n=1}^{\infty} a_n$, falls Bijektion $\sigma: \naturalnumbers \fromto\naturalnumbers$ existiert mit $b_n = a_{\sigma(n)}$.
+    \end{definition}
+
+    \begin{definition}[Unbedingte Konvergenz] % Definition 10
+        Eine Reihe $\sum_{n=0}^{\infty} a_n$ heißt unbedingt konvergent, falls jede Umordnung $\sum_{n=0}^{\infty} b_n$ von dieser Reihe ebenfalls konvergiert und die selbe Summe hat.\\
+        Andernfalls heißt $\sum_{n=0}^{\infty} a_n$ bedingt konvergent.
+    \end{definition}
+
+    \begin{satz}[Direcklet 1837] % Satz 11
+        Eine Reihe $\sum_{n=0}^{\infty} a_n$, $a_n\in\realnumbers$ ist absolut konvergent genau dann, wenn sie unbedingt konvergiert.
+        \begin{proof}
+            \anf{$\impl$} Sei
+            \begin{align*}
+                \sum_{n=0}^{\infty} a_n\text{ absolut konvergent}\\
+                \impl \sum_{n=0}^{\infty} \abs{a_n}\text{ konvergent}\\
+                \equivalent \sum_{n=0}^{\infty} \abs{a_n} < \infty
+                \intertext{Wir wenden das Cauchy-Kriterium an}
+                \forall \varepsilon>0~\exists N\in\naturalnumbers\colon \sum_{j=n+1}^{n+p} \abs{a_j} < \varepsilon\quad\forall n\geq N, p\in\naturalnumbers\\
+                \impl \sum_{j=n+1}^{\infty}\abs{a_j} = \lim_{p\fromto\infty} \sum_{j=n+1}^{n+p} \abs{a_j} \leq \varepsilon\quad\forall n\geq N\tag{3}
+                \intertext{Wir definieren}
+                s_n \definedas \sum_{j=0}^{\infty} a_j\quad \sum_{n=0}^{\infty} b_n\text{ Umordnung von } s_n\\
+                b_n = a_{\sigma(n)}\quad \sigma: \naturalnumbers_0 \fromto\naturalnumbers_0\text{ Bijektion}\\
+                t_n \definedas \sum_{j=0}^{n} b_j
+                \intertext{Wir wissen $s_n\fromto s$. Zu zeigen: $t_n\fromto s$}
+                \set{1,2,\dots, N} \subseteq \set{\sigma(1), \sigma(2), \dots, \sigma(M)}\tag{Nehmen $M\in\naturalnumbers$}\\
+                \intertext{Ist dann $n\geq M$, dann ist}
+                \set{a_1, a_2, a_3, \dots, a_N}\subseteq \set{b_1, b_2, \dots b_M} = \set{a_{\sigma(1)}, a_{\sigma(2)}, \dots, a_{\sigma(M)}}\\
+                \impl\text{ Alle Glieder $a_1, \dots, a_n$ in der Summe $s_n$ treten in $t_n = t_1 + t_2 + \dots + t_n$ auf}\\
+                \impl\text{ Diese Terme heben sich in $s_n-t_n$ gegenseitig auf, sofern $n\geq M$ ist}\\
+                \impl \abs{s_n-t_n} \leq \sum_{j\geq N+1, j=\sigma{k}\text{ für ein }k\in\set{1,\dots, M}}^{} \abs{a_j}\\
+                \leq \sum_{j=??}^{\infty} \abs{a_j} \leq \varepsilon\\
+                \impl s_n - t_n \fromto 0\text{ für }\ntoinfty
+            \end{align*}
+            Da $(s_n)_n$ gegen $s$ konvergiert, konvergiert auch $(t_n)_n$ gegen $s$. Somit konvergiert $\sum_{n=0}^{\infty} b_n$ und hat die selbe Summe wie $\sum_{n=0}^{\infty} a_n$.\\[10pt]
+            \anf{$\Leftarrow$} Angenommen $\sum_{n=0}^{\infty} a_n$ ist unbedingt konvergent, aber nicht absolut konvergent.
+            \begin{align*}
+                p_n &\definedas (a_n)_{+} \definedas \max\pair{0, a_n}\\
+                q_n &\definedas (a_n)_{-} \definedas \max\pair{0,-a_n} = -\min\pair{0,a_n}\\
+                \impl \abs{a_n} &= p_n + q_n\quad\forall n\in\naturalnumbers_0\\
+                \intertext{Wir haben $\sum_{n=0}^{\infty} \abs{a_n}$ konvergiert, aber $\sum_{n=0}^{\infty} p_n = \infty$}
+            \end{align*}
+            Behauptung: $\sum_{n=0}^{\infty} p_n = \infty$ und $\sum_{n=0}^{\infty} q_n = \infty$. Angenommen $0\leq \sum_{n=0}^{\infty} p_n < \infty$.
+            \begin{align*}
+                \impl \sum_{n=0}^{\infty} \pair{p_n - a_n}\text{ konvergiert}\\
+                \impl \sum_{n=0}^{\infty} a_n < \infty
+                \intertext{Da $\abs{a_n} = p_n + q_n$}
+                \impl \sum_{n=0}^{\infty} \abs{a_n} = \sum_{n=0}^{\infty} \pair{p_n+q_n} = \sum_{n=0}^{\infty} p_n + \sum_{n=0}^{\infty} q_n < \infty\\
+                \text{Widerspruch zu } \sum_{n=0}^{\infty} b_n\text{ ist nicht absolut konvergent}
+            \end{align*}
+            Jetzt setze $r_0=0$ und bestimme induktiv $(r_n)_n~r_n < r_{n+1}$ mit $p_0 + p_1 + \dots + p_{r_n} > n + q_0 + q_1 + \dots + q_n~\forall n\in\naturalnumbers$.
+            $r_q\definedas$ kleinste natürliche Zahl mit $p_0 + p_q + \dots + p_{r_1} > 1 + q_? + q_1$.\\
+            $r_2\definedas$ kleinste natürliche Zahl $\geq r_1 + 1$: $p_0 + \dots + p_{r_2} > 2 + q_0 + q_1 + q_2$.\\
+            Machen induktiv weiter: Gegeben $r_n$ wähle $r_{n+1} =$ kleinste natürliche Zahl $\geq r_n + 1$ mit $p_0 + p_1 + \dots + p_{r_{n+1}} > n + q_0 + q_1 + \dots + q_n$.\\[10pt]
+            Umordnung $p_0 - q_0 + p_1 + \dots + p_{r_1} - q_1 + p_{r_{1+1}} + \dots + p_{r_2} - q_2 + p_{r_{2+1}} + \dots + p_{r_3} - q_3 + \dots$. Diese Umordnung divergiert gegen $+\infty$.
+        \end{proof}
+    \end{satz}
+
 \end{document}
