@@ -20,6 +20,8 @@
 \usepackage{colonequals}
 \usepackage{caption}
 \usepackage{tikz}
+\usepackage{marginnote}
+\usepackage{etoolbox}
 
 % Theorems
 \newtheorem{blockelement}{Blockelement}[subsection]
@@ -39,6 +41,12 @@
 \newtheorem{konzept}[blockelement]{Konzept}
 \newtheorem{visualisierung}[blockelement]{Visualisierung}
 \newtheorem{anwendung}[blockelement]{Anwendung}
+
+% Marginnotes left
+\makeatletter
+\patchcmd{\@mn@@@marginnote}{\begingroup}{\begingroup\@twosidefalse}{}{\fail}
+\reversemarginpar
+\makeatother
 
 % Paranthese
 \newcommand{\set}[1]{\left\{#1\right\}}
@@ -226,6 +234,7 @@
     \subsection{Eigenschaften von Folgen und Konvergenzen}
 
     \begin{definition}[Beschränktheit von Folgen]
+        \marginnote{[21. Nov]}
         Eine Folge $(a_n)_n$ heißt nach oben beschränkt, falls es ein $k\in\realnumbers$ gibt mit
         \begin{align*}
             \forall n\in \naturalnumbers\colon a_n \leq k\tag{$k$ ist obere Schranke für $(a_n)_n$}
@@ -438,6 +447,7 @@
     %%%%%%%%%%%%%%%%%%%%%%%%
 
     \begin{beispiel}
+        \marginnote{[23. Nov]}
         \theoremescape
         \begin{enumerate}
             \item % 1.
@@ -699,6 +709,7 @@
     %%%%%%%%%%%%%%%%%%%%%%%%
 
     \subsection{Größter und kleinster Häufungswert - Limes superior und Limes inferior}
+    \marginnote{[28. Nov]}
 
     Es sei $(a_n)_{n\in\naturalnumbers}$ eine beschränkte reelle Folge.
     \begin{align*}
@@ -917,12 +928,12 @@
         \label{lemma:cauchy-konv-teilfolge}
         Eine reelle Cauchy-Folge $a_n$ konvergiert genau dann, wenn sie eine konvergente Teilfolge hat.
 
-
         %%%%%%%%%%%%%%%%%%%%%%%%
         % 30. November 2023
         %%%%%%%%%%%%%%%%%%%%%%%%
 
         \begin{proof}
+            \marginnote{[30. Nov]}
             ~\\
             \anf{$\impl$}: Klar, weil nach Satz~\ref{satz:konv-teilfolgen-umordnungen} jede Teilfolge einer konvergenten Folge konvergiert.\\[10pt]
             \anf{$\Leftarrow$}: Sei $b_j$ eine Teilfolge von $a_n$ mit $b_j = a_{n_j}$ und $n_1 < n_2 < \dots < n_j < n_{j+1} < \dots$\\
@@ -1068,6 +1079,7 @@
         %%%%%%%%%%%%%%%%%%%%%%%%
 
         \begin{proof}[Beweis der Konvergenz für $\abs{q} < 1$]
+            \marginnote{[5. Dez]}
             \begin{align*}
                 s_n\definedas \sum_{j=0}^{n} q^j &= \frac{1-q^{n+1}}{1-q}\\
                 \lim_{n\fromto\infty} q^n &= 0 = \lim_{n\fromto\infty} q^{n+1}\tag{Weil $\abs{q} < 1$}\\
@@ -1270,6 +1282,7 @@
     %%%%%%%%%%%%%%%%%%%%%%%%
 
     \begin{definition}[Alternierende Reihe] % Definition 10
+        \marginnote{[7. Dez]}
         Sei $(a_n)_n$ eine reelle Folge nicht-negativer reeller Zahlen. Dann heißt
         \begin{align*}
             \sum_{n=1}^{\infty} (-1)^{n+1} \cdot a_n = a_1 - a_2 + a_3 - a_4 \dots
@@ -1540,6 +1553,7 @@
         %%%%%%%%%%%%%%%%%%%%%%%%
 
         \begin{bemerkung}[Ännäherung von $e$ über Reihen]
+            \marginnote{[12. Dez]}
             \begin{align*}
                 s_n &\definedas \sum_{k=0}^{n} \frac{1}{k!}\\
                 r_{n,p} &\definedas \sum_{k=n+1}^{n+p} \frac{1}{k!}\\
@@ -1720,6 +1734,7 @@
     %%%%%%%%%%%%%%%%%%%%%%%%
 
     \begin{satz}[Nach Riemann 1854]
+        \marginnote{[14. Dez]}
         Ist $\sum_n a_n$ konvergent, aber nicht absolut konvergent. Dann gibt es zu jedem $c\in\realnumbers$ eine Umordnung $\sum_{n}^{} b_n$ von $\sum_{n}^{} a_n$ so, dass $\sum_n b_n$ konvergiert und den Wert $c$ hat ($\sum_{n} b_n = c$).
 
         \begin{proof}
@@ -1919,7 +1934,9 @@
     % 19. Dezember 2023
     %%%%%%%%%%%%%%%%%%%%%%%%
 
+
     \begin{bemerkung}
+        \marginnote{[19. Dez]}
         2 Normen $\norm{\cdot}_a$ und $\norm{\cdot}_b$ sind äquivalent, falls
         \begin{align*}
             \exists c_1, c_2\colon c_1\cdot\norm{x}_a \leq \norm{x}_b \leq c_2 \norm{x}_a\quad\forall x\in V
