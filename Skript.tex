@@ -1731,112 +1731,183 @@
     \newpage
 
 
-    \section{$\realnumbers^d$ und Konvergenz von Folgen in $\realnumbers^d$}
+    \section{[*] $\realnumbers^d$, Konvergenz im $\realnumbers^d$, die komplexen Zahlen $\complexnumbers$ und der Raum $\complexnumbers^d$}
 
-    \subsection{Die komplexen Zahlen $\complexnumbers$ und der Raum $\complexnumbers^d$}
+    \subsection{[*] Normen und mehrdimensionale Konvergenz}
+
     \thispagestyle{pagenumberonly}
 
+    \begin{definition}
+        \begin{align*}
+            \realnumbers^d &\definedas\text{ Vektorraum der reellen d-Tupel}\\
+            &=\set{\pair{x_1, x_2, \dots, x_d} ~\middle|~ x_j\in\realnumbers,~ j=1,\dots,d }\\
+        \end{align*}
+    \end{definition}
+
+    \begin{notation}[Linearkombination von Vektoren]
+        Es sei
+        \begin{align*}
+            x&= \pair{x_1, \dots, x_d}\\
+            y&= \pair{y_1, \dots, y_d}
+            \intertext{und $\alpha, \beta \in \realnumbers$, dann gilt}
+            \alpha x + \beta y &\definedas \pair{\alpha x_1 + \beta y_1, \alpha x_2 + \beta y_2, \dots, \alpha x_d + \beta y_d}
+        \end{align*}
+    \end{notation}
+
+    \begin{notation}[Vektorschreibweise]
+        \begin{align*}
+            x = \begin{pmatrix}
+                    x_1 \\ \vdots \\ x_d
+            \end{pmatrix}
+        \end{align*}
+    \end{notation}
+
+    \begin{definition}[Euklidische Länge eines Vektors]
+        Für $d=2$ gilt für die euklidische Länge $\norm{x}$ eines Vektors $x\in\realnumbers^2$
+        \begin{align*}
+            \norm{x}^2 &= (x_1)^2 + (x_2)^2\\
+            \norm{x} &= \sqrt{(x_1)^2 + (x_2)^2}
+        \end{align*}
+        Allgemein gilt
+        \begin{align*}
+            \norm{x} &\definedas \sqrt{\pair{\sum_{j=1}^{d} (x_j) ^2}}\tag{$x\in\realnumbers^d$}
+            \intertext{Wir schreiben auch}
+            \norm{x}_2 &\definedas \sqrt{\pair{\sum_{j=1}^{d} (x_j) ^2}}\tag{$x\in\realnumbers^d$}
+        \end{align*}
+    \end{definition}
+
+    \begin{bemerkung}[Alternative Normen]
+        \begin{align*}
+            \norm{x}_1 &\definedas \sum_{j=1}^{d} \abs{x_d} \tag{Manhattan-Norm}\\
+            \norm{x}_{\infty} &\definedas \max_{1\leq j \leq d} \abs{x_j}\tag{Maximums-Norm}
+        \end{align*}
+    \end{bemerkung}
+
+    \begin{bemerkung}[Äquivalenz von Normen]
+        Wir zeigen, dass $\norm{\cdot}_{\infty}$ und $\norm{\cdot}_{2}$ äquivalent sind.
+    \end{bemerkung}
+
     \begin{align*}
-        \realnumbers^d &\definedas\text{ Vektorraum der reellen d-Tupel}\\
-        &=\set{\pair{x_1, x_2, \dots, x_d} \middle | x_j\in\realnumbers }\\
-        x&= \pair{x_1, \dots, x_d}\\
-        y&= \pair{y_1, \dots, y_d}\\
-        \alpha, \beta &\in \realnumbers\\
-        \alpha x + \beta y &\definedas \pair{\alpha x_1 + \beta y_1, \alpha x_2 + \beta y_2, \dots, \alpha x_d + \beta y_d}
-        \intertext{Für $d=2$}
-        \text{Euklidische Länge: }\abs{\abs{x}}^2 &= (x_1)^2 + (x_2)^2\\
-        \abs{\abs{x}} &= \sqrt{(x_1)^2 + (x_2)^2}\\
-        \intertext{Allgemein}
-        \abs{\abs{x}} &\definedas \sqrt{\pair{\sum_{j=1}^{d} x_j ^2}}\tag{Def. der Euklidischen Länge eines Vektors $x\in\realnumbers^d$}
-        \intertext{Wir schreiben auch}
-        \abs{\abs{x}}_2 &= \abs{\abs{x}} = \sqrt{\pair{\sum_{j=1}^{d} x_j ^2}}
-        \intertext{Alternativ}
-        \abs{\abs{x}}_1 &\definedas \sum_{j=1}^{d} \abs{x_d} \tag{Manhattan-Norm}\\
-        \abs{\abs{x}}_{\infty} &\definedas \max_{1\leq j \leq d} \abs{x_j}\tag{Maximumsnorm}\\
         \abs{}\cdot\abs{}_1, &\abs{}\cdot\abs{}_{\infty}, \abs{}\cdot\abs{}\text{ sind äquivalent}\\
-        \abs{x_k} &\leq \sqrt{\sum_{j=1}^{d} \abs{x_j}^2} = \abs{\abs{x}}_2\tag{$1\leq k \leq d$}\\
-        \impl \abs{\abs{x}}_{\infty} &= \max_{k=1,\dots, d} \abs{x_k} \leq \abs{\abs{x}}_2
+        \abs{x_k} &\leq \sqrt{\sum_{j=1}^{d} \abs{x_j}^2} = \norm{x}_2\tag{$1\leq k \leq d$}\\
+        \impl \norm{x}_{\infty} &= \max_{k=1,\dots, d} \abs{x_k} \leq \norm{x}_2
         \intertext{Umgekehrt}
-        \abs{\abs{x}}_2^2 &= \sum_{j=1}^{d} \abs{x_j}^2 \leq \sum_{j=1}^{d} \pair{\max_{k=1,\dots, d}\pair{\abs{x_k}}}^2 = d \cdot \abs{\abs{x}}_{\infty}^2\\
-        \abs{\abs{x}}_{\infty} &\leq \abs{\abs{x}}_2 \leq \sqrt {d}\cdot \abs{\abs{x}}_{\infty}\\
-        \impl \frac{1}{\sqrt{d}}\cdot \abs{\abs{x}}_2 &\leq \abs{\abs{x}}_2 \leq \abs{\abs{x}}_{\infty} \leq \abs{\abs{x}}_2\\
-        \intertext{Ähnlich mit $\abs{\abs{x}}_1$ und $\abs{\abs{x}}_\infty$}
+        \norm{x}_2^2 &= \sum_{j=1}^{d} \abs{x_j}^2 \leq \sum_{j=1}^{d} \pair{\max_{k=1,\dots, d}\pair{\abs{x_k}}}^2 = d \cdot \norm{x}_{\infty}^2\\
+        \norm{x}_{\infty} &\leq \norm{x}_2 \leq \sqrt {d}\cdot \norm{x}_{\infty}\\
+        \impl \frac{1}{\sqrt{d}}\cdot \norm{x}_2 &\leq \norm{x}_2 \leq \norm{x}_{\infty} \leq \norm{x}_2\\
+        \intertext{Ähnlich mit $\norm{x}_1$ und $\norm{x}_\infty$}
     \end{align*}
 
-    \begin{definition}[Abstand zwischen Vektoren im $\realnumbers^d$] % Definition 1
+    \newpage
+
+    \begin{definition}[Norm] % Definition 1
         Eine Norm auf $\realnumbers^d$ (oder einem reellen Vektorraum) ist eine Abbildung
         \begin{align*}
             \abs{\abs{.}}: \realnumbers^d\fromto \realnumbers
         \end{align*}
-        mit
+        mit folgenden Eigenschaften
         \begin{enumerate}[label=\alph*)]
-            \item $\abs{\abs{x}} \geq 0~\forall x\in\realnumbers^d$ und\\ $\abs{\abs{x}} = 0\impl x=0$
-            \item $\forall\lambda\in\realnumbers,~x\in\realnumbers^d\colon \abs{\abs{\lambda x}} = \abs{\lambda}\abs{\abs{x}}$
-            \item $\forall x,y\in\realnumbers^d\colon\abs{\abs{x+y}} \leq \abs{\abs{x}} + \abs{\abs{y}}$\aligntoright{(Dreiecksungleichung)}{0.15}
+            \item $\norm{x} \geq 0~\forall x\in\realnumbers^d$ sowie $\norm{x} = 0\impl x=0$
+            \item $\forall\lambda\in\realnumbers,~x\in\realnumbers^d\colon \abs{\abs{\lambda x}} = \abs{\lambda}\norm{x}$
+            \item $\forall x,y\in\realnumbers^d\colon\abs{\abs{x+y}} \leq \norm{x} + \abs{\abs{y}}$\quad\text{(Dreiecksungleichung)}
         \end{enumerate}
     \end{definition}
 
     \begin{bemerkung}
-        a), b) und c) sind für $\norm{.}_1, \norm{.}_{\infty}$ einfach zu zeigen. Außerdem ist a), b) einfach zu zeigen für $\norm{.}_2$, c) ist ??.\\
-        Zu jeder Norm auf $\realnumbers^d$ (oder reellen Vektorräumen) Abstand von 2 Vektoren $x,y\in\realnumbers^d$ defineren wir als $\norm{x-y}$ (Abstand von $x$ und $y$).
+        Dass a), b) und c) für $\norm{\cdot}_1$ und $\norm{\cdot}_{\infty}$ gelten, ist einfach zu zeigen. Außerdem sind a) und b) für $\norm{\cdot}_2$ einfach zu zeigen, c) ist tricky.
+    \end{bemerkung}
 
+    \begin{bemerkung}[Abstand zwischen 2 Vektoren im $\realnumbers^d$]
+        Zu jeder Norm auf $\realnumbers^d$ (oder reellen Vektorräumen) definieren wir den Abstand von 2 Vektoren $x,y\in\realnumbers^d$ als $\norm{x-y}$
         \begin{align*}
             d(x,y) &\definedas \norm{x-y}
-            \intertext{Mit $z$ als weiterem Vektor}
+            \intertext{Mit $z$ als weiterem Vektor gilt}
             \norm{x-y} &= \norm{x-z+z-y}\\
             &\leq \norm{x-y} + \norm{z-y}\\
-            \norm{x-y} &= \norm{-(y-x)} = \abs{-1\norm{y-x}} = \norm{y-x}
+            \norm{x-y} &= \norm{-(y-x)} = \abs{-1}\cdot \norm{y-x} = \norm{y-x}
         \end{align*}
     \end{bemerkung}
 
-    \begin{folgerung}
-        Bisher basierte unser Konvergenz-Begriff auf dem Abstand von $x_n$ zu $x$ kleiner als $\varepsilon$ für alle $n\geq N$.\\
-        Wir verallgemeinern das für eine offene Kugel in $\realnumbers^d$ und $x\in\realnumbers^d$
+    \begin{folgerung}[Mehrdimensionale $\varepsilon$-Umgebung]
+        Bisher basierte unser Konvergenz-Begriff auf dem Abstand von $(x_n)_n$ und $x$ und somit auf einer eindimensionalen $\varepsilon$-Umgebung.\\
+        Wir verallgemeinern dieses Konzept für eine offene Kugel im $\realnumbers^d$ mit $x\in\realnumbers^d$
         \begin{align*}
-            B_\varepsilon(x) &\definedas \set{x\in\realnumbers^d\middle | \norm{x-y}_2 < \varepsilon}\tag{Mehrdimensionale $\varepsilon$-Umgebung}\\
-            \norm{x-y}_2&=\sqrt{(x_1-y_1)^2 + (x_2 - y_2)^2} < \varepsilon\\
-            \abs{x_1-y_1}^2 + \abs{x_2-y_2}^2 &< \varepsilon^2
-            \intertext{In der Visualisierung erhalten wir einen offenen Ball um $x$ mit Radius $\varepsilon$}
+            B_\varepsilon(x) \definedas \set{y\in\realnumbers^d\middle |~ \norm{x-y}_2 < \varepsilon}
         \end{align*}
     \end{folgerung}
 
-    \begin{definition} % Definition 2
-        Sei $(x_n)_n$ eine Folge in $\realnumbers^d$, $x_n\in\realnumbers^d~\forall n$. $(x_n)_n$ konvergiert gegen $x\in\realnumbers^d$, falls
+    \begin{visualisierung}[Zweidimensionale $\varepsilon$-Umgebung]
+        Wir formen die Bedingung um
+        \begin{align*}
+            \norm{x-y}_2 &< \varepsilon\\
+            \impl \sqrt{(x_1-y_1)^2 + (x_2 - y_2)^2} &< \varepsilon\\
+            \impl \pair{x_1-y_1}^2 + \pair{x_2-y_2}^2 &< \varepsilon^2
+        \end{align*}
+        In der Visualisierung erhalten wir einen offenen Ball um $x$ mit Radius $\varepsilon$.
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \draw[->] (-3,0) -- (3,0);
+                \draw[->] (0,-3) -- (0,3);
+                \draw[->] (0,0) node {$\times$} -- (0.52, 0.52) node[below, pos=0.8] {$\varepsilon$};
+                \draw[->] (2,1) node {$\times$} -- (2, 1.75) node[right, pos=0.5] {$\varepsilon$};
+                \draw (0,0) circle (0.75cm);
+                \draw (-0.25, 0.35) -- (-1.5, 0.35) node[left] {$B_{\varepsilon}\pair{(0,0)}$};
+                \draw (2,1) circle (0.75cm);
+                \node at (-0.75,-0.75) {1.};
+                \node at (2.75,0.25) {2.};
+                \node at (3,-2) {\begin{tabular}{l}
+                                     1. $x=(0,0)$ \\ 2. $x=(x_1, x_2)$
+                \end{tabular}};
+            \end{tikzpicture}
+            \caption{Zweidimensionale $\varepsilon$-Umgebungen}
+        \end{figure}
+    \end{visualisierung}
+
+    \begin{definition}[Konvergenz im $\realnumbers^d$] % Definition 2
+        Sei $(x_n)_n$ eine Folge in $\realnumbers^d$ mit $x_n\in\realnumbers^d~\forall n$.\\
+        $(x_n)_n$ konvergiert gegen $x\in\realnumbers^d$, falls
         \begin{align*}
             \forall\varepsilon > 0~\exists N\in\naturalnumbers\colon& \norm{x_1-x}_2 <\varepsilon\quad\forall n\geq N
             \intertext{Das heißt}
-            \forall\varepsilon > 0~\exists N\in\naturalnumbers\colon& x_1\in B_{\varepsilon}(x)\quad\forall n\geq N
+            \forall\varepsilon > 0~\exists N\in\naturalnumbers\colon& x_n\in B_{\varepsilon}(x)\quad\forall n\geq N
         \end{align*}
     \end{definition}
 
-    \begin{beobachtung}
-        $\realnumbers^d\ni x = (x_n^1, x_n^2, \dots, x_n^d)$ (Koordinaten von $x_n$)\\
-        $\impl$ Folgen $(x_n^1)$, $(x_n^2)$, \dots, $(x_n^d)$ in $\realnumbers$\nn
-        Angenommen $x_n$ konvergiert gegen $x\in\realnumbers^d$. Dann konvergieren alle Folgen $(x_n^l)_n$ in $\realnumbers$ und $\lim_{\ntoinfty} x_n^l = x^l$
+    \begin{beobachtung}[Konvergenz in $\realnumbers$ vs $\realnumbers^d$]
+        Es sei ${x_n}\in\realnumbers^d$ mit $x_n = \pair{x_n^1, x_n^2, \dots, x_n^d}$\footnote{Koordinaten von $(x_n)_n$}.\\
+        Damit ergeben sich die Folgen $(x_n^1)_n$, $(x_n^2)_n$, \dots, $(x_n^d)_n$ in $\realnumbers$.
+        Angenommen $(x_n)_n$ konvergiert gegen $x\in\realnumbers^d$. Dann konvergieren alle Folgen $(x_n^l)_n$ in $\realnumbers$ und $\lim_{\ntoinfty} x_n^l = x^l$
 
         \begin{proof}
             \begin{align*}
                 \abs{x_n^{l} - x^{l}}^2 &\leq \sum_{j=1}^{d} \abs{x_n^{j}-x^{j}}^2 = \norm{x_n -x}_2^2\quad \forall l=1,\dots, d\\
                 \impl \abs{x_n^l-x^l} &\leq \norm{x_n-x}_2 \fromto 0\text{ für } n\fromto\infty
             \end{align*}
-            Also konvergiert $(x_n^l)$ gegen $x^l$ in $\realnumbers$.
+            Also konvergiert $(x_n^l)$ gegen $x^l$ in $\realnumbers$ für alle $l=1,\dots,d$.\qedhere\\
+            Es gilt sogar die Umkehrung.
         \end{proof}
-
-        Es gilt sogar die Umkehrung.
     \end{beobachtung}
-    \begin{satz}
-        Eine Folge $(x_n)_n$ in $\realnumbers^d$ konvergiert genau dann, wenn jede der Koordinatenfolge $(x_n^l)_n$ in $\realnumbers$ konvergiert $\forall l=1,\dots, d$
+
+    \begin{satz}[Konvergenz im $\realnumbers^d$]
+        Eine Folge $(x_n)_n$ in $\realnumbers^d$ konvergiert genau dann, wenn jede der Koordinatenfolge $(x_n^l)_n$ in $\realnumbers$ konvergiert $\forall l=1,\dots, d$.
 
         \begin{proof}
-            \anf{$\impl$} Gerade gezeigt\\
-            \anf{$\Leftarrow$} Angenommen $\forall l=1,\dots, d~\exists x^l \definedas \lim_{\ntoinfty} x^l_n$\\
-            Das heißt $\forall l=1,\dots, d\colon \abs{x_n^l - x^l} \fromto 0$ für $n\fromto\infty$.\\
-            Das heißt $\forall\varepsilon > 0~\exists N_l\in\naturalnumbers\colon \abs{x_n^l - x^l} < \frac{\varepsilon}{\sqrt{d}}\quad\forall n\geq N_{l}$
+            ~\\\anf{$\impl$} Gerade gezeigt.\\
+            \anf{$\Leftarrow$} Angenommen
             \begin{align*}
-                N&\definedas\max\pair{N_1, N_2, \dots, N_d}\\
+                \exists x^l &\definedas \lim_{\ntoinfty} x^l_n\quad\forall l=1,\dots, d\\
+                \impl \abs{x_n^l - x^l} &\fromto 0 \text{ für }\ntoinfty\quad\forall l=1,\dots, d\colon\\
+                \intertext{Das heißt}
+                \forall\varepsilon > 0~\exists N_l\in\naturalnumbers\colon \abs{x_n^l - x^l} &< \frac{\varepsilon}{\sqrt{d}}\quad\forall n\geq N_{l}
+                \intertext{Wir definieren}
+                N&\definedas\max\pair{N_1, N_2, \dots, N_d}
+                \intertext{Dann gilt $\forall n>N$}
                 \norm{x_n-x}^2_2 &= \sum_{j=1}^{d} \abs{x_n^j - x^j}^2 < \sum_{j=1}^{d} \pair{\frac{\varepsilon}{\sqrt{d}}}^2\\
-                &= d\cdot\frac{\varepsilon^2}{d} = \varepsilon^2\quad\forall n\geq N\\
-                \impl \norm{x_n-x}_2 < \varepsilon\quad\forall n\geq N\\
+                &= d\cdot\frac{\varepsilon^2}{d} = \varepsilon^2\\
+                \impl \norm{x_n-x}_2 &< \varepsilon\quad\forall n\geq N
+                \intertext{Wir definieren den Grenzwert}
                 x&\definedas (x^1, x^2, \dots, x^d)\quad x^j\definedas \lim_{\ntoinfty} x_n^j\qedhere
             \end{align*}
         \end{proof}
