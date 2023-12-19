@@ -1730,7 +1730,9 @@
 
     \newpage
 
+
     \section{$\realnumbers^d$ und Konvergenz von Folgen in $\realnumbers^d$}
+
     \subsection{Die komplexen Zahlen $\complexnumbers$ und der Raum $\complexnumbers^d$}
     \thispagestyle{pagenumberonly}
 
@@ -1840,7 +1842,141 @@
         \end{proof}
     \end{satz}
 
+    \newpage
 
+    %%%%%%%%%%%%%%%%%%%%%%%%
+    % 19. Dezember 2023
+    %%%%%%%%%%%%%%%%%%%%%%%%
 
+    \begin{bemerkung}
+        2 Normen $\norm{\cdot}_a$ und $\norm{\cdot}_b$ sind äquivalent, falls
+        \begin{align*}
+            \exists c_1, c_2\colon c_1\cdot\norm{x}_a \leq \norm{x}_b \leq c_2 \norm{x}_a\quad\forall x\in V
+        \end{align*}
+    \end{bemerkung}
+
+    \begin{bemerkung}
+        Sei $(a_n)_n\in\realnumbers^d$ mit $a_n = \pair{a_n^1, a_n^2, \dots, a_n^d}$. Reihe $\sum_{n=1}^{\infty} a_n = ??$. Wir betrachten die Partialsummen
+        \begin{align*}
+            s_n &\definedas \sum_{j=1}^{n} a_j
+        \end{align*}
+    \end{bemerkung}
+
+    \begin{definition}
+        $\sum_{n} a_n$ konvergiert, falls $(s_n)_n$ im $\realnumbers^d$ konvergiert
+    \end{definition}
+
+    \begin{satz}[Cauchy-Kriterium für Konvergenz im $\realnumbers^d$]
+        Eine Folge $(x_n)_n$ ist genau dann im $\realnumbers^d$ konvergent, wenn $(x_n)_n$ eine Cauchy-Folge ist. Das heißt
+        \begin{align*}
+            \forall\varepsilon > 0~\exists N\in\naturalnumbers\colon \norm{x_n-x_m}_2 < \varepsilon\quad\forall n,m\geq N
+        \end{align*}
+
+        \begin{proof}
+            \anf{$\impl$} Wie im Fall $\realnumbers$.\\
+            \anf{$\Leftarrow$} Sei $(x_n)_n$ Cauchy-Folge.
+            \begin{align*}
+                \impl\text{ Alle Koordinaten } &(x_n^j)_n\text{ sind Cauchy-Folgen in }\realnumbers\text{, weil}\\
+                \abs{x_n^j-x_m^j} &= \sqrt {\abs{x_n^j-x_m^j}^2} \leq \sqrt {\sum_{l=1}^{d} \abs{x_n^l - x_m^l}^2}\\
+                &= \norm{x_1-x_m}_2\\
+                \impl x_n &\definedas \lim_{\ntoinfty} x_n^j\text{ existiert}\\
+                \impl x &= \lim_{\ntoinfty} x_n\text{ existiert}\qedhere
+            \end{align*}
+        \end{proof}
+
+        \begin{proof}[2. Beweis]
+            Wir wollen Satz~\ref{satz:bolzano-weierstrass} im $\realnumbers^d$ zeigen:
+            Jede beschränkte Folge $(x_n)_n$ in $\realnumbers^d$ besitzt eine konvergente Teilfolge. ($(x_n)_n$ ist beschränkt, wenn $\exists R\geq 0\colon \norm{x_n}_2 \leq R~\forall n\in\naturalnumbers$ .Bzw., wenn $x_n\in\set{y\in\realnumbers^d \middle|~ \norm{y}_2 \leq R}$ (abgeschlossene Kugel mit Radius $R$ um 0).).\\
+            \begin{align*}
+                \impl \forall j=1,\dots, d\colon (x_n^j)_n\text{ beschränkte Folge im }\realnumbers^d\\
+                \impl \exists\text{ Teilfolge } (x_n^1)_k\text{ von } (x_n^1)_n\text{, welche in }\realnumbers\text{ konvergiert}\\
+                \impl \text{ Ausdünnung }\sigma: \naturalnumbers\fromto\naturalnumbers\text{ mit } \sigma(k) < \sigma(k+1)\\
+                n_k \definedas \sigma(k)\quad\text{Existenz des Grenzwert} x_1 \definedas \lim_{\ntoinfty} x_{\sigma(k)}
+                \intertext{Genauso für $\lim (x^2_n)_n$}
+                \annot{\impl}{\ref{satz:bolzano-weierstrass}} \exists \kappa: \naturalnumbers\fromto\naturalnumbers\colon (x^2_{\kappa(k)})_k\text{ konvergent}
+                \intertext{Catch: $(x^1_{\sigma(k)}, x^2_{\sigma(k)})_k$ ist im Allgemeinen keine Teilfolge von $(x^1_n, x^2_n)_n$. Lösung betrachte}
+                \pair{x_{\sigma(k)}}_k\text{ Teilfolge von }(x_n)_n\\
+                = \pair{x^1_{\sigma(k)}, x^2_{\sigma(k)}, x^3_{\sigma(k)}, \dots, x^d_{\sigma(k)}, }
+                \intertext{Mache mit $(x^2_{\sigma(k)})_k$ weiter}
+                \annot{\impl}{\ref{satz:bolzano-weierstrass}} \exists\text{ konvergente Teilfolge von } (x^2_{\sigma(k)})_k\\
+                \impl\text{ Ausdünnung } \sigma_2: \naturalnumbers\fromto\naturalnumbers\\
+                \impl \pair{x^2_{\sigma(\sigma_2(k))}}_k\text{ konvergent}\\
+                x_2 \definedas \sigma \circ \sigma_{2}\\
+                \impl\text{ Neue Teilfolge } (x_{\kappa_{2}(k)}) = (x^1_{\kappa_{2}(k)},x^2_{\kappa_{2}(k)},x^3_{\kappa_{2}(k)},\dots, x^d_{\kappa_{2}(k)})
+                \intertext{mit $\lim_{k\fromto\infty} x^1_{\kappa_{2}(k)}$ und $\lim_{k\fromto\infty} x^2_{\kappa_{2}(k)}$ existent}
+            \end{align*}
+            Mache induktiv so weiter, nach maximal $d$ Schritten sind wir fertig.\\
+            Jede Cauchy-Folge in $\realnumbers^d$ ist beschränkt.
+            \begin{proof}
+                \begin{align*}
+                    \varepsilon = 1\\
+                    \impl \exists N\colon\norm{x_n-x_m}_2 \leq 1\quad\forall n,m\geq N\\
+                    \impl \norm{x_n}_2 = \norm{x_n-x_N+x_N}_2 \leq \norm{x_n-x_N}_2 + \norm{x}_2\quad\forall n\geq N\\
+                    < 1 + \norm{x_n}\\
+                    \impl \norm{x}_2 \leq \max\pair{\norm{x_1}_2, \norm{x_2}_2,\dots\norm{x_{N-1}}_2, 1+\norm{x_N}_2}
+                \end{align*}
+            \end{proof}
+            Auch: Eine Cauchy-Folge im $\realnumbers^d$ ist genau dann konvergent, wenn sie eine konvergente Teilfolge besitzt. (Beweis wie im Fall $d=1$).\\
+            Alle bisherigen Konvergenz-Sätze, welche nicht die Anordnung im $\realnumbers$ benötigen, übertragen sich auf $\realnumbers^d$.\\
+            Insbesondere: Reihe $\sum_{n=1}^{\infty} a_n$ ist absolut konvergent, falls $\sum_{n=1}^{\infty} \norm{a_n}_2 < \infty$.\\
+            Ist eine Reihe $\sum_{n=1}^{\infty} a_n$ in $\realnumbers^d$ konvergent, so konvergieren alle Umordnungen gegen den selben Wert. Und es gilt die Umkehrung! (Satz von Direcklet in $\realnumbers^d$)
+        \end{proof}
+    \end{satz}
+
+    \subsection{[*] Die Komplexen Zahlen}
+
+    Was sind die komplexen Zahlen?\\
+    $x^2+1$ ist nie Null $\forall x\in\realnumbers$. Wir definieren eine Zahl $i$ mit $i^2=-1$.\\
+    Schreiben $x+iy$ mit $x,y\in\realnumbers$.
+    \begin{align*}
+    (x_1 + y_1\cdot i)
+        \cdot (x_2 + y_2\cdot i) &= x_1\cdot x_2 + x_1\cdot i\cdot y_2 + i\cdot y_1 \cdot x_2 + (i\cdot y_1)\cdot(i\cdot y_2)\\
+        &= x_1\cdot x_2 - y_1\cdot y_2 + \pair{x_1\cdot y_2 + y_1\cdot x_2}\cdot i\\
+        (x_1+y_1\cdot i) + (x_2 + y_2\cdot i) &= x_1 + x_2 + \pair{y_1+y_2}\cdot i
+    \end{align*}
+    Betrachte $\realnumbers^2 = \set{(x,y) \middle|~ x,y\in\realnumbers}$.
+    % Visualisierung: Eukldische Ebene
+    \begin{align*}
+        z &= (x,y)\\
+        z_1 + z_2 &\definedas (x_1, y_1) + (x_2,y_2)\\
+        &\definedas (x_1 + x_2, y_1 + y_2)
+        \intertext{Wir definieren eine \anf{seltsame} Multiplikation}
+        z_1 \cdot z_2 &\definedas (x_1, y_1)\cdot (x_2, y_2)\\
+        &= \definedas \pair{x_1 x_2 - y_1 y_2, x_1 y_2 + x_2 y_1}
+        \intertext{Wir definieren den Betrag}
+        \abs{z} &\definedas\text{ Länge des Vektors } (x,y) = \sqrt {x^2+y^2}\\
+        \intertext{Wir nennen}
+        x&= \text{ Realteil von } z\\
+        y&= \text{ Imaginärteil von } z\\
+    \end{align*}
+
+    Man rechnet einfach nach, dass Multiplikation und Addition Assoziativität, Kommutativität und Distributivität erfüllen.
+    \begin{align*}
+    (1,0)
+        \cdot (1,0) &= (1,0)\\
+        (0,1) \cdot (0,1) &= (0-1,0) = -(1,0)\\
+        z\cdot (1,0) &= (x,y)\cdot(1,0)= (x,y) = z
+        \intertext{in $\realnumbers^2$}
+        (x,y) &= x\cdot e_1 + y \cdot e_2\tag{$e_1 = (1,0)$, $e_2 = (0,1)$}\\
+        (e_1)^2 &= e_1\quad (e_2)^2 = -e_1
+    \end{align*}
+    Wir schreiben $1$ für $e_1$ und $i$ für $e_2$.
+    \begin{align*}
+        z &= (x,y) = x\cdot e_1 + y\cdot e_2\\
+        &= x\cdot 1 + y\cdot i\\
+        &= x + y\cdot i
+    \end{align*}
+    $\complexnumbers = \realnumbers^2$ mit obiger Multiplikaton und Addition. Wir identifizieren $\realnumbers$ mit $\realnumbers\times\set{0}$ als Teilmenge von $\complexnumbers$.\\
+    Was ist das Inverse von $z=x+y\cdot i$?
+    \begin{definition}[Komplexe Konjugation]
+        $\overline{z} \definedas \overline{x+yi} \definedas x-yi$
+    \end{definition}
+
+    \begin{align*}
+        z\cdot\overline{z} &= (x+yi) \cdot (x-yi)\\
+        &= (x^2-(yi)^2) = x^2+y^2 = \abs{z}^2\\
+        \impl \abs{z} &= \sqrt{z\cdot\overline{z}}\\
+        \frac{1}{z} &= \frac{\overline{z}}{z\cdot\overline{z}} = \frac{z}{\abs{z}^2} = \frac{x-yi}{x^2+y^2} = \frac{x}{x^2+y^2} - \frac{y}{x^2+y^2}\cdot i
+    \end{align*}
 
 \end{document}
