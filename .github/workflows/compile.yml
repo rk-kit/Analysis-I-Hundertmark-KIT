@@ -23,11 +23,11 @@ jobs:
            sudo apt-get install texlive-latex-base
            sudo apt-get install texlive-latex-extra --no-install-recommends
            sudo apt-get install texlive-lang-german
+           sudo apt-get install latexmk
 
       - name: Compile Skript.pdf
         run: |
-          pdflatex Skript.tex
-          pdflatex Skript.tex
+          latexmk Skript.tex -pdf
 
       - name: Commit Skript.pdf
         run: |

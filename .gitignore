@@ -11,3 +11,5 @@
 *.synctex(busy)
 *.auxlock
 *.tmp
+*.fls
+*.fdb_latexmk
