@@ -69,6 +69,7 @@
 \newcommand{\annot}[2]{\overset{\text{#2}}{#1}}
 \newcommand{\nn}[0]{\\[2\baselineskip]}
 \newcommand{\anf}[1]{\glqq{}#1\grqq}
+\newcommand{\sprod}[1]{\left<#1\right>}
 \newcommand{\OBDA}{o.B.d.A.}
 \newcommand{\theoremescape}{\leavevmode}
 \newcommand{\fromto}{\rightarrow{}}
@@ -2066,5 +2067,190 @@
         \impl \abs{z} &= \sqrt{z\cdot\overline{z}}\\
         \frac{1}{z} &= \frac{\overline{z}}{z\cdot\overline{z}} = \frac{z}{\abs{z}^2} = \frac{x-yi}{x^2+y^2} = \frac{x}{x^2+y^2} - \frac{y}{x^2+y^2}\cdot i
     \end{align*}
+
+    \newpage
+
+    %%%%%%%%%%%%%%%%%%%%%%%%
+    % 21. Dezember 2023
+    %%%%%%%%%%%%%%%%%%%%%%%%
+
+    \marginnote{[21. Dez]}
+
+    Wie $\realnumbers^d$ wollen wir auch $\complexnumbers^d$ definieren.
+
+    \begin{definition}[Der Raum $\complexnumbers^d$]
+        \begin{align*}
+            \complexnumbers^d &\definedas \set{\pair{z_1, \dots, z_d} ~\middle | ~ z_j \in\complexnumbers}\\
+            u &= \pair{u_1, \dots, u_d} \in\realnumbers^d\\
+            w &= \pair{w_1, \dots, w_d} \in\realnumbers^d\\
+            u+w &= \pair{u_1+w_1,\dots,u_d+w_d}\\
+            \lambda\cdot u &= \pair{\lambda u_1,\dots,\lambda u_d}\tag{$\lambda\in\complexnumbers$}
+        \end{align*}
+        $\complexnumbers^d$ ist ein komplexer Vektorraum.
+
+        \begin{align*}
+            \abs{u} &\definedas \sqrt{\pair{\sum_{j=1}^{d} \abs{u_j}^2}}\tag{Euklidische Länge}\\
+            u &= \pair{u_1, \dots, u_d}\\
+            &= \pair{x_1+y_1i, x_2 + y_2 i,\dots, x_d + y_d i}\\
+            &= \pair{x_1, x_2,\dots,x_d} + \pair{y_1,y_2,\dots,y_d}i\\
+            ???
+        \end{align*}
+    \end{definition}
+
+    \begin{definition}[]
+        \begin{align*}
+            \overline{u} &\definedas x - yi\quad (u=x+iy, x,y\in\realnumbers^d)\\
+            \complexnumbers^d &= \realnumbers^{2d}\\[10pt]
+            u &= x + yi\\
+            x &= \frac{1}{2}\pair{u+\overline{u}}\quad y = \frac{1}{2i}\pair{u-\overline{u}}
+        \end{align*}
+    \end{definition}
+
+    Zu ?? im $\realnumbers^d$
+    \begin{align*}
+        \norm{x}_2 &= \sqrt{\pair{\sum_{j=1}^{d} \abs{x_j}^2}} \geq c\\
+        \norm{\lambda x}_2 &= \sqrt{\pair{\sum_{j=1}^{d} \abs{\lambda x_j}^2}} = \abs{\lambda}\norm{x}_2
+    \end{align*}
+
+    Wann gilt die Dreiecksungleichung?\\
+    Auf $\realnumbers^d$ gibt es ein Skalarprodukt.\\
+    \begin{align*}
+        \sprod{x,y} &\definedas \sum_{j=1}^{d} x_j\cdot y_j\tag{$x,y\in\realnumbers^d$}\\
+        \impl <x,x> &\definedas \sum_{j=1}^{d} \pair{x_j}^2 = \norm{x}^2_2\\
+        \norm{x}_2 &= \sqrt {<x,x>}
+        \intertext{Auch}
+        \left<x_1+x_2,y\right> &= <x_1,y> + <x_2,y>\\
+        <x,y_1+y_2> &= <x,y_1> + <x,y_2>\\
+        <\alpha x,y> &= \alpha <x,y>\\
+        <x,\alpha y > &= \alpha <x,y>
+    \end{align*}
+
+    \begin{uebung}
+        Rechnen Sie die vorherigen Eigenschaften des Skalarprodukts nach.
+    \end{uebung}
+
+    \begin{align*}
+        \norm{x}_2^2 &= \sprod{x,x}\quad\forall x\in\realnumbers^d
+        \intertext{Es sei $t\in\realnumbers$}
+        \norm{x+ty}^2_2 &= \sprod{x+ty, x+ty}\\
+        &= \sprod{x,x+ty} + \sprod{ty,x+ty}\\
+        &= \sprod{x,x} + \sprod{x+ty} + \sprod{ty,x} + \sprod{ty+ty}\\
+        &= t\sprod{x,y}\\
+        &= \sprod{x,x} + 2t\sprod{x,y} + t^2\sprod{y,y}
+        \intertext{Genauso}
+        \norm{x-ty}_2^2 &= \sprod{x-ty, x-ty}\\
+        &= \sprod{x,x} - 2t\sprod{x,y} + t^2\sprod{y,y}\\
+        &= \norm{x}_2^2 t^2 - 2\sprod{x,y}t + \norm{x}_2^2
+        \intertext{Sei $y\neq 0$}
+        &= \norm{x}_2^2 \cdot\pair{t^2 - \frac{2\sprod{x,y}}{\norm{y}^2} + \pair{\frac{\sprod{x,y}}{\norm{y}^2}}^2 - \pair{\frac{\sprod{x,y}}{\norm{y}^2}}^2} + \norm{x}_2^2\\
+        \intertext{Wir erhalten im Sinne eines Polynoms $a = \norm{y}_2^2\quad b= \sprod{x,y}\quad c= \norm{x}_2^2$}
+        &= a\cdot\pair{t^2 - \frac{2b}{a}t + \pair{\frac{b}{a}}^2} + c\\
+        &= a\cdot\pair{t-b}^2 - \frac{b^2}{a}+c
+        \intertext{Da wir am Anfang der Rechnung eine Norm verwendet haben, muss der Ausdruck nicht-negativ sein}
+        a\cdot\pair{t-b}^2 - \frac{b^2}{a}+c &\geq 0\quad\forall t\in\realnumbers
+        \intertext{Das heißt wir müssen haben}
+        \frac{b^2}{a} + c &\geq 0\\
+        \equivalent b^2 \leq ac\\
+        \equivalent \sprod{x,y}^2 &\leq \norm{y}_2^2 \cdot\norm{x}_2^2\\
+        \equivalent \abs{\sprod{x,y}} &\leq \norm{y}_2 \norm{x}_2\tag{Cauchy-Schwarzer-Ungl.}
+    \end{align*}
+
+    Und ist $y \neq 0$ und gilt $\abs{\prod{x+y}} = \norm{x}_2 \norm{y}_2$. Dann sind $x$ und $y$ linear abhängig. Das heißt
+    \begin{align*}
+        \exists t\in\realnumbers \text{ mit } x = ty
+    \end{align*}
+    \begin{proof}
+        Dann gilt
+        \begin{align*}
+            b^2 &= ac\quad \frac{b^2}{a} ac = 0\\
+            \impl 0 &\leq \norm{x-ty}^2_2 = a\abs{t-b}^2\\
+            &= 0 \text{ für $t=b$ }\\
+            \impl \norm{x-ty}_2 &= 0 \text{ für } t=b\\
+            \impl x-ty &= 0\\
+            \impl x&= ty\qedhere
+        \end{align*}
+    \end{proof}
+    Erkentnis: Aus Cauchy-Schwarzer folgt die Dreiecksungleichung für die Euklidische Norm.
+
+    \begin{align*}
+        \norm{x+y}_2^2 &= \sprod{x+y,x+y}\\
+        &= \sprod{x,x+y}+ \sprod{y,x+y}\\
+        &= \sprod{x,x} + 2 \sprod{x,y} + \sprod{y,y}\\
+        &= \norm{x}_2^2 + 2\sprod{x,y} + \norm{y}_2^2\\
+        &\leq \norm{x}_2^2 + 2\abs{\sprod{x,y}} + \norm{y}_2^2\\
+        &\leq \norm{x}_2^2 + 2\norm{x}_2 \norm{y}_2 + \norm{y}^2\\
+        &= \pair{\norm{x}_2 + \norm{y}_2}^2\\
+        \impl \norm{x+y}_2 &\leq \norm{x}_2 + \norm{y}_2\tag{Dreiecksungleichung für Eukl. Norm}
+    \end{align*}
+
+    \noindent Frage: Was passiert, wenn $\norm{x+y}_2 = \norm{x}_2 + \norm{y}_2$?\\
+    (Später)
+
+    \newpage
+
+    \section{Polynome}
+    \subsection{Reelle Polynome}
+
+    Es sei $a_0,a_1, \dots, a_n\in\realnumbers$,~$a_n \neq 0, x\in\realnumbers$. Dann ist
+    \begin{align*}
+        P(x) &\definedas a_0 + a_1 \cdot x + a_2 \cdot x^2 + \dots + a_n \cdot x^n
+    \end{align*}
+    ein reelles Polynom vom Grad $n$ mit $Grad(P) = n$.
+
+    \begin{definition}[Nullpolynom]
+        $P(x) = 0$ ist das Nullpolynom. $P$ ist nicht-trivial, wenn es nicht das Nullpolynom ist.
+    \end{definition}
+
+    Ähnlich: analytische Polynome.
+    \begin{align*}
+        a_0, a_1, \dots, a_n \in\complexnumbers\quad z\in\complexnumbers\\
+        P(z) &\definedas a_0 + a_1 z + a_2 z^2 + \dots + a_n z^n
+        \intertext{ist $a_n \neq 0$}
+        Grad(P) &= n
+    \end{align*}
+    \begin{definition}[Grad von speziellen Polynomen]
+        Wir definieren den Grad von konstanten Polynomen $P(x) = a_0$ als 0 und Grad(Nullpolynom) = $-1$.
+    \end{definition}
+
+    \begin{satz}
+        \theoremescape
+        \begin{enumerate}[label=(\roman*)]
+            \item Seien $P, Q$ nicht-triviale Polynome mit $Grad(P) = n$ und $Grad(Q)=m$
+            \begin{align*}
+                \impl PQ \text{ Polynom mit } Grad(PQ) = n+m
+            \end{align*}
+            \begin{proof}
+                \begin{align*}
+                    P(x) &= \sum_{j=0}^{n} a_j x^j\\
+                    Q(X) &= \sum_{j=0}^{n} b_j x^j\\
+                    P(x) \cdot Q(x) &= \pair{\sum_{j=0}^{n} a_j x^j}\cdot \pair{\sum_{j=0}^{n} b_j x^j}\\
+                    &= \sum_{j=0}^{n} \sum_{l=0}^{n} a_{j} b_l x^{j+l}
+                    \intertext{Wir setzen $k= j+l\in\set{0,1,\dots,n+m}$}
+                    &= \sum_{k=0}^{n+m} \pair{\sum_{j=0}^{n} a_j b_{k-j}} x^k\\
+                    P(x) \cdot Q(x) &= \sum_{k=0}^{n+m} \cdot\pair{\sum_{j=0, 0\leq k-j\leq m}^{n} a_j b_{k-j}} x^k\\
+                    &= a_n b_m x^{n+m} + \text{ Terme niedriger Ordnung } (x^3\quad k< n+m)\\
+                \end{align*}
+            \end{proof}
+            \item ??? von einem anderen Punkt
+            Schreiben $x = \eta + \rho$
+            \begin{align*}
+                P(x) &= \sum_{j=0}^{n} a_j x^0\\
+                &= \sum_{j=0}^{n} a_j \cdot\pair{\eta + \rho}^j\\
+                &= \sum_{l=0}^{j} \binom{?}{?} \eta^l + \rho^{j-l}\\
+                ???\\
+                P(X) &= \sum_{j=0}^{n} \alpha_j \cdot \sum_{l\geq 0}^{} \binom{j}{l} \eta^l + \rho^{j-l}\\
+                &= \sum_{l\geq0}^{} \pair{\sum_{j=0}^{n} a_j \binom{j}{l}\zeta^{j-l}}\eta^l\\
+                &= \sum_{l=0}^{n} \pair{\sum_{j=0}^{n} \binom{j}{l}a_j \cdot \zeta ^{j-l}}\cdot\pair{x-\zeta}^2\\
+                &= \sum_{l=0}^{n} b_l \cdot\pair{x-\zeta}^l
+                \intertext{$l=0$. Dann}
+                b_j &= \sum_{j=0}^{n} \binom{j}{a} a_j \zeta^j\\
+                &= \sum_{j=0}^{n} a_j \zeta^j&= P(\zeta)\\
+                \impl P(x) &= P(\zeta) + \sum_{l=1}^{n} b_l \cdot\pair{x-\zeta}^l\\
+                &= P(\zeta) + (x-\zeta) \cdot\pair{\sum_{l=0}^{n-1} b_{l+1}(x-\zeta)}^2\\
+                ????
+            \end{align*}
+        \end{enumerate}
+    \end{satz}
+
 
 \end{document}
