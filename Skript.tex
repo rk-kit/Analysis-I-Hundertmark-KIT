@@ -2116,13 +2116,13 @@
     Auf $\realnumbers^d$ gibt es ein Skalarprodukt.\\
     \begin{align*}
         \sprod{x,y} &\definedas \sum_{j=1}^{d} x_j\cdot y_j\tag{$x,y\in\realnumbers^d$}\\
-        \impl <x,x> &\definedas \sum_{j=1}^{d} \pair{x_j}^2 = \norm{x}^2_2\\
-        \norm{x}_2 &= \sqrt {<x,x>}
+        \impl \sprod{x,x} &\definedas \sum_{j=1}^{d} \pair{x_j}^2 = \norm{x}^2_2\\
+        \norm{x}_2 &= \sqrt {\sprod{x,x}}
         \intertext{Auch}
-        \left<x_1+x_2,y\right> &= <x_1,y> + <x_2,y>\\
-        <x,y_1+y_2> &= <x,y_1> + <x,y_2>\\
-        <\alpha x,y> &= \alpha <x,y>\\
-        <x,\alpha y > &= \alpha <x,y>
+        \sprod{x_1+x_2,y} &= \sprod{x_1,y} + \sprod{x_2,y}\\
+        \sprod{x,y_1+y_2} &= \sprod{x,y_1} + \sprod{x,y_2}\\
+        \sprod{\alpha x,y} &= \alpha \sprod{x,y}\\
+        \sprod{x,\alpha y} &= \alpha \sprod{x,y}
     \end{align*}
 
     \begin{uebung}
