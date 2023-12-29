@@ -22,6 +22,8 @@
 \usepackage{tikz}
 \usepackage{marginnote}
 \usepackage{etoolbox}
+\usepackage{mdframed}
+\usepackage{aligned-overset}
 
 % Theorems
 \newtheorem{blockelement}{Blockelement}[subsection]
@@ -48,6 +50,9 @@
 \reversemarginpar
 \makeatother
 
+% Long equations
+\allowdisplaybreaks
+
 % Paranthese
 \newcommand{\set}[1]{\left\{#1\right\}}
 \newcommand{\pair}[1]{\left(#1\right)}
@@ -66,7 +71,7 @@
 \newcommand{\infinity}[0]{\infty}
 \newcommand{\exclude}[0]{\setminus}
 \renewcommand{\emptyset}{\varnothing}
-\newcommand{\annot}[2]{\overset{\text{#2}}{#1}}
+\newcommand{\annot}[3][]{\overset{\text{#3}}#1{#2}}
 \newcommand{\nn}[0]{\\[2\baselineskip]}
 \newcommand{\anf}[1]{\glqq{}#1\grqq}
 \newcommand{\sprod}[1]{\left<#1\right>}
@@ -251,25 +256,26 @@
         \label{satz:konv-folg-beschr}
         Jede konvergente Folge $(a_n)_{n\in\naturalnumbers}$ ist beschränkt.
         \begin{proof}
-            Sei $a$ der Grenzwert von $(a_n)_n$\quad $\pair{\lim_{n\fromto\infty} a_n = a}$.\\
-            Das heißt für $\varepsilon = 1 \impl \exists N\in\naturalnumbers\colon \abs{a_n-a} < 1\quad\forall n\geq N$\\
-            $\abs{a_n} = \abs{a_n-a+a} \leq \underbrace{\abs{a_n-a}}_{<1} + \abs{a} < 1+\abs{a} \quad \forall n\geq N$\\
-            Setze $k\definedas \max\pair{\abs{a_1}, \abs{a_2}, \dots, \abs{a_{N-1}}, 1+\abs{a}} \geq 0$\\
-            $\impl \abs{a_n} \leq k \quad\forall n\in\naturalnumbers$\qedhere
+            Sei $a$ der Grenzwert von $(a_n)_n$~$\pair{\lim_{n\fromto\infty} a_n = a}$. Das heißt für $\varepsilon = 1$
+            \begin{align*}
+                \impl \exists N\in\naturalnumbers\colon \abs{a_n-a} &< 1\quad &\forall n\geq N\\[8pt]
+                \abs{a_n} = \abs{a_n-a+a} \leq \abs{a_n-a} + \abs{a} &< 1+\abs{a} \quad &\forall n\geq N
+                \intertext{Setze $k\definedas \max\pair{\abs{a_1}, \abs{a_2}, \dots, \abs{a_{N-1}}, 1+\abs{a}} \geq 0$}
+                \impl \abs{a_n} &\leq k \quad&\forall n\in\naturalnumbers &\qedhere
+            \end{align*}
         \end{proof}
     \end{satz}
 
-    \begin{satz}[Eindeutigkeit des Grenzwerts]
-        Der Grenzwert einer konvergenten Folge $(a_n)_n$ ist eindeutig.
+    \begin{satz}[Eindeutigkeit des Limes]
+        Der Limes einer konvergenten Folge $(a_n)_n$ ist eindeutig.
         \begin{proof}
-            Annahme: $a_n\fromto a$ und $a_n\fromto b$ mit  $a\neq b$. Dann gilt \OBDA, dass $a<b$.\\
-            Wir setzen $\varepsilon = \frac{b-a}{2} > 0$.
+            Annahme: $a_n\fromto a$ und $a_n\fromto b$ mit  $a\neq b$. Dann gilt \OBDA, dass $a<b$. Setzen $\varepsilon = \frac{b-a}{2} > 0$.
             \begin{align*}
                 \impl &\exists N_1 \in\naturalnumbers: \abs{a_n-a} < \varepsilon \quad \forall n\geq N_1\\
                 \impl &\exists N_2 \in\naturalnumbers: \abs{a_n-b} < \varepsilon \quad \forall n\geq N_2\\[10pt]
                 &N\definedas \max\pair{N_1, N_2}\\
                 \impl &\forall n\geq N\colon a_n < a+\varepsilon = a + \frac{b-a}{2} = \frac{b+a}{2} = b-\varepsilon\\
-                &\forall n\geq N: a_n > b-\varepsilon = \frac{b+a}{2}\\[10pt]
+                &\forall n\geq N: a_n > b-\varepsilon = \frac{b+a}{2}\\
                 \impl &a_n <\frac{b+a}{2} < a_n \quad \forall n\geq N\qquad\text{ (Widerspruch)}\qedhere
             \end{align*}
         \end{proof}
@@ -381,7 +387,7 @@
         \end{proof}
     \end{satz}
 
-    \subsection{[*] Monotone Konvergenz}
+    \subsection{Monotone Konvergenz}
 
     Wir sind bisher immer davon ausgegangen, dass wir den Grenzwert einer Folge bereits kennen. Das folgende Unterkapitel beschäftigt sich damit, die Konvergenz einer Folge nachzuweisen, wenn deren Grenzwert nicht bekannt ist.
 
@@ -408,14 +414,15 @@
         ~\label{lemma:hilf-monoton-konv}
         Jede nach oben (bzw. unten) beschränkte Folge besitzt eine kleinste obere (bzw. größte untere) Schranke.
         \begin{proof}
-            Sei $(a_n)_n$ nach oben beschränkt und $S\definedas\set{c\in\realnumbers|~a_n \leq c~\forall n} \neq \emptyset\footnote{Folgt aus der Beschränktheit}.$\\
-            Dann ist $S$ nach unten beschränkt, da $a_1 \leq c\quad\forall c\in S$\\
-            $\impl a\definedas \inf S$ existiert\\[10pt]
-            Behauptung: $a$ ist obere Schranke für $(a_n)_n$, das heißt $a\in S$.\\[10pt]
-            Angenommen $a\notin S$ ($a$ ist keine obere Schranke)\\
-            $\impl \exists n_0 \in\naturalnumbers\colon a_{n_0} > a$.\\
-            Wir setzen $\varepsilon\definedas a_{n_0} - a > 0$. Und $\exists c\in S\colon c < a + \varepsilon = a + a_{n_0} - a = a_{n_0}$. Widerspruch zu $c\in S$.\\[10pt]
-            Das heißt $a$ ist obere Schranke für $(a_n)_n$.
+            Sei $(a_n)_n$ nach oben beschränkt und $S\definedas\set{c\in\realnumbers|~a_n \leq c~\forall n} \neq \emptyset\footnote{Folgt aus der Beschränktheit}.$ Dann ist $S$ nach unten beschränkt, da $\forall c\in S\colon a_1 \leq c$.
+            \begin{align*}
+                &\impl a\definedas \inf S \text{ existiert}
+                \intertext{Behauptung: $a$ ist obere Schranke für $(a_n)_n$, das heißt $a\in S$. Annahme: $a\notin S$ ($a$ ist keine obere Schranke)}
+                &\impl \exists n_0 \in\naturalnumbers\colon a_{n_0} > a
+                \intertext{Wir setzen $\varepsilon\definedas a_{n_0} - a > 0$}
+                &\impl \exists c\in S\colon c < a + \varepsilon = a + a_{n_0} - a = a_{n_0}
+            \end{align*}
+            Widerspruch zu $c\in S$. Das heißt $a$ ist obere Schranke für $(a_n)_n$.
         \end{proof}
     \end{lemma}
 
@@ -434,11 +441,13 @@
     \end{proof}
 
     \begin{proof}[Alternativer Beweis]
-        \footnote{Dieser Beweis bezieht sich laut Vorlesung auf Lemma 14, welches allerdings nicht existiert. Gemeint ist vermutlich Satz 14 (hier Satz~\ref{satz:monoton-konv}) oder Lemma 15 (hier Lemma~\ref{lemma:hilf-monoton-konv})}
+        \footnote{Dieser Beweis bezieht sich laut Vorlesung auf Lemma 14, welches allerdings nicht existiert. Gemeint ist vermutlich Lemma 15 (hier Lemma~\ref{lemma:hilf-monoton-konv})}
         ~\\
-        Sei $(a_n)_n$ eine Folge mit $a_n = f(a), f:\naturalnumbers\fromto\realnumbers$\\
-        $Bild(f) = f(\naturalnumbers)$ nach oben beschränkt\\
-        $a\definedas\sup\pair{f\pair{\naturalnumbers}}\geq a_n \quad\forall n\in\naturalnumbers$
+        Sei $(a_n)_n$ eine Folge mit $a_n = f(a),~f:\naturalnumbers\fromto\realnumbers$
+        \begin{align*}
+            \impl Bild(f) &= f(\naturalnumbers) \text{ nach oben beschränkt }\\
+            \impl a&\definedas\sup\pair{f\pair{\naturalnumbers}}\geq a_n \quad\forall n\in\naturalnumbers\qedhere
+        \end{align*}
     \end{proof}
 
     \newpage
@@ -447,154 +456,226 @@
     % 23. November 2023
     %%%%%%%%%%%%%%%%%%%%%%%%
 
-    \begin{beispiel}
+    \begin{beispiel}[Berechnen von $\sqrt {c}$ für $c>0$]
         \marginnote{[23. Nov]}
-        \theoremescape
-        \begin{enumerate}
-            \item % 1.
-            Berechnen von $\sqrt {c}$ für $c>0$.
+        \begin{align*}
+            x^2 = c &\equivalent x = \frac{c}{x}\tag{$x >0$}\\
+            &\equivalent x=\frac{1}{2}\pair{x+\frac{c}{x}}
+        \end{align*}
+        Folge $x_n$. Wählen $x_0 > 0$. Für $n\in\naturalnumbers$ sei $x_n=\frac{1}{2}\pair{x_{n-1}+\frac{c}{x_{n-1}}}$\\
+        Behauptung 1: $x_n \geq \sqrt{c}\quad\forall n\in\naturalnumbers$
+        \begin{proof}
             \begin{align*}
-                x^2 = c &\equivalent x = \frac{c}{x}\qquad x >0\\
-                &\equivalent x=\frac{1}{2}\pair{x+\frac{c}{x}}
+                x_1 &= \frac{1}{2}\pair{x_0+\frac{c}{x_0}}
             \end{align*}
-            Folge $x_n$: Wählen $x_0 > 0$. Für $n\in\naturalnumbers$ sei $x_n=\frac{1}{2}\pair{x_{n-1}+\frac{c}{x_{n-1}}}$\\
-            Behauptung 1: $x_n \geq \sqrt{c}\quad\forall n\in\naturalnumbers$\\
-            Bew.:
-            \begin{align*}
-                x_1 &= \frac{1}{2}\pair{x_0+\frac{c}{x_0}}\\
-                \intertext{haben AGM\footnotemark: $\forall a,b\geq 0\colon ab\leq \pair{\frac{a+b}{2}}^2$}
-                0 &\leq x^2-2xy+y^2 \equivalent xy \leq \frac{x^2+y^2}{2}
-                \intertext{Setzen $x=\sqrt{a}$ und $y=\sqrt{b}$, $\sqrt{ab} \leq\frac{ab}{2}$}
-                (x_1)^2 \geq \frac{1}{2}\pair{x_0-\frac{c}{x_0}}^2 \geq x_0\cdot\frac{c}{x_0} = c\\
-                x_1 &\geq \sqrt{c}\\
-                \intertext{Falls }
-            \end{align*}
-            \footnotetext{Arithmetisch-geometrisches Mittel}
-            Behauptung 2: $(x_n)_n$ ist monoton fallend.\\
-            \textit{Beweis}
-            \begin{align*}
-                x_{n+1} &= \frac{1}{2}\pair{x_n+\frac{c}{x_n}}
-                \intertext{haben für $n\geq 1$: $(x_n)^2 = \pair{\frac{1}{2}\pair{x_{n+1} + \frac{c}{x_{n+1}}}}^2 \geq c$}\\
-                \impl x_n &\geq \frac{c}{x_n}\\
-                \impl x_{n+1} &\geq \frac{1}{2}\pair{x_n+\frac{c}{x_n}}\leq \frac{1}{2}\pair{x_n+x_n} = x_n
-            \end{align*}
-            Nach dem Satz der monotonen Konvergenz ist $x\definedas\lim_{n\fromto\infty} x_n$ entspricht?? $\geq\sqrt {c}$\\
-            $=\lim_{n\fromto\infty} x_{n+1}$
-            \begin{align*}
-                x &= \lim x_n = \lim \frac{1}{2}\pair{x_{n+1} + \frac{c}{x_{n+1}}} = \frac{1}{2}\pair{x+\frac{c}{x}}\\
-                \equivalent x &= \sqrt {c}
-            \end{align*}
+            \begin{mdframed}
+                Einschub: Arithmetisch-geometrisches Mittel (AGM)
+                \begin{align*}
+                    0 \leq (x-y)^2 &= x^2-2xy+y^2 \equivalent xy \leq \frac{x^2+y^2}{2}
+                    \intertext{Wir setzen $x=\sqrt{a}$ und $y=\sqrt{b}$}
+                    \impl \forall a,b \geq 0\colon \sqrt {ab} &\leq \frac{a+b}{2}
+                \end{align*}
+            \end{mdframed}
 
-            \item % 2.
-            $x_n = \frac{1}{n}\fromto 0$
             \begin{align*}
-                \abs{\frac{1}{n}-0} &= \frac{1}{n}
-                \intertext{geg. $\varepsilon > 0$ nach $n\in\naturalnumbers$, $N>\frac{1}{\varepsilon} \equivalent \varepsilon > \frac{1}{N}$}
-                \impl \forall n\geq N\colon \abs{\frac{1}{n}-0} = \frac{1}{n} \leq \frac{1}{N}< \varepsilon
+            (x_1)
+                ^2 &= \pair{\frac{1}{2}\pair{x_0+\frac{c}{x_0}}}^2 \annot{\geq}{AGM} x_0\cdot\frac{c}{x_0} = c\\
+                \impl x_1 &\geq \sqrt{c}\\
+                \intertext{Zu zeigen: Falls $x_n \geq 0\impl x_{n+1}\geq \sqrt{c}$}
+                \pair{x_{n+1}}^2 &= \pair{\frac{1}{2}\pair{x_n + \frac{c}{x_n}}}^2 \annot{\geq}{AGM} x_n \cdot \frac{c}{x_n} = c\qedhere
             \end{align*}
-            Ähnlich funktioniert $x_n = \frac{1}{\sqrt {c}}$
-            \item % 3.
+        \end{proof}
+        \vspace{0.5cm}
+
+        \noindent Behauptung 2: $(x_n)_n$ ist monoton fallend.
+        \begin{proof}
             \begin{align*}
-                x_n&\definedas \frac{1+2+3+\dots+n}{n^2} \fromto \frac{1}{2}\text{ für }n\fromto\infty
-                \intertext{Mit Gaußscher Summenformel ($1+2+3+\dots+n = \frac{n\cdot(n+1)}{2}$)}
-                \impl x_n &= \frac{\frac{n\cdot(n+1)}{2}}{n^2} = \frac{n^2+n}{2n^2} = \frac{1+\frac{1}{n}}{2} \fromto \frac{1}{2}
+                x_{n+1} &= \frac{1}{2}\pair{x_n+\frac{c}{x_n}}\\
+                (x_n)^2 &= \pair{\frac{1}{2}\pair{x_{n+1} + \frac{c}{x_{n+1}}}}^2 \geq c\tag{$n\geq 1$}\\
+                \impl x_n &\geq \frac{c}{x_n}\\
+                \impl x_{n+1} &= \frac{1}{2}\pair{x_n+\frac{c}{x_n}}\leq \frac{1}{2}\pair{x_n+x_n} = x_n\qedhere
             \end{align*}
-            \item % 4.
-            Sei $0\leq q< 1$. $x_n \definedas q^n \fromto 0$\\
-            Bew: Ist $q=0\impl x_n = 0^n = 0 \fromto 0$.\\
-            Also sei $0<q<1 \impl \frac{1}{q}> 1$\\
-            $h\definedas\frac{1}{q}-1>0\quad \frac{1}{q}= 1 + h$, $q=\frac{1}{1+h}$\\
-            $\impl x_n = q^n \leq \pair{\frac{1}{1+h}}^n = \frac{1}{\pair{1+h}}^n$\\
-            Nach Bernoulli: $\pair{1+h}^n\geq 1+nh$\\
-            $\impl q^n = \frac{1}{()}$
-            \item Sei $-1<q<1\impl x_n \definedas q^n \fromto 0$. (Übung)
-            \item Sei $a>0$, $x_n\definedas a^\frac{1}{n} = \sqrt[n]{a} \fromto 1$\\
-            Bew: 1. Fall $a = 1\impl x_n = 1$\\
-            2. Fall $a> 1 \impl a^\frac{1}{n} > a^\frac{a}{n}=1$\\
-            $h_m = a^\frac{1}{m} - 1 > 0$ und $a+h_m = a^\frac{a}{m}$\\
-            $q=\pair{a+b_n}^n \geq 1+ab_1 \geq a_{b1}$\\
-            $\impl h_n < \frac{a}{n}$\\
-            $\abs{a^\frac{1}{n}-1} = h_n < \frac{a}{n}\impl \lim a^\frac{1}{n}= 1$\\
-            3. Fall $0<a<1$\\
-            \begin{align*}
-                b &= \frac{1}{a} > 1\\
-                \impl \lim b^\frac{1}{n} &= 1\\
-                &=\lim \frac{1}{a^\frac{1}{n}} &\impl \lim a^{\frac{1}{n}} = 1
-            \end{align*}
-            \item $x_n = \sqrt[n]{n} = n^\frac{1}{n}\fromto 1$
-            \begin{align*}
-                n \geq 2 \impl \frac{1}{n^n} > 1\qquad h_n \definedas n^{\frac{1}{n}} - 1\\
-                \impl n = \pair{n^\frac{1}{n}}^n = \pair{1+h_n}^n \geq 1+n\cdot h_n > n\cdot h_n \impl h_n \leq \frac{h}{n} = 1
-            \end{align*}
-            Aber: Binomialsatz
-            \begin{align*}
-                \pair{1+h_n}^n &= \underbrace{\sum_{k=0}^{n} \binom{n}{k}\pair{h_n}^k}_{\geq 0} \geq \binom{n}{0}\cdot \pair{h_n}^0 \binom{n}{1}\cdot \pair{h_n}^1 + \binom{n}{2}\cdot \pair{h_n}^2\\
-                &= 1 + n\cdot h_n + \frac{n\cdot(n+1)}{2}(h_n)^2\\
-                > \frac{n(n+1)}{2}\cdot h_n^2\\
-                \impl h_n^2 < \frac{2n}{n(n-1)} = \frac{2}{n-1}\\
-                0 < h_n < \sqrt{\frac{2}{n-1}} \fromto 0\\
-                \impl \lim h_n &= 0 \equivalent \lim n^{\frac{1}{n}} = 1
-            \end{align*}
-        \end{enumerate}
+        \end{proof}
+
+        \noindent Nach dem Satz der monotonen Konvergenz (\ref{satz:monoton-konv}) existiert ein Grenzwert $x$ mit
+        \begin{align*}
+            x&\definedas \lim_{n\fromto\infty} x_n = \lim_{n\fromto\infty} x_{n-1}\\
+            x &= \lim_{n\fromto\infty} x_n = \lim_{n\fromto\infty} \frac{1}{2}\pair{x_{n-1}+\frac{c}{x_{n-1}}} = \frac{1}{2}\pair{x+\frac{c}{x}}\\
+            \equivalent x &= \sqrt{c}
+        \end{align*}
     \end{beispiel}
 
-    \begin{definition}
-        Eine reelle Folge $(x_n)_n$ strebt gegen unendlich, falls $\forall k \geq 0~\exists N\in\naturalnumbers\colon x_n \geq k\quad \forall n> N$\\
-        ($\equivalent \forall k \geq 0$ ist $x_n < k$ für endlich viele $n\in\naturalnumbers$).\\
-        $(x_n)_n$ strebt gegen $-\infty$, falls $(-x_n)_n$ gegen $\infty$ strebt.
+    \begin{beispiel}[Harmonische Folge]
+        Es sei $x_n = \frac{1}{n}\fromto 0$
+        \begin{align*}
+            \abs{\frac{1}{n}-0} &= \frac{1}{n}
+            \intertext{geg. $\varepsilon > 0$ wähle $N\in\naturalnumbers$ mit $N>\frac{1}{\varepsilon} \equivalent \varepsilon > \frac{1}{N}$}
+            \impl \forall n\geq N\colon \abs{\frac{1}{n}-0} &= \frac{1}{n} \leq \frac{1}{N}< \varepsilon
+        \end{align*}
+        Ähnlich funktioniert $x_n = \frac{1}{\sqrt {n}}$
+    \end{beispiel}
+
+    \begin{beispiel}
+        \begin{align*}
+            x_n&\definedas \frac{1+2+3+\dots+n}{n^2} \fromto \frac{1}{2}\text{ für }n\fromto\infty
+            \intertext{Mit Gaußscher Summenformel ($1+2+3+\dots+n = \frac{n\cdot(n+1)}{2}$)}
+            \impl x_n &= \frac{\frac{n\cdot(n+1)}{2}}{n^2} = \frac{n^2+n}{2n^2} = \frac{1+\frac{1}{n}}{2} \fromto \frac{1}{2}
+        \end{align*}
+    \end{beispiel}
+
+    \begin{beispiel}[Geometrische Folge (1)]
+        \label{beispiel:geometrische-folge}
+        Sei $0\leq q< 1$. Dann gilt $x_n \definedas q^n \fromto 0$
+        \begin{proof}
+            Ist $q=0\impl x_n = 0^n = 0 \fromto 0$. Also sei $0<q<1$
+            \begin{align*}
+                \impl \frac{1}{q} &> 1\\
+                h &\definedas\frac{1}{q}-1>0\\
+                \impl \frac{1}{q} &= 1 + h\\
+                \impl q &= \frac{1}{1+h}\\
+                \impl x_n &= q^n = \pair{\frac{1}{1+h}}^n = \frac{1}{(1+h)^n}
+                \intertext{Nach Bernoulli (\ref{satz:bernoulli-ungleichung}) gilt $(1+h)^n \geq 1+nh>nh$}
+                \impl q^n &= \frac{1}{(1+h)^n}< \frac{1}{nh}\fromto 0 \text{ für } \ntoinfty\\
+                \impl \abs{q^n-0} &= q^n < \frac{1}{nh} \fromto 0 \text{ für } \ntoinfty
+                \intertext{Für $\varepsilon>0$ wähle $N\geq \frac{1}{\varepsilon\cdot h}\equivalent \frac{1}{N\cdot h}\leq \varepsilon$}
+                \impl \forall n\geq N&\colon \abs{q^n-0} = q^n \leq \frac{1}{nh} \leq \frac{1}{Nh} < \varepsilon\qedhere
+            \end{align*}
+        \end{proof}
+    \end{beispiel}
+
+    \begin{uebung}[Geometrische Folge (2)]
+        Es sei $-1<q<1$. Weisen Sie basierend auf Beispiel~\ref{beispiel:geometrische-folge} nach, dass dann $x_n \definedas q^n \fromto 0$ gilt.
+    \end{uebung}
+
+    \newpage
+
+    \begin{beispiel}
+        Sei $a>0$, $x_n\definedas a^\frac{1}{n} = \sqrt[n]{a} \fromto 1$ für $\ntoinfty$.\\
+        \begin{proof}
+            Wir unterscheiden in drei Fälle.
+            \theoremescape
+            \begin{enumerate}[label=\arabic*.]
+                \item $a=1$
+                \begin{align*}
+                    \impl x_n &= 1
+                    \intertext{\item $a> 1$}
+                    \impl a^\frac{1}{n} &> 1^\frac{1}{n}=1\\
+                    h_n &\definedas a^\frac{1}{n} - 1 > 0 \text{ und } 1+h_n = a^\frac{1}{n}\\
+                    a&=\pair{1+h_n}^n \geq 1+n\cdot h_n > n\cdot h_n\\
+                    \impl h_n &< \frac{a}{n}\\
+                    \abs{a^\frac{1}{n}-1} &= a^\frac{1}{n}-1 = h_n < \frac{a}{n}\\
+                    \impl \lim_{\ntoinfty} a^\frac{1}{n}&= 1
+                    \intertext{\item $0<a<1$}
+                    b &\definedas \frac{1}{a} > 1\\
+                    \impl \lim_{\ntoinfty} b^\frac{1}{n} &= 1\\
+                    \lim_{\ntoinfty} b^\frac{1}{n} &=\lim_{\ntoinfty} \frac{1}{a^\frac{1}{n}}\\
+                    \impl \lim_{\ntoinfty} a^{\frac{1}{n}} &= 1\qedhere
+                \end{align*}
+            \end{enumerate}
+        \end{proof}
+    \end{beispiel}
+
+    \begin{beispiel}
+        Es sei $x_n = \sqrt[n]{n} = n^\frac{1}{n}\fromto 1$
+        \begin{align*}
+            n^{\frac{1}{n}} &> 1 \text{ für } n\geq 2\\
+            h_n &\definedas n^{\frac{1}{n}} - 1\\
+            \impl n = \pair{n^\frac{1}{n}}^n = \pair{1+h_n}^n \annot[{&}]{\geq}{\ref{satz:bernoulli-ungleichung}} 1+n\cdot h_n > n\cdot h_n\\
+            \impl h_n &\leq \frac{n}{n} = 1
+            \intertext{Wir wenden den Binomischen Lehrsatz (\ref{satz:binom-lehrsatz}) an}
+            n = \pair{1+h_n}^n &= \sum_{k=0}^{n} \underbrace{\binom{n}{k}\pair{h_n}^k}_{\geq 0}\\
+            &\geq \binom{n}{0}\cdot \pair{h_n}^0 \binom{n}{1}\cdot \pair{h_n}^1 + \binom{n}{2}\cdot \pair{h_n}^2\tag{$n\geq 2$}\\
+            &= 1 + n\cdot h_n + \frac{n\cdot(n-1)}{2}\cdot(h_n)^2\\
+            &> \frac{n\cdot (n-1)}{2}\cdot \pair{h_n}^2\\
+            \impl h_n^2 &< \frac{2n}{n\cdot (n-1)} = \frac{2}{n-1}\\
+            0 &< h_n < \sqrt{\frac{2}{n-1}} \fromto 0 \text{ für } \ntoinfty\\
+            \impl \lim h_n &= 0\\
+            \equivalent \lim n^{\frac{1}{n}} &= 1
+        \end{align*}
+    \end{beispiel}
+
+    \begin{definition}[Divergenz gegen unendlich]
+        Eine reelle Folge $(x_n)_n$ strebt gegen unendlich, falls
+        \begin{align*}
+            &\forall k \geq 0~\exists N\in\naturalnumbers\colon x_n \geq k\quad \forall n> N\\[8pt]
+            (\equivalent &\forall k \geq 0 \text{ ist } x_n < k \text{ für endlich viele } n\in\naturalnumbers)
+        \end{align*}
+        Die Folge $(x_n)_n$ strebt gegen $-\infty$, falls $(-x_n)_n$ gegen $\infty$ strebt.
     \end{definition}
 
-    $x_n=n$ divergiert gegen $\infty$
+    \begin{notation}
+        Wenn die Folge $(x_n)_n$ gegen unendlich strebt, schreiben wir $x_n\fromto\infty$ oder $\lim_{n\fromto\infty} x_n = +\infty$.
+    \end{notation}
 
-    \begin{satz}
-        Falls $x_n\fromto \infty$ folgt $\frac{1}{x_n}\fromto 0$.\\
-        Ist $(x_n)_n$ Nullfolge mit $x_n > 0$ für fast alle $n\in\naturalnumbers$, so ist $\frac{1}{x_n}\fromto \infty$\\
-        Falls $x < 0$ für fast alle $n$, so folgt $\frac{1}{x_n} \fromto -\infty$
-        \begin{proof}
-            Sei $x_n\fromto \infty$\\
-            $\impl \forall \varepsilon > 0~\exists N\in\naturalnumbers\colon x_n > \frac{1}{2}\quad\forall n \geq N$\\
-            $\impl 0 < \frac{1}{x_n} < \varepsilon\quad \forall n \geq N$, das heißt $\frac{1}{x_n}\fromto 0$\\
-            (Rest Übung)
+    \begin{beispiel}[Monoton wachsende, divergente Folge]
+        $x_n=n$ divergiert gegen $\infty$
+    \end{beispiel}
+
+
+    \begin{satz}[Eigenschaften von Kehrwerten von Folgen]
+        \theoremescape
+        \begin{enumerate}[label=(\alph*)]
+            \item Falls $x_n\fromto \infty$ für $\ntoinfty$, so folgt $\frac{1}{x_n}\fromto 0$ für $\ntoinfty$.
+            \item Ist $(x_n)_n$ eine Nullfolge mit $x_n > 0$ für fast alle $n\in\naturalnumbers$, so ist $\frac{1}{x_n}\fromto \infty$ für $\ntoinfty$.\\
+            Falls $x_n < 0$ für fast alle $n$, so folgt $\frac{1}{x_n} \fromto -\infty$ für $\ntoinfty$.
+        \end{enumerate}
+
+        \begin{proof}[Beweis (a)]
+            Sei $x_n\fromto \infty$
+            \begin{align*}
+                \impl \forall \varepsilon > 0~\exists N\in\naturalnumbers\colon x_n &> \frac{1}{\varepsilon}\quad\forall n \geq N\\
+                \impl 0 < \frac{1}{x_n} &< \varepsilon\quad \forall n \geq N
+            \end{align*}
+            das heißt $\frac{1}{x_n}\fromto 0$.
         \end{proof}
     \end{satz}
 
+    \begin{uebung}
+        Weisen Sie den Teil (b) des vorherigen Satzes nach.
+    \end{uebung}
+
     \begin{beispiel}
-        $\frac{n}{2^n}\fromto 0$ (Sogar $\forall k\in\naturalnumbers\colon \frac{n^k}{2^n} \fromto 0$)
+        $\frac{n}{2^n}\fromto 0$ für $\ntoinfty$ (Sogar $\forall k\in\naturalnumbers\colon \frac{n^k}{2^n} \fromto 0$ für $\ntoinfty$)
 
         \begin{proof}
-            Zu zeigen: $x_n = \frac{2^n}{n}\fromto \infty$\\
-            $2^n = (1+1)^n = \\sum_{k=0}^{n} \binom{n}{k}\geq \binom{n}{2} = \frac{n(n+1)}{2}$\\
-            $\impl x_n = \frac{2^n}{n}\geq \frac{\frac{n(n-1)}{2}}{1} = \frac{1}{2}(n+1)$\\
-            $\impl x_n \fromto \infty$, $\frac{1}{x_n}\fromto 0$
+            Zu zeigen: $x_n = \frac{2^n}{n}\fromto \infty$
+            \begin{align*}
+                2^n = (1+1)^n &= \sum_{k=0}^{n} \binom{n}{k}\geq \binom{n}{2} = \frac{n\cdot (n-1)}{2}\\
+                &\impl x_n = \frac{2^n}{n}\geq \frac{\frac{n\cdot (n-1)}{2}}{n} = \frac{1}{2}\cdot (n-1)\\
+                &\impl x_n \fromto \infty\\
+                &\impl \frac{1}{x_n}\fromto 0\qedhere
+            \end{align*}
         \end{proof}
     \end{beispiel}
 
-    \begin{beispiel}[Die Eulersche Zahl]
+    \begin{beispiel}[Die Eulersche Zahl $e$]
         \begin{align*}
-            a_n &\definedas (1+\frac{1}{n})^n\\
-            b_n &\definedas (1 + \frac{1}{n})^{n+1}\\
-            \impl a_n & b_n\quad\forall n \in\naturalnumbers\\
-            \intertext{Behauptung:}
-            a_n &< a_{n+1}\text{ und } b_n > b_{n+1} \quad \forall n
+            a_n &\definedas \pair{1+\frac{1}{n}}^n\quad b_n \definedas \pair{1 + \frac{1}{n}}^{n+1}\\
+            \impl a_n &< b_n\quad\forall n \in\naturalnumbers
         \end{align*}
+        Behauptung: $\forall n\in\naturalnumbers\colon a_n < a_{n+1}$ und $b_n > b_{n+1}$.
         \begin{proof}
             Sei $n\geq 2$
+
             \begin{align*}
-                \frac{a_n}{a_{n-1}} &= \frac{\pair{1+\frac{1}{n}}^n}{\pair{1+\frac{1}{n-1}}^{n-1}}\\
-                &= \pair{1+\frac{1}{n-1}} \cdot \frac{\pair{1+\frac{1}{n}}^n}{\pair{1+\frac{1}{n-1}}^n}\\
+                \frac{a_n}{a_{n-1}} &= \frac{\pair{1+\frac{1}{n}}^n}{\pair{1+\frac{1}{n-1}}^{n-1}} = \pair{1+\frac{1}{n-1}} \cdot \frac{\pair{1+\frac{1}{n}}^n}{\pair{1+\frac{1}{n-1}}^n}\\
                 &= \frac{n}{n-1} \cdot \pair{\frac{\frac{n+1}{n}}{\frac{n}{n-1}}}^n = \frac{n}{n-1}\cdot \pair{\frac{(n+1)\cdot (n-1)}{n^2}}^n\\
-                &= \frac{n}{n-1}\cdot \pair{\frac{n^2-1}{n^2}}^n\\
-                &= \frac{n}{n-1}\cdot\pair{1-\frac{1}{n^2}}^n\\
-                &\geq \frac{n}{n-1}\cdot\pair{1-\frac{n}{n^2}} = \frac{n}{n-1}\cdot\pair{1-\frac{1}{n}}\\
-                &= 1 \impl a_n > a_{n-1} \quad \forall n\geq 2\\
-                ???\\
-                \intertext{Mit dem Satz der monotonen Konvergenz folgt:}
-                \impl a_1 < a_2 < \dots < a_n < b_n < b_{n+1} < \dots < b_1\\
-                \impl e\definedas \lim a_n = \lim \pair{1+\frac{1}{n}}^n\text{ existiert}\\
-                b\definedas \lim b_n\text{ existiert, sogar $b=e$}
-                \text{Da } 1 < \frac{b_n}{a_n} = \frac{\pair{1+\frac{1}{n}}^{n-1}}{\pair{1+\frac{1}{n}}^{n}} = 1 + \frac{1}{n} \fromto 1\\
-                1 &= \lim \frac{b_n}{a_n} = \frac{\lim b_n}{\lim a_n} = \frac{b}{e} \impl b = e\\
-                \pair{1+\frac{1}{n}}^n < e < \pair{1-\frac{1}{n}}^{n-1}
+                &= \frac{n}{n-1}\cdot \pair{\frac{n^2-1}{n^2}}^n = \frac{n}{n-1}\cdot\pair{1-\frac{1}{n^2}}^n\\
+                \annot[{&}]{\geq}{\ref{satz:bernoulli-ungleichung}} \frac{n}{n-1}\cdot\pair{1-\frac{n}{n^2}} = \frac{n}{n-1}\cdot\pair{1-\frac{1}{n}} = 1\\
+                \impl a_n &> a_{n-1}\quad\forall n\geq 2\\[10pt]
+                \frac{b_{n-1}}{b_n} &= \frac{\pair{1+\frac{1}{n-1}}^n}{\pair{1+\frac{1}{n}}^{n+1}} = \pair{1+\frac{1}{n}}^{-1}\cdot\pair{\frac{1+\frac{1}{n-1}}{1+\frac{1}{n}}}^n\\
+                &= \frac{n}{n+1}\cdot\pair{\frac{\frac{n}{n-1}}{\frac{n+1}{n}}}^n = \frac{n}{n+1}\cdot\pair{\frac{n^2}{(n+1)\cdot(n-1)}}^n\\
+                &= \frac{n}{n+1}\cdot\pair{\frac{n^2-1+1}{n^2-1}}^n = \frac{n}{n+1}\cdot\pair{1+\frac{1}{n^2-1}}^n\\
+                &> \frac{n}{n+1}\cdot\pair{1+\frac{1}{n^2}}^n \annot{\geq}{\ref{satz:bernoulli-ungleichung}} \frac{n}{n+1}\cdot\pair{1+\frac{n}{n^2}} = 1\\
+                \impl b_n & < b_{n-1}\quad\forall n\in\naturalnumbers\\[10pt]
+                \impl a_1 < a_2 < \dots < a_n &< b_n < \dots < b_2 < b_1
+                \intertext{Mit dem Satz der monotonen Konvergenz (\ref{satz:monoton-konv}) folgt daraus}
+                e &\definedas \lim_{n\fromto\infty} a_n = \lim_{n\fromto\infty} \pair{1+\frac{1}{n}}^n \text{ existiert } \\
+                b &\definedas \lim_{n\fromto\infty} b_n \text{ existiert und sogar } b = e
+                \intertext{Da $1<\frac{b_n}{a_n} = \frac{\pair{1+\frac{1}{n}}^{n-1}}{\pair{1+\frac{1}{n}}^n} = 1 + \frac{1}{n}\fromto 1$}
+                \impl 1 = \lim_{n\fromto\infty} \frac{b_n}{a_n} &= \frac{\lim_{n\fromto\infty} b_n}{\lim_{n\fromto\infty} a_n} = \frac{b}{e}\\[10pt]
+                \impl b &= e\qedhere\\[10pt]
+                \pair{1+\frac{1}{n}}^n &< e < \pair{1+\frac{1}{n}}^{n+1}
             \end{align*}
         \end{proof}
     \end{beispiel}
@@ -2188,8 +2269,11 @@
 
     \newpage
 
+
     \section{Polynome}
+
     \subsection{Reelle Polynome}
+    \thispagestyle{pagenumberonly}
 
     Es sei $a_0,a_1, \dots, a_n\in\realnumbers$,~$a_n \neq 0, x\in\realnumbers$. Dann ist
     \begin{align*}
