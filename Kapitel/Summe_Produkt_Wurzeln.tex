@@ -12,20 +12,20 @@
     \begin{align*}
         \sum_{k=m}^{n}a_k &= a_m+a_{m+1}+a_{m+2}+\dots+a_{n}
         \intertext{und}
-        \prod_{k=m}^{n} &= a_m\cdot a_{m+1}\cdot a_{m+2}\cdot \dots\cdot a_{n}
+        \prod_{k=m}^{n} &= a_m\cdot a_{m+1}\cdot a_{m+2}\cdot \ldots\cdot a_{n}
     \end{align*}
     Für $n\in\naturalnumbers_0$, $n<m$ setzt man $\prod_{k=m}^{n}a_k = 1$.
 \end{definition}
 \begin{definition}[Fakultät]
     Sei $n\in\naturalnumbers$, dann gilt:
     \begin{align*}
-        n! &= 1 \cdot 2\cdot 3 \cdot \dots \cdot n
+        n! &= 1 \cdot 2\cdot 3 \cdot \ldots \cdot n
         \intertext{und wir definieren}
         0! &= 1
     \end{align*}
     Alternativ lässt sich rekursiv definieren:
     \begin{align*}
-        0! &\definedas 1\\
+        0! &= 1\\
         n! &= (n-1)! \cdot n
     \end{align*}
 \end{definition}
@@ -160,7 +160,8 @@
             $n\rightarrow n+1$
             \begin{align*}
             (1+a)
-                ^{n+1} = (1+a)^n\cdot (1+a) \annot{\geq}{I-Ann} (1+na)\cdot(1+a) = 1+na+a+na^2\geq 1+(n+1)\cdot a
+                ^{n+1} &= (1+a)^n\cdot (1+a) \annot{\geq}{I-Ann} (1+na)\cdot(1+a) \\
+                &= 1+na+a+na^2\geq 1+(n+1)\cdot a\qedhere
             \end{align*}
         \end{induktionsschritt}
     \end{proof}
@@ -200,7 +201,7 @@
     Für $n\in\naturalnumbers$ und für jedes $c\in\realnumbers$, $c\geq 0$ gibt es genau ein $x \geq 0$, $x\in\realnumbers$, so dass $x^n = c$.
     \begin{proof}
         \textit{Eindeutigkeit}\\
-        $x_1>0$, $x_2>0$, $\pair{x_1}^n-\pair{x_2}^n = c$, $0=\pair{\pair{x_1}^n-\pair{x_2}^n} = \pair{x_1 - x_2}\cdot\pair{\sum_{k=0}^{n-1} \pair{x_1}^{n-k+1}\cdot \pair{x_2}^k}$\\
+        $x_1>0$, $x_2>0$, $\pair{x_1}^n=\pair{x_2}^n = c$, $0=\pair{\pair{x_1}^n-\pair{x_2}^n} = \pair{x_1 - x_2}\cdot\pair{\sum_{k=0}^{n-1} \pair{x_1}^{n-k+1}\cdot \pair{x_2}^k}$\\
         $\impl x_1 = x_2$
     \end{proof}
     \noindent Die Existenz ist Aufgabe auf dem Übungsblatt.
@@ -224,14 +225,14 @@
     \theoremescape
     \begin{enumerate}[label=(\roman*)]
         \item $\abs{a} \geq 0$, $\abs{a} = 0 \equivalent a = 0$
-        \item $\abs{\lambda\cdot a} = \abs{\lambda}\cdot\abs{a}$, $\forall \lambda, a \in \realnumbers$
+        \item $\abs{\lambda\cdot a} = \abs{\lambda}\cdot\abs{a}$\quad $\forall \lambda, a \in \realnumbers$
         \item $\abs{a+b}\leq \abs{a}+\abs{b}$ (Dreiecksungleichung) %%% 5.14
     \end{enumerate}
     \begin{proof}[Beweis von (iii)]
         \begin{align*}
-            \abs{a+b}^2 = &\pair{a+b}^2 = a^2 + 2ab + b^2\\
-            \leq &\abs{a}^2 + 2\abs{a}\abs{b} + \abs{b}^2 = \pair{\abs{a}+\abs{b}}^2\\
-            \impl &\abs{a+b}\leq\abs{a}+\abs{b}\qedhere
+            \abs{a+b}^2 &= \pair{a+b}^2 = a^2 + 2ab + b^2\\
+            &\leq \abs{a}^2 + 2\abs{a}\abs{b} + \abs{b}^2 = \pair{\abs{a}+\abs{b}}^2\\
+            \impl \abs{a+b}&\leq\abs{a}+\abs{b}\qedhere
         \end{align*}
     \end{proof}
 \end{satz}
@@ -246,7 +247,7 @@
     \begin{enumerate}[label=(\roman*)]
         \item $\abs{a-b}\geq 0$, $\abs{a-b} = 0\equivalent a = b$
         \item $\abs{a-b} = \abs{b-a}$
-        \item $\abs{a-b}\leq \abs{a-c} + \abs{b-c}$ $\forall c\in\realnumbers$ %%% 5.15
+        \item $\abs{a-b}\leq \abs{a-c} + \abs{b-c}$\quad $\forall c\in\realnumbers$ %%% 5.15
     \end{enumerate}
     \begin{proof}[Beweis von (iii)]
         \begin{align*}
@@ -259,10 +260,14 @@
     $\forall a,b\in\realnumbers$ gilt $\abs{\abs{a}-\abs{b}}\leq\abs{a-b}$
     \begin{proof}
         \begin{align*}
-            \abs{a} = \abs{a-b+b} &\leq \abs{a-b} + \abs{b}\\
-            \impl \abs{a}-\abs{b} &\leq \abs{a-b}\\
-            \abs{b}-\abs{a} &\leq \abs{b-a} = \abs{a-b}\\[10pt]
-            \impl \abs{a-b}&\geq\abs{\abs{a}-\abs{b}}\qedhere
+            \abs{a} &= \abs{a-b+b} \leq \abs{a-b} + \abs{b}\\
+            &\impl
+            \begin{array}{l}
+                \abs{a}-\abs{b} \leq \abs{a-b} \\
+                \abs{b}-\abs{a} \leq \abs{b-a} = \abs{a-b}
+            \end{array}
+            \\[10pt]
+            &\impl \abs{a-b}\geq\abs{\abs{a}-\abs{b}}\qedhere
         \end{align*}
     \end{proof}
 \end{satz}
@@ -271,12 +276,12 @@
     \theoremescape
     \begin{enumerate}[label=(\roman*)]
         \item $\abs{a-b}\geq \abs{a}-\abs{b}$
-        \item $\abs{a+b} = \abs{a-\pair{-b}} \geq \abs{a} - \abs{-b}$
+        \item $\abs{a+b} = \abs{a-\pair{-b}} \geq \abs{a} - \abs{b}$
     \end{enumerate}
 \end{folgerung}
 
 \begin{bemerkung}
-    Durch Induktion leitet man her, dass:
+    Durch Induktion leitet man her, dass
     \begin{align*}
         \abs{\sum_{i=1}^{n} a_i} &\leq \sum_{i=1}^{n} \abs{a_i}\quad a_i \in\realnumbers
     \end{align*}

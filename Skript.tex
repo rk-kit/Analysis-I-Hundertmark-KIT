@@ -153,7 +153,7 @@
     \input{Kapitel/Mengen}
 
 
-    \section{Die Axiome der Reellen Zahlen}
+    \section{Die Axiome der reellen Zahlen}
     \input{Kapitel/Reelle_Zahlen}
 
 
@@ -972,7 +972,7 @@
     \subsection{Das Konvergenzkriterium von Cauchy}
 
     \begin{definition}[Cauchy-Folge]
-        Eine reelle Folge $a_n$ heißt Cauchy-Folge, falls
+        Eine reelle Folge $(a_n)_n$ heißt Cauchy-Folge, falls
         \begin{align*}
             &\forall\varepsilon > 0~\exists N\in\naturalnumbers\colon \abs{a_n - a_m} < \varepsilon\quad\forall n,m \geq N\\
             (\equivalent &\forall \varepsilon > 0~\exists N\in\naturalnumbers\colon \abs{a_n - a_m} < \varepsilon\quad\forall n\geq m\geq N)
@@ -981,7 +981,7 @@
 
     \begin{lemma} % Lemma 2
         \label{lemma:konv-cauchy}
-        Jede konvergente reelle Folge $a_n$ ist eine Cauchy-Folge.
+        Jede konvergente reelle Folge $(a_n)_n$ ist eine Cauchy-Folge.
         \begin{proof}
             Es sei $(a_n)_n\fromto a$ eine reelle Folge.
             \begin{align*}

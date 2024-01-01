@@ -22,7 +22,7 @@
     \theoremescape
     \begin{enumerate}
         \item 2 Mengen sind gleich, wenn sie die selben Elemente enthalten.
-        \item Die leere Menge ($\emptyset$) ist die einzige Menge, die keine Elemente enthält
+        \item Die leere Menge ($\emptyset$) ist die einzige Menge, die keine Elemente enthält.
         \item Wenn für jedes $x\in A$ auch $x\in B$ folgt, dann ist $A$ eine Teilmenge von $B$. ($A\subseteq B$)
         \item Ist $A\subseteq B$ und $A\neq B$, dann nennen wir $A$ eine echte Teilmenge von $B$. ($A\subsetneq B$)
         \item $A$ und $B$ sind disjunkt, falls aus $x\in A$ folgt, dass $x\not\in B$.
@@ -41,7 +41,7 @@
         A\cap B &\definedas \set{x|~x\in A \land x\in B}\tag{Schnitt}\\
         A\cup B &\definedas \set{x|~x\in A \lor x\in B}\tag{Vereinigung}\\
         A\exclude B &\definedas \set{x|~x\in A \land x\notin B}\tag{Differenz}\\[10pt]
-        \text{Wenn } A\subseteq M&: A^{C} = A^{C}_{M} \definedas M\exclude A\tag{Komplement}
+        \text{Wenn } A\subseteq M&\colon A^{C} = A^{C}_{M} \definedas M\exclude A\tag{Komplement}
     \end{align*}
     Allgemein gilt: $A$ und $B$ disjunkt $\equivalent A\cap B = \emptyset$
 \end{definition}
@@ -107,8 +107,6 @@
     \end{align*}
 \end{definition}
 
-\newpage
-
 \subsection{Quantoren}
 
 \begin{definition}[Quantoren]
@@ -122,21 +120,21 @@
     \vspace{0.2cm}
     Es seien $A,B$ Mengen und $H(x,y)$ eine Aussageform mit $x\in A$ und $y \in B$. Dann gilt:
     \begin{align*}
-        \forall x \in A~\exists y \in B: H(x,y) \equivalent \text{Für alle $x\in A$ existiert ein $y \in B$, so dass $H(x,y)$ wahr ist}
+        \forall x \in A~\exists y \in B\colon H(x,y) \equivalent \text{Für alle $x\in A$ existiert ein $y \in B$, so dass $H(x,y)$ wahr ist}
     \end{align*}
 \end{definition}
 
 \begin{folgerung}[Negation von Quantoren]
     Es seien $A,B$ Mengen und $H(x,y)$ Aussageform mit $x\in A$ und $y \in B$. Dann gilt:
     \begin{align*}
-        \neg\pair{\forall x \in A: H(x)} &\equivalent \exists x\in A: \neg H(x)\\
-        \neg\pair{\exists x \in A: H(x)} &\equivalent \forall x\in A: \neg H(x)\\
-        \neg \pair{\forall x \in A~\exists y\in B: H(x,y)}&\equivalent\exists x \in A: \neg\pair{\exists y\in B: H(x,y)}\\
-        &\equivalent \exists x\in A~\forall y \in B: \neg H(x,y)\\
+        \neg\pair{\forall x \in A\colon H(x)} &\equivalent \exists x\in A\colon \neg H(x)\\
+        \neg\pair{\exists x \in A\colon H(x)} &\equivalent \forall x\in A\colon \neg H(x)\\
+        \neg \pair{\forall x \in A~\exists y\in B\colon H(x,y)}&\equivalent\exists x \in A\colon \neg\pair{\exists y\in B\colon H(x,y)}\\
+        &\equivalent \exists x\in A~\forall y \in B\colon \neg H(x,y)\\
     \end{align*}
 \end{folgerung}
 
-\begin{definition}[Potenzmenge]
+\begin{definition}[Potenzmenge und Mengensystem]
     Sei $A$ eine Menge, so heißt $\mathcal{P}(A) \definedas \set{N|~N \subseteq A}$ Potenzmenge von $A$. Eine Teilmenge $A\subseteq \mathcal{P}(A)$ heißt Mengensystem über $A$.
 \end{definition}
 
@@ -145,7 +143,7 @@
     Falls $R$ eine Menge, dann kann man fragen, ob $R\in R$ oder nicht.\\
     1. Fall: $R\notin R\impl R\in R$\qquad (Widerspruch)\\
     2. Fall: $R\in R\impl R \notin R$\qquad (Widerspruch)\\
-    Lösung: $R$ ist keine Menge, sondern eine Klasse
+    Lösung: $R$ ist keine Menge, sondern eine Klasse.
 \end{bemerkung}
 
 \subsection{Kartesisches Produkt und Relationen}
@@ -160,7 +158,7 @@
 \end{definition}
 
 \begin{definition}[Kartesisches Produkt]
-    Somit ist $A \times B \definedas \set{\pair{a,b}|~a\in A \land b \in B}$ wieder eine Menge genannt das Kartesische Produkt von $A$ und $B$.
+    Somit ist $A \times B \definedas \set{\pair{a,b}|~a\in A \land b \in B}$ wieder eine Menge, genannt das Kartesische Produkt von $A$ und $B$.
 \end{definition}
 
 \begin{beispiel}
@@ -193,13 +191,14 @@
     Dann gilt: $a_1 < a_2 \equivalent \pair{a_1, a_2} \in G_{<}$ und somit $G_{<} = \set{(1,2), (1,3), (1,4), (2,3), (2,4), (3,4)}$
 \end{beispiel}
 
+\newpage
 
 \begin{definition}[Äquivalenzrelation]
     Sei $R=\pair{A, A, G}$ eine Relation. Dann definieren wir unterschiedliche Eigenschaften, die die Relation haben kann:
     \begin{enumerate}[label=(\roman*)]
-        \item $R$ ist reflexiv:\quad $\forall a\in A: aRa\quad\pair{\forall a \in A: (a,a) \in G}$
-        \item $R$ ist symmetrisch:\quad $\forall a_1, a_2\in A: a_{1}Ra_2\equivalent a_{2}Ra_1$
-        \item $R$ ist transitiv:\quad $\forall a_1, a_2, a_3 \in A: a_{1}Ra_{2} \land a_{2}Ra_{3} \impl a_{1}Ra_{3}$
+        \item $R$ ist reflexiv:\quad $\forall a\in A\colon aRa\quad\pair{\forall a \in A\colon (a,a) \in G}$
+        \item $R$ ist symmetrisch:\quad $\forall a_1, a_2\in A\colon a_{1}Ra_2\equivalent a_{2}Ra_1$
+        \item $R$ ist transitiv:\quad $\forall a_1, a_2, a_3 \in A\colon a_{1}Ra_{2} \land a_{2}Ra_{3} \impl a_{1}Ra_{3}$
     \end{enumerate}
     Eine Äquivalenzrelation ist eine reflexive, symmetrische und transitive Relation auf $A$.\\
     Ist $R$ eine Äquivalenzrelation und $a_{1}Ra_{2}$ so nennt man $a_{1}$ äquivalent zu $a_{2}$ bezüglich $R$.
@@ -217,7 +216,7 @@
     Allgemein gilt für Äquivalenzklassen damit:
     \theoremescape
     \begin{enumerate}[label=(\roman*)]
-        \item $\forall a\in A: [a]_R \neq \emptyset$
+        \item $\forall a\in A\colon [a]_R \neq \emptyset$
         \item $aRa \impl a\in [a]_R$
         \item $a_1, a_2\in [a]_R \impl a_1 \sim_R a, a_2 \sim_R a \annot{\impl}{sym.} a_1 \sim_R a, a \sim_R a_2 \annot{\impl}{trans.} a_1\sim_R a_2$
     \end{enumerate}
@@ -230,7 +229,8 @@
         \begin{align*}
             \text{Sei }b\in [a_1]_R\cap [a_2]_R\text{ und }c\in [a_1]_R\\
             \impl b\sim_R a_1 \land c\sim_R a_1 \annot{\impl}{trans.} c\sim_R b\\
-            \intertext{Da  $b\sim_R a_2$ muss nach der Transitivität gelten:} c\sim_R a_2 \impl [a_1]_R \subseteq [a_2]_R
+            \intertext{Da  $b\sim_R a_2$ muss nach der Transitivität gelten:}
+            c\sim_R a_2 \impl [a_1]_R \subseteq [a_2]_R
         \end{align*}
         Symmetrisch lässt sich argumentieren, dass $[a_2]_R \subseteq [a_1]_R$.
     \end{proof}
@@ -244,7 +244,7 @@
     Sei $A\neq \emptyset$ eine Menge. Dann ist eine Zerlegung $F = \set{A_j}_{j\in J}, A_j\subseteq A$ mit folgenden Eigenschaften definiert:
     \begin{enumerate}
         \item $\forall j\in J\colon A_j\neq \emptyset$
-        \item $j_1, j_2\in J, j_1\neq j_2\colon A_{j1} \cap A_{j2} = \emptyset$
+        \item Für $j_1, j_2\in J, j_1\neq j_2\colon A_{j1} \cap A_{j2} = \emptyset$
         \item $\bigcup_{j\in J}A_j = A$
     \end{enumerate}
 \end{definition}
@@ -259,13 +259,13 @@
 \end{notation}
 
 \begin{beispiel}[Restklassendefinition über Äquivalenzrelationen]
-    Es sei $A = \naturalnumbers_{0} = \set{0,1,2,3,4,\dots}$ und $p\in \mathbb{N}$. $m,n\in\mathbb{N}_0$ seien genau dann äquivalent, wenn $m=n+kp$ für ein $k\in\mathbb{Z}$:
+    Es sei $A = \naturalnumbers_{0} = \set{0,1,2,3,4,\dots}$ und $p\in \mathbb{N}$. $m,n\in\mathbb{N}_0$ seien genau dann äquivalent, wenn $m=n+k\cdot p$ für ein $k\in\mathbb{Z}$:
     \begin{align*}
-        R_{p} = \set{\pair{m,n}\in \mathbb{N}_0 \times \mathbb{N}_0 |~\exists k\in \mathbb{Z}\text{ mit } m=n+kp}
+        R_{p} = \set{\pair{m,n}\in \mathbb{N}_0 \times \mathbb{N}_0 |~\exists k\in \mathbb{Z}\text{ mit } m=n+k\cdot p}
     \end{align*}
     So definieren wir die Restklassen von $\mathbb{N}_0$ bezüglich Division mit $p$.
     \begin{align*}
-        m\in [j]_{R} \equivalent m=j+kp\text{ für ein }k\in\mathbb{Z}
+        m\in [j]_{R} \equivalent m=n+k\cdot p\text{ für ein }k\in\mathbb{Z}
     \end{align*}
 \end{beispiel}
 
@@ -281,28 +281,28 @@
 \end{bemerkung}
 
 \begin{notation}[Pfeilnotation]
-    Wir schreiben $f: A \fromto B,\quad a\mapsto f\pair{a}$
+    Wir schreiben $f: A \fromto B,~a\mapsto f\pair{a}$.
 \end{notation}
 \begin{folgerung}
-    Zu $a\in A$ gibt es $f\pair{a}\in B \leadsto$ Tupel($a, f\pair{a}$) $\in A\times B \impl \set{\pair{a, f(a)}: a\in A} \subseteq A\times B$
+    Zu $a\in A$ gibt es $f\pair{a}\in B \leadsto$ Tupel($a, f\pair{a}$) $\in A\times B \impl \set{\pair{a, f(a)}: a\in A} \subseteq A\times B$.
 \end{folgerung}
 
 \begin{definition}[Funktion]
     Eine Relation $R = (A, B, G_R)$ heißt Funktion (oder Abbildung), wenn
     \begin{align*}
-        \forall a\in A~\exists! b\in B: (a,b)\in G_f.
+        \forall a\in A~\exists! b\in B\colon (a,b)\in G_f.
     \end{align*}
-    Wir setzen dann $f(a)\definedas b$
+    Wir setzen dann $f(a)\definedas b$.
 \end{definition}
 
 \begin{beispiel}[Mögliche Funktionen]
     \theoremescape
-    \begin{align*}
-        f\colon &\mathbb{Z} \rightarrow \realnumbers,\quad n\mapsto 3n^2+7\\
-        g\colon &\mathbb{Z} \rightarrow \mathbb{Z},\quad n\mapsto 3n^2+7\\
-        h\colon &\linterv{0, \infinity} \rightarrow \realnumbers,\quad n\mapsto x^2+3x+4\\
-        j\colon &\realnumbers \rightarrow \realnumbers,\quad n\mapsto x^2+3x+4\\
-    \end{align*}
+    \begin{alignat*}{2}
+        f\colon &\mathbb{Z} \rightarrow \realnumbers,\quad && n\mapsto 3n^2+7\\
+        g\colon &\mathbb{Z} \rightarrow \mathbb{Z},\quad && n\mapsto 3n^2+7\\
+        h\colon &\linterv{0, \infinity} \rightarrow \realnumbers,\quad && x\mapsto x^2+3x+4\\
+        j\colon &\realnumbers \rightarrow \realnumbers,\quad && x\mapsto x^2+3x+4\\
+    \end{alignat*}
 \end{beispiel}
 \begin{bemerkung}
     $f$ und $g$ haben zwar die gleiche Funktionsvorschrift, sind aber dennoch unterschiedliche Funktionen, da diese wie Relationen auch über Definitionsmenge und Zielmenge definiert sind.
@@ -311,10 +311,10 @@
 \begin{notation}[Bild und Urbild]
     Sei $f: A\rightarrow B$ eine Funktion.
     Dann gilt
-    \begin{align*}
-        &M \subseteq A:\qquad &f\pair{M} &\definedas \set{b\in B|~\exists x\in M: b=f\pair{x}}& (\text{Bild von } M \text{ unter } f)\\
-        &N \subseteq B:\qquad &f^{-1}\pair{N} &\definedas \set{a\in A|~f(a)\in N}& (\text{Urbild von } N \text{ unter } f)
-    \end{align*}
+    \begin{alignat*}{2}
+        & M \subseteq A:~ & f\pair{M} &\definedas \set{b\in B|~\exists x\in M\colon b=f\pair{x}}\tag{Bild von $M$ unter $f$}\\
+        & N \subseteq B:~ & f^{-1}\pair{N} &\definedas \set{a\in A|~f(a)\in N}\tag{Urbild von $N$ unter $f$}
+    \end{alignat*}
     Außerdem ist das gesamte Bild von $f$ definiert als
     \begin{align*}
         Bild(f) \definedas f(A)
@@ -331,9 +331,9 @@
     Es sei $f\colon A\fromto B$ eine Funktion.
     \theoremescape
     \begin{enumerate}[label=(\roman*)]
-        \item $f$ ist injektiv, falls $\forall a_1, a_2 \in A: f\pair{a_1} = f\pair{a_2} \impl a_1 = a_2$.
-        \item $f$ ist surjektiv, falls $Bild\pair{f} = B$
-        \item $f$ ist bijektiv, falls es injektiv und surjektiv ist
+        \item $f$ ist injektiv, falls $\forall a_1, a_2 \in A\colon f\pair{a_1} = f\pair{a_2} \impl a_1 = a_2$.
+        \item $f$ ist surjektiv, falls $Bild\pair{f} = B$.
+        \item $f$ ist bijektiv, falls es injektiv und surjektiv ist. In diesem Fall existiert eine Inverse\\ $f^{-1}: B\fromto A, b\mapsto a$ mit $f(a)=b$.
     \end{enumerate}
 \end{definition}
 
@@ -342,9 +342,9 @@
 \begin{definition}[Ordnungsrelation und teilweise geordnete Menge]
     Es sei $A$ eine Menge und $R$ eine Relation auf $A$. $R$ heißt Ordnungsrelation (geschrieben \anf{$\prec$}), falls
     \begin{enumerate}[label=(\roman*)]
-        \item $\forall a\in A: a \prec a$ (Reflexivität)
-        \item $\forall a_1, a_2, a_3\in A: a_1\prec a_2 \land a_2 \prec a_3 \impl a_1 \prec a_3$ (Transitivität)
-        \item $\forall a_1, a_2\in A: a_1\prec a_2 \land a_2 \prec a_1 \impl a_1 = a_2$ (Antisymmetrie)
+        \item $\forall a\in A\colon a \prec a$ (Reflexivität)
+        \item $\forall a_1, a_2, a_3\in A\colon a_1\prec a_2 \land a_2 \prec a_3 \impl a_1 \prec a_3$ (Transitivität)
+        \item $\forall a_1, a_2\in A\colon a_1\prec a_2 \land a_2 \prec a_1 \impl a_1 = a_2$ (Antisymmetrie)
     \end{enumerate}
     $\pair{A, \prec}$ heißt \textbf{teilweise} geordnete Menge. Nicht alle Paare $a_1$, $a_2$ müssen vergleichbar sein.
 \end{definition}

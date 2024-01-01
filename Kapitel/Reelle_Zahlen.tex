@@ -1,6 +1,6 @@
 \thispagestyle{pagenumberonly}
 
-Es gibt eine Menge $\realnumbers$, genannt Reelle Zahlen, die 3 Gruppen von Axiomen erfüllt:
+Es gibt eine Menge $\realnumbers$, genannt reelle Zahlen, die 3 Gruppen von Axiomen erfüllt:
 \begin{enumerate}
     \item Algebraische Axiome
     \item Anordnungsaxiome
@@ -23,12 +23,12 @@ In $\realnumbers$ gibt es 2 Operationen:
     \begin{enumerate}[label=(I.\arabic*)]
         \item $(a+b) + c = a + (b+c)$\quad \textit{Assoziativität der Addition}
         \item $a + b = b + a$\quad \textit{Kommutativität der Addition}
-        \item Es gibt genau eine Zahl genannt Null, geschrieben $0$, mit $\forall a \in\realnumbers: a+0 = a$ \quad \textit{Existenz eines neutralen Elements der Addition}
-        \item $\forall a\in\realnumbers~\exists! b\in \realnumbers: a + b = 0$, geschrieben $b=-a$\quad \textit{Existenz eines inversen Elements der Addition}
+        \item Es gibt genau eine Zahl genannt Null, geschrieben $0$, mit $\forall a \in\realnumbers\colon a+0 = a$ \quad \textit{Existenz eines neutralen Elements der Addition}
+        \item $\forall a\in\realnumbers~\exists! b\in \realnumbers\colon a + b = 0$, geschrieben $b=-a$\quad \textit{Existenz eines inversen Elements der Addition}
         \item $\pair{a\cdot b}\cdot c = a\cdot\pair{b\cdot c}$\quad \textit{Assoziativität der Multiplikation}
         \item $a\cdot b = b \cdot a$\quad \textit{Kommutativität der Multiplikation}
         \item $\forall a \in\realnumbers, a \neq 0$ gibt es ein eindeutiges $b\neq 0$ mit $a\cdot b = 1$. Wir schreiben $b = a^{-1} = \frac{1}{a}$\quad \textit{Existenz eines inversen Elements der Multiplikation}
-        \item Es gibt genau eine Zahl Eins, geschrieben 1, die von 0 verschieden ist, mit $\forall a\in\realnumbers: a\cdot 1 = a$\quad \textit{Existenz eines neutralen Elements der Multiplikation}
+        \item Es gibt genau eine Zahl Eins, geschrieben 1, die von 0 verschieden ist, mit $\forall a\in\realnumbers\colon a\cdot 1 = a$\quad \textit{Existenz eines neutralen Elements der Multiplikation}
         \item $a\cdot\pair{b+c} = a \cdot b + a \cdot c$\quad \textit{Distributivität}
     \end{enumerate}
 
@@ -97,11 +97,11 @@ In $\realnumbers$ gibt es 2 Operationen:
     \label{satz:bruchrechnen}
     ~\\(I.12) Es gilt:
     \setcounter{equation}{0}
-    \begin{align}
-        \frac{a}{b} + \frac{c}{d} &= \frac{ad+cb}{bd} &b,d&\neq 0\\[10pt]
-        \frac{a}{b} \cdot \frac{c}{d} &= \frac{ac}{bd} &b,d&\neq 0\\[10pt]
-        \frac{\frac{a}{b}}{\frac{c}{d}} &= \frac{ad}{bc} &b,c,d&\neq 0
-    \end{align}
+    \begin{alignat}{4}
+        \frac{a}{b} + \frac{c}{d} &= \frac{ad+cb}{bd} &\text{ für } b,d&\neq 0\\[10pt]
+        \frac{a}{b} \cdot \frac{c}{d} &= \frac{ac}{bd} &\text{ für } b,d&\neq 0\\[10pt]
+        \frac{\frac{a}{b}}{\frac{c}{d}} &= \frac{ad}{bc} &\text{ für } b,c,d&\neq 0
+    \end{alignat}
     \begin{uebung}
         Beweisen Sie Satz~\ref{satz:bruchrechnen}.
     \end{uebung}
@@ -111,14 +111,14 @@ In $\realnumbers$ gibt es 2 Operationen:
 
 Allgemein gilt: $a,b\in\realnumbers \impl a = b \lor a \neq b$.\\
 Ist $a\neq b$, besteht eine Anordnung \anf{$<$}, die verlangt, dass genau eine der Relationen $a<b$ oder $b<a$ gilt.
-Das heißt $\forall a,b\in\realnumbers$ gilt genau eine der Aussagen $a<b, b<a, a= b$\\
+Das heißt $\forall a,b\in\realnumbers$ gilt genau eine der Aussagen $a<b$, $b<a$, $a=b$.\\
 Diese Anordnung genügt folgenden Axiomen:
 \begin{axiom}[Anordnungsaxiome]
     \theoremescape
     \begin{enumerate}[label=(II.\arabic*)]
-        \item $a<b \land b < c \impl a < c$ (Transitivität)
-        \item $a<b, c \in\realnumbers \impl a + c < b + c$
-        \item $a<b, c > 0 \impl ac < bc$
+        \item $a<b \land b < c \impl a < c$\quad \textit{Transitivität}
+        \item $a<b,~c \in\realnumbers \impl a + c < b + c$
+        \item $a<b,~c > 0 \impl ac < bc$
     \end{enumerate}
 \end{axiom}
 
@@ -191,19 +191,20 @@ Diese Anordnung genügt folgenden Axiomen:
 \subsection{Das Vollständigkeitsaxiom}
 
 \begin{axiom}[Vollständigkeitsaxiom]
+    \label{axiom:vollstaendigkeitsaxiom}
     Jede nicht-leere Teilmenge $M\subseteq \realnumbers$, welche nach oben beschränkt ist, besitzt eine kleinste obere Schranke, genannt das Supremum von $M$.
 \end{axiom}
 
 \begin{notation}[Supremum]
-    Das Supremum einer Menge $M$ schreiben wir als $\sup M$
+    Das Supremum einer Menge $M$ schreiben wir als $\sup M$.
 \end{notation}
 
 \begin{definition}[Beschränktheit von Mengen]
     Sei $M\subseteq \realnumbers, M\neq \emptyset$.
     \begin{enumerate}[label=(\roman*)]
-        \item $M$ heißt \textbf{nach oben beschränkt}, falls ein $k\in\realnumbers$ existiert mit $\forall x\in M:x\leq k$.
+        \item $M$ heißt \textbf{nach oben beschränkt}, falls ein $k\in\realnumbers$ existiert mit $\forall x\in M\colon x\leq k$.
         Jede solche Zahl $k$ heißt obere Schranke von $M$.
-        \item $M$ heißt \textbf{nach unten beschränkt}, falls ein $k\in\realnumbers$ existiert mit $\forall x\in M:x\geq k$.
+        \item $M$ heißt \textbf{nach unten beschränkt}, falls ein $k\in\realnumbers$ existiert mit $\forall x\in M\colon x\geq k$.
         Jede solche Zahl $k$ heißt untere Schranke von $M$.
         \item $M$ heißt \textbf{beschränkt}, falls ein $k\geq 0$ existiert mit $-k\leq x \leq k\quad \forall x\in M$
     \end{enumerate}
@@ -265,9 +266,9 @@ Diese Anordnung genügt folgenden Axiomen:
     \end{enumerate}
     \begin{proof}
         \theoremescape
-        \begin{enumerate}
-            \item Wir setzen $a\definedas \sup M$. Sei $a<\infty$. Wäre (i) falsch, so folgt $\exists \varepsilon>0~\forall x\in M:a-\varepsilon > x$.\\Das heißt $a-\varepsilon$ ist eine obere Schranke für $M$. Aber $a-\varepsilon < a$; (Widerspruch)
-            \item Ist $a=\infty$, so hat $M$ keine obere Schranke. Nach Def. folgt für jedes $k\in\realnumbers$ existiert ein $x\in M: x > k$\qedhere
+        \begin{enumerate}[label=(\roman*)]
+            \item Wir setzen $a\definedas \sup M$. Sei $a<\infty$. Wäre (i) falsch, so folgt $\exists \varepsilon>0~\forall x\in M\colon a-\varepsilon > x$.\\Das heißt $a-\varepsilon$ ist eine obere Schranke für $M$. Aber $a-\varepsilon < a$ (Widerspruch)
+            \item Ist $a=\infty$, so hat $M$ keine obere Schranke. Nach Def. folgt für jedes $k\in\realnumbers$ existiert ein $x\in M\colon x > k$\qedhere
         \end{enumerate}
     \end{proof}
 \end{satz}
@@ -283,9 +284,14 @@ Diese Anordnung genügt folgenden Axiomen:
     \end{proof}
 \end{satz}
 \begin{definition}[Maximum und Minimum]
-    Es sei $M\subseteq \realnumbers, M\neq\emptyset$\\
-    $m\in M$ heißt größtes Element von $M$ (Maximum), geschrieben $\max M$, falls $x\leq m~\forall x\in M$.\\
-    Entsprechend: $m\in M$ heißt kleinstes Element von $M$ (Minimum), geschrieben $\min M$, falls $x\geq m~\forall x\in M$
+    Es sei $M\subseteq \realnumbers, M\neq\emptyset$. $m\in M$ heißt größtes Element von $M$ (Maximum), geschrieben $\max M$, falls
+    \begin{align*}
+        x\leq m\quad\forall x\in M
+    \end{align*}
+    Entsprechend: $m\in M$ heißt kleinstes Element von $M$ (Minimum), geschrieben $\min M$, falls
+    \begin{align*}
+        x\geq m\quad\forall x\in M
+    \end{align*}
 \end{definition}
 
 \begin{beispiel}
