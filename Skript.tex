@@ -168,6 +168,7 @@
     \section{Folgen und Grenzwerte}
     \input{Kapitel/Folgen_Grenzwerte}
 
+
     \section{Dichtheit von $\mathbb{Q}$ in $\mathbb{R}$}
     \input{Kapitel/Dichtheit}
 
@@ -1457,5 +1458,102 @@
         \end{enumerate}
     \end{satz}
 
+    \newpage
+
+    %%%%%%%%%%%%%%%%%%%%%%%%
+    % 9. Januar 2024
+    %%%%%%%%%%%%%%%%%%%%%%%%
+
+    \begin{satz}[Nullstellensatz für Polynome]
+        \marginnote{[9. Jan]}
+        \label{satz:nullstellen-polynome}
+        Jedes nicht-triviale Polynom von Grad $n$ hat höchstens $n$ Nullstellen.
+
+        \begin{proof}
+            Induktion in $n$.~\\
+            \begin{induktionsanfang}
+                Für $n=0$ (konstantes Polynom) stimmt die Behauptung.
+            \end{induktionsanfang}
+            \begin{induktionsschritt}
+                Angenommen die Behauptung stimmt für Polynom von Grad $n$. Sei $P$ Polynom von Grad $n+1$.\\
+                1. Fall: $P$ hat keine Nullstelle $\impl$ Die Behauptung stimmt (Fertig).\\
+                2. Fall: $P(\zeta) = 0$ für ein $\zeta\in\realnumbers \impl P(x) = (x-\zeta)\cdot Q\pair{x-\zeta}$. $Q(x-\zeta)$ ist Polynom von Grad $n$ mit höchstens $n$ Nullstellen. $\impl$ Anzahl der Nullstellen von $P$ ist $\leq n+1$.\qedhere
+            \end{induktionsschritt}
+        \end{proof}
+    \end{satz}
+
+    \begin{korollar}
+        Sind $P,Q$ Polynome von Grad $\leq n$ und stimmen $P,Q$ an $n+1$ verschiedenen Stellen überein, so ist $P=Q$.
+
+        \begin{proof}
+            $h\definedas P-Q$ ist Polynom von Grad $\leq n \annot{\impl}{\ref{satz:nullstellen-polynome}} h$ hat höchstens $n$ Nullstellen, sofern $h$ nicht-trivial ist.\\
+            Aber: Nach Voraussetzung existiert $x_1,\dots, x_{n+1}$ paarweise verschieden mit
+            \begin{align*}
+                P(x_j) &= Q(x_j)\quad j=1,\dots,n+1\\
+                \impl h(x_j) &= 0\quad\forall j=1,\dots,n+1
+            \end{align*}
+            $\annot{\impl}{\ref{satz:nullstellen-polynome}}$ $h$ ist trivial, das heißt $H(x) = 0~\forall x \impl P(x)=Q(x)~\forall x$.
+        \end{proof}
+    \end{korollar}
+
+    \begin{bemerkung}
+        Der vorherige Beweis lässt sich auch für die komplexen Zahlen durchführen.
+    \end{bemerkung}
+
+    \begin{korollar}[Koeffizientenvergleich]
+        Zwei Polynome $P,Q$ sind genau dann gleich, wenn sie dieselben Koeffizienten haben.
+    \end{korollar}
+
+    \newpage
+
+
+    \section{Cauchyprodukt und Exponentialfunktionen}
+    \thispagestyle{pagenumberonly}
+
+    \subsection{}
+    Frage: Gegeben Reihen $\sum_{n=0}^{\infty} a_n$, $\sum_{n=0}^{\infty} b_n$, beide konvergent. Wie kann man das Produkt $\pair{\sum_{n=0}^{\infty} a_n}\cdot\pair{\sum_{n=0}^{\infty} b_n}$ geschickt berechnen?\\
+    \begin{align*}
+        u &= \sum_{n=0}^{\infty} a_n = \lim_{n\fromto\infty} s_n\quad s_n \definedas \sum_{l=0}^{n} a_l\\
+        v &= \sum_{n=0}^{\infty} b_n = \lim_{n\fromto\infty} t_n \quad t_n \definedas \sum_{j=0}^{n} b_j\\
+        \impl u\cdot v &= \lim_{n\fromto\infty} s_n \cdot \lim_{n\fromto\infty} t_n = \lim_{n\fromto\infty} \pair{s_n\cdot t_n}\\[10pt]
+        s_n \cdot t_n &= \sum_{l=0}^{n} a_l \cdot \sum_{j=0}^{n} b_j = \sum_{l=0}^{n} \sum_{j=0}^{n} a_l\cdot b_j
+    \end{align*}
+    Fakt: Indexmenge der Produkte $a_l b_j$ ist $\naturalnumbers_0 \times \naturalnumbers_0$.
+    \begin{align*}
+        = \set{(l,j):~l,j\in\naturalnumbers_0} &= \naturalnumbers_0\times\naturalnumbers_0
+    \end{align*}
+    Es gibt (viele) Bijektionen $\sigma: \naturalnumbers_0 \fromto \naturalnumbers_0\times\naturalnumbers_0$ zum Beispiel durch Schrägabzählen.\\
+    Frage: Ist $\sigma: \naturalnumbers_0 \fromto \naturalnumbers_0\times\naturalnumbers_0$ eine beliebige Bijektion, gilt dann
+    \begin{align*}
+        \pair{\sum_{n=0}^{\infty} a_n}\cdot\pair{\sum_{n=0}^{\infty} b_n} &= \sum_{n=0}^{\infty} a_{\sigma_1(n)}\cdot b_{\sigma_2(n)}\\
+        \sigma(n) &= \pair{\sigma_1(n), \sigma_2(n)}
+    \end{align*}
+    Antwort: Im Allgemeinen nein, aber okay, wenn $\sum_{n}^{} a_n$, $\sum_{n}^{} b_n$ absolut konvergent sind.
+
+    \begin{satz} % Satz 1
+        Seien $\sum_{n=0}^{\infty} a_n$, $\sum_{n=0}^{\infty} b_n$ absolut konvergente Reihen. Dann gilt für jede Bijektion $\sigma: \naturalnumbers_0 \fromto \naturalnumbers_0\times\naturalnumbers_0$
+        \begin{align*}
+            \pair{\sum_{n=0}^{\infty} a_n} \cdot \sum_{n=0}^{\infty} b_n &= \sum_{n=0}^{\infty} a_{\sigma_1(n)} \cdot b_{\sigma_2(n)}
+            \intertext{Das heißt mit $\sigma(n)=\pair{\sigma_1(n), \sigma_2(n)}$}
+            c_n &\definedas a_{\sigma_1(n)}\cdot b_{\sigma_2(n)}\\
+            u\cdot v &= \sum_{n=0}^{\infty} c_n
+            \intertext{mit der Reihe $\sum_{n=0}^{\infty} c_n$ auch absolut konvergent}
+        \end{align*}
+        Ferner gilt
+        \begin{align*}
+            u\cdot v &= \sum_{l=0}^{\infty} \pair{\sum_{j=0}^{\infty} a_l\cdot b_j} \tag{Vertikal zuerst}\\
+            &= \sum_{j=0}^{\infty} \pair{\sum_{l=0}^{\infty} a_l\cdot b_j}\tag{Horizontal zuerst}
+        \end{align*}
+        und
+        \begin{align*}
+            u\cdot v &= \sum_{k=0}^{\infty} \pair{\sum_{0\leq j,l~l+j=k}^{} a_l\cdot b_j} \tag{Schräg abzählen}
+        \end{align*}
+
+        \begin{align*}
+            \sum_{k=0}^{L} \abs{a_{\sigma_1(k)}\cdot b_{\sigma_2(k)}} &\leq \sum_{0\leq l\leq M_L~0\leq j\leq M_L}^{} \abs{a_l\cdot b_j} = \pair{\sum_{l=0}^{M_L} \abs{a_l}} \cdot \pair{\sum_{j=0}^{M_L} \abs{b_j}}\\
+            &\leq \pair{\sum_{l=0}^{\infty} \abs{a_l}} \cdot \pair{\sum_{j=0}^{\infty} \abs{b_j}}\\
+            M_L &\definedas \max_{0\leq k\leq L}\pair{\max\pair{\sigma_1(k), \sigma_2(k)}}
+        \end{align*}
+    \end{satz}
 
 \end{document}
