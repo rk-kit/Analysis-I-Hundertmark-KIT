@@ -1596,7 +1596,7 @@
                 \intertext{Schritt 4: Cauchy-Produkt}
                 \sum_{n=0}^{L} \sum_{0\leq j,k~j+k=n}^{} a_j b_k &= \sum_{n=0}^{L} \pair{\sum_{j=0}^{L} a_j b_{L-j}}
                 \intertext{ist Teilfolge der Folge $\sum_{n}^{} c_n$ mittels Schrägabzählen}
-                \impl ???
+                \impl \lim_{L\fromto\infty} \sum_{n=0}^{L} \sum_{j=0}^{L} a_j b_{L-j} &= \sum_{n=0}^{\infty} c_{\sigma(n)} = s\qedhere
             \end{align*}
         \end{proof}
 
