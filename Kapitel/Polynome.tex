@@ -1,0 +1,107 @@
+\subsection{Reelle Polynome}
+\thispagestyle{pagenumberonly}
+
+\begin{definition}[Reelles Polynom]
+    Es sei $a_0,a_1, \dots, a_n\in\realnumbers$,~$a_n \neq 0,~\in\realnumbers$. Dann ist
+    \begin{align*}
+        P(x) &\definedas a_0 + a_1 \cdot x + a_2 \cdot x^2 + \dots + a_n \cdot x^n
+    \end{align*}
+    ein reelles Polynom vom Grad $n$ mit $Grad(P) = n$.
+\end{definition}
+
+\begin{definition}[Nullpolynom]
+    $P(x) = 0$ ist das Nullpolynom. Ein Polynom $P$ ist nicht-trivial, wenn es nicht das Nullpolynom ist.
+\end{definition}
+
+\begin{bemerkung}[Analytische Polynome]
+    Ähnlich zu reellen Polynomen lassen sich auch analytische Polynome definieren. Es sei $a_0, a_1, \dots, a_n \in\complexnumbers,~a_0\neq 0,~z\in\complexnumbers$. Dann ist
+    \begin{align*}
+        P(z) &\definedas a_0 + a_1\cdot z + a_2\cdot z^2 + \dots + a_n\cdot z^n
+    \end{align*}
+    eine analytisches Polynom mit $Grad(P) = n$.
+\end{bemerkung}
+
+\begin{definition}[Grad von speziellen Polynomen]
+    Wir definieren den Grad von konstanten Polynomen der Form $P(x) = a_0$ als 0 und den Grad des Nullpolynoms als $-1$.
+\end{definition}
+
+\begin{satz}[Eigenschaften von Polynomen]
+    \theoremescape
+    \label{satz:eigenschaften-polynome}
+    \begin{enumerate}[label=(\roman*)]
+        \item Sei $P$ ein Polynom mit $Grad(P) = n$ und $\lambda\in\realnumbers,~\lambda\neq 0$. Dann ist $Grad(\lambda P) = n$.
+        \item Seien $P, Q$ nicht-triviale Polynome mit $Grad(P) = n$ und $Grad(Q)=m$. Dann gilt $PQ$ ist ein Polynom mit $Grad(PQ)=n+m$.
+        \begin{proof}
+            \begin{align*}
+                P(x) &= \sum_{j=0}^{n} a_j x^j\\
+                Q(x) &= \sum_{i=0}^{n} b_i x^i\\
+                P(x) \cdot Q(x) &= \pair{\sum_{j=0}^{n} a_j x^j}\cdot \pair{\sum_{i=0}^{n} b_i x^i}\\
+                &= \sum_{j=0}^{n} \sum_{l=0}^{m} a_{j} b_l\cdot x^{j+l}
+                \intertext{Wir setzen $k= j+l\in\set{0,1,\dots,n+m}$}
+                &= \sum_{k=0}^{n+m} \pair{\sum_{\substack{j=0\\ 0\leq k-j\leq m}}^{n} a_j b_{k-j}} x^k\\
+                &= a_n b_m\cdot x^{n+m} + \textit{Terme niedrigerer Ordnung}\qedhere
+            \end{align*}
+        \end{proof}
+        \item Entwicklung in einem anderen Punkt. Wir schreiben $x = \eta + \zeta$
+        \begin{align*}
+            P(x) &= \sum_{j=0}^{n} a_j x^j = \sum_{j=0}^{n} a_j \cdot\pair{\eta + \zeta}^j\\
+            \annot[{&}]{=}{\ref{satz:binom-lehrsatz}} \sum_{j=0}^{n} a_j \cdot\pair{\sum_{l=0}^{j} \binom{j}{l}\cdot\eta^{l}\cdot\zeta^{j-l}}
+            \intertext{Es gilt $\binom{j}{l}=0$, falls $l>j$. Also können wir auch schreiben}
+            &= \sum_{j=0}^{n} a_j \cdot\pair{\sum_{l\geq 0} \binom{j}{l}\cdot\eta^{l}\cdot\zeta^{j-l}}\\
+            &= \sum_{l\geq 0} \pair{\sum_{j=0}^{n} a_j\cdot \binom{j}{l}\cdot\zeta^{j-l}}\cdot\eta^l\\
+            &= \sum_{l\geq 0} \underbrace{\pair{\sum_{j=0}^{n} \binom{j}{l}\cdot a_j\cdot\zeta^{j-l}}}_{\definedasbackwards b_l}\cdot\pair{x-\zeta}^l\\
+            &= \sum_{l=0}^{n} b_l \cdot\pair{x-\zeta}^l
+            \intertext{Wir betrachten $l=0$}
+            b_0 &= \sum_{j=0}^{n} \binom{j}{0}\cdot a_j\cdot\zeta^{j} = \sum_{j=0}^{n} a_j \zeta^j = P(\zeta)\\
+            \impl P(x) &= P(\zeta) + \sum_{l=1}^{n} b_l \cdot\pair{x-\zeta}^l\\
+            &= P(\zeta) + (x-\zeta) \cdot \underbrace{\sum_{l=0}^{n-1} b_{l+1} \cdot \pair{x-\zeta}^l}_{\definedasbackwards Q(x-\zeta)}\\
+            &= P(\zeta) + (x-\zeta)\cdot Q(x-\zeta)
+        \end{align*}
+        Dabei gilt außerdem $Grad(Q) = n-1$. Diesen Zusammenhang werden wir später in Satz~\ref{satz:nullstellen-polynome} verwenden, um eine Aussage über die Anzahl an Nullstellen eines Polynoms zu treffen.
+    \end{enumerate}
+\end{satz}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% 9. Januar 2024
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{satz}[Nullstellensatz für Polynome]
+    \marginnote{[9. Jan]}
+    \label{satz:nullstellen-polynome}
+    Jedes nicht-triviale Polynom von Grad $n$ hat höchstens $n$ Nullstellen.
+
+    \begin{proof}
+        Induktion in $n$.~\\
+        \begin{induktionsanfang}
+            Für $n=0$ (konstantes Polynom) stimmt die Behauptung.
+        \end{induktionsanfang}
+        \begin{induktionsschritt}
+            Angenommen die Behauptung stimmt für Polynom von Grad $n$. Sei $P$ Polynom von Grad $n+1$.\\
+            1. Fall: $P$ hat keine Nullstelle $\impl$ Die Behauptung stimmt für $P$.\\
+            2. Fall: $P(\zeta) = 0$ für ein $\zeta\in\realnumbers \annot{\impl}{\ref{satz:eigenschaften-polynome}} P(x) = (x-\zeta)\cdot Q\pair{x-\zeta}$. $Q$ ist Polynom von Grad $n$ mit höchstens $n$ Nullstellen. $\impl$ Anzahl der Nullstellen von $P$ ist $\leq n+1$.\qedhere
+        \end{induktionsschritt}
+    \end{proof}
+\end{satz}
+
+\begin{korollar}
+    Sind $P,Q$ Polynome von Grad $\leq n$ und stimmen $P,Q$ an $n+1$ verschiedenen Stellen überein, so ist $P=Q$.
+
+    \begin{proof}
+        $h\definedas P-Q$ ist Polynom von Grad $\leq n$. Nach Satz~\ref{satz:nullstellen-polynome} hat $h$ damit höchstens $n$ Nullstellen, sofern $h$ nicht-trivial ist. Aber nach Voraussetzung existieren paarweise verschiedene $x_1,\dots, x_{n+1}$ mit
+        \begin{alignat*}{2}
+            P(x_j) &= Q(x_j)\quad&\forall j=1,\dots,n+1\\
+            \impl h(x_j) &= 0\quad&\forall j=1,\dots,n+1
+        \end{alignat*}
+        Damit ist $h$ nach Satz~\ref{satz:nullstellen-polynome} trivial, das heißt $(\forall x\colon H(x) = 0) \impl (\forall x\colon P(x)=Q(x))$.
+    \end{proof}
+\end{korollar}
+
+\begin{bemerkung}
+    Der vorherige Beweis lässt sich auch auf analytische Polynome in den komplexen Zahlen übertragen.
+\end{bemerkung}
+
+\begin{korollar}[Koeffizientenvergleich]
+    Zwei Polynome $P,Q$ sind genau dann gleich, wenn sie dieselben Koeffizienten haben.
+\end{korollar}
+
+\newpage
