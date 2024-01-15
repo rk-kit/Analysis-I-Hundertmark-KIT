@@ -88,6 +88,7 @@
 \newcommand{\aligntoright}[2]{\hfill#1\hspace{#2\textwidth}~}
 \newcommand{\horizontalline}[0]{\par\noindent\rule{0.05\textwidth}{0.1pt}\\}
 \newcommand{\ntoinfty}[0]{n\fromto\infty}
+\newcommand{\rgbcolor}[3]{rgb,255:red,#1;green,#2;blue,#3}
 
 % Envs
 \newenvironment{induktionsanfang}{
@@ -858,8 +859,6 @@
 
     \newpage
 
-    \renewcommand{\thepage}{(Noch in Bearbeitung)}
-
     \begin{definition}[Umordnung von Reihen] % Definition 9
         Seien
         \begin{align*}
@@ -952,13 +951,13 @@
 
     \section{[*] $\realnumbers^d$, Konvergenz im $\realnumbers^d$, die komplexen Zahlen $\complexnumbers$ und der Raum $\complexnumbers^d$}
 
-    \subsection{[*] Normen und mehrdimensionale Konvergenz}
+    \subsection{[*] Der Raum $\realnumbers^d$ und Normen}
 
     \thispagestyle{pagenumberonly}
 
     \begin{definition}
         \begin{align*}
-            \realnumbers^d &\definedas\text{ Vektorraum der reellen d-Tupel}\\
+            \realnumbers^d &\definedas\text{ Vektorraum der reellen $d$-Tupel}\\
             &=\set{\pair{x_1, x_2, \dots, x_d} ~\middle|~ x_j\in\realnumbers,~ j=1,\dots,d }\\
         \end{align*}
     \end{definition}
@@ -981,7 +980,10 @@
         \end{align*}
     \end{notation}
 
-    \begin{definition}[Euklidische Länge eines Vektors]
+    \horizontalline
+    Im $\realnumbers$ haben wir Konvergenz über den Betrag definiert. Im $\realnumbers^d$ benötigen wir daher ein ähnliches Konzept. Wir betrachten dafür zunächst einige Beispiele solcher \textit{Normen}.
+
+    \begin{beispiel}[Euklidische Länge eines Vektors]
         Für $d=2$ gilt für die euklidische Länge $\norm{x}$ eines Vektors $x\in\realnumbers^2$
         \begin{align*}
             \norm{x}^2 &= (x_1)^2 + (x_2)^2\\
@@ -993,56 +995,67 @@
             \intertext{Wir schreiben auch}
             \norm{x}_2 &\definedas \sqrt{\pair{\sum_{j=1}^{d} (x_j) ^2}}\tag{$x\in\realnumbers^d$}
         \end{align*}
-    \end{definition}
+    \end{beispiel}
 
-    \begin{bemerkung}[Alternative Normen]
+    \begin{beispiel}[Andere Normen]
+        Neben der euklidischen lassen sich noch weitere Normen definieren. Zum Beispiel
         \begin{align*}
-            \norm{x}_1 &\definedas \sum_{j=1}^{d} \abs{x_d} \tag{Manhattan-Norm}\\
+            \norm{x}_1 &\definedas \sum_{j=1}^{d} \abs{x_j} \tag{Manhattan-Norm}\\
             \norm{x}_{\infty} &\definedas \max_{1\leq j \leq d} \abs{x_j}\tag{Maximums-Norm}
         \end{align*}
-    \end{bemerkung}
-
-    \begin{bemerkung}[Äquivalenz von Normen]
-        Wir zeigen, dass $\norm{\cdot}_{\infty}$ und $\norm{\cdot}_{2}$ äquivalent sind.
-    \end{bemerkung}
-
-    \begin{align*}
-        \abs{}\cdot\abs{}_1, &\abs{}\cdot\abs{}_{\infty}, \abs{}\cdot\abs{}\text{ sind äquivalent}\\
-        \abs{x_k} &\leq \sqrt{\sum_{j=1}^{d} \abs{x_j}^2} = \norm{x}_2\tag{$1\leq k \leq d$}\\
-        \impl \norm{x}_{\infty} &= \max_{k=1,\dots, d} \abs{x_k} \leq \norm{x}_2
-        \intertext{Umgekehrt}
-        \norm{x}_2^2 &= \sum_{j=1}^{d} \abs{x_j}^2 \leq \sum_{j=1}^{d} \pair{\max_{k=1,\dots, d}\pair{\abs{x_k}}}^2 = d \cdot \norm{x}_{\infty}^2\\
-        \norm{x}_{\infty} &\leq \norm{x}_2 \leq \sqrt {d}\cdot \norm{x}_{\infty}\\
-        \impl \frac{1}{\sqrt{d}}\cdot \norm{x}_2 &\leq \norm{x}_2 \leq \norm{x}_{\infty} \leq \norm{x}_2\\
-        \intertext{Ähnlich mit $\norm{x}_1$ und $\norm{x}_\infty$}
-    \end{align*}
-
-    \newpage
+    \end{beispiel}
 
     \begin{definition}[Norm] % Definition 1
         Eine Norm auf $\realnumbers^d$ (oder einem reellen Vektorraum) ist eine Abbildung
         \begin{align*}
-            \abs{\abs{.}}: \realnumbers^d\fromto \realnumbers
+            \norm{.}: \realnumbers^d\fromto \realnumbers
         \end{align*}
-        mit folgenden Eigenschaften
+        mit folgenden Eigenschaften:
         \begin{enumerate}[label=\alph*)]
             \item $\norm{x} \geq 0~\forall x\in\realnumbers^d$ sowie $\norm{x} = 0\impl x=0$
-            \item $\forall\lambda\in\realnumbers,~x\in\realnumbers^d\colon \abs{\abs{\lambda x}} = \abs{\lambda}\norm{x}$
-            \item $\forall x,y\in\realnumbers^d\colon\abs{\abs{x+y}} \leq \norm{x} + \abs{\abs{y}}$\quad\text{(Dreiecksungleichung)}
+            \item $\forall\lambda\in\realnumbers,~x\in\realnumbers^d\colon \norm{\lambda x} = \abs{\lambda}\cdot\norm{x}$
+            \item $\forall x,y\in\realnumbers^d\colon\norm{x+y} \leq \norm{x} + \norm{y}$\quad\text{(Dreiecksungleichung)}
         \end{enumerate}
     \end{definition}
 
     \begin{bemerkung}
-        Dass a), b) und c) für $\norm{\cdot}_1$ und $\norm{\cdot}_{\infty}$ gelten, ist einfach zu zeigen. Außerdem sind a) und b) für $\norm{\cdot}_2$ einfach zu zeigen, c) ist tricky.
+        Dass a), b) und c) für $\norm{\cdot}_1$ und $\norm{\cdot}_{\infty}$ gelten, ist einfach zu zeigen. Außerdem sind a) und b) für $\norm{\cdot}_2$ einfach zu zeigen, c) ist tricky. (Übung)
     \end{bemerkung}
 
+    \begin{definition}[Äquivalenz von Normen]
+        2 Normen $\norm{\cdot}_a$ und $\norm{\cdot}_b$ sind äquivalent, falls
+        \begin{align*}
+            \exists c_1, c_2\in\realnumbers\colon c_1\cdot\norm{x}_a \leq \norm{x}_b \leq c_2 \norm{x}_a\quad\forall x\in V
+        \end{align*}
+    \end{definition}
+
+    \begin{beispiel}[Äquivalenz von euklidischer und Maximums-Norm]
+        \label{beispiel:norm-equiv}
+        Wir zeigen, dass $\norm{\cdot}_{\infty}$ und $\norm{\cdot}_{2}$ äquivalent sind.
+        \begin{align*}
+            \abs{x_k} &\leq \sqrt{\sum_{j=1}^{d} \abs{x_j}^2} = \norm{x}_2\tag{$1\leq k \leq d$}\\
+            \impl \norm{x}_{\infty} &= \max_{k=1,\dots, d} \abs{x_k} \leq \norm{x}_2\tag{1}
+            \intertext{Umgekehrt}
+            \norm{x}_2^2 = \sum_{j=1}^{d} \abs{x_j}^2 &\leq \sum_{j=1}^{d} \pair{\max_{k=1,\dots, d}\pair{\abs{x_k}}}^2 = d \cdot \norm{x}_{\infty}^2\\
+            \impl \norm{x}_2 &\leq \sqrt {d}\cdot \norm{x}_{\infty}\tag{2}
+            \intertext{Mit (1) und (2) gilt dann}
+            \impl \frac{1}{\sqrt{d}}\cdot \norm{x}_2 &\leq\norm{x}_{\infty} \leq \norm{x}_2
+        \end{align*}
+    \end{beispiel}
+
+    \begin{uebung}
+        Weisen Sie die Äquivalenz von $\norm{x}_1$ und $\norm{x}_\infty$ analog zu Beispiel~\ref{beispiel:norm-equiv} nach.
+    \end{uebung}
+
+    \subsection{[*] Konvergenz im $\realnumbers^d$}
+
     \begin{bemerkung}[Abstand zwischen 2 Vektoren im $\realnumbers^d$]
-        Zu jeder Norm auf $\realnumbers^d$ (oder reellen Vektorräumen) definieren wir den Abstand von 2 Vektoren $x,y\in\realnumbers^d$ als $\norm{x-y}$
+        Zu jeder Norm auf $\realnumbers^d$ (oder reellen Vektorräumen) definieren wir den Abstand von 2 Vektoren $x,y\in\realnumbers^d$ als $\norm{x-y}$.
         \begin{align*}
             d(x,y) &\definedas \norm{x-y}
             \intertext{Mit $z$ als weiterem Vektor gilt}
             \norm{x-y} &= \norm{x-z+z-y}\\
-            &\leq \norm{x-y} + \norm{z-y}\\
+            &\leq \norm{x-z} + \norm{z-y}\\
             \norm{x-y} &= \norm{-(y-x)} = \abs{-1}\cdot \norm{y-x} = \norm{y-x}
         \end{align*}
     \end{bemerkung}
@@ -1067,13 +1080,14 @@
         \begin{figure}[H]
             \centering
             \begin{tikzpicture}
+                \draw[fill=\rgbcolor{230}{230}{230}, dashed] (0,0) circle (0.75cm);
+                \draw[fill=\rgbcolor{230}{230}{230}, dashed] (2,1) circle (0.75cm);
                 \draw[->] (-3,0) -- (3,0);
                 \draw[->] (0,-3) -- (0,3);
                 \draw[->] (0,0) node {$\times$} -- (0.52, 0.52) node[below, pos=0.8] {$\varepsilon$};
                 \draw[->] (2,1) node {$\times$} -- (2, 1.75) node[right, pos=0.5] {$\varepsilon$};
-                \draw (0,0) circle (0.75cm);
                 \draw (-0.25, 0.35) -- (-1.5, 0.35) node[left] {$B_{\varepsilon}\pair{(0,0)}$};
-                \draw (2,1) circle (0.75cm);
+                \draw (1.75, 1.35) -- (-1.5, 1.35) node[left] {$B_{\varepsilon}\pair{(x_1,x_2)}$};
                 \node at (-0.75,-0.75) {1.};
                 \node at (2.75,0.25) {2.};
                 \node at (3,-2) {\begin{tabular}{l}
@@ -1085,18 +1099,16 @@
     \end{visualisierung}
 
     \begin{definition}[Konvergenz im $\realnumbers^d$] % Definition 2
-        Sei $(x_n)_n$ eine Folge in $\realnumbers^d$ mit $x_n\in\realnumbers^d~\forall n$.\\
-        $(x_n)_n$ konvergiert gegen $x\in\realnumbers^d$, falls
-        \begin{align*}
-            \forall\varepsilon > 0~\exists N\in\naturalnumbers\colon& \norm{x_1-x}_2 <\varepsilon\quad\forall n\geq N
+        Sei $(x_n)_n$ eine Folge in $\realnumbers^d$ mit $x_n\in\realnumbers^d~\forall n$. Dann konvergiert $(x_n)_n$ gegen $x\in\realnumbers^d$, falls
+        \begin{alignat*}{2}
+            \forall\varepsilon > 0~\exists N\in\naturalnumbers\colon& \norm{x_1-x}_2 <\varepsilon\quad&&\forall n\geq N
             \intertext{Das heißt}
-            \forall\varepsilon > 0~\exists N\in\naturalnumbers\colon& x_n\in B_{\varepsilon}(x)\quad\forall n\geq N
-        \end{align*}
+            \forall\varepsilon > 0~\exists N\in\naturalnumbers\colon& x_n\in B_{\varepsilon}(x)\quad&&\forall n\geq N
+        \end{alignat*}
     \end{definition}
 
     \begin{beobachtung}[Konvergenz in $\realnumbers$ vs $\realnumbers^d$]
-        Es sei ${x_n}\in\realnumbers^d$ mit $x_n = \pair{x_n^1, x_n^2, \dots, x_n^d}$\footnote{Koordinaten von $(x_n)_n$}.\\
-        Damit ergeben sich die Folgen $(x_n^1)_n$, $(x_n^2)_n$, \dots, $(x_n^d)_n$ in $\realnumbers$.
+        Es sei ${x_n}\in\realnumbers^d$ mit $x_n = \pair{x_n^1, x_n^2, \dots, x_n^d}$\footnote{Koordinaten von $(x_n)_n$}. Damit ergeben sich die Folgen $(x_n^1)_n$, $(x_n^2)_n$, \dots, $(x_n^d)_n$ in $\realnumbers$.
         Angenommen $(x_n)_n$ konvergiert gegen $x\in\realnumbers^d$. Dann konvergieren alle Folgen $(x_n^l)_n$ in $\realnumbers$ und $\lim_{\ntoinfty} x_n^l = x^l$
 
         \begin{proof}
@@ -1104,10 +1116,11 @@
                 \abs{x_n^{l} - x^{l}}^2 &\leq \sum_{j=1}^{d} \abs{x_n^{j}-x^{j}}^2 = \norm{x_n -x}_2^2\quad \forall l=1,\dots, d\\
                 \impl \abs{x_n^l-x^l} &\leq \norm{x_n-x}_2 \fromto 0\text{ für } n\fromto\infty
             \end{align*}
-            Also konvergiert $(x_n^l)$ gegen $x^l$ in $\realnumbers$ für alle $l=1,\dots,d$.\qedhere\\
-            Es gilt sogar die Umkehrung.
+            Also konvergiert $(x_n^l)$ gegen $x^l$ in $\realnumbers$ für alle $l=1,\dots,d$.\qedhere
         \end{proof}
     \end{beobachtung}
+
+    \noindent Es gilt sogar die Umkehrung:
 
     \begin{satz}[Konvergenz im $\realnumbers^d$]
         Eine Folge $(x_n)_n$ in $\realnumbers^d$ konvergiert genau dann, wenn jede der Koordinatenfolge $(x_n^l)_n$ in $\realnumbers$ konvergiert $\forall l=1,\dots, d$.
@@ -1138,16 +1151,8 @@
     % 19. Dezember 2023
     %%%%%%%%%%%%%%%%%%%%%%%%
 
-
     \begin{bemerkung}
         \marginnote{[19. Dez]}
-        2 Normen $\norm{\cdot}_a$ und $\norm{\cdot}_b$ sind äquivalent, falls
-        \begin{align*}
-            \exists c_1, c_2\colon c_1\cdot\norm{x}_a \leq \norm{x}_b \leq c_2 \norm{x}_a\quad\forall x\in V
-        \end{align*}
-    \end{bemerkung}
-
-    \begin{bemerkung}
         Sei $(a_n)_n\in\realnumbers^d$ mit $a_n = \pair{a_n^1, a_n^2, \dots, a_n^d}$. Reihe $\sum_{n=1}^{\infty} a_n = ??$. Wir betrachten die Partialsummen
         \begin{align*}
             s_n &\definedas \sum_{j=1}^{n} a_j
@@ -1394,6 +1399,7 @@
 
     \section{Polynome}
     \input{Kapitel/Polynome}
+
 
     \section{[*] Cauchyprodukt und Exponentialfunktionen}
     \thispagestyle{pagenumberonly}
