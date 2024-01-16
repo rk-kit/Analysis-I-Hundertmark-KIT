@@ -89,6 +89,8 @@
 \newcommand{\horizontalline}[0]{\par\noindent\rule{0.05\textwidth}{0.1pt}\\}
 \newcommand{\ntoinfty}[0]{n\fromto\infty}
 \newcommand{\rgbcolor}[3]{rgb,255:red,#1;green,#2;blue,#3}
+\newcommand{\re}{\text{Re}}
+\newcommand{\im}{\text{Im}}
 
 % Envs
 \newenvironment{induktionsanfang}{
@@ -1542,5 +1544,239 @@
 
     \par\noindent\rule{\textwidth}{0.4pt}
 
+    %%%%%%%%%%%%%%%%%%%%%%%%
+    % 16. Januar 2023
+    %%%%%%%%%%%%%%%%%%%%%%%%
+
+    \begin{bemerkung}
+        \marginnote{[16. Jan]}
+        Letzter Schritt: Cauchy-Produkt:
+        \begin{align*}
+            \sum_{n=0}^{\infty} &= \sum_{n=0}^{\infty} \sum_{\nu=0}^{\infty} a_{\nu}\cdot b_{n-\nu}\\
+            &= \pair{\sum_{j=0}^{n} a_j}\cdot\pair{\sum_{k=0}^{\infty} b_k}
+        \end{align*}
+    \end{bemerkung}
+
+    \newpage
+
+    \subsection{Exponentialfunktionen}
+
+    \begin{definition}[Exponentialfunktion]
+        $z\in\complexnumbers$, $e^z = \exp(z)\definedas \sum_{n=0}^{\infty} \frac{z^n}{n!}$, $z^0=1$. $\exp: \complexnumbers\fromto\complexnumbers$.
+    \end{definition}
+
+    \begin{satz}
+        \theoremescape
+        \begin{enumerate}[label=(\alph*)]
+            \item Für alle $z\in\complexnumbers$ konvergiert obige Reihe absolut
+            \item $\exp(z_1)\cdot\exp(z_2) = \exp(z_1+z_2)$
+            \item $\exp(z)\neq 0~\forall z\in\complexnumbers$ und $\exp(z)^{-1} = \exp(-z)$
+            \item $\overline{\exp(z)} = \exp(\overline{z})$. Insbesondere ist $\abs{\exp(z)} = \exp(\re(z))$
+            \item Für $\alpha\in\realnumbers$ ist $\abs{\exp(i\alpha)}=1$. Setzen
+            \begin{align*}
+                \cos \alpha &= \cos(\alpha) \definedas \re (e^{i\alpha})\\
+                &= \frac{1}{2} \cdot\pair{e^{i\alpha} + e^{-i\alpha}}
+                \sin \alpha &= \sin(\alpha) \definedas \im (e^{i\alpha}) = \frac{1}{2i}\cdot\pair{e^{i\alpha}-e^{-i\alpha}}
+                \intertext{Haben}
+                -1 &\leq \cos \alpha \leq 1\\
+                -1 &\leq \sin \alpha \leq 1\\
+                \cos(\alpha)^2 + \sin(\alpha)^2 &= 1\quad\forall \alpha\in\realnumbers\\
+                \text{ Euklidische Gleichung } e^{i\alpha} &= \cos(\alpha) + i\sin(\alpha)
+            \end{align*}
+        \end{enumerate}
+
+        \begin{proof}[(a)]
+            \begin{align*}
+                a_n &= \frac{1}{n!}\cdot z^n\\
+                \frac{a_{n+1}}{a_n} &= \frac{z}{n+1}\fromto 0 \text{ für } n\fromto\infty\\
+                \annot{\impl}{Quotientenkriteirum} \sum_{n=0}^{\infty} a_n &= \sum_{n=0}^{\infty} \frac{z^n}{n!}\text{ konvergiert absolut }
+            \end{align*}
+        \end{proof}
+        \begin{proof}[(b)]
+            \begin{align*}
+                e^z + e^{zi} &= \pair{\sum_{j=0}^{\infty} \frac{z^j}{j!}} \cdot \pair{\sum_{k=0}^{\infty} \frac{z^k}{k!}}\\
+                &= \text{ Cauchy-produkt } \\
+                &= \sum_{n=0}^{\infty} \sum_{\nu=0}^{n} a_{\nu} b_{n-\nu}\\
+                &= \sum_{n=0}^{\infty} \sum_{\nu=0}^{n} \frac{(z_n)^{\nu}}{\nu!} \frac{(z_n)^{n-\nu}}{(n-\nu)!}\\
+                &= \sum_{n=0}^{\infty} \frac{1}{n!} \sum_{\nu=0}^{n} \frac{n!}{\nu!(n-\nu)!} (z_1)^{\nu} z_z)^{n-\nu}\\
+                &= \sum_{\nu=0}^{n} \binom{n}{\nu} (z_1)^{\nu} (z_2) ^{n-\nu} = (z_1+z_2)^n\\[10pt]
+                \sum_{n=0}^{\infty} \frac{1}{n!}(z_1+z_2)^n &= e^{z_1 + z_2}
+            \end{align*}
+        \end{proof}
+        \begin{proof}[(c)]
+            \begin{align*}
+                \sum_{k=0}^{n} \frac{z^k}{k!} &= \sum_{k=0}^{n} \frac{\overline{z^k}}{k!}\\
+                &= \sum_{k=0}^{n} \frac{\overline{z}^k}{k!} \fromto \exp(\overline{z})\\[10pt]
+                \overline{\exp(z)} &\impl \overline{\exp(z)} = \exp{\overline{z}}
+                \intertext{Insbesondere}
+                e^z e^{-z} &= e^{z-z} = e^0 = 1\\
+                \impl e^z e^{-z} \neq 0 \quad \forall z\in\complexnumbers
+                \intertext{und}
+                (e^z)^{-1} &= e^{-z}
+            \end{align*}
+        \end{proof}
+        \begin{proof}
+            \begin{align*}
+                \abs{\exp(z)}^2 &= \overline{\exp(z)} \exp(z)\\
+                &= \exp(\overline{z}) \exp(z)\\
+                &= \exp(\overline{z} + z) = \exp(z \re(z))\\
+                &= \pair{\exp(\re(z))}^2\\[10pt]
+                \impl \abs{\exp(z)} &= \abs{\exp(\re(z))} = \exp(\re(z))
+                \intertext{Behauptung: $e^x = \exp(z) > 0~\forall x\in\realnumbers$}
+                \text{ Ist } x \geq 0 &\impl \exp(z) = \sum_{n=0}^{\infty} \frac{x^n}{n!}= 1 + \sum_{n=1}^{\infty} \frac{x^n}{n!}\geq 1\\
+                \text{ Ist } x < 0 &\impl -x > 0\quad \exp(z) = \frac{1}{\exp(-x)} > 0
+            \end{align*}
+        \end{proof}
+
+        \begin{proof}[(d)]
+            Es sei $\alpha\in\realnumbers$.
+            \begin{align*}
+                \abs{e^{i\alpha}}^2 &= \overline{e^{i\alpha}} e^{i\alpha}\\
+                &= e^{-i\alpha} e^{i\alpha} = e^0 = 1\\[10pt]
+                \re(e^{i\alpha}) &= \frac{1}{2}\cdot\pair{e^{i\alpha} + \overline{e^{-i\alpha}}}\\
+                &= \frac{1}{2}\cdot\pair{e^{i\alpha} + e^{-i\alpha}}\\
+                &\definedasbackwards \cos \alpha\\[10pt]
+                \im(e^{i\alpha}) &= \frac{1}{2i}\cdot\pair{e^{i\alpha} - \overline{e^{-i\alpha}}}\\
+                &= \frac{1}{2i}\cdot\pair{e^{i\alpha} - e^{-i\alpha}}\\[10pt]
+                \abs{e^{i\alpha}}^2 &= \pair{\re(e^{i\alpha})}^2 + \im(e^{i\alpha})^2\\
+                &= \pair{\cos \alpha}^2 + \pair{\sin \alpha}^2\\[10pt]
+                e^{i\alpha} &= \re (e^{i\alpha}) + i \im (e^{i\alpha)} = \cos \alpha + i \cdot \sin \alpha
+            \end{align*}
+        \end{proof}
+    \end{satz}
+
+    \newpage
+
+
+    \section{Potenzreihen}
+
+    \subsection{}
+    \thispagestyle{pagenumberonly}
+    Wir untersuchen Reihen der Form $ \sum_{n=0}^{\infty} a_n\cdot z^n$ oder $ \sum_{n=0}^{\infty} a_n \cdot \pair{z-z_0}^n$, $z_0\in\complexnumbers$ fest, $z\in\complexnumbers$ oder $\realnumbers$, $a_n\in\complexnumbers$.\\
+    Partialsummen:
+    \begin{align*}
+        s_n(z) &\definedas \sum_{j=0}^{n} a_j\cdot z^j
+    \end{align*}
+    Frage: Konvergenz?
+    \begin{beispiel}
+        \begin{align*}
+            \exp(z) &\definedas \sum_{n=0}^{\infty} \frac{1}{n!} z^n\\
+            &= \sum_{n=0}^{\infty} n! \cdot z^n \text{ konvergiert nur für } z=0
+        \end{align*}
+    \end{beispiel}
+
+    \begin{definition}[Konvergenzradius]
+        \begin{align*}
+            R &\definedas \sup \set{\abs{z}: z\in\complexnumbers \text{ und } \sum_{n=0}^{\infty} a_n \cdot z^n \text{ konvergent } }
+        \end{align*}
+        $R$ ist der Konvergenzradius.
+    \end{definition}
+
+    \begin{satz}
+        Die Potenzreihe $ \sum_{n=0}^{\infty} a_n z^n$ konvergiert absolut für jedes $z$ in der Kreisscheibe
+        \begin{align*}
+            B_R (a) &= \set{z\in\complexnumbers: \abs{z} < R}
+        \end{align*}
+        Für jedes $\abs{z} > R$ divergiert $ \sum_{n=0}^{\infty} a_n \cdot z^n$.
+        \begin{proof}
+            Sei $z_1\neq 0$. $ \sum_{n=0}^{\infty} a_n \cdot z^n$ konvergiert.
+            \begin{align*}
+                \impl (a_n \cdot z^n) \text{ Nullfolge }\\
+                \impl \text{ ist beschränkt }\\
+                \impl K\definedas \sup_{n\in\naturalnumbers} \set{a_n z^n} < \infty
+                \intertext{Sei $0 < r < \abs{z_1}$, $0 < \theta \definedas \frac{r}{\abs{z_1}} < 1$}
+                z &\leq \overline{B_r (a)} = \set{\abs{z} \leq r}\\[10pt]
+                \abs{a_n z^n} &= \abs{a_n}\abs{z^n} = \abs{a_n} \cdot \abs{z}^n &= \abs{a_n} \cdot \abs{z}^n \frac{\abs{z}}{\abs{z_1}} ^n\\
+                &\leq k \theta^n\quad \forall n \geq 0\\
+                \impl \sum_{n=0}^{\infty} k \theta^n \text{ konvergente Majorante für } \sum_{n=0}^{\infty} a_n z^n \text{ sofern } 0 \leq z \leq r < \abs{z}\\
+                \impl \sum_{n}^{} a_n z^n \text{ konvergiert absolut }\\[12pt]
+                \impl (1) \sum_{n=0}^{\infty} a_n z^n \text{ konvergiert für alle } \abs{z} \leq r\\
+                \impl (2) \text{ Angenommen } \sum_{n}^{} a_n z^n \text{ konvergiert für ein } \abs{z} > R\\
+                (2) \impl \text{ Widerspruch zu Definition von } R
+            \end{align*}
+        \end{proof}
+    \end{satz}
+
+    \begin{bemerkung}
+        Konvergiere $ \sum_{n}^{} a_n z^n$ und $ \sum_{n}^{} b_n z^n$ für $\abs{z} < R$
+        \begin{align*}
+            \impl \sum_{n=0}^{\infty} \pair{\lambda a_n + \mu b_n} z^n &= \lambda \sum_{n=0}^{\infty} a_n z^n + \mu \sum_{n=0}^{\infty} b_n z^n
+        \end{align*}
+    \end{bemerkung}
+
+    \begin{bemerkung}
+        Konvergieren $ \sum_{n=0}^{\infty} a_n z^n$, $ \sum_{n=0}^{\infty} b_n z^n$ auf $B_R (0)$
+        \begin{align*}
+            \impl \pair{\sum_{n=0}^{\infty} a_n z^n} \cdot \pair{\sum_{n=0}^{\infty} b_n z^n} = \sum_{n=0}^{\infty} \pair{\sum_{\nu=0}^{\infty} a_{\nu} b_{n-\nu}} z^n \tag{Cauchy-Produkt}
+            \intertext{Sei $0 < r < R$ für $\abs{z} \leq r$}
+        \end{align*}
+    \end{bemerkung}
+
+    \begin{bemerkung}
+        Wir können auch Potenzreihen der Form
+        \begin{align*}
+            \sum_{n=0}^{\infty} a_n z^n, \sum_{n=0}^{\infty} a_n \cdot \pair{z-z_0}^n \text{ mit } a_n\in\realnumbers^d \text{ oder } \complexnumbers^d
+        \end{align*}
+        betrachten. Wir setzen
+        \begin{align*}
+            R &= \sup \set{\abs{z}: z\in\complexnumbers und \sum_{n=0}^{\infty} a_n z^n \text{ konvergent } }
+        \end{align*}
+    \end{bemerkung}
+
+    \begin{satz} % Satz 2
+        Die Potenzreihe $ \sum_{n=0}^{\infty} a_n z^n$ konvergiert absolut $\forall z\in B_R (0)$ und divergiert für $\abs{z} > R$.
+
+        \begin{proof}
+            Abschreiben des Beweises von Satz 1.
+        \end{proof}
+    \end{satz}
+
+    \begin{lemma}
+        Konvergiert $ \sum_{n=0}^{\infty} a_n z^n$ für ein $z=z_1 \neq 0$ und ist $0 < r < \abs{z_r}$. So ist $ \sum_{n=0}^{\infty} a_n z^n$ auf $B_r (0) = \set{\abs{z} \leq r}$ beschränkt.\\
+        Das heißt $\exists M = M_r \geq 0$ mit $\abs{\sum_{n=0}^{\infty} a_n z^n} \leq M_r~\forall \abs{z} \leq r$
+
+        \begin{proof}
+            \begin{align*}
+                \theta &\definedas \frac{r}{\abs{z_1}} < 1
+                \intertext{Da $ \sum_{n=0}^{\infty}  a_n z_1^n$ konvergiert ist}
+                (a_n z_n^n)_n \text{ Nullfolge also beschränkt }
+                \impl K &= \sup_{n\in\naturalnumbers_0} \abs{a_n z_1^n} = \sup_{n\in\naturalnumbers} \abs{a_n} \abs{z_1}^n < \infty\\
+                \intertext{Ist $\abs{z} < r$}
+                \abs{a_n z^n} &= \abs{a_n} \abs{z}^n = \abs{a_n} \abs{z_1}^n \abs{\frac{\abs{z}}{\abs{z_1}}}^n\\
+                \impl \abs{\sum_{n=0}^{\infty} a_n z^n} &\leq \sum_{n=0}^{\infty} \abs{a_n z}^n \leq \sum_{n=0}^{\infty} k \theta^n = \frac{k}{1-\theta} < \infty\quad \forall \abs{z} \leq r
+            \end{align*}
+        \end{proof}
+    \end{lemma}
+
+    \begin{lemma} % Lemma 4
+        Annahmen wie bei vorherigem Lemma.
+        \begin{align*}
+            \impl \text{ Für alle } 0 &< r < \abs{z_1}\quad\forall k\in\naturalnumbers_0\\
+            \text{ existiert } M &= M_k, r\geq 0
+            \intertext{mit}
+            \abs{\sum_{n=k+1}^{\infty} a_n z^n} &\leq M_{k,r} \abs{z}^{k+1}\quad\forall \abs{z} \leq r
+        \end{align*}
+
+        \begin{proof}
+            \begin{align*}
+                \sum_{n=k+1}^{\infty} a_n z^n \text{ konvergiert auch }\\
+                \impl \sum_{n=k+1}^{\infty} a_n z^{n-(k+1)} &= z^{-(k+1)} \sum_{n=k+1}^{\infty} a_n z^n \text{ konvergiert }\\
+                \impl \text{ verschobene Reihe } \sum_{n=k+1}^{\infty} a_n z^{n-(k+1)} \text{ konvergiert }\\
+                \annot{\impl}{Lemma 3} \text{ Für } 0 < r < z_1  \text{ existiert ein } M = M_{k,r} \geq 0
+                \intertext{sodass}
+                \abs{\sum_{n=k+1}^{\infty} a_n z^{n-(k+1)}} &\leq M_r\quad\forall \abs{z} \leq r < \abs{z_1}\\
+                \text{ (linke Seite) } &= \abs{z^{-(k+1)} \sum_{n=k+1}^{\infty} a_n z^n}\\
+                &= \frac{1}{\abs{z}^{k+1}} \abs{\sum_{n=k+1}^{\infty} a_n z^n}\\
+                \impl \abs{\sum_{n=k+1}^{\infty} a_n z^n} &\leq M_{k,r} \abs{z}^{k+1}
+            \end{align*}
+        \end{proof}
+    \end{lemma}
+
+    \begin{anwendung}
+        \begin{align*}
+            \sum_{n=0}^{\infty} a_n z^n &= \underbrace{\sum_{n=0}^{k} a_n z^n}_{s_k (z)} + \underbrace{\sum_{n=k+1}^{\infty} a_n z^n}_{Fehler}\\
+            \abs{Fehler} &\leq M_{k,r} \abs{z}^{k+1} \leq M_{k,r} \theta^{k+1} \tag{$\theta = \frac{r}{\abs{z_1}}$}
+        \end{align*}
+    \end{anwendung}
 
 \end{document}
