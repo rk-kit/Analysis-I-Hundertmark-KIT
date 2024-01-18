@@ -1779,4 +1779,265 @@
         \end{align*}
     \end{anwendung}
 
+    \newpage
+
+    %%%%%%%%%%%%%%%%%%%%%%%%
+    % 18. Januar 2023
+    %%%%%%%%%%%%%%%%%%%%%%%%
+
+    Bessere Version von Lemma~\ref{lemma:temp-4}:
+
+    \begin{align*}
+        \varphi(z) &= \sum_{n=0}^{\infty} a_n z^n\\
+        \abs{\varphi(z) - \sum_{n=k}^{\infty} a_n z^n} &= \abs{\sum_{n=0}^{k} a_n z^n} \leq M_{r,z} \cdot \abs{z}^{k+1}\quad 0< r < \abs{z_1}
+        \intertext{Sei $ \sum_{n=0}^{\infty} a_n z^n$ konvergent für ein $z=z_1\neq 0$}
+        \impl \forall~ 0< r < \abs{z_1}\colon \text{ existiert }  M_{r,z_1} &> 0
+        \intertext{sodass}
+        \forall k\in\naturalnumbers_0\colon \abs{\sum_{n=0}^{\infty} a_n z^n} &\leq M_{r,z_1} \abs{\frac{z}{z_1}}^{k+1}\quad\forall \abs{z} \leq r\\
+        \abs{\frac{z}{z_1}} &\leq \frac{\abs{z}}{\abs{z_1}} \leq \frac{r}{\abs{z_1}} = \theta < 1
+    \end{align*}
+
+    \begin{proof}
+        \begin{align*}
+            \sum_{n\geq 0}^{} a_n z_1^n \text{ konvergiert }\\
+            \impl \pair{a_n z_1^n}_n \text{ ist Nullfolge }\\
+            k &\definedas \sup_{n\geq 0} \abs{a_n z_1^n} &< \infty\\
+            \impl \abs{a_n z^n} &= \abs{a_n z_1^n \pair{\frac{z}{z_1}}^n} = \abs{a_n z_1^n} \abs{\frac{z}{z_1}}^n\\
+            \abs{\frac{z}{z_1}} &\leq \frac{r}{\abs{z_1}} = \theta < 1\\
+            \impl \abs{\sum_{n=k+1}^{\infty} a_n z^n} &= \sum_{n=k+1}^{\infty} \abs{a_n z^n}\\
+            &\leq \sum_{n=k+1}^{\infty} K \cdot \abs{\frac{z}{z_1}}^n\\
+            &= k\cdot \abs{\frac{z}{z_1}}^{k+1} \cdot \sum_{n=0}^{k} \abs{\frac{z}{z_1}}^n\\
+            &= \frac{k}{1-\theta} \abs{\frac{z}{z_1}}^{k+1} = \frac{K}{1-\frac{r}{??}}\cdot ??
+        \end{align*}
+    \end{proof}
+
+    \begin{satz} % Satz 5
+        \marginnote{[18. Jan]}
+
+        Sei $ \sum_{n=0}^{\infty}$ eine Potenzreihe, die für ein $z=z_1\neq 0$ konvergiert.\\
+        $(z_j)_j$: Folge $0< \abs{z_j} < \abs{z_1}$, $z_j \fromto 0$, $j\fromto\infty$ mit
+        \begin{align*}
+            \sum_{n=0}^{\infty} a_n (z_j)^n &= 0\quad\forall j\in\naturalnumbers\\
+            \impl a_n &= 0\quad\forall n\in\naturalnumbers_0
+        \end{align*}
+        \begin{proof}
+            Angenommen nicht alle $a_n=0$
+            \begin{align*}
+                \impl B &\definedas \set{n\in\naturalnumbers_0: a_n \neq 0} \neq \emptyset\\
+                \impl B \text{ hat ein kleinstes Element, nennen wir } n_0\\
+                \impl a_0 &= a_1 = \dots = a_{n_0-1} = 0\quad a_{n_0}\neq 0\\
+                f(z) &= \sum_{n=0}^{\infty} a_n z^n = \sum_{n=n_0}^{\infty} a_n z^n = a_{n_0} z^{n_0} + \sum_{n=n_0 + 1}^{\infty} a_n z^n\\
+                f(z_1) &= 0\quad\forall j\quad z_j \neq 0\quad z_j\fromto 0\\
+                \impl \abs{a_{n_0} (z_j)^{n_0}} &= \abs{- \sum_{n=n_0 + 1}^{\infty} a_n z_j^n} \leq M_{r, z_1} \pair{\frac{\abs{z_j}}{\abs{z_1}}}^{n+1}\\
+                \impl \abs{a_{n_0}} \leq M_{r,z} \abs{z_1}^{-(n_0+1)}\quad \abs{z_j} \fromto 0\quad j\fromto\infty\\
+                \impl a_{n_0} &= 0\tag{Widerspruch}
+            \end{align*}
+        \end{proof}
+    \end{satz}
+
+    \begin{satz} % Satz 6
+        Sei $ \sum_{n=0}^{\infty} a_n z^{n}$, $ \sum_{n=0}^{\infty} b_n z^n$ welche für ein $z=w\neq 0$ konvergieren.\\
+        $(z_j)_j$ Folge in $\complexnumbers$, $z_1\neq 0$, $\forall i, z_i \fromto 0$\\
+        mit $ \sum_{n=0}^{\infty} a_n z^n = \sum_{n=0}^{\infty} b_n z_j^n$ für fast alle $z_j$.\\
+        Dann ist $a_n = b_n~\forall n\in\naturalnumbers_0$.
+        \begin{proof}
+            \begin{align*}
+                c_n &= a_n - b_n
+                \intertext{\OBDA sind alle $\abs{z_1} < \abs{w}$}
+                \impl h(z) &\definedas \sum_{n=0}^{\infty} c_n z^n \text{ konvergiert für } z=w\neq 0\\
+                \text{ und } h(z_j) &= 0\quad \forall j\\
+                \annot{\impl}{Satz 5} c_n &= 0\quad \forall n\in\naturalnumbers_0 \equivalent a_n = b_n \quad\forall n\in\naturalnumbers_0
+            \end{align*}
+        \end{proof}
+    \end{satz}
+
+    \begin{bemerkung}
+        Hatten geg. $ \sum_{n=0}^{\infty} a_n z^n$. Dann ist der Konvergenzradius
+        \begin{align*}
+            R &= \sup \set{\abs{z} : z\in\complexnumbers \text{ und } \sum_{n=0}^{\infty} a_n z^n \text{ konvergent } }
+        \end{align*}
+    \end{bemerkung}
+
+    \begin{satz} % Satz 7
+        \begin{align*}
+            R &= \frac{1}{\limsup_{n\fromto\infty}\sqrt[n]{\abs{a_n}}}
+        \end{align*}
+
+        \begin{proof}
+            Schritt 1: Zu zeigen: Für $\abs{z} < R$ konvergiert die Potenzreihe.
+            \begin{align*}
+                M &= \limsup_{n\fromto\infty}\sqrt[n]{\abs{a_n}}\\
+                \impl \forall \varepsilon > 0~\exists N \colon \sqrt[n]{\abs{a_n}} &\leq M+\varepsilon\\
+                \impl \forall \varepsilon > 0 \text{ ist } \sqrt[n]{\abs{a_n}} &> M- \varepsilon \text{ für fast alle } n
+            \end{align*}
+            Schritt 2: Zu zeigen: Für $\abs{z} > R$ konvergiert die Potenzreihe nicht. (Übung)
+        \end{proof}
+    \end{satz}
+
+    \begin{korollar}
+        Die Potenzreihe $ \sum_{n=0}^{\infty} a_n z^n$ und $ \sum_{n=1}^{\infty} n a_n z^{n-1}$ haben den gleichen Konvergenzradius.
+        \begin{proof}
+            Folgt mit vorherigem Satz und $\sqrt[n]{n}\fromto 1$ für $n\fromto\infty$.
+        \end{proof}
+    \end{korollar}
+
+    \newpage
+
+
+    \section{[*] Stetige Funktionen einer reellen (oder komplexen) Variablen}
+
+    \subsection{}
+    \thispagestyle{pagenumberonly}
+    Sei $D\subseteq \realnumbers$ (oder $D\subseteq \complexnumbers$, wenn komplexe Funktion von $z$) und $D\neq\emptyset$.\\
+    $\mathbb{K} = \realnumbers$ oder $\complexnumbers$ (Körper)
+
+    \begin{definition}[$\varepsilon-\delta$ Definition von Stetigkeit]
+        Sei $f: D \fromto \mathbb{K}$ und $x_c\in D$.\\
+        Die Funktion $f$ heißt stetig in $x_0$, falls
+        \begin{align*}
+            \forall \varepsilon > 0~\exists \delta > 0\colon \abs{f(x)-f(x_0)} < \varepsilon \text{ für alle } x\in D \text{ mit } \abs{x-x_0} < \delta
+        \end{align*}
+        $f$ ist stetig in $D$, falls es in jedem Punkt $x_0\in D$ stetig ist.
+    \end{definition}
+
+    \begin{bemerkung}
+        \theoremescape
+        \begin{enumerate}[label=\arabic*)]
+            \item $x$ Input, $f(x)$ Output. $f$ stetig in $x_0 \equivalent$ Output $f(x)$ ist $\varepsilon$-nahe bei $f(x_0)$, sofern Input $x$ $\delta$-nahe bei $x_0$ ist.
+            \item Eine Funktion $f: D\fromto\realnumbers^d$ oder $\complexnumbers^d$ ist stetig in $x_0\in D$, falls
+            \begin{align*}
+                \forall \varepsilon>0~\exists\delta>0\colon \norm{f(x)-f(x_0)} &< \varepsilon\\
+                \forall x\in D\colon \abs{x-x_0} &<\delta
+            \end{align*}
+            oder $f:D\fromto V$ mit $V$ Vektorraum mit Norm $\norm{\cdot}$. $f$ ist steig in $x_0$, falls
+            \begin{align*}
+                \forall \varepsilon>0~\exists\delta>0\colon \norm{f(x)-f(x_0)} &< \varepsilon\\
+                \forall x\in D\colon \abs{x-x_0} &<\delta
+            \end{align*}
+            \item Stetigkeit ist eine lokale Eigenschaft.
+            \item Direcklet Funktion
+            \begin{align*}
+                f(x) &\definedas \begin{cases}
+                                     1\quad x\in\mathbb{Q}\\
+                                     0\quad x\in\realnumbers\exclude\mathbb{Q}
+                \end{cases}
+            \end{align*}
+            nirgends stetig auf $\realnumbers$.
+            \item Für
+            \begin{align*}
+                f(x) &\definedas \begin{cases}
+                                     x\quad x\in\mathbb{Q}\\
+                                     0\quad x\in\realnumbers\exclude\mathbb{Q}
+                \end{cases}
+            \end{align*}
+            nur stetig in $x_0=0$
+            \item Für
+            \begin{align*}
+                f(x) &\definedas \begin{cases}
+                                     \sin(\frac{x}{2})\quad x\neq 0\\
+                                     0\quad x = 0
+                \end{cases}
+            \end{align*}
+            nicht stetig in 0.
+        \end{enumerate}
+    \end{bemerkung}
+
+    \begin{lemma}
+        Ist $f:D\fromto\mathbb{K}$ (oder $\mathbb{K}^d$) stetig in $x_0\in D$.\\
+        Dann gilt
+        \begin{enumerate}[label=\arabic*.]
+            \item $\exists \delta > 0$ mit $\abs{f(x)}\leq 1+\abs{f(x_0)}$~$\forall x\in D$, $\abs{x-x_0} < \delta$
+            \item Ist $f(x_0) \neq 0$ dann existiert $\delta>0$.
+            \begin{align*}
+                \frac{1}{2}\abs{f(x)} &\leq \abs{f(x)} \leq \frac{3}{2} \abs{f(x_0)} \text{ für } x\in D, \abs{x-x_0} < \delta
+            \end{align*}
+        \end{enumerate}
+
+        \begin{proof}
+            Nehme $\varepsilon = 1$
+            \begin{align*}
+                \annot{\impl}{Stet.} \exists\delta > 0\colon \abs{f(x)-f(x_0)} &< \varepsilon\quad x\in D, \abs{x-x_0} < \delta\\
+                \impl \abs{f(x)} &= \abs{f(x)-f(x_0)+f(x_0)} \leq \underbrace{\abs{f(x)-f(x_0)}}_{< 1} + \abs{f(x_0)}\\
+                &\leq 1 + \abs{f(x_0)} \impl 1.
+            \end{align*}
+        \end{proof}
+        \begin{proof}
+            Ist $f(x) \neq 0$ wähle $\varepsilon = \frac{1}{2}\abs{f(x_0)} > 0$, $\delta > 0$.
+            \begin{align*}
+                \abs{f(x)-f(x_0)} &< \varepsilon = \frac{1}{2} \abs{f(x_0)} \quad x\in D, \abs{x-x_0} < \delta\\
+                \impl \abs{f(x)} &= \abs{f(x_0)-f(x_0)+f(x)} \leq \abs{f(x_0)} + \abs{f(x_0) + f(x)} \leq \frac{1}{2}\abs{f(x_0)}\\
+                \abs{f(x)} &= \abs{f(x_0)+f(x)-f(x_0)} \geq \abs{f(x_0)} = \abs{f(x)-f(x_0)}\\
+                &\geq \abs{f(x_0)} = \frac{1}{2} \abs{f(x_0)} = \frac{1}{2}\abs{f(x)}
+            \end{align*}
+        \end{proof}
+    \end{lemma}
+
+    \begin{notation}
+        Seien
+        \begin{align*}
+            f&: D_f \fromto \mathbb{K}\\
+            g&: D_g \fromto \mathbb{K}
+        \end{align*}
+        Setzen
+        \begin{align*}
+            f + g: D_{f,g} = D_f \cap D_g &\fromto \mathbb{K}\\
+            x &\mapsto  f(x) + g(x)\\[10pt]
+            f \cdot g: D_{f,g} &\fromto \mathbb{K}\\
+            x &\mapsto  f(x) \cdot g(x)\\[10pt]
+            \frac{f}{g}: D_{f,g} \exclude\set{x\in D_g: g(x)=0} &\fromto \mathbb{K}\\
+            x &\mapsto  \frac{f(x)}{g(x)}
+        \end{align*}
+    \end{notation}
+
+    \begin{bemerkung}
+        $f+g$ geht auch für $f: D_f \fromto \mathbb{K}^d$, $g: D_f \fromto \mathbb{K}^d$.\\
+        $f\cdot g$ und $\frac{f}{g}$ geht auch für $f: D_f \fromto \mathbb{K}^d$, $g: D_f \fromto \mathbb{K}$.
+    \end{bemerkung}
+
+    \begin{satz} % Satz 3
+        Seien $f, g: D\fromto \mathbb{K}$ stetig in $x_0\in D$.\\
+        Dann gilt
+        \begin{enumerate}[label=\arabic*.]
+            \item $f+g$ ist stetig in $x_0$
+            \item $f\cdot g$ ist stetig in $x_0$
+            \item Ist $g(x_0)\neq 0$, dann ist $\frac{f}{g}$ stetig in $x_0$
+        \end{enumerate}
+
+        \begin{proof}[1.]
+            \begin{align*}
+                \abs{f(x)+g(x)-(f(x_0)+g(x_0))} &\leq \abs{f(x)-f(x_0)} + \abs{g(x)-g(x_0)}
+                \intertext{Geg $\varepsilon >0$}
+                \exists \delta_1, \delta_2 > 0\colon \abs{f(x)-f(x_0)} &< \frac{\varepsilon}{2}\tag{$x\in D, \abs{x-x_0} < \delta$}\\
+                \abs{g(x)-g(x_0)} &< \frac{\varepsilon}{2}
+                \intertext{Ist $\min \set{\delta_1, \delta_2} > 0$}
+                \impl \abs{f(x)+g(x)-(f(x_0)+g(x_0))} &< \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon\tag{$x\in D, \abs{x-x_0} < \delta$}
+            \end{align*}
+        \end{proof}
+
+        \begin{proof}[2.]
+            \begin{align*}
+                \abs{f(x)\cdot g(x)-(f(x_0)\cdot g(x_0))} &\leq \abs{f(x)-f(x_0)}\cdot\abs{g(x)} + \abs{f(x_0)}\cdot\abs{g(x)-g(x_0)}\\
+                \text{ Lemma 2 } \impl \exists \delta_0 &> 0\colon \abs{g(x)} \leq 1 + \abs{g(x_0)} \quad\forall x\in D, \abs{x-x_0} < \delta_0
+                \intertext{f,g stetig}
+                \forall\varepsilon >0~\exists \delta_1, \delta_2 > 0\colon \abs{f(x)-f(x_0)} &< \frac{\varepsilon}{2(1+\abs{g(x)})}\\
+                \abs{g(x)-g(x_0)} &< \frac{\varepsilon}{2(1+\abs{f(x)})}\\
+                \delta &\definedas \min(\delta_0, \delta_1, \delta_2)\\
+                \impl \abs{f(x)\cdot g(x)-(f(x_0)\cdot g(x_0))} &< \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon\tag{$x\in D, \abs{x-x_0} < \delta$}
+            \end{align*}
+        \end{proof}
+
+        \begin{proof}[3.]
+            Sei $g(x_0) \neq 0$
+            \begin{align*}
+                \frac{f(x)}{g(x)} - \frac{f(x_0)}{g(x_0)} &= \frac{f(x)g(x) - f(x_0)g(x_0)}{g(x)g(x_0)}\\
+                &= \frac{1}{g(x)g(x_0)} \interv{(f(x)-f(x_0))\cdot g(x_0) + f(x_0)\cdot (g(x)-g(x_0))}\\
+                \text{ Lemma 2 } \impl \exists \delta_0>0\colon \abs{g(x)} &\geq \frac{1}{2}\abs{g(x_0)}\tag{$x\in D, \abs{x-x_0} < \delta$}\\
+                \intertext{f,g stetig in $x_0$. geg. $\varepsilon > 0$}
+                \forall\varepsilon >0~\exists \delta_1, \delta_2 > 0\colon \abs{f(x)-f(x_0)} &< \frac{\varepsilon\cdot \abs{g(x)}}{4(1+\abs{g(x)})}\\
+                \abs{g(x)-g(x_0)} &< \frac{\varepsilon\cdot \abs{g(x_0)}^2}{4(1+\abs{f(x)})}\\
+                \impl \abs{\frac{f(x)}{g(x)}- \frac{f(x_0)}{g(x_0)}} &\leq \frac{1}{\abs{g(x)} \cdot \abs{g(x_0)}} \interv{??}\\
+                &< \frac{2}{\abs{g(x)}^2}\cdot\interv{\frac{\varepsilon\cdot g(x_0)^2}{4(1+\abs{g(x)})} + \frac{\abs{f(x_0)}\cdot \abs{g(x_0)}}{4(1+\abs{f(x)})}} \leq \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
+            \end{align*}
+        \end{proof}
+    \end{satz}
 \end{document}
