@@ -1648,7 +1648,7 @@
     \newpage
 
 
-    \section{Potenzreihen}
+    \section{[*] Potenzreihen}
 
     \subsection{}
     \thispagestyle{pagenumberonly}
@@ -1749,6 +1749,7 @@
     \end{lemma}
 
     \begin{lemma} % Lemma 4
+        \label{lemma:temp-4}
         Annahmen wie bei vorherigem Lemma.
         \begin{align*}
             \impl \text{ Für alle } 0 &< r < \abs{z_1}\quad\forall k\in\naturalnumbers_0\\
@@ -1886,14 +1887,12 @@
 
     \section{[*] Stetige Funktionen einer reellen (oder komplexen) Variablen}
 
-    \subsection{}
+    \subsection{[*] Stetigkeit}
     \thispagestyle{pagenumberonly}
-    Sei $D\subseteq \realnumbers$ (oder $D\subseteq \complexnumbers$, wenn komplexe Funktion von $z$) und $D\neq\emptyset$.\\
-    $\mathbb{K} = \realnumbers$ oder $\complexnumbers$ (Körper)
+    Sei $D\subseteq \realnumbers$ (oder $D\subseteq \complexnumbers$, wenn wir eine komplexe Funktion betrachten) und $D\neq\emptyset$. Außerdem sei $\mathbb{K} = \realnumbers$ oder $\complexnumbers$ (Körper).
 
     \begin{definition}[$\varepsilon-\delta$ Definition von Stetigkeit]
-        Sei $f: D \fromto \mathbb{K}$ und $x_c\in D$.\\
-        Die Funktion $f$ heißt stetig in $x_0$, falls
+        Sei $f: D \fromto \mathbb{K}$. Die Funktion $f$ heißt stetig in $x_0$, falls
         \begin{align*}
             \forall \varepsilon > 0~\exists \delta > 0\colon \abs{f(x)-f(x_0)} < \varepsilon \text{ für alle } x\in D \text{ mit } \abs{x-x_0} < \delta
         \end{align*}
@@ -1903,71 +1902,78 @@
     \begin{bemerkung}
         \theoremescape
         \begin{enumerate}[label=\arabic*)]
-            \item $x$ Input, $f(x)$ Output. $f$ stetig in $x_0 \equivalent$ Output $f(x)$ ist $\varepsilon$-nahe bei $f(x_0)$, sofern Input $x$ $\delta$-nahe bei $x_0$ ist.
-            \item Eine Funktion $f: D\fromto\realnumbers^d$ oder $\complexnumbers^d$ ist stetig in $x_0\in D$, falls
+            \item Wir können Stetigkeit auch etwas anschaulicher betrachten: $x$ ist der Input, $f(x)$ der Output. $f$ ist genau dann stetig in $x_0$, wenn der Output $f(x)$ $\varepsilon$-nahe bei $f(x_0)$ ist, sofern Input $x$ $\delta$-nahe bei $x_0$ ist.
+            \item Eine Funktion $f: D\fromto\mathbb{K}^d$ ist stetig in $x_0\in D$, falls
             \begin{align*}
-                \forall \varepsilon>0~\exists\delta>0\colon \norm{f(x)-f(x_0)} &< \varepsilon\\
-                \forall x\in D\colon \abs{x-x_0} &<\delta
-            \end{align*}
-            oder $f:D\fromto V$ mit $V$ Vektorraum mit Norm $\norm{\cdot}$. $f$ ist steig in $x_0$, falls
-            \begin{align*}
-                \forall \varepsilon>0~\exists\delta>0\colon \norm{f(x)-f(x_0)} &< \varepsilon\\
-                \forall x\in D\colon \abs{x-x_0} &<\delta
+                \forall \varepsilon>0~\exists\delta>0\colon \underbrace{\norm{f(x)-f(x_0)}}_{\text{Norm}} &< \varepsilon\qquad \forall x\in D\colon \abs{x-x_0} <\delta
+                \intertext{oder $f:D\fromto V$ (dabei sei $V$ Vektorraum mit Norm $\norm{\cdot}$) ist stetig in $x_0$, falls}
+                \forall \varepsilon>0~\exists\delta>0\colon \norm{f(x)-f(x_0)} &< \varepsilon\qquad \forall x\in D\colon \abs{x-x_0} <\delta
             \end{align*}
             \item Stetigkeit ist eine lokale Eigenschaft.
-            \item Direcklet Funktion
-            \begin{align*}
-                f(x) &\definedas \begin{cases}
-                                     1\quad x\in\mathbb{Q}\\
-                                     0\quad x\in\realnumbers\exclude\mathbb{Q}
-                \end{cases}
-            \end{align*}
-            nirgends stetig auf $\realnumbers$.
-            \item Für
-            \begin{align*}
-                f(x) &\definedas \begin{cases}
-                                     x\quad x\in\mathbb{Q}\\
-                                     0\quad x\in\realnumbers\exclude\mathbb{Q}
-                \end{cases}
-            \end{align*}
-            nur stetig in $x_0=0$
-            \item Für
-            \begin{align*}
-                f(x) &\definedas \begin{cases}
-                                     \sin(\frac{x}{2})\quad x\neq 0\\
-                                     0\quad x = 0
-                \end{cases}
-            \end{align*}
-            nicht stetig in 0.
         \end{enumerate}
     \end{bemerkung}
 
-    \begin{lemma}
-        Ist $f:D\fromto\mathbb{K}$ (oder $\mathbb{K}^d$) stetig in $x_0\in D$.\\
-        Dann gilt
+    \begin{beispiel}[Dirichlet-Funktion]
+        Die Funktion
+        \begin{align*}
+            f(x) &\definedas \begin{cases}
+                                 1\quad &x\in\mathbb{Q}\\
+                                 0\quad &x\in\realnumbers\exclude\mathbb{Q}
+            \end{cases}
+        \end{align*}
+        ist nirgends stetig auf $\realnumbers$.
+    \end{beispiel}
+    \begin{beispiel}
+        Die Funktion
+        \begin{align*}
+            f(x) &\definedas \begin{cases}
+                                 x\quad &x\in\mathbb{Q}\\
+                                 0\quad &x\in\realnumbers\exclude\mathbb{Q}
+            \end{cases}
+        \end{align*}
+        ist nur stetig in $x_0=0$.
+    \end{beispiel}
+    \begin{beispiel}
+        \begin{align*}
+            f(x) &\definedas \begin{cases}
+                                 \sin\pair{\frac{1}{x}}\quad &x\neq 0\\
+                                 0\quad &x = 0
+            \end{cases}
+        \end{align*}
+        ist nicht stetig in 0.
+    \end{beispiel}
+
+    \newpage
+
+    \begin{lemma} % Lemma 2
+        \label{lemma:abschaetzung-stetigkeit}
+        Ist $f:D\fromto\mathbb{K}$ (oder $\mathbb{K}^d$) stetig in $x_0\in D$. Dann gilt
         \begin{enumerate}[label=\arabic*.]
-            \item $\exists \delta > 0$ mit $\abs{f(x)}\leq 1+\abs{f(x_0)}$~$\forall x\in D$, $\abs{x-x_0} < \delta$
-            \item Ist $f(x_0) \neq 0$ dann existiert $\delta>0$.
+            \item $\exists \delta > 0$ mit $\abs{f(x)}\leq 1+\abs{f(x_0)}$\quad$\forall x\in D\colon \abs{x-x_0} < \delta$
+            \item Ist $f(x_0) \neq 0$ dann existiert ein $\delta>0$ sodass
             \begin{align*}
-                \frac{1}{2}\abs{f(x)} &\leq \abs{f(x)} \leq \frac{3}{2} \abs{f(x_0)} \text{ für } x\in D, \abs{x-x_0} < \delta
+                \frac{1}{2}\abs{f(x_0)} &\leq \abs{f(x)} \leq \frac{3}{2} \abs{f(x_0)} \text{ für } x\in D \text{ mit } \abs{x-x_0} < \delta
             \end{align*}
         \end{enumerate}
 
-        \begin{proof}
-            Nehme $\varepsilon = 1$
+        \begin{proof}[Beweis (1.)]
+            Wähle $\varepsilon = 1$
             \begin{align*}
-                \annot{\impl}{Stet.} \exists\delta > 0\colon \abs{f(x)-f(x_0)} &< \varepsilon\quad x\in D, \abs{x-x_0} < \delta\\
-                \impl \abs{f(x)} &= \abs{f(x)-f(x_0)+f(x_0)} \leq \underbrace{\abs{f(x)-f(x_0)}}_{< 1} + \abs{f(x_0)}\\
-                &\leq 1 + \abs{f(x_0)} \impl 1.
+                \impl \exists\delta > 0\colon \abs{f(x)-f(x_0)} &< \varepsilon\quad x\in D,~\abs{x-x_0} < \delta\\[10pt]
+                \impl \abs{f(x)} &= \abs{f(x)-f(x_0)+f(x_0)}\\
+                &\leq \underbrace{\abs{f(x)-f(x_0)}}_{< 1} + \abs{f(x_0)}\leq 1 + \abs{f(x_0)}\qedhere
             \end{align*}
         \end{proof}
-        \begin{proof}
-            Ist $f(x) \neq 0$ wähle $\varepsilon = \frac{1}{2}\abs{f(x_0)} > 0$, $\delta > 0$.
+        \begin{proof}[Beweis (2.)]
+            Ist $f(x_0) \neq 0$, wähle $\varepsilon = \frac{1}{2}\cdot\abs{f(x_0)} > 0$, $\delta > 0$.
             \begin{align*}
-                \abs{f(x)-f(x_0)} &< \varepsilon = \frac{1}{2} \abs{f(x_0)} \quad x\in D, \abs{x-x_0} < \delta\\
-                \impl \abs{f(x)} &= \abs{f(x_0)-f(x_0)+f(x)} \leq \abs{f(x_0)} + \abs{f(x_0) + f(x)} \leq \frac{1}{2}\abs{f(x_0)}\\
-                \abs{f(x)} &= \abs{f(x_0)+f(x)-f(x_0)} \geq \abs{f(x_0)} = \abs{f(x)-f(x_0)}\\
-                &\geq \abs{f(x_0)} = \frac{1}{2} \abs{f(x_0)} = \frac{1}{2}\abs{f(x)}
+                \abs{f(x)-f(x_0)} &< \varepsilon = \frac{1}{2} \abs{f(x_0)} \tag{$x\in D, \abs{x-x_0} < \delta$}\\[10pt]
+                \impl \abs{f(x)} &= \abs{f(x_0)+f(x)-f(x_0)}\\
+                &\leq \abs{f(x_0)} + \abs{f(x) - f(x_0)}\\
+                &\leq \abs{f(x_0)}+\frac{1}{2}\abs{f(x_0)} = \frac{3}{2}\abs{f(x_0)}\\[10pt]
+                \abs{f(x)} &= \abs{f(x_0)+f(x)-f(x_0)}\\
+                &\geq \abs{f(x_0)} - \abs{f(x)-f(x_0)}\\
+                &\geq \abs{f(x_0)} - \frac{1}{2} \abs{f(x_0)} = \frac{1}{2}\abs{f(x_0)}\qedhere
             \end{align*}
         \end{proof}
     \end{lemma}
@@ -1978,62 +1984,70 @@
             f&: D_f \fromto \mathbb{K}\\
             g&: D_g \fromto \mathbb{K}
         \end{align*}
-        Setzen
+        Wir definieren
         \begin{align*}
-            f + g: D_{f,g} = D_f \cap D_g &\fromto \mathbb{K}\\
-            x &\mapsto  f(x) + g(x)\\[10pt]
-            f \cdot g: D_{f,g} &\fromto \mathbb{K}\\
-            x &\mapsto  f(x) \cdot g(x)\\[10pt]
-            \frac{f}{g}: D_{f,g} \exclude\set{x\in D_g: g(x)=0} &\fromto \mathbb{K}\\
-            x &\mapsto  \frac{f(x)}{g(x)}
+            D_{f+g} &\definedas D_f \cap D_g\\
+            D_{\frac{f}{g}} &\definedas D_{f+g} \exclude\set{x\in D_g: g(x)=0}
+        \end{align*}
+        und setzen
+        \begin{align*}
+            f + g: D_{f+g} &\fromto \mathbb{K},\quad x \mapsto  f(x) + g(x)\\
+            f \cdot g: D_{f+g} &\fromto \mathbb{K},\quad x \mapsto  f(x) \cdot g(x)\\
+            \frac{f}{g}: D_{\frac{f}{g}} &\fromto \mathbb{K},\quad x \mapsto \frac{f(x)}{g(x)}
         \end{align*}
     \end{notation}
 
     \begin{bemerkung}
-        $f+g$ geht auch für $f: D_f \fromto \mathbb{K}^d$, $g: D_f \fromto \mathbb{K}^d$.\\
-        $f\cdot g$ und $\frac{f}{g}$ geht auch für $f: D_f \fromto \mathbb{K}^d$, $g: D_f \fromto \mathbb{K}$.
+        $f+g$ geht auch für $f: D_f \fromto \mathbb{K}^d$, $g: D_g \fromto \mathbb{K}^d$. $f\cdot g$ und $\frac{f}{g}$ gehen auch für $f: D_f \fromto \mathbb{K}^d$, $g: D_g \fromto \mathbb{K}$.
     \end{bemerkung}
 
+    \newpage
+
     \begin{satz} % Satz 3
-        Seien $f, g: D\fromto \mathbb{K}$ stetig in $x_0\in D$.\\
-        Dann gilt
+        Seien $f, g: D\fromto \mathbb{K}$ stetig in $x_0\in D$. Dann gilt
         \begin{enumerate}[label=\arabic*.]
-            \item $f+g$ ist stetig in $x_0$
-            \item $f\cdot g$ ist stetig in $x_0$
-            \item Ist $g(x_0)\neq 0$, dann ist $\frac{f}{g}$ stetig in $x_0$
+            \item $f+g: D\fromto\mathbb{K},~x\mapsto f(x)+g(x)$ ist stetig in $x_0$.
+            \item $f\cdot g: D\fromto\mathbb{K},~x\mapsto f(x)\cdot g(x)$ ist stetig in $x_0$.
+            \item Ist $g(x_0)\neq 0$, dann ist $\frac{f}{g}: D_{\frac{f}{g}}\fromto\mathbb{K},~x\mapsto \frac{f(x)}{g(x)}$ stetig in $x_0$.
         \end{enumerate}
 
-        \begin{proof}[1.]
+        \begin{proof}[Beweis (1.)]
             \begin{align*}
                 \abs{f(x)+g(x)-(f(x_0)+g(x_0))} &\leq \abs{f(x)-f(x_0)} + \abs{g(x)-g(x_0)}
-                \intertext{Geg $\varepsilon >0$}
-                \exists \delta_1, \delta_2 > 0\colon \abs{f(x)-f(x_0)} &< \frac{\varepsilon}{2}\tag{$x\in D, \abs{x-x_0} < \delta$}\\
-                \abs{g(x)-g(x_0)} &< \frac{\varepsilon}{2}
-                \intertext{Ist $\min \set{\delta_1, \delta_2} > 0$}
-                \impl \abs{f(x)+g(x)-(f(x_0)+g(x_0))} &< \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon\tag{$x\in D, \abs{x-x_0} < \delta$}
+                \intertext{Nach der Stetigkeit der beiden einzelnen Funktionen gilt}
+                \forall\varepsilon>0~\exists \delta_1, \delta_2 > 0\colon \abs{f(x)-f(x_0)} &< \frac{\varepsilon}{2}\tag{$x\in D, \abs{x-x_0} < \delta_1$}\\
+                \abs{g(x)-g(x_0)} &< \frac{\varepsilon}{2}\tag{$x\in D, \abs{x-x_0} < \delta_2$}
+                \intertext{Ist $\delta\definedas\min \set{\delta_1, \delta_2} > 0$}
+                \impl \forall\varepsilon>0\colon \abs{f(x)+g(x)-(f(x_0)+g(x_0))} &< \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon\tag{$x\in D, \abs{x-x_0} < \delta$}
             \end{align*}
         \end{proof}
 
-        \begin{proof}[2.]
+        \begin{proof}[Beweis (2.)]
+            Aus Lemma~\ref{lemma:abschaetzung-stetigkeit} folgt
             \begin{align*}
-                \abs{f(x)\cdot g(x)-(f(x_0)\cdot g(x_0))} &\leq \abs{f(x)-f(x_0)}\cdot\abs{g(x)} + \abs{f(x_0)}\cdot\abs{g(x)-g(x_0)}\\
-                \text{ Lemma 2 } \impl \exists \delta_0 &> 0\colon \abs{g(x)} \leq 1 + \abs{g(x_0)} \quad\forall x\in D, \abs{x-x_0} < \delta_0
-                \intertext{f,g stetig}
-                \forall\varepsilon >0~\exists \delta_1, \delta_2 > 0\colon \abs{f(x)-f(x_0)} &< \frac{\varepsilon}{2(1+\abs{g(x)})}\\
-                \abs{g(x)-g(x_0)} &< \frac{\varepsilon}{2(1+\abs{f(x)})}\\
-                \delta &\definedas \min(\delta_0, \delta_1, \delta_2)\\
-                \impl \abs{f(x)\cdot g(x)-(f(x_0)\cdot g(x_0))} &< \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon\tag{$x\in D, \abs{x-x_0} < \delta$}
+                \exists \delta_0 > 0\colon \abs{g(x)} &\leq 1 + \abs{g(x_0)} \qquad\forall x\in D\colon \abs{x-x_0} < \delta_0
+                \intertext{Mit der Stetigkeit von $f$ und $g$ in $x_0$ gilt}
+                \forall\varepsilon >0~\exists \delta_1, \delta_2 > 0\colon \abs{f(x)-f(x_0)} &< \frac{\varepsilon}{2\cdot(1+\abs{g(x_0)})}\tag{$x\in D, \abs{x-x_0} < \delta_1$}\\
+                \abs{g(x)-g(x_0)} &< \frac{\varepsilon}{2\cdot(1+\abs{f(x)})}\tag{$x\in D, \abs{x-x_0} < \delta_2$}
+                \intertext{Wir definieren $\delta\definedas \min(\delta_0, \delta_1, \delta_2)$}
+                \impl \abs{f(x)\cdot g(x)-(f(x_0)\cdot g(x_0))} &\leq \abs{f(x)-f(x_0)}\cdot\abs{g(x)} + \abs{f(x_0)}\cdot\abs{g(x)-g(x_0)}\\
+                &\leq \frac{\varepsilon}{2\cdot(1+\abs{g(x_0)})}\cdot \abs{g(x)} + \frac{\varepsilon}{2\cdot(1+\abs{f(x)})}\cdot \abs{f(x_0)}\\
+                &\leq \frac{\varepsilon}{2\cdot(1+\abs{g(x_0)})}\cdot \pair{1+\abs{g(x_0)}} + \frac{\varepsilon}{2\cdot(1+\abs{f(x)})}\cdot \pair{1+\abs{f(x)}}\\
+                &\leq \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon\tag{$x\in D, \abs{x-x_0} < \delta$}
             \end{align*}
         \end{proof}
 
-        \begin{proof}[3.]
+        \newpage
+
+        \begin{proof}[Beweis (3.)]
             Sei $g(x_0) \neq 0$
             \begin{align*}
-                \frac{f(x)}{g(x)} - \frac{f(x_0)}{g(x_0)} &= \frac{f(x)g(x) - f(x_0)g(x_0)}{g(x)g(x_0)}\\
-                &= \frac{1}{g(x)g(x_0)} \interv{(f(x)-f(x_0))\cdot g(x_0) + f(x_0)\cdot (g(x)-g(x_0))}\\
-                \text{ Lemma 2 } \impl \exists \delta_0>0\colon \abs{g(x)} &\geq \frac{1}{2}\abs{g(x_0)}\tag{$x\in D, \abs{x-x_0} < \delta$}\\
-                \intertext{f,g stetig in $x_0$. geg. $\varepsilon > 0$}
-                \forall\varepsilon >0~\exists \delta_1, \delta_2 > 0\colon \abs{f(x)-f(x_0)} &< \frac{\varepsilon\cdot \abs{g(x)}}{4(1+\abs{g(x)})}\\
+                \frac{f(x)}{g(x)} - \frac{f(x_0)}{g(x_0)} &= \frac{f(x)\cdot g(x_0) - f(x_0)\cdot g(x)}{g(x)\cdot g(x_0)}\\
+                &= \frac{1}{g(x)\cdot g(x_0)}\cdot\interv{\pair{f(x)-f(x_0)}\cdot g(x_0) + f(x_0)\cdot \pair{g(x)-g(x_0)}}\tag{*}
+                \intertext{Aus Lemma~\ref{lemma:abschaetzung-stetigkeit} folgt}
+                \exists \delta_0>0\colon \abs{g(x)} &\geq \frac{1}{2}\abs{g(x_0)}\tag{$x\in D, \abs{x-x_0} < \delta$}\\
+                \intertext{Nach der Stetigkeit von $f$ und $g$ gilt außerdem}
+                \forall\varepsilon >0~\exists \delta_1, \delta_2 > 0\colon \abs{f(x)-f(x_0)} &< \frac{\varepsilon\cdot \abs{g(x_0)}}{4\cdot (1+\abs{g(x)})}\\
                 \abs{g(x)-g(x_0)} &< \frac{\varepsilon\cdot \abs{g(x_0)}^2}{4(1+\abs{f(x)})}\\
                 \impl \abs{\frac{f(x)}{g(x)}- \frac{f(x_0)}{g(x_0)}} &\leq \frac{1}{\abs{g(x)} \cdot \abs{g(x_0)}} \interv{??}\\
                 &< \frac{2}{\abs{g(x)}^2}\cdot\interv{\frac{\varepsilon\cdot g(x_0)^2}{4(1+\abs{g(x)})} + \frac{\abs{f(x_0)}\cdot \abs{g(x_0)}}{4(1+\abs{f(x)})}} \leq \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
