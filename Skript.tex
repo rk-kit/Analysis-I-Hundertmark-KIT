@@ -2060,5 +2060,205 @@
                 &< \frac{2}{\abs{g(x)}^2}\cdot\interv{\frac{\varepsilon\cdot g(x_0)^2}{4(1+\abs{g(x)})} + \frac{\abs{f(x_0)}\cdot \abs{g(x_0)}}{4(1+\abs{f(x)})}} \leq \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
             \end{align*}
         \end{proof}
+
+        \begin{proof}
+            Es reicht aus, zu zeigen, dass $\frac{1}{g(x)}$ in $x_0$ stetig ist.
+            \begin{align*}
+                \abs{\frac{1}{g(x)} - \frac{1}{g(x_0)}} &= \frac{\abs{g(x)-g(x_0)}}{g(x)\cdot g(x_0)}
+            \end{align*}
+        \end{proof}
     \end{satz}
+
+    \newpage
+
+    %%%%%%%%%%%%%%%%%%%%%%%%
+    % 23. Januar 2023
+    %%%%%%%%%%%%%%%%%%%%%%%%
+
+    \begin{satz}[Stetigkeit von Polynomen]
+        \marginnote{[23. Jan]}
+        Für eine stetige Funktion $f$ und $a$ eine Zahl, dann ist auch $a\cdot f$ stetig.\\
+        Außerdem ist $x^2$ bzw. $z^2$ nach Multiplikation stetig. $\annot{\impl}{Ind.}$ $x^n$ bzw. $z^n$ stetig.\\
+        Damit sind auch alle Polynome stetig auf ganz $\realnumbers$ bzw. $\complexnumbers$.\\
+        Außerdem ist für $P,Q$ Polynome mit $Q(x)\neq 0$ auch die Funktion
+        \begin{align*}
+            R(x) &= \frac{P(x)}{Q(X)}
+        \end{align*}
+        stetig.
+    \end{satz}
+    
+    \begin{align*}
+        e^x-e^0 &= e^x - 1 = \sum_{n=0}^{\infty} \frac{x^n}{n!}-1 = \sum_{n=1}^{\infty} \frac{x^n}{n!}
+    \end{align*}
+
+    \begin{uebung}
+        Weisen Sie basierend auf der vorherigen Gleichung die Stetigkeit der Funktion $e^x$ nach.
+    \end{uebung}
+
+    \begin{korollar}
+        Alle Polynome (reell oder komplex) sind stetig und alle polynomiellen Funktionen $P(x) = \frac{R(x)}{Q(x)}$ sind stetig auf $D_R = \mathbb{K}\exclude\set{x\in\mathbb{K}: Q(x) = 0}$.
+    \end{korollar}
+
+    \begin{satz} % Satz 5
+        Sei $f: D\fromto\realnumbers$ (oder $\complexnumbers$, $\realnumbers^d$, $\complexnumbers^d$) mit $D\subseteq\realnumbers$ (oder $\complexnumbers$).\\
+        Dann gilt $f$ ist genau dann stetig in $x_0$, wenn für alle Folgen $(x_n)_n \subseteq D$, $x_n \fromto x_0$ folgt, dass $f(x_n) \fromto f(x_0)$ für $\ntoinfty$.
+
+        \begin{proof}
+            \anf{$\impl$} $f$ ist stetig in $x_0$. Dann gilt
+            \begin{align*}
+                \forall\varepsilon > 0~\exists\delta>0\colon \abs{f(x)-f(x_0)} < \varepsilon\tag{für $x\in D$, $\abs{x-x_-0}<\delta$}
+                \intertext{Sei $(x_n)_n\subseteq D$ Folge mit Werten aus $D$ mit $x_n\fromto x_0$. Das heißt}
+                \forall \varepsilon > 0~\exists N\in\naturalnumbers\colon \abs{x_n-x_0} < \varepsilon\quad\forall n\geq N\\
+                \intertext{Gegeben $\varepsilon$ verwenden wir die Stetigkeits-Eigenschaften}
+                \exists \delta>0\colon \abs{f(x)-f(x_-0)} < \varepsilon\quad \forall x\in D\colon \abs{x-x_0} < \delta\\
+                \intertext{nehmen $\hat{\varepsilon} = \delta$}
+                \impl \exists N\in\naturalnumbers\colon \abs{x_n-x_0} < \delta\quad\forall n\geq N\\
+                \impl \abs{f(x_n)-f(x_0)} < \varepsilon\quad\forall n\geq N_0
+            \end{align*}
+            Mit der Definition der Konvergenz folgt dann $f(x_n) \fromto f(x_0)$.\\[10pt]
+            \anf{$\Leftarrow$} Kontraposition. Annahme $f$ ist nicht stetig in $x_0$.
+            \begin{align*}
+                \impl \exists \varepsilon > 0~\forall \delta > 0\colon \exists x\in D, \abs{x-x_0} < \delta \text{ und } \abs{f(x)-f(x_0)} \geq \varepsilon > 0
+                \intertext{Wählen $\delta = \frac{1}{n}$, $n\in\naturalnumbers$}
+                \impl \exists x_n\in D\colon \abs{x_n-x_0} < \frac{1}{n} \text{ und } \abs{f(x_n)-f(x_0)} \geq \varepsilon\\
+                \impl \text{ Haben } (x_n)_n\subseteq D, x_n \fromto x_0 \text{ und } f(x_n)\not\fromto f(x_0)
+            \end{align*}
+        \end{proof}
+    \end{satz}
+
+    \begin{satz} % Satz 6
+        \label{satz:verkettung-stetigkeit}
+        Sei $f: D_f \fromto\realnumbers$, $D_g\subseteq\realnumbers$, $g: D_g\fromto\realnumbers$. und $f(D_f)\subseteq D_g$.\\
+        Sind $f$ stetig in $x_0$ und $g$ stetig in $y_0=f(x_0)\in D_g$. Dann ist $g\circ f: D_f\fromto\realnumbers$ stetig in $x_0$.
+
+        \begin{proof}
+            Sei $(x_n)_n\subseteq D_f$ mit $x_n\fromto x_0$. Dann folgt aus dem vorherigen Satz, dass $f(x_n) \fromto f(x_0) = y_0$.\\
+            \begin{align*}
+                y_n\fromto y_0 \text{ stetig in } y\\
+                \intertext{Nach dem vorherigen Satz folgt}
+                \impl g(f(x_n)) g(y_n) \fromto g(y_0) = g(f(x_0))\\
+                \impl g\circ f \text{ ist stetig }
+            \end{align*}
+        \end{proof}
+    \end{satz}
+
+    \begin{uebung}
+        Zeigen Sie Satz~\ref{satz:verkettung-stetigkeit} mit dem $\varepsilon$-$\delta$-Kriterium der Stetigkeit.
+    \end{uebung}
+
+    \newpage
+    \section{[*] Zwischenwertsatz}
+    \subsection{[*]}
+    \thispagestyle{pagenumberonly}
+
+    % Erklärung für den Zwischenwertsatz
+
+    \begin{beispiel}
+        Die Funktion
+        \begin{align*}
+            f: \mathbb{Q} &\fromto \realnumbers\\
+            x &\mapsto
+            \begin{cases}
+                1\quad x^2 &> 2\\
+                -1\quad x^2 &< 2
+            \end{cases}
+        \end{align*}
+        ist eine stetige Funktion auf $\mathbb{Q}$.
+    \end{beispiel}
+
+    \begin{satz}[Zwischenwertsatz] % Satz 1
+        Sei $f: \interv{a,b}\fromto\realnumbers$ stetig, $f(a)\neq f(b)$. Dann gibt es zu jedem $c$ zwischen $f(a)$ und $f(b)$ (d.h. $f(a) < c < f(b)$ oder $f(b) < c < f(a)$) ein $\zeta$ zwischen $a$ und $b$ ($a<\zeta < b$) mit $f(\zeta) = c$.\\
+        Dieser Satz funktioniert nicht auf $\complexnumbers$, da wir die Anordnung der reellen Zahlen verwenden und funktioniert nach dem vorherigen Beispiel nicht auf unvollständigen Mengen.
+
+        \begin{proof}
+            \OBDA sei $f(a) < f(b)$ (sonst ersetzen wir $f$ durch $-f$).\\
+            Schritt 1: Sei $f(a) < 0 < f(b)$ und $c=0$. Wir setzen $M\definedas\set{x\in\interv{a,b}: f(x) < 0}$.
+            \begin{align*}
+                \impl\Bigg\{\begin{split}
+                         a\in M \text{ das heißt } M\neq\emptyset\\
+                         \forall m\in M\colon m \leq b
+                \end{split}
+                \intertext{Setzen $\zeta\definedas \sup M\in\realnumbers$. Behauptung: $f(\zeta) = 0$. Beobachtung: $f$ ist stetig auf $\interv{a,b}$ und angenommen $f(\zeta)\neq 0$}
+                \impl \exists \delta > 0~\forall x\in\pair{\zeta-\delta, \zeta+\delta} \cap\interv{a,b} \text{ hat } f(x) \text{ das gleiche Vorzeichen wie } f(\zeta)
+                \intertext{Nehmen $\varepsilon = \abs{f(\zeta)} > 0$}
+                \impl \exists\delta > 0\colon \abs{f(x)-f(\zeta)} < \abs{f(\zeta)}\\
+                ???
+            \end{align*}
+            1. Fall: $f(\zeta)>0$. Insbesondere $\zeta > a$. Aus der Beobachtung folgt
+            \begin{align*}
+                \exists \delta > 0\colon f(x) > 0\quad\forall x\in\interv{a,b}\cap\pair{\zeta-\delta, \zeta+\delta}\\
+                f(x) > 0\quad\forall \zeta - \frac{\delta}{2}\leq x \leq \max\set{b, \zeta + \delta}\\
+                \impl \zeta-\frac{\delta}{2} \text{ ist auch obere Schranke für } M\\
+                \impl \text{$\zeta$ ist aber kleinste obere Schranke für $M$. Widerspruch}
+            \end{align*}
+            2. Fall: $f(\zeta) < 0$.
+            \begin{align*}
+                \impl \exists\delta > 0\colon f(x) < 0 \quad\forall x\in\interv{a,b}\cap \pair{\zeta-\delta, \zeta+\delta}\\
+                \impl f(\zeta + \frac{\delta}{2}) < 0 \impl \text{ $\zeta$ ist keine obere Schranke für $M$. Widerspruch }
+            \end{align*}
+            Damit ist $f(\zeta) = 0$.
+        \end{proof}
+    \end{satz}
+
+    \newpage
+    \section{[*] Satz von Weierstraß}
+    \subsection{[*]}
+    \thispagestyle{pagenumberonly}
+
+    \begin{definition} % Definition 1
+        Eine Menge $A\subseteq\realnumbers$ (oder $\complexnumbers$) ist beschränkt, falls
+        \begin{align*}
+            \exists R>0\colon A\subseteq\pair{-R, R}
+            \intertext{bzw}
+            A\subseteq B_R(?) \definedas\set{z\in\complexnumbers: \abs{z} < R}
+        \end{align*}
+        $A$ ist abgeschlossen, falls für jede Folge $(x_n)_n\subseteq A$, welche konvergiert auf $ \lim_{n\fromto\infty} x_n \in A$.\\
+    \end{definition}
+
+    \begin{beispiel}
+        $\interv{a,b}$ ist abgeschlossen und beschränkt. $\pair{0,1}$ ist nicht abgeschlossen.
+    \end{beispiel}
+
+    \begin{definition} % Definition 2
+        $K\subseteq\realnumbers$ (oder $\complexnumbers$) ist kompakt, falls jede Folge $(x_n)_n\subseteq K$ eine in $K$ konvergente Teilfolge besitzen. Das heißt
+        \begin{enumerate}[label=(\alph*)]
+            \item $(x_N)_n$ hat konvergente Teilfolge und
+            \item den Grenzwert $ \lim_{j\fromto\infty} x_n \in K$
+        \end{enumerate}
+    \end{definition}
+
+    \begin{satz} % Satz 3
+        $K\subseteq\realnumbers$ (oder $\complexnumbers$) ist genau dann kompakt, wenn $K$ abgeschlossen und beschränkt ist.
+
+        \begin{proof}
+            \anf{$\Leftarrow$}: $K$ ist abgeschlossen und beschränkt. Und $(x_n)_n\subseteq K$ sei beliebige Folge in $K$.
+            \begin{align*}
+                \impl (x_n)_n \text{ ist beschränkte Folge }
+                \impl \exists \text{ konvergente Teilfolge } (x_{n_j})_j \text{ von } (x_n)_n\\
+                \intertext{$K$ ist abgeschlossen. Das heißt}
+                x = \lim_{j\fromto\infty} x_{n_j} \in K\\
+                \impl K \text{ ist kompakt }
+            \end{align*}
+            \anf{$\impl$}: Sei $K$ kompakt. Dann ist $K$ auch abgeschlossen. (Warum?)\\
+            $K$ ist auch beschränkt. Wenn $K$ nicht beschränkt ist existiert für jedes $n\in\naturalnumbers$ ein $x_n\in K$ mit $\abs{x_n} > n$.\\
+            Die Folge $(x_n)_n$ hat dann aber keine konvergente Teilfolge.
+        \end{proof}
+    \end{satz}
+
+    \begin{satz} % Satz 4
+        Sei $K\subseteq\realnumbers$ (oder $\complexnumbers$) und $f: K\fromto\realnumbers$ (oder $\complexnumbers$) stetig. Dann ist $f(K)$ kompakt.
+        \begin{proof}
+            Sei $(y_n)_n$ Folge in $f(k)$. $f(K) \definedas\set{f(x): x\in K}$\\
+            $\impl \forall n\in\naturalnumbers~\exists x_n\in K\colon f(x_n) = y_n$. Nach Definition existiert eine Teilfolge $(x_{n_j})_j$ von $(x_n)_n$, welche gegen ein $x_0\in K$ konvergiert.
+            \begin{align*}
+                x_{n_j} \fromto x_0 \in K\\
+                y_{n_j} \definedas f(x_{n_j})
+            \end{align*}
+            $f$ stetig $\impl$ $\underbrace{f(x_{n_j})}_{=y_n} \fromto f(x_0) \definedasbackwards y_0$.\\
+            $\impl$ Teilfolge $(y_{n_j})_j$ konvergiert und $y_0=f(x_0) \in f(K)$. Das heißt nach Definition ist $f(K)$ kompakt.
+        \end{proof}
+        Insbesondere ist $f(K)$ abgeschlossen und beschränkt
+    \end{satz}
+
+
 \end{document}
