@@ -89,8 +89,9 @@
 \newcommand{\horizontalline}[0]{\par\noindent\rule{0.05\textwidth}{0.1pt}\\}
 \newcommand{\ntoinfty}[0]{n\fromto\infty}
 \newcommand{\rgbcolor}[3]{rgb,255:red,#1;green,#2;blue,#3}
-\newcommand{\re}{\text{Re}}
-\newcommand{\im}{\text{Im}}
+\renewcommand{\Re}{\text{Re}}
+\renewcommand{\Im}{\text{Im}}
+\newcommand{\conj}[1]{\overline{#1}}
 
 % Envs
 \newenvironment{induktionsanfang}{
@@ -1406,7 +1407,7 @@
     \section{[*] Cauchyprodukt und Exponentialfunktionen}
     \thispagestyle{pagenumberonly}
 
-    \subsection{}
+    \subsection{[*] Cauchyprodukt}
     Frage: Gegeben Reihen $\sum_{n=0}^{\infty} a_n$, $\sum_{n=0}^{\infty} b_n$, beide konvergent. Wie kann man das Produkt $\pair{\sum_{n=0}^{\infty} a_n}\cdot\pair{\sum_{n=0}^{\infty} b_n}$ geschickt berechnen?\\
     \begin{align*}
         u &= \sum_{n=0}^{\infty} a_n = \lim_{n\fromto\infty} s_n\quad s_n \definedas \sum_{l=0}^{n} a_l\\
@@ -1427,6 +1428,7 @@
     Antwort: Im Allgemeinen nein, aber okay, wenn $\sum_{n}^{} a_n$, $\sum_{n}^{} b_n$ absolut konvergent sind.
 
     \begin{satz} % Satz 1
+        \label{satz:cauchyprodukt}
         Seien $\sum_{n=0}^{\infty} a_n$, $\sum_{n=0}^{\infty} b_n$ absolut konvergente Reihen. Dann gilt für jede Bijektion $\sigma: \naturalnumbers_0 \fromto \naturalnumbers_0\times\naturalnumbers_0$
         \begin{align*}
             \pair{\sum_{n=0}^{\infty} a_n} \cdot \sum_{n=0}^{\infty} b_n &= \sum_{n=0}^{\infty} a_{\sigma_1(n)} \cdot b_{\sigma_2(n)}
@@ -1562,85 +1564,90 @@
     \subsection{Exponentialfunktionen}
 
     \begin{definition}[Exponentialfunktion]
-        $z\in\complexnumbers$, $e^z = \exp(z)\definedas \sum_{n=0}^{\infty} \frac{z^n}{n!}$, $z^0=1$. $\exp: \complexnumbers\fromto\complexnumbers$.
+        Es sei $z\in\complexnumbers$. Dann gilt
+        \begin{align*}
+            e^z = \exp(z)\definedas \sum_{n=0}^{\infty} \frac{z^n}{n!}
+        \end{align*}
+        Außerdem ist $z^0=1$.
     \end{definition}
 
-    \begin{satz}
+    \begin{satz}[Eigenschaften der Exponentialfunktion]
         \theoremescape
         \begin{enumerate}[label=(\alph*)]
-            \item Für alle $z\in\complexnumbers$ konvergiert obige Reihe absolut
-            \item $\exp(z_1)\cdot\exp(z_2) = \exp(z_1+z_2)$
-            \item $\exp(z)\neq 0~\forall z\in\complexnumbers$ und $\exp(z)^{-1} = \exp(-z)$
-            \item $\overline{\exp(z)} = \exp(\overline{z})$. Insbesondere ist $\abs{\exp(z)} = \exp(\re(z))$
-            \item Für $\alpha\in\realnumbers$ ist $\abs{\exp(i\alpha)}=1$. Setzen
-            \begin{align*}
-                \cos \alpha &= \cos(\alpha) \definedas \re (e^{i\alpha})\\
-                &= \frac{1}{2} \cdot\pair{e^{i\alpha} + e^{-i\alpha}}
-                \sin \alpha &= \sin(\alpha) \definedas \im (e^{i\alpha}) = \frac{1}{2i}\cdot\pair{e^{i\alpha}-e^{-i\alpha}}
-                \intertext{Haben}
-                -1 &\leq \cos \alpha \leq 1\\
-                -1 &\leq \sin \alpha \leq 1\\
-                \cos(\alpha)^2 + \sin(\alpha)^2 &= 1\quad\forall \alpha\in\realnumbers\\
-                \text{ Euklidische Gleichung } e^{i\alpha} &= \cos(\alpha) + i\sin(\alpha)
-            \end{align*}
+            \item Für alle $z\in\complexnumbers$ konvergiert die obige Reihe absolut. (Wohldefiniertheit der $\exp$-Funktion)
+            \item Es gilt $\exp(z_1)\cdot\exp(z_2) = \exp(z_1+z_2)$. Insbesondere ist $\exp(z)\neq 0~\forall z\in\complexnumbers$ und $\exp(z)^{-1} = \exp(-z)$.
+            \item $\conj{\exp(z)} = \exp(\conj{z})$
+            \item $\abs{\exp(z)} = \exp(\Re(z))$
+            \item $e^x = \exp(x) > 0\quad\forall x\in\realnumbers$
         \end{enumerate}
 
-        \begin{proof}[(a)]
+        \begin{proof}[Beweis (a)]
+            Wir zeigen, dass die Reihe absolut konvergiert.
             \begin{align*}
-                a_n &= \frac{1}{n!}\cdot z^n\\
-                \frac{a_{n+1}}{a_n} &= \frac{z}{n+1}\fromto 0 \text{ für } n\fromto\infty\\
-                \annot{\impl}{Quotientenkriteirum} \sum_{n=0}^{\infty} a_n &= \sum_{n=0}^{\infty} \frac{z^n}{n!}\text{ konvergiert absolut }
+                a_n &= \frac{1}{n!}\cdot z^n
+                \intertext{Nach dem Quotientenkriterium (\ref{satz:quotientenkriterium})}
+                \abs{\frac{a_{n+1}}{a_n}} &= \frac{z}{n+1}\fromto 0 \text{ für } n\fromto\infty\\
+                \impl \sum_{n=0}^{\infty} a_n &= \sum_{n=0}^{\infty} \frac{z^n}{n!}\text{ konvergiert absolut}\qedhere
             \end{align*}
         \end{proof}
-        \begin{proof}[(b)]
+        \begin{proof}[Beweis (b)]
             \begin{align*}
-                e^z + e^{zi} &= \pair{\sum_{j=0}^{\infty} \frac{z^j}{j!}} \cdot \pair{\sum_{k=0}^{\infty} \frac{z^k}{k!}}\\
-                &= \text{ Cauchy-produkt } \\
-                &= \sum_{n=0}^{\infty} \sum_{\nu=0}^{n} a_{\nu} b_{n-\nu}\\
-                &= \sum_{n=0}^{\infty} \sum_{\nu=0}^{n} \frac{(z_n)^{\nu}}{\nu!} \frac{(z_n)^{n-\nu}}{(n-\nu)!}\\
-                &= \sum_{n=0}^{\infty} \frac{1}{n!} \sum_{\nu=0}^{n} \frac{n!}{\nu!(n-\nu)!} (z_1)^{\nu} z_z)^{n-\nu}\\
-                &= \sum_{\nu=0}^{n} \binom{n}{\nu} (z_1)^{\nu} (z_2) ^{n-\nu} = (z_1+z_2)^n\\[10pt]
-                \sum_{n=0}^{\infty} \frac{1}{n!}(z_1+z_2)^n &= e^{z_1 + z_2}
-            \end{align*}
-        \end{proof}
-        \begin{proof}[(c)]
-            \begin{align*}
-                \sum_{k=0}^{n} \frac{z^k}{k!} &= \sum_{k=0}^{n} \frac{\overline{z^k}}{k!}\\
-                &= \sum_{k=0}^{n} \frac{\overline{z}^k}{k!} \fromto \exp(\overline{z})\\[10pt]
-                \overline{\exp(z)} &\impl \overline{\exp(z)} = \exp{\overline{z}}
+                \exp(z_1) \cdot \exp(z_2) &= \pair{\sum_{j=0}^{\infty} \frac{z^j}{j!}} \cdot \pair{\sum_{k=0}^{\infty} \frac{z^k}{k!}} \annot{=}{\ref{satz:cauchyprodukt}} \sum_{n=0}^{\infty} \sum_{\nu=0}^{n} a_{\nu} b_{n-\nu}\\
+                &= \sum_{n=0}^{\infty} \sum_{\nu=0}^{n} \frac{(z_1)^{\nu}}{\nu!}\cdot \frac{(z_2)^{n-\nu}}{(n-\nu)!}\\
+                &= \sum_{n=0}^{\infty} \frac{1}{n!}\cdot \underbrace{\sum_{\nu=0}^{n} \frac{n!}{\nu!\cdot(n-\nu)!}\cdot (z_1)^{\nu}\cdot (z_2)^{n-\nu}}_{\text{Binomischer Lehrsatz}}\\
+                &= \sum_{n=0}^{\infty} \frac{1}{n!}\cdot(z_1+z_2)^n = \exp(z_1 + z_2)\qedhere
                 \intertext{Insbesondere}
-                e^z e^{-z} &= e^{z-z} = e^0 = 1\\
-                \impl e^z e^{-z} \neq 0 \quad \forall z\in\complexnumbers
-                \intertext{und}
-                (e^z)^{-1} &= e^{-z}
+                \exp(z)\cdot \exp(-z) &= \exp(z-z) = e^0 = 1\\
+                \impl \Bigg\{
+                \begin{split}
+                    \exp(z), \exp(-z) &\neq 0 \quad \forall z\in\complexnumbers\\
+                    \exp(z)^{-1} &= \exp(-z)
+                \end{split}
             \end{align*}
         \end{proof}
-        \begin{proof}
+        \begin{proof}[Beweis (c)]
             \begin{align*}
-                \abs{\exp(z)}^2 &= \overline{\exp(z)} \exp(z)\\
-                &= \exp(\overline{z}) \exp(z)\\
-                &= \exp(\overline{z} + z) = \exp(z \re(z))\\
-                &= \pair{\exp(\re(z))}^2\\[10pt]
-                \impl \abs{\exp(z)} &= \abs{\exp(\re(z))} = \exp(\re(z))
-                \intertext{Behauptung: $e^x = \exp(z) > 0~\forall x\in\realnumbers$}
-                \text{ Ist } x \geq 0 &\impl \exp(z) = \sum_{n=0}^{\infty} \frac{x^n}{n!}= 1 + \sum_{n=1}^{\infty} \frac{x^n}{n!}\geq 1\\
-                \text{ Ist } x < 0 &\impl -x > 0\quad \exp(z) = \frac{1}{\exp(-x)} > 0
+                \conj{\exp(z)} &= \conj{\sum_{k=0}^{\infty} \frac{z^k}{k!}} = \sum_{k=0}^{\infty} \conj{\frac{z^k}{k!}} = \sum_{k=0}^{\infty} \frac{\conj{z^k}}{k!} = \sum_{k=0}^{\infty} \frac{\pair{\conj{z}}^k}{k!} = \exp(\conj{z})\qedhere
             \end{align*}
         \end{proof}
+        \begin{proof}[Beweis (d)]
+            \begin{align*}
+                \abs{\exp(z)}^2 &= \conj{\exp(z)}\cdot \exp(z) = \exp(\conj{z})\cdot \exp(z)\\
+                &= \exp(\conj{z} + z) = \exp(2\cdot \Re(z))\\
+                &=\exp(\Re(z)+ \Re(z)) = \pair{\exp(\Re(z))}^2\\[10pt]
+                \impl \abs{\exp(z)} &= \abs{\exp(\Re(z))} = \exp(\Re(z))\qedhere
+            \end{align*}
+        \end{proof}
+        \begin{proof}[Beweis (e)]
+            \begin{align*}
+                \text{Ist } x \geq 0 &\impl \exp(x) = \sum_{n=0}^{\infty} \frac{x^n}{n!}= 1 + \sum_{n=1}^{\infty} \frac{x^n}{n!}\geq 1\\
+                \text{Ist } x < 0 &\impl \exp(x) = \frac{1}{\exp(-x)} > 0\qedhere
+            \end{align*}
+        \end{proof}
+    \end{satz}
 
-        \begin{proof}[(d)]
+    \begin{satz}[Definition von Sinus und Kosinus über Expontentialfunktionen]
+        Für $\alpha\in\realnumbers$ ist $\abs{\exp(i\alpha)}=1$. Wir setzen
+        \begin{align*}
+            \cos(\alpha) \definedas \Re (e^{i\alpha}) &= \frac{1}{2} \cdot\pair{e^{i\alpha} + e^{-i\alpha}}\\
+            \sin(\alpha) \definedas \Im (e^{i\alpha}) &= \frac{1}{2i}\cdot\pair{e^{i\alpha}-e^{-i\alpha}}
+            \intertext{Dann haben wir}
+            -1 \leq \cos \alpha &\leq 1\\
+            -1 \leq \sin \alpha &\leq 1
+            \intertext{Außerdem gilt $\forall \alpha\in\realnumbers$}
+            \cos(\alpha)^2 + \sin(\alpha)^2 &= 1\\
+            \cos(\alpha) + i\cdot\sin(\alpha) &= e^{i\alpha} \tag{Eulersche Gleichung}
+        \end{align*}
+
+        \begin{proof}
             Es sei $\alpha\in\realnumbers$.
             \begin{align*}
-                \abs{e^{i\alpha}}^2 &= \overline{e^{i\alpha}} e^{i\alpha}\\
-                &= e^{-i\alpha} e^{i\alpha} = e^0 = 1\\[10pt]
-                \re(e^{i\alpha}) &= \frac{1}{2}\cdot\pair{e^{i\alpha} + \overline{e^{-i\alpha}}}\\
-                &= \frac{1}{2}\cdot\pair{e^{i\alpha} + e^{-i\alpha}}\\
-                &\definedasbackwards \cos \alpha\\[10pt]
-                \im(e^{i\alpha}) &= \frac{1}{2i}\cdot\pair{e^{i\alpha} - \overline{e^{-i\alpha}}}\\
-                &= \frac{1}{2i}\cdot\pair{e^{i\alpha} - e^{-i\alpha}}\\[10pt]
-                \abs{e^{i\alpha}}^2 &= \pair{\re(e^{i\alpha})}^2 + \im(e^{i\alpha})^2\\
-                &= \pair{\cos \alpha}^2 + \pair{\sin \alpha}^2\\[10pt]
-                e^{i\alpha} &= \re (e^{i\alpha}) + i \im (e^{i\alpha)} = \cos \alpha + i \cdot \sin \alpha
+                \abs{\exp(i\alpha)}^2 &= \conj{\exp(i\alpha)}\cdot \exp(i\alpha) = \exp(-i\alpha)\cdot \exp(i\alpha) = \exp(0) = 1\\[10pt]
+                \Re(e^{i\alpha}) &= \frac{1}{2}\cdot\pair{e^{i\alpha} + \conj{e^{i\alpha}}} = \frac{1}{2}\cdot\pair{e^{i\alpha} + e^{-i\alpha}} \definedasbackwards \cos \alpha\\
+                \Im(e^{i\alpha}) &= \frac{1}{2i}\cdot\pair{e^{i\alpha} - \conj{e^{i\alpha}}}= \frac{1}{2i}\cdot\pair{e^{i\alpha} - e^{-i\alpha}}\definedasbackwards \sin \alpha\\[10pt]
+                \impl \abs{\exp(i\alpha)}^2 &= \pair{\Re(\exp(i\alpha))}^2 + \pair{\Im(\exp(i\alpha))}^2\\
+                &= \pair{\cos (\alpha)}^2 + \pair{\sin (\alpha)}^2\\[10pt]
+                \exp(i\alpha) &= \Re (\exp(i\alpha)) + i\cdot \Im (\exp(i\alpha)) = \cos \alpha + i \cdot \sin \alpha\qedhere
             \end{align*}
         \end{proof}
     \end{satz}
@@ -1685,7 +1692,7 @@
                 \impl \text{ ist beschränkt }\\
                 \impl K\definedas \sup_{n\in\naturalnumbers} \set{a_n z^n} < \infty
                 \intertext{Sei $0 < r < \abs{z_1}$, $0 < \theta \definedas \frac{r}{\abs{z_1}} < 1$}
-                z &\leq \overline{B_r (a)} = \set{\abs{z} \leq r}\\[10pt]
+                z &\leq \conj{B_r (a)} = \set{\abs{z} \leq r}\\[10pt]
                 \abs{a_n z^n} &= \abs{a_n}\abs{z^n} = \abs{a_n} \cdot \abs{z}^n &= \abs{a_n} \cdot \abs{z}^n \frac{\abs{z}}{\abs{z_1}} ^n\\
                 &\leq k \theta^n\quad \forall n \geq 0\\
                 \impl \sum_{n=0}^{\infty} k \theta^n \text{ konvergente Majorante für } \sum_{n=0}^{\infty} a_n z^n \text{ sofern } 0 \leq z \leq r < \abs{z}\\
