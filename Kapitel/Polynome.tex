@@ -2,7 +2,7 @@
 \thispagestyle{pagenumberonly}
 
 \begin{definition}[Reelles Polynom]
-    Es sei $a_0,a_1, \dots, a_n\in\realnumbers$,~$a_n \neq 0,~\in\realnumbers$. Dann ist
+    Es sei $a_0,a_1, \dots, a_n\in\R$,~$a_n \neq 0,~\in\R$. Dann ist
     \begin{align*}
         P(x) &\definedas a_0 + a_1 \cdot x + a_2 \cdot x^2 + \dots + a_n \cdot x^n
     \end{align*}
@@ -14,7 +14,7 @@
 \end{definition}
 
 \begin{bemerkung}[Analytische Polynome]
-    Ähnlich zu reellen Polynomen lassen sich auch analytische Polynome definieren. Es sei $a_0, a_1, \dots, a_n \in\complexnumbers,~a_0\neq 0,~z\in\complexnumbers$. Dann ist
+    Ähnlich zu reellen Polynomen lassen sich auch analytische Polynome definieren. Es sei $a_0, a_1, \dots, a_n \in\C,~a_0\neq 0,~z\in\C$. Dann ist
     \begin{align*}
         P(z) &\definedas a_0 + a_1\cdot z + a_2\cdot z^2 + \dots + a_n\cdot z^n
     \end{align*}
@@ -29,7 +29,7 @@
     \theoremescape
     \label{satz:eigenschaften-polynome}
     \begin{enumerate}[label=(\roman*)]
-        \item Sei $P$ ein Polynom mit $Grad(P) = n$ und $\lambda\in\realnumbers,~\lambda\neq 0$. Dann ist $Grad(\lambda P) = n$.
+        \item Sei $P$ ein Polynom mit $Grad(P) = n$ und $\lambda\in\R,~\lambda\neq 0$. Dann ist $Grad(\lambda P) = n$.
         \item Seien $P, Q$ nicht-triviale Polynome mit $Grad(P) = n$ und $Grad(Q)=m$. Dann gilt $PQ$ ist ein Polynom mit $Grad(PQ)=n+m$.
         \begin{proof}
             \begin{align*}
@@ -78,7 +78,7 @@
         \begin{induktionsschritt}
             Angenommen die Behauptung stimmt für Polynom von Grad $n$. Sei $P$ Polynom von Grad $n+1$.\\
             1. Fall: $P$ hat keine Nullstelle $\impl$ Die Behauptung stimmt für $P$.\\
-            2. Fall: $P(\zeta) = 0$ für ein $\zeta\in\realnumbers \annot{\impl}{\ref{satz:eigenschaften-polynome}} P(x) = (x-\zeta)\cdot Q\pair{x-\zeta}$. $Q$ ist Polynom von Grad $n$ mit höchstens $n$ Nullstellen. $\impl$ Anzahl der Nullstellen von $P$ ist $\leq n+1$.\qedhere
+            2. Fall: $P(\zeta) = 0$ für ein $\zeta\in\R \annot{\impl}{\ref{satz:eigenschaften-polynome}} P(x) = (x-\zeta)\cdot Q\pair{x-\zeta}$. $Q$ ist Polynom von Grad $n$ mit höchstens $n$ Nullstellen. $\impl$ Anzahl der Nullstellen von $P$ ist $\leq n+1$.\qedhere
         \end{induktionsschritt}
     \end{proof}
 \end{satz}

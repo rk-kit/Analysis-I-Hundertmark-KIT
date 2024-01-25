@@ -2,7 +2,7 @@
 \thispagestyle{pagenumberonly}
 
 \begin{definition}[Reelle Folge]
-    Eine reelle Folge ist eine Abbildung $\naturalnumbers\fromto\realnumbers$. Alternative Notation: $\pair{a_n}_{n\in\naturalnumbers}$, $\pair{a_1, a_2, \dots}$
+    Eine reelle Folge ist eine Abbildung $\N\fromto\R$. Alternative Notation: $\pair{a_n}_{n\in\N}$, $\pair{a_1, a_2, \dots}$
 \end{definition}
 
 \begin{beispiel}
@@ -10,10 +10,10 @@
 \end{beispiel}
 
 \begin{definition}[Konvergenzkriterium]
-    Sei $\pair{a_n}_{n\in\naturalnumbers}$ eine Folge reeller Zahlen. Die Folge heißt konvergent gegen $a\in\realnumbers$, falls gilt:
+    Sei $\pair{a_n}_{n\in\N}$ eine Folge reeller Zahlen. Die Folge heißt konvergent gegen $a\in\R$, falls gilt:
     \begin{align*}
-        \forall \varepsilon > 0 ~\exists n_0\in\naturalnumbers\colon \abs{a_n-a} &< \varepsilon\text{ für alle $n>n_0$}
-        \intertext{$a$ heißt Grenzwert von $\pair{a_n}_{n\in\naturalnumbers}$ und man schreibt}
+        \forall \varepsilon > 0 ~\exists n_0\in\N\colon \abs{a_n-a} &< \varepsilon\text{ für alle $n>n_0$}
+        \intertext{$a$ heißt Grenzwert von $\pair{a_n}_{n\in\N}$ und man schreibt}
         \lim_{n\fromto \infty} a_n &= a
     \end{align*}
 \end{definition}
@@ -21,7 +21,7 @@
 \begin{beispiel}[Nachweis von Konvergenz]
     Es sei
     \begin{align*}
-        \pair{a_n}_{n\in\naturalnumbers}&=1+\frac{(-1)^n}{2n}
+        \pair{a_n}_{n\in\N}&=1+\frac{(-1)^n}{2n}
         \intertext{wir definieren $\varepsilon$ und $n_0$}
         \varepsilon > 0,&\quad n_0 = \frac{1}{2\varepsilon}\\
         \intertext{und wenden das Konvergenzkriterium an}
@@ -31,11 +31,11 @@
 \end{beispiel}
 
 \begin{bemerkung}[\anf{Fast alle Elemente}]
-    Wir sagen, dass fast alle Element der Folge $(a_n)_{n\in\naturalnumbers}$ eine Eigenschaft (E) haben, wenn es höchstens eine endliche Anzahl von $a_n$ existiert, die die Eigenschaft (E) nicht erfüllen.
+    Wir sagen, dass fast alle Element der Folge $(a_n)_{n\in\N}$ eine Eigenschaft (E) haben, wenn es höchstens eine endliche Anzahl von $a_n$ existiert, die die Eigenschaft (E) nicht erfüllen.
 \end{bemerkung}
 
 \begin{definition}[Alternativ formuliertes Konvergenzkriterium]
-    Sei $(a_n)_{n\in\naturalnumbers}$ eine Folge, dann heißt diese Folge konvergent gegen $a\in\realnumbers$, wenn $\forall \varepsilon > 0$ und für fast alle $a_n$ gilt: $\abs{a_n-a}<\varepsilon$
+    Sei $(a_n)_{n\in\N}$ eine Folge, dann heißt diese Folge konvergent gegen $a\in\R$, wenn $\forall \varepsilon > 0$ und für fast alle $a_n$ gilt: $\abs{a_n-a}<\varepsilon$
 \end{definition}
 
 \begin{definition}[Nullfolge]
@@ -47,7 +47,7 @@
 \end{definition}
 
 \begin{definition}[$\varepsilon$-Umgebung]
-    Für $\varepsilon > 0$, $a\in\realnumbers$ versteht man unter der $\varepsilon$-Umgebung von $a$ das Intervall $\left]a-\varepsilon, a+\varepsilon\right[$
+    Für $\varepsilon > 0$, $a\in\R$ versteht man unter der $\varepsilon$-Umgebung von $a$ das Intervall $\left]a-\varepsilon, a+\varepsilon\right[$
 \end{definition}
 
 \subsection{Geometrische Bedeutung der Konvergenz}
@@ -76,27 +76,27 @@
 
 \begin{definition}[Beschränktheit von Folgen]
     \marginnote{[21. Nov]}
-    Eine Folge $(a_n)_n$ heißt nach oben beschränkt, falls es ein $k\in\realnumbers$ gibt mit
+    Eine Folge $(a_n)_n$ heißt nach oben beschränkt, falls es ein $k\in\R$ gibt mit
     \begin{align*}
-        \forall n\in \naturalnumbers\colon a_n \leq k\tag{$k$ ist obere Schranke für $(a_n)_n$}
+        \forall n\in \N\colon a_n \leq k\tag{$k$ ist obere Schranke für $(a_n)_n$}
     \end{align*}
     Beschränktheit nach unten wird analog definiert.\\
     $(a_n)_n$ heißt beschränkt, falls ein $k\geq 0$ existiert mit
     \begin{align*}
-        \forall n\in\naturalnumbers\colon -k \leq a_n \leq k\quad \text{bzw.}\quad \forall n\in\naturalnumbers\colon \abs{a_n} \leq k
+        \forall n\in\N\colon -k \leq a_n \leq k\quad \text{bzw.}\quad \forall n\in\N\colon \abs{a_n} \leq k
     \end{align*}
 \end{definition}
 
 \begin{satz}
     \label{satz:konv-folg-beschr}
-    Jede konvergente Folge $(a_n)_{n\in\naturalnumbers}$ ist beschränkt.
+    Jede konvergente Folge $(a_n)_{n\in\N}$ ist beschränkt.
     \begin{proof}
         Sei $a$ der Grenzwert von $(a_n)_n$~$\pair{\lim_{n\fromto\infty} a_n = a}$. Das heißt für $\varepsilon = 1$
         \begin{align*}
-            \impl \exists N\in\naturalnumbers\colon \abs{a_n-a} &< 1\quad &\forall n\geq N\\[8pt]
+            \impl \exists N\in\N\colon \abs{a_n-a} &< 1\quad &\forall n\geq N\\[8pt]
             \abs{a_n} = \abs{a_n-a+a} \leq \abs{a_n-a} + \abs{a} &< 1+\abs{a} \quad &\forall n\geq N
             \intertext{Setze $k\definedas \max\pair{\abs{a_1}, \abs{a_2}, \dots, \abs{a_{N-1}}, 1+\abs{a}} \geq 0$}
-            \impl \abs{a_n} &\leq k \quad&\forall n\in\naturalnumbers &\qedhere
+            \impl \abs{a_n} &\leq k \quad&\forall n\in\N &\qedhere
         \end{align*}
     \end{proof}
 \end{satz}
@@ -106,8 +106,8 @@
     \begin{proof}
         Annahme: $(a_n)_n\fromto a$ und $(a_n)_n\fromto b$ mit  $a\neq b$. Dann gilt \OBDA, dass $a<b$. Setzen $\varepsilon = \frac{b-a}{2} > 0$.
         \begin{align*}
-            \impl &\exists N_1 \in\naturalnumbers\colon \abs{a_n-a} < \varepsilon \quad \forall n\geq N_1\\
-            \impl &\exists N_2 \in\naturalnumbers\colon \abs{a_n-b} < \varepsilon \quad \forall n\geq N_2\\[10pt]
+            \impl &\exists N_1 \in\N\colon \abs{a_n-a} < \varepsilon \quad \forall n\geq N_1\\
+            \impl &\exists N_2 \in\N\colon \abs{a_n-b} < \varepsilon \quad \forall n\geq N_2\\[10pt]
             &N\definedas \max\pair{N_1, N_2}\\
             \impl &\forall n\geq N\colon a_n < a+\varepsilon = a + \frac{b-a}{2} = \frac{b+a}{2} = b-\varepsilon\\
             &\forall n\geq N\colon a_n > b-\varepsilon = \frac{b+a}{2}\\
@@ -122,10 +122,10 @@
     \begin{enumerate}[label=(\alph*)]
         \item $x_n+y_n\fromto a+b$\quad ($\lim\pair{x_n+y_n}=\lim x_n + \lim y_n$).
         \item $x_n\cdot y_n \fromto a\cdot b$\quad ($\lim\pair{x_n\cdot y_n} = \lim x_n \cdot \lim y_n$).
-        \item $\lambda\cdot y_n \fromto \lambda\cdot b$\quad ($\lim\pair{\lambda\cdot y_n} = \lambda \cdot \lim y_n$). ($\lambda\in\realnumbers$)
-        \item Ist $b\neq 0$, so ist $y_n \neq 0$ für fast alle $n\in\naturalnumbers$ und $\frac{x_n}{y_n}$ ist für fast alle $n$ definiert und $\lim\pair{\frac{x_n}{y_n}} = \frac{\lim x_n}{\lim y_n} = \frac{a}{b}$.
+        \item $\lambda\cdot y_n \fromto \lambda\cdot b$\quad ($\lim\pair{\lambda\cdot y_n} = \lambda \cdot \lim y_n$). ($\lambda\in\R$)
+        \item Ist $b\neq 0$, so ist $y_n \neq 0$ für fast alle $n\in\N$ und $\frac{x_n}{y_n}$ ist für fast alle $n$ definiert und $\lim\pair{\frac{x_n}{y_n}} = \frac{\lim x_n}{\lim y_n} = \frac{a}{b}$.
         \item $\abs{x_n} \fromto \abs{a}$\quad ($\lim \abs{x_n} = \abs{\lim x_n}$)
-        \item Ist $x_n \leq y_n$ für fast alle $n\in\naturalnumbers$ $\impl a = \lim x_n \leq b = \lim y_n$.
+        \item Ist $x_n \leq y_n$ für fast alle $n\in\N$ $\impl a = \lim x_n \leq b = \lim y_n$.
     \end{enumerate}
 
     \begin{proof}
@@ -148,7 +148,7 @@
                 \impl \abs{x_n\cdot y_n - ab} &= \abs{\pair{x_n-a}\cdot y_n + a\cdot \pair{y_n-b}}\\
                 &\leq \abs{x_n-a}\cdot\abs{y_n}+\abs{a}\cdot\abs{y_n-b}
                 \intertext{Nach Satz~\ref{satz:konv-folg-beschr} ist $y_n$ beschränkt}
-                \exists k\geq 0\colon \abs{y_n} &\leq k \quad\forall n\in\naturalnumbers
+                \exists k\geq 0\colon \abs{y_n} &\leq k \quad\forall n\in\N
                 \intertext{Nach der Konvergenz der Folgen gilt außerdem}
                 \forall \varepsilon >0~\exists N_1, N_2\colon \abs{x_n-a} &< \frac{\varepsilon}{2(k+1)}\quad\forall n\geq N_1\\
                 \abs{y_n-b} &< \frac{\varepsilon}{2(\abs{a}+1)}\quad\forall n\geq N_2\\[10pt]
@@ -157,12 +157,12 @@
             \item Setze $y_n=\lambda \fromto \lambda$ und verwende (b)
             \item Wir wählen $\varepsilon\definedas\frac{\abs{b}}{2}$
             \begin{align*}
-                \exists N\in\naturalnumbers\colon \abs{y_n-b} &< \varepsilon = \frac{\abs{b}}{2}\quad\forall n\geq \naturalnumbers.\\[10pt]
+                \exists N\in\N\colon \abs{y_n-b} &< \varepsilon = \frac{\abs{b}}{2}\quad\forall n\geq \N.\\[10pt]
                 \forall n\geq N\colon\quad\abs{y_n} &= \abs{y_n-b+b} = \abs{b+(y_n-b)}\\
                 &\geq \abs{b} - \abs{y_n-b} > \abs{b} - \frac{\abs{b}}{2} + \frac{\abs{b}}{2}\\
                 &> 0
             \end{align*}
-            $\impl y_n \neq 0$ für fast alle $n$ und somit $\frac{x_n}{y_n}$ wohldefiniert für fast alle $n\in\naturalnumbers$
+            $\impl y_n \neq 0$ für fast alle $n$ und somit $\frac{x_n}{y_n}$ wohldefiniert für fast alle $n\in\N$
             \begin{align*}
                 \intertext{Wir betrachten den Spezialfall $x_n = 1$}
                 \abs{\frac{1}{y_n} - \frac{1}{b}} &= \abs{\frac{b-y_n}{y_n\cdot b}} = \frac{\abs{b-y_n}}{\abs{y_n}\cdot\abs{b}}.\\
@@ -197,7 +197,7 @@
 
 \begin{satz}[Sandwich Satz]
     \label{satz:sandwich}
-    Seien $(a_n)_n$, $(b_n)_n$, $(c_n)_n$ Folgen mit $\lim a_n = a$, $\lim \pair{b_n-a_n} = 0$ und $a_n \leq c_n \leq b_n$ für fast alle $n\in\naturalnumbers$.\\
+    Seien $(a_n)_n$, $(b_n)_n$, $(c_n)_n$ Folgen mit $\lim a_n = a$, $\lim \pair{b_n-a_n} = 0$ und $a_n \leq c_n \leq b_n$ für fast alle $n\in\N$.\\
     Dann folgt, dass $(c_n)_n$ und $(b_n)_n$ jeweils gegen $a$ konvergieren.
     \begin{proof}
         ~\\
@@ -230,10 +230,10 @@ Wir sind bisher immer davon ausgegangen, dass wir den Grenzwert einer Folge bere
 \begin{definition}[Monotonie]
     Eine reelle Folge $(a_n)_n$ heißt
     \begin{enumerate}[label=(\roman*)]
-        \item monoton wachsend, wenn $a_n \leq a_{n+1}\quad\forall n\in\naturalnumbers$
-        \item streng monoton wachsend, wenn $a_n < a_{n+1}\quad\forall n\in\naturalnumbers$
-        \item monoton fallend, wenn $a_n \geq a_{n+1}\quad\forall n\in\naturalnumbers$
-        \item streng monoton fallend, wenn $a_n > a_{n+1}\quad\forall n\in\naturalnumbers$
+        \item monoton wachsend, wenn $a_n \leq a_{n+1}\quad\forall n\in\N$
+        \item streng monoton wachsend, wenn $a_n < a_{n+1}\quad\forall n\in\N$
+        \item monoton fallend, wenn $a_n \geq a_{n+1}\quad\forall n\in\N$
+        \item streng monoton fallend, wenn $a_n > a_{n+1}\quad\forall n\in\N$
     \end{enumerate}
     \noindent Wir nennen $(a_n)_n$ (streng) monoton, falls sie (streng) monoton wachsend oder fallend ist.
 \end{definition}
@@ -250,11 +250,11 @@ Wir sind bisher immer davon ausgegangen, dass wir den Grenzwert einer Folge bere
     ~\label{lemma:hilf-monoton-konv}
     Jede nach oben (bzw. unten) beschränkte Folge besitzt eine kleinste obere (bzw. größte untere) Schranke.
     \begin{proof}
-        Sei $(a_n)_n$ nach oben beschränkt und $S\definedas\set{c\in\realnumbers|~a_n \leq c~\forall n} \neq \emptyset\footnote{Folgt aus der Beschränktheit}.$ Dann ist $S$ nach unten beschränkt, da $\forall c\in S\colon a_1 \leq c$.
+        Sei $(a_n)_n$ nach oben beschränkt und $S\definedas\set{c\in\R|~a_n \leq c~\forall n} \neq \emptyset\footnote{Folgt aus der Beschränktheit}.$ Dann ist $S$ nach unten beschränkt, da $\forall c\in S\colon a_1 \leq c$.
         \begin{align*}
             &\impl a\definedas \inf S \text{ existiert}
             \intertext{Behauptung: $a$ ist obere Schranke für $(a_n)_n$, das heißt $a\in S$. Annahme: $a\notin S$ ($a$ ist keine obere Schranke)}
-            &\impl \exists n_0 \in\naturalnumbers\colon a_{n_0} > a
+            &\impl \exists n_0 \in\N\colon a_{n_0} > a
             \intertext{Wir setzen $\varepsilon\definedas a_{n_0} - a > 0$}
             &\impl \exists c\in S\colon c < a + \varepsilon = a + a_{n_0} - a = a_{n_0}
         \end{align*}
@@ -265,10 +265,10 @@ Wir sind bisher immer davon ausgegangen, dass wir den Grenzwert einer Folge bere
 \begin{proof}[Beweis von Satz~\ref{satz:monoton-konv}]
     Angenommen $(a_n)_n$ ist monoton wachsend und nach oben beschränkt.
     \begin{align*}
-        &a\definedas\sup_{n\in\naturalnumbers} a_n\\
-        \impl &a_n \leq a\quad\forall n\in\naturalnumbers
+        &a\definedas\sup_{n\in\N} a_n\\
+        \impl &a_n \leq a\quad\forall n\in\N
         \intertext{Sei $\varepsilon > 0 \impl a-\varepsilon$ keine obere Schranke für $(a_n)_n$ mehr.}
-        \impl &\exists N\in\naturalnumbers\colon a_N \geq a-\varepsilon\\
+        \impl &\exists N\in\N\colon a_N \geq a-\varepsilon\\
         \intertext{Sei $n\geq N$. Dann gilt:}
         &a_N \leq a_{N+1} \leq a_{N+2} \leq \dots \leq a_{N+k} = a_n\\
         \impl &\forall n\geq N\colon a-\varepsilon < a_n\\
@@ -279,10 +279,10 @@ Wir sind bisher immer davon ausgegangen, dass wir den Grenzwert einer Folge bere
 \begin{proof}[Alternativer Beweis]
     \footnote{Dieser Beweis bezieht sich laut Vorlesung auf Lemma 14, welches allerdings nicht existiert. Gemeint ist vermutlich Lemma 15 (hier Lemma~\ref{lemma:hilf-monoton-konv})}
     ~\\
-    Sei $(a_n)_n$ eine Folge mit $a_n = f(a),~f:\naturalnumbers\fromto\realnumbers$
+    Sei $(a_n)_n$ eine Folge mit $a_n = f(a),~f:\N\fromto\R$
     \begin{align*}
-        \impl Bild(f) &= f(\naturalnumbers) \text{ nach oben beschränkt }\\
-        \impl a&\definedas\sup\pair{f\pair{\naturalnumbers}}\geq a_n \quad\forall n\in\naturalnumbers\qedhere
+        \impl Bild(f) &= f(\N) \text{ nach oben beschränkt }\\
+        \impl a&\definedas\sup\pair{f\pair{\N}}\geq a_n \quad\forall n\in\N\qedhere
     \end{align*}
 \end{proof}
 
@@ -298,8 +298,8 @@ Wir sind bisher immer davon ausgegangen, dass wir den Grenzwert einer Folge bere
         x^2 = c &\equivalent x = \frac{c}{x}\tag{$x >0$}\\
         &\equivalent x=\frac{1}{2}\pair{x+\frac{c}{x}}
     \end{align*}
-    Folge $x_n$. Wählen $x_0 > 0$. Für $n\in\naturalnumbers$ sei $x_n=\frac{1}{2}\pair{x_{n-1}+\frac{c}{x_{n-1}}}$\\
-    Behauptung 1: $x_n \geq \sqrt{c}\quad\forall n\in\naturalnumbers$
+    Folge $x_n$. Wählen $x_0 > 0$. Für $n\in\N$ sei $x_n=\frac{1}{2}\pair{x_{n-1}+\frac{c}{x_{n-1}}}$\\
+    Behauptung 1: $x_n \geq \sqrt{c}\quad\forall n\in\N$
     \begin{proof}
         \begin{align*}
             x_1 &= \frac{1}{2}\pair{x_0+\frac{c}{x_0}}
@@ -345,7 +345,7 @@ Wir sind bisher immer davon ausgegangen, dass wir den Grenzwert einer Folge bere
     Es sei $x_n = \frac{1}{n}\fromto 0$
     \begin{align*}
         \abs{\frac{1}{n}-0} &= \frac{1}{n}
-        \intertext{geg. $\varepsilon > 0$ wähle $N\in\naturalnumbers$ mit $N>\frac{1}{\varepsilon} \equivalent \varepsilon > \frac{1}{N}$}
+        \intertext{geg. $\varepsilon > 0$ wähle $N\in\N$ mit $N>\frac{1}{\varepsilon} \equivalent \varepsilon > \frac{1}{N}$}
         \impl \forall n\geq N\colon \abs{\frac{1}{n}-0} &= \frac{1}{n} \leq \frac{1}{N}< \varepsilon
     \end{align*}
     Ähnlich funktioniert $x_n = \frac{1}{\sqrt {n}}$
@@ -433,8 +433,8 @@ Wir sind bisher immer davon ausgegangen, dass wir den Grenzwert einer Folge bere
 \begin{definition}[Divergenz gegen unendlich]
     Eine reelle Folge $(x_n)_n$ strebt gegen unendlich, falls
     \begin{align*}
-        &\forall k \geq 0~\exists N\in\naturalnumbers\colon x_n \geq k\quad \forall n> N\\[8pt]
-        (\equivalent &\forall k \geq 0 \text{ ist } x_n < k \text{ für endlich viele } n\in\naturalnumbers)
+        &\forall k \geq 0~\exists N\in\N\colon x_n \geq k\quad \forall n> N\\[8pt]
+        (\equivalent &\forall k \geq 0 \text{ ist } x_n < k \text{ für endlich viele } n\in\N)
     \end{align*}
     Die Folge $(x_n)_n$ strebt gegen $-\infty$, falls $(-x_n)_n$ gegen $\infty$ strebt.
 \end{definition}
@@ -452,14 +452,14 @@ Wir sind bisher immer davon ausgegangen, dass wir den Grenzwert einer Folge bere
     \theoremescape
     \begin{enumerate}[label=(\alph*)]
         \item Falls $x_n\fromto \infty$ für $\ntoinfty$, so folgt $\frac{1}{x_n}\fromto 0$ für $\ntoinfty$.
-        \item Ist $(x_n)_n$ eine Nullfolge mit $x_n > 0$ für fast alle $n\in\naturalnumbers$, so ist $\frac{1}{x_n}\fromto \infty$ für $\ntoinfty$.\\
+        \item Ist $(x_n)_n$ eine Nullfolge mit $x_n > 0$ für fast alle $n\in\N$, so ist $\frac{1}{x_n}\fromto \infty$ für $\ntoinfty$.\\
         Falls $x_n < 0$ für fast alle $n$, so folgt $\frac{1}{x_n} \fromto -\infty$ für $\ntoinfty$.
     \end{enumerate}
 
     \begin{proof}[Beweis (a)]
         Sei $x_n\fromto \infty$
         \begin{align*}
-            \impl \forall \varepsilon > 0~\exists N\in\naturalnumbers\colon x_n &> \frac{1}{\varepsilon}\quad\forall n \geq N\\
+            \impl \forall \varepsilon > 0~\exists N\in\N\colon x_n &> \frac{1}{\varepsilon}\quad\forall n \geq N\\
             \impl 0 < \frac{1}{x_n} &< \varepsilon\quad \forall n \geq N
         \end{align*}
         das heißt $\frac{1}{x_n}\fromto 0$.
@@ -471,7 +471,7 @@ Wir sind bisher immer davon ausgegangen, dass wir den Grenzwert einer Folge bere
 \end{uebung}
 
 \begin{beispiel}
-    $\frac{n}{2^n}\fromto 0$ für $\ntoinfty$ (Sogar $\forall k\in\naturalnumbers\colon \frac{n^k}{2^n} \fromto 0$ für $\ntoinfty$)
+    $\frac{n}{2^n}\fromto 0$ für $\ntoinfty$ (Sogar $\forall k\in\N\colon \frac{n^k}{2^n} \fromto 0$ für $\ntoinfty$)
 
     \begin{proof}
         Zu zeigen: $x_n = \frac{2^n}{n}\fromto \infty$
@@ -487,9 +487,9 @@ Wir sind bisher immer davon ausgegangen, dass wir den Grenzwert einer Folge bere
 \begin{beispiel}[Die Eulersche Zahl $e$]
     \begin{align*}
         a_n &\definedas \pair{1+\frac{1}{n}}^n\quad b_n \definedas \pair{1 + \frac{1}{n}}^{n+1}\\
-        \impl a_n &< b_n\quad\forall n \in\naturalnumbers
+        \impl a_n &< b_n\quad\forall n \in\N
     \end{align*}
-    Behauptung: $\forall n\in\naturalnumbers\colon a_n < a_{n+1}$ und $b_n > b_{n+1}$.
+    Behauptung: $\forall n\in\N\colon a_n < a_{n+1}$ und $b_n > b_{n+1}$.
     \begin{proof}
         Sei $n\geq 2$
 
@@ -503,7 +503,7 @@ Wir sind bisher immer davon ausgegangen, dass wir den Grenzwert einer Folge bere
             &= \frac{n}{n+1}\cdot\pair{\frac{\frac{n}{n-1}}{\frac{n+1}{n}}}^n = \frac{n}{n+1}\cdot\pair{\frac{n^2}{(n+1)\cdot(n-1)}}^n\\
             &= \frac{n}{n+1}\cdot\pair{\frac{n^2-1+1}{n^2-1}}^n = \frac{n}{n+1}\cdot\pair{1+\frac{1}{n^2-1}}^n\\
             &> \frac{n}{n+1}\cdot\pair{1+\frac{1}{n^2}}^n \annot{\geq}{\ref{satz:bernoulli-ungleichung}} \frac{n}{n+1}\cdot\pair{1+\frac{n}{n^2}} = 1\\
-            \impl b_n & < b_{n-1}\quad\forall n\in\naturalnumbers\\[10pt]
+            \impl b_n & < b_{n-1}\quad\forall n\in\N\\[10pt]
             \impl a_1 < a_2 < \dots < a_n &< b_n < \dots < b_2 < b_1
             \intertext{Mit dem Satz der monotonen Konvergenz (\ref{satz:monoton-konv}) folgt daraus}
             e &\definedas \lim_{n\fromto\infty} a_n = \lim_{n\fromto\infty} \pair{1+\frac{1}{n}}^n \text{ existiert } \\
@@ -522,7 +522,7 @@ Wir sind bisher immer davon ausgegangen, dass wir den Grenzwert einer Folge bere
 
 Wir möchten eine Folge $(a_n)_n$ \anf{massieren}.
 \begin{align*}
-    a_n &= f(n), \quad f: \naturalnumbers \fromto \realnumbers
+    a_n &= f(n), \quad f: \N \fromto \R
 \end{align*}
 
 \noindent Wir wollen die Folgeglieder umordnen oder auch beliebige weglassen. Wie machen wir das und wie lässt sich das ausdrücken?
@@ -530,13 +530,13 @@ Wir möchten eine Folge $(a_n)_n$ \anf{massieren}.
 \begin{definition}[Umordnung]
     Sei $(a_n)_n$ eine reelle Folge. Eine Umordnung ist gegeben durch eine Bijektion
     \begin{align*}
-        \sigma: \naturalnumbers\fromto \naturalnumbers\\
+        \sigma: \N\fromto \N\\
         b_n \definedas a_{\sigma(n)} \tag{Umordnung von $(a_n)_n$}
     \end{align*}
 \end{definition}
 
 \begin{definition}[Ausdünnung]
-    Es sei $\kappa: \naturalnumbers\fromto\naturalnumbers$ streng monoton wachsend
+    Es sei $\kappa: \N\fromto\N$ streng monoton wachsend
     \begin{align*}
         b_n \definedas a_{\kappa(n)}\tag{Teilfolge von $(a_n)_n$}
     \end{align*}
@@ -548,21 +548,21 @@ Wir möchten eine Folge $(a_n)_n$ \anf{massieren}.
 
     \begin{proof}[Beweis\footnotemark.]
         \footnotetext{Nachtrag vom 28. November 2023.}
-        Sei $(a_n)_n$ konvergent gegen $a$ und $\kappa: \naturalnumbers\fromto\naturalnumbers$ monoton wachsend ($\kappa(n+1) > \kappa(n)$).\\
-        $\impl \kappa(j) \geq j\quad\forall j \in\naturalnumbers$\footnotemark
+        Sei $(a_n)_n$ konvergent gegen $a$ und $\kappa: \N\fromto\N$ monoton wachsend ($\kappa(n+1) > \kappa(n)$).\\
+        $\impl \kappa(j) \geq j\quad\forall j \in\N$\footnotemark
         \footnotetext{Lässt sich per Induktion nachweisen}
         \begin{align*}
             b_j &\definedas a_{\kappa(j)}
             \intertext{$a_n\fromto a$, das heißt}
-            \forall \varepsilon > 0~\exists N\in\naturalnumbers&\colon a-\varepsilon < a_n < a + \varepsilon\quad\forall n \geq N\\
-            \impl \forall \varepsilon > 0~\exists N\in\naturalnumbers&\colon a-\varepsilon < a_{\kappa(j)} < a + \varepsilon\quad\forall j \geq N\\[10pt]
+            \forall \varepsilon > 0~\exists N\in\N&\colon a-\varepsilon < a_n < a + \varepsilon\quad\forall n \geq N\\
+            \impl \forall \varepsilon > 0~\exists N\in\N&\colon a-\varepsilon < a_{\kappa(j)} < a + \varepsilon\quad\forall j \geq N\\[10pt]
             \impl \lim_{j\fromto\infty} a_{\kappa(j)} &= a\quad\text{ d.h. } \lim_{j\fromto\infty} b_j = a
         \end{align*}
-        Für Umordnung: Sei $\sigma: \naturalnumbers\fromto\naturalnumbers$ Bijektion.
+        Für Umordnung: Sei $\sigma: \N\fromto\N$ Bijektion.
         \begin{align*}
             b_j &\definedas a_{\sigma(j)}\\
-            \intertext{Wir haben $\forall \varepsilon > 0~\exists N\in\naturalnumbers\colon a-\varepsilon < a_n < a+\varepsilon$ und betrachten das Urbild}
-            A&\definedas \sigma^{-1}\pair{\set{1,2,3, \dots, N}}\subseteq \naturalnumbers\\
+            \intertext{Wir haben $\forall \varepsilon > 0~\exists N\in\N\colon a-\varepsilon < a_n < a+\varepsilon$ und betrachten das Urbild}
+            A&\definedas \sigma^{-1}\pair{\set{1,2,3, \dots, N}}\subseteq \N\\
             \intertext{$A$ hat endlich viele Elemente}
             L&\definedas \max\pair{\sigma^{-1}(1), \sigma^{-1}(2), \dots, \sigma^{-1}(N)}\\
             j \geq L &\impl \sigma(j) \geq N\\
@@ -581,7 +581,7 @@ Wir möchten eine Folge $(a_n)_n$ \anf{massieren}.
     \begin{align*}
         a-\varepsilon < a_n < a+ \varepsilon\text{ für unendlich viele $n$}
     \end{align*}
-    Das heißt $\forall L\in\naturalnumbers~\exists n> L\colon a-\varepsilon < a_n < a+\varepsilon$.
+    Das heißt $\forall L\in\N~\exists n> L\colon a-\varepsilon < a_n < a+\varepsilon$.
 \end{definition}
 
 \begin{beispiel}
@@ -601,17 +601,17 @@ Wir möchten eine Folge $(a_n)_n$ \anf{massieren}.
     \begin{proof}
         \anf{$\impl$}: $a$ sei Häufungswert von $(a_n)_n$. Das heißt
         \begin{align*}
-            \forall \varepsilon > 0~\forall L\in\naturalnumbers~\exists n>L\colon a-\varepsilon < a_n < a+\varepsilon
+            \forall \varepsilon > 0~\forall L\in\N~\exists n>L\colon a-\varepsilon < a_n < a+\varepsilon
         \end{align*}
         \begin{enumerate}[label=\arabic*)]
-            \item Wir wählen $\varepsilon = 1 \impl \exists n_1\in\naturalnumbers\colon a-1 < a_{n_1} < a+1$
+            \item Wir wählen $\varepsilon = 1 \impl \exists n_1\in\N\colon a-1 < a_{n_1} < a+1$
             \item Wir wählen $\varepsilon = \frac{1}{2}$, $L=n_1 + 1 \impl \exists n_2 > L > n_1\colon a-\frac{1}{2} < a_{n_2} < a + \frac{1}{2}$
             \item Wir wählen $\varepsilon = \frac{1}{3} \impl \exists n_3 > n_2\colon a - \frac{1}{3} < a_{n_3} < a + \frac{1}{3}$
-            \item[$j$)] Wir wählen $\varepsilon = \frac{1}{j+1} \impl \exists n_{j+1} > n_j\colon a-\frac{1}{j+1} < a_{n_{j+1}} < a + \frac{1}{j+1}\qquad \impl n_j < n_{j+1}\quad\forall j \in \naturalnumbers$
+            \item[$j$)] Wir wählen $\varepsilon = \frac{1}{j+1} \impl \exists n_{j+1} > n_j\colon a-\frac{1}{j+1} < a_{n_{j+1}} < a + \frac{1}{j+1}\qquad \impl n_j < n_{j+1}\quad\forall j \in \N$
         \end{enumerate}
         \noindent Wir definieren $\kappa\pair{j} \definedas n_j$ und $b_j \definedas a_{\kappa(j)}$ als eine Teilfolge von $(a_n)_n$. Es gilt
         \begin{align*}
-            a-\frac{1}{j} < b_j < a + \frac{1}{j}\quad\forall j\in\naturalnumbers
+            a-\frac{1}{j} < b_j < a + \frac{1}{j}\quad\forall j\in\N
         \end{align*}
         und nach Satz~\ref{satz:sandwich} konvergiert $(b_j)_j$ gegen $a$.\qedhere
     \end{proof}
@@ -694,19 +694,19 @@ Genauso: $y_n\definedas \inf_{l\geq n} a_l \impl y_n < y_{n+1}$ und $y_n$ ist na
     \begin{proof}[Beweis für ersten Teil des Lemmas, zweiter analog.]
         \anf{$\impl$}:
         \begin{align*}
-            a^{*} = \limsup_{n\fromto\infty} a_n &= \inf_{n\in\naturalnumbers} \sup_{l\geq n} a_l\\
+            a^{*} = \limsup_{n\fromto\infty} a_n &= \inf_{n\in\N} \sup_{l\geq n} a_l\\
             \intertext{Angenommen $\exists \varepsilon > 0\colon a_l \geq a^{*} +\varepsilon$ für unendlich viele $l$}
-            \impl \forall n\in\naturalnumbers\colon \sup_{l\geq n} a_l &\geq a^{*} + \varepsilon\\
-            \impl a^{*} = \inf_{n\in\naturalnumbers} \sup_{l\geq n} a_l &\geq a^{*} + \varepsilon\quad\text{ (Widerspruch)}
+            \impl \forall n\in\N\colon \sup_{l\geq n} a_l &\geq a^{*} + \varepsilon\\
+            \impl a^{*} = \inf_{n\in\N} \sup_{l\geq n} a_l &\geq a^{*} + \varepsilon\quad\text{ (Widerspruch)}
             \intertext{Angenommen $\exists \varepsilon_0 > 0\colon a_n \leq a^{*} -\varepsilon_0$ für fast alle $n$}
             \impl \sup_{l\geq n} a_l &\leq a^{*} - \varepsilon_0\\
             \impl a^{*} = \lim_{n\fromto\infty} \sup_{l\geq n} a_l &\leq a^{*} - \varepsilon_0\quad\text{(Widerspruch)}
         \end{align*}
-        \anf{$\Leftarrow$}: Sei $a^{*}\in\realnumbers$
+        \anf{$\Leftarrow$}: Sei $a^{*}\in\R$
         \begin{align*}
             \forall \varepsilon > 0\colon a_n &< a^{*} + \varepsilon\text{ für fast alle $n$}\\
             a_n &> a^{*} - \varepsilon\text{ für unendlich viele $n$}\\
-            \impl \exists k\in\naturalnumbers\colon a_l &< a^{*} + \varepsilon\quad\forall l\geq k\\[10pt]
+            \impl \exists k\in\N\colon a_l &< a^{*} + \varepsilon\quad\forall l\geq k\\[10pt]
             \impl \forall n\geq k\colon \sup_{l\geq n} a_l &\leq a^{*} + \varepsilon\\
             \sup_{l\geq n} a_l &> a^{*} - \varepsilon\\
             \impl \forall n \geq k\colon a^{*} - \varepsilon &< \sup_{l\geq n} a_l \leq a^{*} + \varepsilon\\
@@ -807,8 +807,8 @@ Genauso: $y_n\definedas \inf_{l\geq n} a_l \impl y_n < y_{n+1}$ und $y_n$ ist na
 \begin{definition}[Cauchy-Folge]
     Eine reelle Folge $(a_n)_n$ heißt Cauchy-Folge, falls
     \begin{align*}
-        &\forall\varepsilon > 0~\exists N\in\naturalnumbers\colon \abs{a_n - a_m} < \varepsilon\quad\forall n,m \geq N\\
-        (\equivalent &\forall \varepsilon > 0~\exists N\in\naturalnumbers\colon \abs{a_n - a_m} < \varepsilon\quad\forall n\geq m\geq N)
+        &\forall\varepsilon > 0~\exists N\in\N\colon \abs{a_n - a_m} < \varepsilon\quad\forall n,m \geq N\\
+        (\equivalent &\forall \varepsilon > 0~\exists N\in\N\colon \abs{a_n - a_m} < \varepsilon\quad\forall n\geq m\geq N)
     \end{align*}
 \end{definition}
 
@@ -818,7 +818,7 @@ Genauso: $y_n\definedas \inf_{l\geq n} a_l \impl y_n < y_{n+1}$ und $y_n$ ist na
     \begin{proof}
         Es sei $(a_n)_n\fromto a$ eine reelle Folge.
         \begin{align*}
-            \forall \varepsilon > 0~\exists N\in\naturalnumbers\colon &\abs{a_n-a} < \frac{\varepsilon}{2}\quad\forall n\geq N\\
+            \forall \varepsilon > 0~\exists N\in\N\colon &\abs{a_n-a} < \frac{\varepsilon}{2}\quad\forall n\geq N\\
             \impl\text{ Sei }n,m\geq N \impl &\abs{a_n-a_m} = \abs{a_n-a+a-a_m}\\
             \leq &\abs{a_n-a} + \abs{a-a_m} < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon\qedhere
         \end{align*}
@@ -863,8 +863,8 @@ Genauso: $y_n\definedas \inf_{l\geq n} a_l \impl y_n < y_{n+1}$ und $y_n$ ist na
         Es sei $a\definedas \lim_{j\fromto\infty} b_j$. Behauptung: $\lim_{n\fromto\infty} a_n = a$\\[10pt]
         \noindent Wir wissen:
         \begin{align*}
-            \forall\varepsilon>0~\exists N_1 \in\naturalnumbers&\colon \abs{a-a_{n_j}} < \frac{\varepsilon}{2}\quad\forall j\geq N_1\\
-            \exists N_2 \in\naturalnumbers&\colon \abs{a_n-a_m} < \frac{\varepsilon}{2}\quad\forall m\geq n\geq N_2\\[10pt]
+            \forall\varepsilon>0~\exists N_1 \in\N&\colon \abs{a-a_{n_j}} < \frac{\varepsilon}{2}\quad\forall j\geq N_1\\
+            \exists N_2 \in\N&\colon \abs{a_n-a_m} < \frac{\varepsilon}{2}\quad\forall m\geq n\geq N_2\\[10pt]
             \impl \abs{a_n-a} &= \abs{a_n-a_{n_j} + a_{n_j} - a}\\
             &\leq \abs{a_n-a_{n_j}} + \abs{a_{n_j}-a}
             \intertext{Wir wählen $j\geq\max\pair{N_1,N_2}$}
@@ -881,7 +881,7 @@ Genauso: $y_n\definedas \inf_{l\geq n} a_l \impl y_n < y_{n+1}$ und $y_n$ ist na
 
     \begin{proof}
         \anf{$\impl$}: Folgt direkt aus Lemma~\ref{lemma:konv-cauchy}\\[10pt]
-        \anf{$\Leftarrow$}: Sei $(a_n)_{n\in\naturalnumbers}$ eine Cauchy-Folge $\annot{\impl}{Lemma~\ref{lemma:beschr-cauchy}} (a_n)_n$ ist beschränkt $\annot{\impl}{Satz~\ref{korollar:beschr-konv-teilfolge}} (a_n)_n$ hat eine konvergente Teilfolge $\annot{\impl}{Lemma~\ref{lemma:cauchy-konv-teilfolge}} (a_n)_n$ ist konvergent
+        \anf{$\Leftarrow$}: Sei $(a_n)_{n\in\N}$ eine Cauchy-Folge $\annot{\impl}{Lemma~\ref{lemma:beschr-cauchy}} (a_n)_n$ ist beschränkt $\annot{\impl}{Satz~\ref{korollar:beschr-konv-teilfolge}} (a_n)_n$ hat eine konvergente Teilfolge $\annot{\impl}{Lemma~\ref{lemma:cauchy-konv-teilfolge}} (a_n)_n$ ist konvergent
     \end{proof}
 \end{satz}
 

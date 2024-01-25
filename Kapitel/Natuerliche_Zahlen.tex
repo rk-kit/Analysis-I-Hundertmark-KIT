@@ -3,7 +3,7 @@ Frage: Was sind die natürlichen Zahlen? (zum Beispiel $1$, $2\definedas 1+1$, $
 
 \subsection{Induktive Mengen}
 \begin{definition}[Induktive Menge]
-    Eine Teilmenge $A\subseteq \realnumbers$ heißt induktiv, falls
+    Eine Teilmenge $A\subseteq \R$ heißt induktiv, falls
     \begin{enumerate}
         \item $1\in A$ und
         \item Ist $x\in A$ so ist auch $x+1\in A$
@@ -18,7 +18,7 @@ Frage: Was sind die natürlichen Zahlen? (zum Beispiel $1$, $2\definedas 1+1$, $
 \end{beispiel}
 
 \begin{beobachtung}[Schnittmengen von induktiven Mengen]
-    Ist $J\neq\emptyset$ Indexmenge und $A_j$ induktive Teilmenge von $\realnumbers$ für jedes $j\in J$.
+    Ist $J\neq\emptyset$ Indexmenge und $A_j$ induktive Teilmenge von $\R$ für jedes $j\in J$.
     Dann folgt daraus: $A\definedas \bigcap_{j\in J}A_j$ ist induktiv.\\
     Anders formuliert: Beliebige Schnittmengen von induktiven Mengen sind induktiv.
     \begin{proof}
@@ -30,20 +30,20 @@ Frage: Was sind die natürlichen Zahlen? (zum Beispiel $1$, $2\definedas 1+1$, $
     \end{proof}
 \end{beobachtung}
 
-\begin{definition}[Definition von $\naturalnumbers$]
-    Sei $\bar{f}\definedas\set{A\subseteq \realnumbers|~A\text{ ist induktiv}}$.
+\begin{definition}[Definition von $\N$]
+    Sei $\bar{f}\definedas\set{A\subseteq \R|~A\text{ ist induktiv}}$.
     \begin{align*}
-        \naturalnumbers &\definedas \text{kleinste induktive Teilmenge von }\realnumbers\\
+        \N &\definedas \text{kleinste induktive Teilmenge von }\R\\
         &\definedas \bigcap_{A\in \bar{f}}A
     \end{align*}
-    d. h. $\naturalnumbers\subseteq A$, falls $A$ induktiv ist.
+    d. h. $\N\subseteq A$, falls $A$ induktiv ist.
 \end{definition}
 
 \begin{satz}[Induktionsprinzip]
     \label{satz:induktionsprinzip}
-    Ist $M\subseteq \naturalnumbers$ induktiv $\impl M = \naturalnumbers$
+    Ist $M\subseteq \N$ induktiv $\impl M = \N$
     \begin{proof}
-        Nach Voraussetzung ist $M\subseteq \naturalnumbers$ und aus der Definition von $\naturalnumbers$ als Schnitt aller induktiven Teilmengen von $\realnumbers$ ist auch $\naturalnumbers\subseteq M \impl \naturalnumbers = M$.
+        Nach Voraussetzung ist $M\subseteq \N$ und aus der Definition von $\N$ als Schnitt aller induktiven Teilmengen von $\R$ ist auch $\N\subseteq M \impl \N = M$.
     \end{proof}
 \end{satz}
 
@@ -57,23 +57,23 @@ Frage: Was sind die natürlichen Zahlen? (zum Beispiel $1$, $2\definedas 1+1$, $
 
 \begin{satz}[Induktionsbeweis]
     \marginnote{[9. Nov]}
-    Für jedes $n\in\naturalnumbers$ sei eine Aussage $B_n$ gegeben derart, dass folgendes gilt:
+    Für jedes $n\in\N$ sei eine Aussage $B_n$ gegeben derart, dass folgendes gilt:
     \begin{enumerate}
         \item $B_1$ ist wahr
-        \item Aus der Annahme, dass $B_n$ ($n\in\naturalnumbers$) wahr ist folgt, dass $B_{n+1}$ wahr ist.
+        \item Aus der Annahme, dass $B_n$ ($n\in\N$) wahr ist folgt, dass $B_{n+1}$ wahr ist.
     \end{enumerate}
-    Dann ist $B_n$ wahr $\forall n\in\naturalnumbers$.
+    Dann ist $B_n$ wahr $\forall n\in\N$.
     \begin{proof}
-        Definiere: $M\definedas\set{n\in\naturalnumbers|~B_n\text{ ist wahr}} \subseteq \naturalnumbers$.\\
-        Zu zeigen: $M=\naturalnumbers$. Also reicht es nach Satz~\ref{satz:induktionsprinzip} zu zeigen, dass $M$ induktiv ist.
+        Definiere: $M\definedas\set{n\in\N|~B_n\text{ ist wahr}} \subseteq \N$.\\
+        Zu zeigen: $M=\N$. Also reicht es nach Satz~\ref{satz:induktionsprinzip} zu zeigen, dass $M$ induktiv ist.
         \begin{enumerate}
-            \item $1\in\naturalnumbers$, da $B_1$ wahr ist.
+            \item $1\in\N$, da $B_1$ wahr ist.
             \item Ist $n\in M$ dann ist $B_n$ wahr
             \begin{align*}
                 &\impl B_{n+1} \text{ ist wahr }\\
                 &\impl n+1\in M\\
                 &\impl M \text{ ist induktiv } \\
-                &\impl M = \naturalnumbers\qedhere
+                &\impl M = \N\qedhere
             \end{align*}
         \end{enumerate}
     \end{proof}
@@ -83,7 +83,7 @@ Frage: Was sind die natürlichen Zahlen? (zum Beispiel $1$, $2\definedas 1+1$, $
     Die starke Induktion ist eine Variante der vollständigen Induktion. Bei dieser beweist man folgendes:
     \begin{enumerate}
         \item $B_1$ ist wahr.
-        \item für alle $n\in\naturalnumbers$ gilt $B_1, B_2, B_3, \dots, B_n$ ist wahr $\impl$ $B_{n+1}$ ist wahr.
+        \item für alle $n\in\N$ gilt $B_1, B_2, B_3, \dots, B_n$ ist wahr $\impl$ $B_{n+1}$ ist wahr.
     \end{enumerate}
 \end{bemerkung}
 
@@ -101,39 +101,39 @@ Frage: Was sind die natürlichen Zahlen? (zum Beispiel $1$, $2\definedas 1+1$, $
 \end{beispiel}
 
 \begin{uebung}
-    Zeigen Sie, dass $2k\geq k+1$ für alle $k\in\naturalnumbers$ gilt.
+    Zeigen Sie, dass $2k\geq k+1$ für alle $k\in\N$ gilt.
 \end{uebung}
 
 \begin{beispiel}[Gaußsche Summenformel]
-    Zu zeigen: $1+2+3+\dots+n= \frac{n\cdot(n+1)}{2}~\forall n\in\naturalnumbers$
+    Zu zeigen: $1+2+3+\dots+n= \frac{n\cdot(n+1)}{2}~\forall n\in\N$
     \begin{proof}
         $B_n: 1+2+\dots+n = \frac{n\cdot(n+1)}{2}$\\
         \begin{induktionsanfang}
             $B_1: 1=\frac{1\cdot(1+1)}{2}=\frac{2}{2}=1$
         \end{induktionsanfang}
         \begin{induktionsschritt}
-            $B_n$ ist wahr für ein $k\in\naturalnumbers$, d.h. $1+2+\dots+k=\frac{k\cdot(k+1)}{2}$
+            $B_n$ ist wahr für ein $k\in\N$, d.h. $1+2+\dots+k=\frac{k\cdot(k+1)}{2}$
             \begin{align*}
                 1+2+\dots+k+(k+1) \annot[{&}]{=}{(IA)} \frac{k\cdot(k+1)}{2}+(k+1)\\
                 &= (k+1)\cdot\pair{\frac{k}{2}+1}\\
                 &= \frac{(k+1)\cdot(k+2)}{2}\\
             \end{align*}
         \end{induktionsschritt}
-        \noindent Also ist $B_n$ wahr für $n=k+1$. Nach dem Prinzip der vollständigen Induktion folgt $\forall n\in\naturalnumbers\colon~B_n$ ist wahr, d.h. $1+2+\dots+n=\frac{n\cdot(n+1)}{2}$.\qedhere
+        \noindent Also ist $B_n$ wahr für $n=k+1$. Nach dem Prinzip der vollständigen Induktion folgt $\forall n\in\N\colon~B_n$ ist wahr, d.h. $1+2+\dots+n=\frac{n\cdot(n+1)}{2}$.\qedhere
     \end{proof}
 \end{beispiel}
 
 \newpage
 
-\begin{satz}[Eigenschaften von $\naturalnumbers$]
+\begin{satz}[Eigenschaften von $\N$]
     \label{satz:n-eigenschaften}
     \theoremescape
     \begin{enumerate}
-        \item $n\geq 1\quad\forall n\in\naturalnumbers$
-        \item $n+m\in\naturalnumbers\quad\forall n,m\in\naturalnumbers$
-        \item $n\cdot m\in\naturalnumbers\quad\forall n,m\in\naturalnumbers$
-        \item Für $n\in\naturalnumbers$ gilt entweder $n=1$ oder $n-1\in\naturalnumbers$
-        \item $(n-m) \in \naturalnumbers\quad\forall n,m\in\naturalnumbers$ mit $m<n$
+        \item $n\geq 1\quad\forall n\in\N$
+        \item $n+m\in\N\quad\forall n,m\in\N$
+        \item $n\cdot m\in\N\quad\forall n,m\in\N$
+        \item Für $n\in\N$ gilt entweder $n=1$ oder $n-1\in\N$
+        \item $(n-m) \in \N\quad\forall n,m\in\N$ mit $m<n$
     \end{enumerate}
     \begin{proof}[Beweis (1.)]
         ~\\
@@ -146,50 +146,50 @@ Frage: Was sind die natürlichen Zahlen? (zum Beispiel $1$, $2\definedas 1+1$, $
         \end{induktionsschritt}
     \end{proof}
     \begin{proof}[Beweis (2.)]
-        Fixiere $m\in\naturalnumbers$ für $n\in\naturalnumbers$. Behauptung: $B_n: m+n\in \naturalnumbers$\\
+        Fixiere $m\in\N$ für $n\in\N$. Behauptung: $B_n: m+n\in \N$\\
         \begin{induktionsanfang}
-            $B_1: m+1 \in \naturalnumbers$, da $\naturalnumbers$ induktiv ist.
+            $B_1: m+1 \in \N$, da $\N$ induktiv ist.
         \end{induktionsanfang}
         \begin{induktionsschritt}
-            Nach Anfang: $B_n$ ist wahr für $n=k$, d.h. $(m+k)\in\naturalnumbers$. Somit für $k+1: m+(k+1) = (m+k)+1\in\naturalnumbers \impl$ $B_n$ ist wahr $\forall n\in\naturalnumbers$\qedhere
+            Nach Anfang: $B_n$ ist wahr für $n=k$, d.h. $(m+k)\in\N$. Somit für $k+1: m+(k+1) = (m+k)+1\in\N \impl$ $B_n$ ist wahr $\forall n\in\N$\qedhere
         \end{induktionsschritt}
     \end{proof}
     \begin{proof}[Beweis (3.)]
-        Fixiere $m\in\naturalnumbers$ für $n\in\naturalnumbers$. Behauptung: $B_n: m\cdot n\in \naturalnumbers$\\
+        Fixiere $m\in\N$ für $n\in\N$. Behauptung: $B_n: m\cdot n\in \N$\\
         \begin{induktionsanfang}
-            $B_1: m\cdot 1=m \in \naturalnumbers$
+            $B_1: m\cdot 1=m \in \N$
         \end{induktionsanfang}
         \begin{induktionsschritt}
-            Nach Anfang: $B_n$ ist wahr für $n=k$, d.h. $m\cdot(k+1) = mk + m \in\naturalnumbers$ gilt nach Satz 2.\qedhere
+            Nach Anfang: $B_n$ ist wahr für $n=k$, d.h. $m\cdot(k+1) = mk + m \in\N$ gilt nach Satz 2.\qedhere
         \end{induktionsschritt}
     \end{proof}
     \begin{proof}[Beweis (4.)]
-        $B_n: n= 1 \lor n-1\in\naturalnumbers$\\
+        $B_n: n= 1 \lor n-1\in\N$\\
         \begin{induktionsanfang}
             $B_1: 1=1$
         \end{induktionsanfang}
         \begin{induktionsschritt}
-            Nehmen an, für ein $n=k$ ist $G_k$ wahr. Also ist entweder (a) $k=1$ oder (b) $(k-1)\in\naturalnumbers$.\\
-            Für $n=k+1$ gilt dann im Fall (a): $(k+1)-1 = k\in\naturalnumbers$\\
-            Im Fall (b): $(k+1)-1 = (k-1)+1$ und es gilt $(k-1)\in\naturalnumbers$. Daraus folgt, dass $(k-1)+1\in\naturalnumbers$, da $\naturalnumbers$ induktiv ist.\qedhere
+            Nehmen an, für ein $n=k$ ist $G_k$ wahr. Also ist entweder (a) $k=1$ oder (b) $(k-1)\in\N$.\\
+            Für $n=k+1$ gilt dann im Fall (a): $(k+1)-1 = k\in\N$\\
+            Im Fall (b): $(k+1)-1 = (k-1)+1$ und es gilt $(k-1)\in\N$. Daraus folgt, dass $(k-1)+1\in\N$, da $\N$ induktiv ist.\qedhere
         \end{induktionsschritt}
     \end{proof}
     \begin{proof}[Beweis (5.)]
-        $B_n: n-m\in\naturalnumbers$ für jedes $m,n\in\naturalnumbers$ mit $m<n$\\
+        $B_n: n-m\in\N$ für jedes $m,n\in\N$ mit $m<n$\\
         \begin{induktionsanfang}
             $B_1$ leere Behauptung, da kein $m$ existiert, mit $m<1$ (nach (1.)).
         \end{induktionsanfang}
         \begin{induktionsschritt}
-            $B_n$ wahr für ein $n=k$. Das heißt $k-1\in\naturalnumbers~\forall m\in\naturalnumbers$ mit $m<k$.\\
-            Zu zeigen: $(k+1)-m\in\naturalnumbers~\forall m<k+1$. Ist $m=1\impl m-1 = 0$ und $(k+1)-m = k+1-m=k\in\naturalnumbers$.\\
-            Ist $m>1 \annot{\impl}{(4.)} m-1\in\naturalnumbers$. Da $m<k+1 \impl m-1<k \impl (k+1)-m = k-(m-1)\in\naturalnumbers$ (nach Annahme).\qedhere
+            $B_n$ wahr für ein $n=k$. Das heißt $k-1\in\N~\forall m\in\N$ mit $m<k$.\\
+            Zu zeigen: $(k+1)-m\in\N~\forall m<k+1$. Ist $m=1\impl m-1 = 0$ und $(k+1)-m = k+1-m=k\in\N$.\\
+            Ist $m>1 \annot{\impl}{(4.)} m-1\in\N$. Da $m<k+1 \impl m-1<k \impl (k+1)-m = k-(m-1)\in\N$ (nach Annahme).\qedhere
         \end{induktionsschritt}
     \end{proof}
 \end{satz}
 
 \begin{korollar}
     \label{korollar:4.2.7}
-    Es gibt kein $n\in\naturalnumbers$ mit $0<n<1$. Ferner gilt $\forall n\in\naturalnumbers$ gibt es keine natürliche Zahl $m\in\naturalnumbers$ mit $n<m<n+1$ oder mit $n-1<m<n$.
+    Es gibt kein $n\in\N$ mit $0<n<1$. Ferner gilt $\forall n\in\N$ gibt es keine natürliche Zahl $m\in\N$ mit $n<m<n+1$ oder mit $n-1<m<n$.
 \end{korollar}
 \begin{uebung}
     Beweisen Sie das vorherige Korollar mit Satz~\ref{satz:n-eigenschaften}.
@@ -199,20 +199,20 @@ Frage: Was sind die natürlichen Zahlen? (zum Beispiel $1$, $2\definedas 1+1$, $
 
 \begin{notation}[Zahlenmengen]
     \begin{align*}
-        \naturalnumbers_0 &\definedas \naturalnumbers\cup\set{0}\\
-        \mathbb{-N} &\definedas \set{-n|~n\in\naturalnumbers}\\
-        \mathbb{Z} &\definedas \naturalnumbers\cup\set{0}\cup\mathbb{-N} \tag{Ganze Zahlen}\\
-        \mathbb{Q} &\definedas\set{\frac{p}{q}\middle|~p\in\mathbb{Z}, q\in\naturalnumbers} \tag{Rationale Zahlen}\\
-        \realnumbers&\exclude\mathbb{Q}\tag{Irrationale Zahlen}
+        \N_0 &\definedas \N\cup\set{0}\\
+        \mathbb{-N} &\definedas \set{-n|~n\in\N}\\
+        \Z &\definedas \N\cup\set{0}\cup\mathbb{-N} \tag{Ganze Zahlen}\\
+        \Q &\definedas\set{\frac{p}{q}\middle|~p\in\Z, q\in\N} \tag{Rationale Zahlen}\\
+        \R&\exclude\Q\tag{Irrationale Zahlen}
     \end{align*}
 \end{notation}
 \begin{bemerkung}
-    Sei für $n\in\mathbb{Z}~B_n$ eine Aussage und $n_0\in\naturalnumbers$.\\
+    Sei für $n\in\Z~B_n$ eine Aussage und $n_0\in\N$.\\
     Dann gilt $\pair{\forall n\geq n_0\colon B_n} \equivalent$ ($B_n$ ist wahr) $\land$ (Ist $B_n$ wahr für $n\geq n_0$ so ist auch $B_{n+1}$ wahr)
 \end{bemerkung}
 
 \begin{satz}
-    $n,k\in\mathbb{Z} \impl a +b \in\mathbb{Z}$ und $a\cdot b \in\mathbb{Z}$
+    $n,k\in\Z \impl a +b \in\Z$ und $a\cdot b \in\Z$
     \begin{proof}
         Folgt aus Satz~\ref{satz:n-eigenschaften} mit $-(-a) = a\quad a > 0 \equivalent -a < 0$
     \end{proof}
@@ -220,43 +220,43 @@ Frage: Was sind die natürlichen Zahlen? (zum Beispiel $1$, $2\definedas 1+1$, $
 
 \begin{satz}[Satz von Archimedes]
     \label{satz:von-archimedes}
-    $\forall x\in\realnumbers~\exists n\in\naturalnumbers\colon x < n$.
-    (Das heißt $\naturalnumbers$ ist eine nach oben unbeschränkte Teilmenge von $\realnumbers$)
+    $\forall x\in\R~\exists n\in\N\colon x < n$.
+    (Das heißt $\N$ ist eine nach oben unbeschränkte Teilmenge von $\R$)
     \begin{proof}
-        Angenommen die Aussage ist falsch. Das heißt $\exists x\in\realnumbers$ mit $n\leq x\quad\forall n\in\naturalnumbers$.
+        Angenommen die Aussage ist falsch. Das heißt $\exists x\in\R$ mit $n\leq x\quad\forall n\in\N$.
         \begin{align*}
-            \annot[{&}]{\impl}{\ref{axiom:vollstaendigkeitsaxiom}} a\definedas \sup\naturalnumbers \text{ existiert und } n<a\quad\forall n\in\naturalnumbers
-            \intertext{Es gilt $a+1 > a \impl a - 1 < a$, das heißt $a-1$ ist keine obere Schranke für $\naturalnumbers$}
-            &\impl \exists n\in\naturalnumbers\colon a-1<n\\
-            &\impl \exists n\in\naturalnumbers\colon a < n + 1 \in\naturalnumbers
+            \annot[{&}]{\impl}{\ref{axiom:vollstaendigkeitsaxiom}} a\definedas \sup\N \text{ existiert und } n<a\quad\forall n\in\N
+            \intertext{Es gilt $a+1 > a \impl a - 1 < a$, das heißt $a-1$ ist keine obere Schranke für $\N$}
+            &\impl \exists n\in\N\colon a-1<n\\
+            &\impl \exists n\in\N\colon a < n + 1 \in\N
         \end{align*}
-        Widerspruch zu $a$ ist obere Schranke für $\naturalnumbers$.
+        Widerspruch zu $a$ ist obere Schranke für $\N$.
     \end{proof}
 \end{satz}
 
 \begin{korollar}
-    $\forall x\in\realnumbers~\exists n\in\naturalnumbers\colon -n<x$
+    $\forall x\in\R~\exists n\in\N\colon -n<x$
     \begin{proof}
-        Wende vorherigen Satz auf $-x$ an. $\impl \exists n\in\naturalnumbers\colon -x < n \impl x > -n$
+        Wende vorherigen Satz auf $-x$ an. $\impl \exists n\in\N\colon -x < n \impl x > -n$
     \end{proof}
 \end{korollar}
 
-\begin{satz}[Wohlordnungsprinzip für $\naturalnumbers$]
+\begin{satz}[Wohlordnungsprinzip für $\N$]
     \label{satz:wohlordnungsprinzip}
     Jede nichtleere Menge natürlicher Zahlen hat ein kleinstes Element.
     \begin{proof}
-        Sei $M\subseteq \naturalnumbers$, $M\neq\emptyset$. Es gilt
+        Sei $M\subseteq \N$, $M\neq\emptyset$. Es gilt
         \begin{align*}
-            \inf \naturalnumbers = 1 &\impl a = \inf M \geq 1 > -\infty
+            \inf \N = 1 &\impl a = \inf M \geq 1 > -\infty
             \intertext{Zu zeigen: $a\in M$. Annahme: $a\not\in M$}
-            &\impl a < m\quad\forall m\in\naturalnumbers
+            &\impl a < m\quad\forall m\in\N
             \intertext{Satz~\ref{satz:inf} besagt, dass $\forall \varepsilon > 0~\exists m\in M\colon m<a+\varepsilon$. Für $\varepsilon=1$ gilt damit}
             &\impl \exists m\in M\colon m < a + 1
             \intertext{Wir wählen $\varepsilon = a - m$}
             &\impl \exists m'\in M\colon m'<a+\varepsilon = m
             \intertext{Das heißt wir haben $m',m\in M$ mit $a<m'<m<a+1$}
             &\impl 0 < m-m' < 1\\
-            \text{ aber } (\ref{satz:n-eigenschaften}~(5.)) &\impl m-m'\in\naturalnumbers
+            \text{ aber } (\ref{satz:n-eigenschaften}~(5.)) &\impl m-m'\in\N
         \end{align*}
         Widerspruch zu Korollar~\ref{korollar:4.2.7}.
     \end{proof}

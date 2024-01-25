@@ -1,6 +1,6 @@
 \thispagestyle{pagenumberonly}
 
-Es gibt eine Menge $\realnumbers$, genannt reelle Zahlen, die 3 Gruppen von Axiomen erfüllt:
+Es gibt eine Menge $\R$, genannt reelle Zahlen, die 3 Gruppen von Axiomen erfüllt:
 \begin{enumerate}
     \item Algebraische Axiome
     \item Anordnungsaxiome
@@ -8,14 +8,14 @@ Es gibt eine Menge $\realnumbers$, genannt reelle Zahlen, die 3 Gruppen von Axio
 \end{enumerate}
 
 \subsection{Algebraische Axiome}
-In $\realnumbers$ gibt es 2 Operationen:
+In $\R$ gibt es 2 Operationen:
 \begin{enumerate}
     \item Addition \anf{+}
     \item Multiplikation \anf{$\cdot$}
 \end{enumerate}
 
 \begin{folgerung}
-    $a,b\in\realnumbers\impl a+b\in \realnumbers$ und $a \cdot b\in\realnumbers$
+    $a,b\in\R\impl a+b\in \R$ und $a \cdot b\in\R$
 \end{folgerung}
 
 \begin{definition}[Eigenschaften eines Körpers]
@@ -23,16 +23,16 @@ In $\realnumbers$ gibt es 2 Operationen:
     \begin{enumerate}[label=(I.\arabic*)]
         \item $(a+b) + c = a + (b+c)$\quad \textit{Assoziativität der Addition}
         \item $a + b = b + a$\quad \textit{Kommutativität der Addition}
-        \item Es gibt genau eine Zahl genannt Null, geschrieben $0$, mit $\forall a \in\realnumbers\colon a+0 = a$ \quad \textit{Existenz eines neutralen Elements der Addition}
-        \item $\forall a\in\realnumbers~\exists! b\in \realnumbers\colon a + b = 0$, geschrieben $b=-a$\quad \textit{Existenz eines inversen Elements der Addition}
+        \item Es gibt genau eine Zahl genannt Null, geschrieben $0$, mit $\forall a \in\R\colon a+0 = a$ \quad \textit{Existenz eines neutralen Elements der Addition}
+        \item $\forall a\in\R~\exists! b\in \R\colon a + b = 0$, geschrieben $b=-a$\quad \textit{Existenz eines inversen Elements der Addition}
         \item $\pair{a\cdot b}\cdot c = a\cdot\pair{b\cdot c}$\quad \textit{Assoziativität der Multiplikation}
         \item $a\cdot b = b \cdot a$\quad \textit{Kommutativität der Multiplikation}
-        \item $\forall a \in\realnumbers, a \neq 0$ gibt es ein eindeutiges $b\neq 0$ mit $a\cdot b = 1$. Wir schreiben $b = a^{-1} = \frac{1}{a}$\quad \textit{Existenz eines inversen Elements der Multiplikation}
-        \item Es gibt genau eine Zahl Eins, geschrieben 1, die von 0 verschieden ist, mit $\forall a\in\realnumbers\colon a\cdot 1 = a$\quad \textit{Existenz eines neutralen Elements der Multiplikation}
+        \item $\forall a \in\R, a \neq 0$ gibt es ein eindeutiges $b\neq 0$ mit $a\cdot b = 1$. Wir schreiben $b = a^{-1} = \frac{1}{a}$\quad \textit{Existenz eines inversen Elements der Multiplikation}
+        \item Es gibt genau eine Zahl Eins, geschrieben 1, die von 0 verschieden ist, mit $\forall a\in\R\colon a\cdot 1 = a$\quad \textit{Existenz eines neutralen Elements der Multiplikation}
         \item $a\cdot\pair{b+c} = a \cdot b + a \cdot c$\quad \textit{Distributivität}
     \end{enumerate}
 
-    \noindent Jede Menge $\mathbb{K}$, welche (I.1) bis (I.9) erfüllt, heißt \textbf{Körper}.
+    \noindent Jede Menge $\K$, welche (I.1) bis (I.9) erfüllt, heißt \textbf{Körper}.
 \end{definition}
 
 \begin{bemerkung}
@@ -109,15 +109,15 @@ In $\realnumbers$ gibt es 2 Operationen:
 
 \subsection{Die Anordnungsaxiome}
 
-Allgemein gilt: $a,b\in\realnumbers \impl a = b \lor a \neq b$.\\
+Allgemein gilt: $a,b\in\R \impl a = b \lor a \neq b$.\\
 Ist $a\neq b$, besteht eine Anordnung \anf{$<$}, die verlangt, dass genau eine der Relationen $a<b$ oder $b<a$ gilt.
-Das heißt $\forall a,b\in\realnumbers$ gilt genau eine der Aussagen $a<b$, $b<a$, $a=b$.\\
+Das heißt $\forall a,b\in\R$ gilt genau eine der Aussagen $a<b$, $b<a$, $a=b$.\\
 Diese Anordnung genügt folgenden Axiomen:
 \begin{axiom}[Anordnungsaxiome]
     \theoremescape
     \begin{enumerate}[label=(II.\arabic*)]
         \item $a<b \land b < c \impl a < c$\quad \textit{Transitivität}
-        \item $a<b,~c \in\realnumbers \impl a + c < b + c$
+        \item $a<b,~c \in\R \impl a + c < b + c$
         \item $a<b,~c > 0 \impl ac < bc$
     \end{enumerate}
 \end{axiom}
@@ -128,7 +128,7 @@ Diese Anordnung genügt folgenden Axiomen:
         \item $a < b$: a ist (echt) kleiner als b
         \item $b > a$: b ist größer als a
         \item $a\leq b$: $a=b$ oder $a < b$
-        \item $a\in\realnumbers$ ist positiv, wenn $a>0$; negativ, wenn $a <0$; nicht-negativ, wenn $a\geq 0$; nicht-positiv, wenn $a\leq 0$
+        \item $a\in\R$ ist positiv, wenn $a>0$; negativ, wenn $a <0$; nicht-negativ, wenn $a\geq 0$; nicht-positiv, wenn $a\leq 0$
     \end{enumerate}
 \end{notation}
 
@@ -192,7 +192,7 @@ Diese Anordnung genügt folgenden Axiomen:
 
 \begin{axiom}[Vollständigkeitsaxiom]
     \label{axiom:vollstaendigkeitsaxiom}
-    Jede nicht-leere Teilmenge $M\subseteq \realnumbers$, welche nach oben beschränkt ist, besitzt eine kleinste obere Schranke, genannt das Supremum von $M$.
+    Jede nicht-leere Teilmenge $M\subseteq \R$, welche nach oben beschränkt ist, besitzt eine kleinste obere Schranke, genannt das Supremum von $M$.
 \end{axiom}
 
 \begin{notation}[Supremum]
@@ -200,18 +200,18 @@ Diese Anordnung genügt folgenden Axiomen:
 \end{notation}
 
 \begin{definition}[Beschränktheit von Mengen]
-    Sei $M\subseteq \realnumbers, M\neq \emptyset$.
+    Sei $M\subseteq \R, M\neq \emptyset$.
     \begin{enumerate}[label=(\roman*)]
-        \item $M$ heißt \textbf{nach oben beschränkt}, falls ein $k\in\realnumbers$ existiert mit $\forall x\in M\colon x\leq k$.
+        \item $M$ heißt \textbf{nach oben beschränkt}, falls ein $k\in\R$ existiert mit $\forall x\in M\colon x\leq k$.
         Jede solche Zahl $k$ heißt obere Schranke von $M$.
-        \item $M$ heißt \textbf{nach unten beschränkt}, falls ein $k\in\realnumbers$ existiert mit $\forall x\in M\colon x\geq k$.
+        \item $M$ heißt \textbf{nach unten beschränkt}, falls ein $k\in\R$ existiert mit $\forall x\in M\colon x\geq k$.
         Jede solche Zahl $k$ heißt untere Schranke von $M$.
         \item $M$ heißt \textbf{beschränkt}, falls ein $k\geq 0$ existiert mit $-k\leq x \leq k\quad \forall x\in M$
     \end{enumerate}
 \end{definition}
 
 \begin{definition}[Kleinste obere und größte untere Schranke]
-    Eine Zahl $k\in\realnumbers$ heißt kleinste obere (größte untere) Schranke, falls
+    Eine Zahl $k\in\R$ heißt kleinste obere (größte untere) Schranke, falls
     \begin{enumerate}
         \item es eine obere (untere) Schranke ist und
         \item es keine kleinere obere (größere untere) Schranke für $M$ gibt
@@ -232,7 +232,7 @@ Diese Anordnung genügt folgenden Axiomen:
     \begin{center}
         $k$ ist kleinste obere Schranke für M\\ $\equivalent -k$ ist die größte untere Schranke für $-M$
     \end{center}
-    Das heißt das Anordnungsaxiom ist äquivalent zum \textit{Anordnungsaxiom}$^{-1}$ (Jede nicht-leere Teilmenge $M\subseteq \realnumbers$, welche nach unten beschränkt ist, besitzt eine größte untere Schranke, genannt das Infimum von $M$. Wir schreiben $\inf M$).
+    Das heißt das Anordnungsaxiom ist äquivalent zum \textit{Anordnungsaxiom}$^{-1}$ (Jede nicht-leere Teilmenge $M\subseteq \R$, welche nach unten beschränkt ist, besitzt eine größte untere Schranke, genannt das Infimum von $M$. Wir schreiben $\inf M$).
 \end{folgerung}
 
 \begin{beispiel}
@@ -246,7 +246,7 @@ Diese Anordnung genügt folgenden Axiomen:
 \end{beispiel}
 
 \begin{notation}
-    Sei $M\subseteq \realnumbers, M\neq \emptyset$\\
+    Sei $M\subseteq \R, M\neq \emptyset$\\
     Wir schreiben $\sup M < \infty$, falls $M$ nach oben beschränkt ist, andernfalls setzen wir
     \begin{align*}
         \sup M \definedas \infty
@@ -259,7 +259,7 @@ Diese Anordnung genügt folgenden Axiomen:
 
 \begin{satz}[Eigenschaften des Supremums]
     \label{satz:sup}
-    Sei $M\subseteq \realnumbers$
+    Sei $M\subseteq \R$
     \begin{enumerate}[label=(\roman*)]
         \item Ist $\sup M < \infty$, so folgt $\forall \varepsilon > 0~\exists x\in M$ mit $\sup\pair{M} -\varepsilon < x$
         \item Ist $\sup M = \infty$, so gilt $\forall k\geq 0~\exists x\in M$ mit $x> k$
@@ -268,13 +268,13 @@ Diese Anordnung genügt folgenden Axiomen:
         \theoremescape
         \begin{enumerate}[label=(\roman*)]
             \item Wir setzen $a\definedas \sup M$. Sei $a<\infty$. Wäre (i) falsch, so folgt $\exists \varepsilon>0~\forall x\in M\colon a-\varepsilon > x$.\\Das heißt $a-\varepsilon$ ist eine obere Schranke für $M$. Aber $a-\varepsilon < a$ (Widerspruch)
-            \item Ist $a=\infty$, so hat $M$ keine obere Schranke. Nach Def. folgt für jedes $k\in\realnumbers$ existiert ein $x\in M\colon x > k$\qedhere
+            \item Ist $a=\infty$, so hat $M$ keine obere Schranke. Nach Def. folgt für jedes $k\in\R$ existiert ein $x\in M\colon x > k$\qedhere
         \end{enumerate}
     \end{proof}
 \end{satz}
 \begin{satz}[Eigenschaften des Infimums]
     \label{satz:inf}
-    Sei $M\subseteq \realnumbers$
+    Sei $M\subseteq \R$
     \begin{enumerate}[label=(\roman*)]
         \item Ist $\inf M > -\infty$, so folgt $\forall \varepsilon > 0~\exists x\in M$ mit $x < \inf\pair{M}+ \varepsilon$
         \item Ist $\inf M = -\infty$, so gilt $\forall k\geq 0~\exists x\in M$ mit $x< -k$
@@ -284,7 +284,7 @@ Diese Anordnung genügt folgenden Axiomen:
     \end{proof}
 \end{satz}
 \begin{definition}[Maximum und Minimum]
-    Es sei $M\subseteq \realnumbers, M\neq\emptyset$. $m\in M$ heißt größtes Element von $M$ (Maximum), geschrieben $\max M$, falls
+    Es sei $M\subseteq \R, M\neq\emptyset$. $m\in M$ heißt größtes Element von $M$ (Maximum), geschrieben $\max M$, falls
     \begin{align*}
         x\leq m\quad\forall x\in M
     \end{align*}

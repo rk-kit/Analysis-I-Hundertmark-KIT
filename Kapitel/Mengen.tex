@@ -262,13 +262,13 @@
 \end{notation}
 
 \begin{beispiel}[Restklassendefinition über Äquivalenzrelationen]
-    Es sei $A = \naturalnumbers_{0} = \set{0,1,2,3,4,\dots}$ und $p\in \mathbb{N}$. $m,n\in\mathbb{N}_0$ seien genau dann äquivalent, wenn $m=n+k\cdot p$ für ein $k\in\mathbb{Z}$:
+    Es sei $A = \N_{0} = \set{0,1,2,3,4,\dots}$ und $p\in \N$. $m,n\in\N_0$ seien genau dann äquivalent, wenn $m=n+k\cdot p$ für ein $k\in\Z$:
     \begin{align*}
-        R_{p} = \set{\pair{m,n}\in \mathbb{N}_0 \times \mathbb{N}_0 |~\exists k\in \mathbb{Z}\text{ mit } m=n+k\cdot p}
+        R_{p} = \set{\pair{m,n}\in \N_0 \times \N_0 |~\exists k\in \Z\text{ mit } m=n+k\cdot p}
     \end{align*}
-    So definieren wir die Restklassen von $\mathbb{N}_0$ bezüglich Division mit $p$.
+    So definieren wir die Restklassen von $\N_0$ bezüglich Division mit $p$.
     \begin{align*}
-        m\in [j]_{R} \equivalent m=n+k\cdot p\text{ für ein }k\in\mathbb{Z}
+        m\in [j]_{R} \equivalent m=n+k\cdot p\text{ für ein }k\in\Z
     \end{align*}
 \end{beispiel}
 
@@ -301,10 +301,10 @@
 \begin{beispiel}[Mögliche Funktionen]
     \theoremescape
     \begin{alignat*}{2}
-        f\colon &\mathbb{Z} \rightarrow \realnumbers,\quad && n\mapsto 3n^2+7\\
-        g\colon &\mathbb{Z} \rightarrow \mathbb{Z},\quad && n\mapsto 3n^2+7\\
-        h\colon &\linterv{0, \infinity} \rightarrow \realnumbers,\quad && x\mapsto x^2+3x+4\\
-        j\colon &\realnumbers \rightarrow \realnumbers,\quad && x\mapsto x^2+3x+4\\
+        f\colon &\Z \rightarrow \R,\quad && n\mapsto 3n^2+7\\
+        g\colon &\Z \rightarrow \Z,\quad && n\mapsto 3n^2+7\\
+        h\colon &\linterv{0, \infinity} \rightarrow \R,\quad && x\mapsto x^2+3x+4\\
+        j\colon &\R \rightarrow \R,\quad && x\mapsto x^2+3x+4\\
     \end{alignat*}
 \end{beispiel}
 \begin{bemerkung}
@@ -367,9 +367,9 @@
     \begin{align*}
         M, N \subseteq A \quad M \prec N, \text{ falls } M\subseteq N
     \end{align*}
-    \noindent Ordnungsrelation auf $\naturalnumbers$:
+    \noindent Ordnungsrelation auf $\N$:
     \begin{align*}
-    (\naturalnumbers, \prec)
+    (\N, \prec)
         : n\prec m, \text{ falls $n$ teilt $m$}
     \end{align*}
     $2$ und $3$ sind dabei nicht vergleichbar, aber $2$ und $4$ sind vergleichbar.

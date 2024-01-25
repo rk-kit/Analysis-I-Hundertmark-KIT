@@ -28,6 +28,7 @@
 % Font-Encoding
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
+\usepackage{xxcolor}
 
 % Theorems
 \newtheorem{blockelement}{Blockelement}[subsection]
@@ -82,9 +83,6 @@
 \newcommand{\OBDA}{o.B.d.A.}
 \newcommand{\theoremescape}{\leavevmode}
 \newcommand{\fromto}{\rightarrow{}}
-\newcommand{\naturalnumbers}{\mathbb{N}}
-\newcommand{\realnumbers}{\mathbb{R}}
-\newcommand{\complexnumbers}{\mathbb{C}}
 \newcommand{\aligntoright}[2]{\hfill#1\hspace{#2\textwidth}~}
 \newcommand{\horizontalline}[0]{\par\noindent\rule{0.05\textwidth}{0.1pt}\\}
 \newcommand{\ntoinfty}[0]{n\fromto\infty}
@@ -92,6 +90,14 @@
 \renewcommand{\Re}{\text{Re}}
 \renewcommand{\Im}{\text{Im}}
 \newcommand{\conj}[1]{\overline{#1}}
+
+% Mengenbezeichner
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\K}{\mathbb{Q}}
 
 % Envs
 \newenvironment{induktionsanfang}{
@@ -161,7 +167,7 @@
     \input{Kapitel/Reelle_Zahlen}
 
 
-    \section{Die natürlichen Zahlen $\naturalnumbers$ und vollständige Induktion}
+    \section{Die natürlichen Zahlen $\N$ und vollständige Induktion}
     \input{Kapitel/Natuerliche_Zahlen}
 
 
@@ -173,7 +179,7 @@
     \input{Kapitel/Folgen_Grenzwerte}
 
 
-    \section{Dichtheit von $\mathbb{Q}$ in $\mathbb{R}$}
+    \section{Dichtheit von $\Q$ in $\R$}
     \input{Kapitel/Dichtheit}
 
 
@@ -195,7 +201,7 @@
         \begin{enumerate}[label=\alph*)]
             \item Es steht für die Folge der Partialsummen:
             \begin{align*}
-                s_n&\definedas \sum_{j=1}^{n} a_j\quad\forall n\in\naturalnumbers
+                s_n&\definedas \sum_{j=1}^{n} a_j\quad\forall n\in\N
             \end{align*}
             \item Die Reihe $\sum_{n=1}^{\infty} a_n$ konvergiert, falls der Grenzwert der Partialsummen $\lim_{n\fromto\infty} s_n$ existiert.\\
             Wir setzen
@@ -238,12 +244,12 @@
         Oft hat man Reihen der Form
         \begin{align*}
             \sum_{n=0}^{\infty} a_n &= a_0+a_1+a_2+\dots\\
-            s_n&\definedas \sum_{j=0}^{n} a_j \tag{$n\in\naturalnumbers_0$}
+            s_n&\definedas \sum_{j=0}^{n} a_j \tag{$n\in\N_0$}
             \intertext{oder}
-            s_n &\definedas a_0 + \sum_{j=1}^{\infty} a_j\tag{$n\in\naturalnumbers$}
+            s_n &\definedas a_0 + \sum_{j=1}^{\infty} a_j\tag{$n\in\N$}
             \intertext{Sofern ein Limes existiert, gilt dann}
             \sum_{n=0}^{\infty} a_n &\definedas \lim s_n\\[10pt]
-            \intertext{Allgemein für $v\in\mathbb{Z}\quad a_v, a_{v+1}, a_{v+2}, \dots$}
+            \intertext{Allgemein für $v\in\Z\quad a_v, a_{v+1}, a_{v+2}, \dots$}
             \sum_{n=v}^{\infty} a_n &= a_v + a_{v+1} + \dots\\
             s_n &\definedas \sum_{j=v}^{n} a_j\text{ def. Folge $(s_n)_{n\geq v}$}
         \end{align*}
@@ -252,7 +258,7 @@
     \begin{beispiel}[Geometrische Folge und Reihe]
         \footnote{Wir setzen $0^0 = 1$}
         \begin{align*}
-            q\neq 1 \impl \sum_{j=0}^{n} q^j = \frac{1-q^{n+1}}{1-q}\quad\forall n\in\naturalnumbers_0\\
+            q\neq 1 \impl \sum_{j=0}^{n} q^j = \frac{1-q^{n+1}}{1-q}\quad\forall n\in\N_0\\
             \text{Ist } \abs{q} < 1\colon \sum_{n=0}^{\infty} q^n\text{ konvergiert und } \sum_{n=0}^{\infty} q^n = \frac{1}{1-q}\tag{geometrische Reihe}
         \end{align*}
         Zum Beispiel $q=\frac{1}{2}$
@@ -265,7 +271,7 @@
         \end{align*}
         Das heißt es sollte gelten
         \begin{align*}
-            \sum_{j=1}^{n} \pair{\frac{1}{2}}^j &= 1-\pair{\frac{1}{2}}^n\quad \forall n\in\naturalnumbers
+            \sum_{j=1}^{n} \pair{\frac{1}{2}}^j &= 1-\pair{\frac{1}{2}}^n\quad \forall n\in\N
         \end{align*}
 
         \noindent Dass dieser Zusammenhang gelten muss, lässt sich einfach veranschaulichen. Die linke Seite der Gleichung kann als Summe über Teilflächen des Einheitsquadrats\footnote{Original: \anf{Kuchen}} visualisiert werden.\\
@@ -317,7 +323,7 @@
                 \impl s_4 &\geq s_2 + \frac{1}{2} > \frac{1}{2} + \frac{1}{2} = 1\\
                 s_8 - s_4 &\geq \frac{1}{2}\\
                 \impl s_8 &\geq s_4 + \frac{1}{2} \geq \frac{3}{2}\\
-                \annot{\impl}{Induktion} s_{\pair{2^j}} &> \frac{j}{2}\quad\forall j\in\naturalnumbers
+                \annot{\impl}{Induktion} s_{\pair{2^j}} &> \frac{j}{2}\quad\forall j\in\N
             \end{align*}
             \noindent Also ist $s_{\pair{2^j}}$ nicht nach oben beschränkt $\impl$ $(s_n)_n$ nicht nach oben beschränkt.
             \begin{align*}
@@ -329,7 +335,7 @@
     \begin{satz} % Satz 6
         Seien $\sum_{n=1}^{\infty} a_n$, $\sum_{n=1}^{\infty} b_n$ konvergente Reihen. Dann ist
         \begin{align*}
-            \forall\lambda, \mu \in\realnumbers\colon \sum_{n=1}^{\infty} \pair{\lambda\cdot a_n + \mu\cdot b_n}
+            \forall\lambda, \mu \in\R\colon \sum_{n=1}^{\infty} \pair{\lambda\cdot a_n + \mu\cdot b_n}
         \end{align*}
         konvergent und es gilt
         \begin{align*}
@@ -348,7 +354,7 @@
 
     \begin{satz}[Majoranten-Kriterium] % Satz 7
         \label{satz:majoranten-kriterium}
-        Gegeben zwei Folgen $0\leq a_n \leq b_n~\forall n\in\naturalnumbers$. Konvergiert
+        Gegeben zwei Folgen $0\leq a_n \leq b_n~\forall n\in\N$. Konvergiert
         \begin{align*}
             \sum_{n=1}^{\infty} b_n\quad\text{so konvergiert auch}\quad\sum_{n=1}^{\infty} a_n
         \end{align*}
@@ -364,8 +370,8 @@
                 \impl &(s_n)_n,~(t_n)_n\text{ sind monoton wachsend}\\
                 \intertext{Mit der Konvergenz von $(t_n)_n$ und $(t_n)_n$ monoton wachsend folgt mit Satz~\ref{satz:mont-konv-reihen}}
                 \impl &(t_n)_n\text{ ist beschränkt}\\
-                \impl &\exists M\geq 0\colon t_n \leq M\quad\forall n\in\naturalnumbers\\
-                0\leq a_n \leq b_n \impl &0\leq s_n \leq t_n \leq M \quad\forall n\in\naturalnumbers\\
+                \impl &\exists M\geq 0\colon t_n \leq M\quad\forall n\in\N\\
+                0\leq a_n \leq b_n \impl &0\leq s_n \leq t_n \leq M \quad\forall n\in\N\\
                 \impl &(s_n)_n\text{ ist nach oben beschränkt und monoton wachsend}\\
                 \annot{\impl}{\ref{satz:mont-konv-reihen}} &\lim_{n\fromto\infty} s_n\text{ existiert }\\
                 \quad s &\definedas \lim_{n\fromto\infty} s_n \leq \lim_{n\fromto\infty} t_n = \sum_{n=1}^{\infty} b_n\qedhere\\
@@ -376,7 +382,7 @@
     \end{satz}
 
     \begin{satz}[Minoranten-Kriterium] % Satz 8
-        Sei $0\leq b_n \leq a_n~\forall n\in\naturalnumbers$ und
+        Sei $0\leq b_n \leq a_n~\forall n\in\N$ und
         \begin{align*}
             \sum_{n=1}^{\infty} b_n &= \infty\\
             \impl \sum_{n=1}^{\infty} a_n&\text{ divergiert auch bestimmt gegen }\infty
@@ -385,7 +391,7 @@
             \begin{align*}
                 t_n &= \sum_{j=1}^{n} b_n \quad s_n = \sum_{j=1}^{n} a_n
                 \intertext{Analog zum Beweis des Majoranten-Kriteriums gilt:}
-                (s_n)_n,~(t_n)_n&\text{ sind monoton wachsend und }t_n \leq s_n \quad\forall n\in\naturalnumbers
+                (s_n)_n,~(t_n)_n&\text{ sind monoton wachsend und }t_n \leq s_n \quad\forall n\in\N
                 \intertext{Dann lässt sich folgern}
                 \sum_{n=1}^{\infty} b_n = \infty &\equivalent (t_n)_n \text{ wächst über alle Grenzen}\\
                 &\impl (s_n)_n\text{ wächst über alle Grenzen}\\
@@ -397,7 +403,7 @@
     \begin{beispiel}[Anwendung des Minoranten-Kriteriums]
         Es sei
         \begin{align*}
-            a_n\geq \frac{c}{n}\quad\forall n\in\naturalnumbers\tag{$c>0$}
+            a_n\geq \frac{c}{n}\quad\forall n\in\N\tag{$c>0$}
             \intertext{Nach Minorantenkriterium und der Divergenz der harmonischen Reihe gilt}
             \impl \sum_{n=1}^{\infty} a_n = \infty
         \end{align*}
@@ -413,7 +419,7 @@
 
     \begin{bemerkung}[Abgeschwächtes Majoranten-Kriterium]
         Die Konvergenz/Divergenz von Reihen (und Folgen) ändert sich nicht, wenn man endlich viele Summanden (Folgeglieder) abändert.\\
-        Für das Majoranten-Kriterium reicht also, dass $0\leq a_n \leq b_n$ für fast alle $n\in\naturalnumbers$, damit
+        Für das Majoranten-Kriterium reicht also, dass $0\leq a_n \leq b_n$ für fast alle $n\in\N$, damit
         \begin{align*}
             \sum_{n=1}^{\infty} b_n\text{ konvergiert }\impl \sum_{n=1}^{\infty} a_n\text{ konvergiert}
         \end{align*}
@@ -430,16 +436,16 @@
             \equivalent &\sum_{n=0}^{\infty} 2^n\cdot a_{\pair{2^n}}\text{ konvergiert}\tag{Verdichtete Reihe}
         \end{align*}
         \begin{proof}
-            \anf{$\Leftarrow$} 1. Schritt. Zu zeigen: $a_n\geq 0\quad\forall n\in\naturalnumbers$.
+            \anf{$\Leftarrow$} 1. Schritt. Zu zeigen: $a_n\geq 0\quad\forall n\in\N$.
             \begin{align*}
                 a_n&\geq a_{n+1} \geq a_{n+2} \geq \dots \geq a_{n+l} \fromto 0\text{ für } l\fromto\infty\\
-                \impl a_n &\geq 0\quad\forall n\in\naturalnumbers
+                \impl a_n &\geq 0\quad\forall n\in\N
             \end{align*}
             2. Schritt:
             \begin{align*}
                 s_n &\definedas \sum_{j=0}^{n} a_j\\
                 t_n &\definedas \sum_{\nu=0}^{n} 2^{\nu} \cdot a_{\pair{2^\nu}}
-                \intertext{Jedes $\overline{n}\in\naturalnumbers$ können wir eindeutig schreiben als $\overline{n}=2^\nu + l$ mit $\nu\in\naturalnumbers_0,~0\leq l < 2^\nu$~\footnotemark.\endgraf \noindent Sei $1\leq n< 2^k$ für ein $k\in\naturalnumbers_0$}
+                \intertext{Jedes $\overline{n}\in\N$ können wir eindeutig schreiben als $\overline{n}=2^\nu + l$ mit $\nu\in\N_0,~0\leq l < 2^\nu$~\footnotemark.\endgraf \noindent Sei $1\leq n< 2^k$ für ein $k\in\N_0$}
                 s_n &= \sum_{j=0}^{n} a_j = a_0 + \sum_{j=1}^{n} a_j\\
                 &\leq a_0 + \sum_{j=1}^{2^k-1} a_j = a_0 + \sum_{\nu=0}^{k-1} \pair{\sum_{l=0}^{2^\nu - 1} \underbrace{a_{\pair{2^\nu + l}}}_{\leq a_{\pair{2^\nu}}}}\\
                 &\leq a_0 + \sum_{\nu=0}^{k-1} \pair{\sum_{l=0}^{2^\nu-1} a_{\pair{2^\nu}}}\\
@@ -451,7 +457,7 @@
             Angenommen
             \begin{align*}
                 \sum_{\nu = 0}^{\infty} 2^{\nu} \cdot a_{2^\nu}\text{ konvergent} &\equivalent \lim_{n\fromto\infty} t_n = t\text{ existiert}\\
-                &\impl s_n \leq a_0 + \lim_{k\fromto\infty} t_{k-1} = a_0 + t\quad\forall n\in\naturalnumbers
+                &\impl s_n \leq a_0 + \lim_{k\fromto\infty} t_{k-1} = a_0 + t\quad\forall n\in\N
                 \intertext{Somit ist $a_0 + l$ eine obere Schranke von $(s_n)_n$. Da $s_n\leq s_{n+1} \annot{\impl}{\ref{satz:monoton-konv}} \lim_{n\fromto\infty} s_n$ existiert}
                 \impl \sum_{n=0}^{\infty} a_n&\text{ konvergent}
             \end{align*}
@@ -495,7 +501,7 @@
         \begin{align*}
             \sum_{n=1}^{\infty} (-1)^{n+1} \cdot a_n = a_1 - a_2 + a_3 - a_4 \dots
         \end{align*}
-        alternierende Reihe. Alternativ $a_n\geq 0$, $n\in\naturalnumbers_0$.
+        alternierende Reihe. Alternativ $a_n\geq 0$, $n\in\N_0$.
         \begin{align*}
             \sum_{n=0}^{\infty} (-1)^n\cdot a_n = a_0 - a_1 + a_2 - a_3 \dots
         \end{align*}
@@ -555,13 +561,13 @@
         \end{align*}
         genau dann, wenn
         \begin{align*}
-            \forall \varepsilon > 0~\exists N_{\varepsilon}\in\naturalnumbers\colon \abs{\sum_{j=n+1}^{m} a_j} <\varepsilon\quad\forall m>n\geq N_{\varepsilon}
+            \forall \varepsilon > 0~\exists N_{\varepsilon}\in\N\colon \abs{\sum_{j=n+1}^{m} a_j} <\varepsilon\quad\forall m>n\geq N_{\varepsilon}
         \end{align*}
         \begin{proof}
             \begin{align*}
                 s_n &\definedas \sum_{j=1}^{n} a_j\\
                 \intertext{$(s_n)_n$ konvergiert nach Satz~\ref{satz:jede-konv-cauchy} genau dann, wenn es eine Cauchy-Folge ist. Das heißt}
-                \forall\varepsilon > 0~\exists N_{\varepsilon}\in\naturalnumbers\colon &\abs{s_{m} - s_{n}} < \varepsilon\quad\forall m> n \geq N_{\varepsilon}\\
+                \forall\varepsilon > 0~\exists N_{\varepsilon}\in\N\colon &\abs{s_{m} - s_{n}} < \varepsilon\quad\forall m> n \geq N_{\varepsilon}\\
                 \abs{s_m - s_n} &= \sum_{j=1}^{m} a_j = \sum_{j=1}^{n} a_j\\
                 &= \sum_{j=n+1}^{m} a_j\qedhere
             \end{align*}
@@ -574,7 +580,7 @@
         \begin{proof}
             Nach Satz~\ref{satz:cauchy-kriterium} $\impl$
             \begin{align*}
-                \forall \varepsilon > 0~\exists N_{\varepsilon}\in\naturalnumbers\colon &\abs{\sum_{j=n+1}^{n+p} a_j} < \varepsilon\quad\forall n\geq N_{\varepsilon}, p\in\naturalnumbers\\
+                \forall \varepsilon > 0~\exists N_{\varepsilon}\in\N\colon &\abs{\sum_{j=n+1}^{n+p} a_j} < \varepsilon\quad\forall n\geq N_{\varepsilon}, p\in\N\\
                 \intertext{Wähle $p=1$}
                 \sum_{j=n+1}^{n+1} a_{j} &= a_{j+1}\\
                 \impl \abs{a_{n+1}} &< \varepsilon\quad \forall n\geq N_{\varepsilon}\\
@@ -628,13 +634,13 @@
     \begin{definition}[Majorante] % Def 3
         Die Reihe
         \begin{align*}
-            \sum_{n=1}^{\infty} c_n\quad c_n\geq 0~\forall n\in\naturalnumbers
+            \sum_{n=1}^{\infty} c_n\quad c_n\geq 0~\forall n\in\N
         \end{align*}
         ist eine Majorante der Reihe $\sum_{n}^{\infty} a_n$ falls
         \begin{align*}
-            \abs{a_n} &\leq c_n\text{ für fast alle }n\in\naturalnumbers
+            \abs{a_n} &\leq c_n\text{ für fast alle }n\in\N
             \intertext{Das heißt}
-            \exists n_0\in\naturalnumbers\colon \abs{a_n} &< c_n\quad\forall n\geq n_0
+            \exists n_0\in\N\colon \abs{a_n} &< c_n\quad\forall n\geq n_0
         \end{align*}
     \end{definition}
 
@@ -654,16 +660,16 @@
         \end{align*}
         eine Reihe mit $a_n\neq 0$. Ferner gebe es ein $0\leq q < 1$ so dass
         \begin{align*}
-            \frac{\abs{a_{n+1}}}{\abs{a_n}} \leq q\text{ für fast alle } n\in\naturalnumbers\\
+            \frac{\abs{a_{n+1}}}{\abs{a_n}} \leq q\text{ für fast alle } n\in\N\\
             \impl \sum_{n=0}^{\infty} a_n\text{ absolut konvergent}
         \end{align*}
 
         \begin{proof}
-            Wir haben $n_0\in\naturalnumbers$
+            Wir haben $n_0\in\N$
             \begin{align*}
                 \frac{\abs{a_{n+1}}}{\abs{a_n}} &\leq q\quad\forall n\geq n_0\\[10pt]
                 \abs{a_{n+1}} \leq q\cdot\abs{a_n} &\leq q^2 \cdot \abs{a_{n-1}} \leq q^3 \cdot \abs{a_{n-2}}\\[10pt]
-                \leq \dots &\leq q^{p+1} \cdot\abs{a_{n_0}} = q^{n-n_0+1} \cdot\abs{a_{n_0}}\tag{$p\in\naturalnumbers$, $n=n_0+p$}\\[10pt]
+                \leq \dots &\leq q^{p+1} \cdot\abs{a_{n_0}} = q^{n-n_0+1} \cdot\abs{a_{n_0}}\tag{$p\in\N$, $n=n_0+p$}\\[10pt]
                 &= q^{n+1} \cdot q^{-n_0} \cdot\abs{a_{n_0}}\\[10pt]
                 \impl \abs{a_n} &\leq \underbrace{q^n \cdot K}_{\definedasbackwards c_n}\tag{$K \definedas q^{-n_0} \cdot \abs{a_{n_0}}$}\\
                 \impl \abs{a_{n_0}} &\leq c_n\quad\forall n\geq n_0\\
@@ -746,10 +752,10 @@
                 \intertext{Noch zu zeigen: $e'\leq e$}
                 \pair{1+\frac{1}{n}}^n &= \sum_{k=0}^{n} \frac{1}{k!} \cdot \prod_{j=0}^{k-1} 1-\frac{j}{n}\\
                 &\geq \sum_{k=0}^{m} \frac{1}{k!}\cdot \prod_{j=0}^{k-1} \pair{1-\frac{j}{n}}\tag{$\forall n>m$}\\
-                \intertext{Wir halten $m\in\naturalnumbers$ fest}
+                \intertext{Wir halten $m\in\N$ fest}
                 \impl e &= \lim_{\ntoinfty} \pair{1+\frac{1}{n}}^n \geq \lim_{\ntoinfty} \sum_{k=0}^{m} \frac{1}{k!}\cdot \prod_{j=0}^{k-1} \pair{1-\frac{j}{n}}\\
                 &= \sum_{k=0}^{m} \frac{1}{k!} \cdot \prod_{j=0}^{k-1} \underbrace{\lim_{\ntoinfty} \pair{1-\frac{j}{n}}}_{=1}\\
-                &= \sum_{n=0}^{m} \frac{1}{k!}\tag{$\forall m\in\naturalnumbers$}\\
+                &= \sum_{n=0}^{m} \frac{1}{k!}\tag{$\forall m\in\N$}\\
                 \impl e&\geq \lim_{\ntoinfty} \sum_{k=0}^{m} \frac{1}{k!} = \sum_{k=0}^{\infty} \frac{1}{k!} = e\\
                 \impl e &\leq e' \land e'\leq e\\
                 \impl e &= e'\qedhere
@@ -805,12 +811,12 @@
             Wir haben
             \begin{align*}
                 \frac{1}{(n+1)!} &\leq e-s_n \leq \frac{e-1}{(n+1)!} < \frac{2}{(n+1)!}
-                \intertext{Angenommen $e=\frac{p}{q}$\quad$p,q\in\naturalnumbers$. Wir nehmen $p=q\cdot m$}
+                \intertext{Angenommen $e=\frac{p}{q}$\quad$p,q\in\N$. Wir nehmen $p=q\cdot m$}
                 \impl \frac{1}{(q+1)!} &\leq \frac{p}{q} - s_q < \frac{2}{(q+1)!}\\
                 0 &< \frac{1}{q+1} \leq \frac{p}{q}\cdot q! - q!\cdot s_q < \frac{2}{q+1}<1
                 \intertext{Es lässt sich zeigen, dass der dritte Term eine ganze Zahl ist:}
-                \frac{p}{q}\cdot q! &= p\cdot(q-1)!\in\naturalnumbers\\
-                q!\cdot s_q &= q! \cdot \sum_{k=0}^{q} \frac{1}{k!}\in\naturalnumbers
+                \frac{p}{q}\cdot q! &= p\cdot(q-1)!\in\N\\
+                q!\cdot s_q &= q! \cdot \sum_{k=0}^{q} \frac{1}{k!}\in\N
             \end{align*}
             Damit ergibt sich ein Widerspruch, weil keine ganze Zahl zwischen $0$ und $1$ liegt.
         \end{proof}
@@ -840,7 +846,7 @@
                 \hat{q}&\definedas \limsup \sqrt[n]{\abs{a_n}} < 1
                 \intertext{Wähle $\varepsilon\definedas \frac{1-\hat{q}}{2} > 0$}
                 \annot{\impl}{\ref{lemma:limsup-charak}} \sqrt[n]{\abs{a_n}} &< \hat{q} + \varepsilon = \frac{1+\hat{q}}{2}\text{ für fast alle $n$}\\
-                \impl \exists n_{0}\in\naturalnumbers\colon \sqrt[n]{\abs{a_n}} &\leq q\quad\forall n\geq n_0\\
+                \impl \exists n_{0}\in\N\colon \sqrt[n]{\abs{a_n}} &\leq q\quad\forall n\geq n_0\\
                 \equivalent \abs{a_n} &\leq q^n\quad\forall n\geq n_0\\
                 \intertext{Das heißt $\sum_{n=0}^{\infty} q^n$ ist eine konvergente Majorante für $\sum a_n$}
                 \impl \sum_{n=0}^{\infty} a_n&\text{ ist absolut konvergent}\qedhere
@@ -867,16 +873,16 @@
         \begin{align*}
             \sum_{n=0}^{\infty} a_n\quad \sum_{n=0}^{\infty} b_n
         \end{align*}
-        Reihen mit Gliedern $a_n, b_n\in\realnumbers$, $n\in\naturalnumbers_0$. Wir nennen $\sum_{n=0}^{\infty} b_n$ eine Umordnung von $\sum_{n=0}^{\infty} a_n$, falls eine Bijektion
+        Reihen mit Gliedern $a_n, b_n\in\R$, $n\in\N_0$. Wir nennen $\sum_{n=0}^{\infty} b_n$ eine Umordnung von $\sum_{n=0}^{\infty} a_n$, falls eine Bijektion
         \begin{align*}
-            \sigma: \naturalnumbers_0 \fromto \naturalnumbers_0
+            \sigma: \N_0 \fromto \N_0
         \end{align*}
-        existiert mit $b_n = a_{\sigma(n)}~\forall n\in\naturalnumbers_0$.\\
+        existiert mit $b_n = a_{\sigma(n)}~\forall n\in\N_0$.\\
         Ähnlich für Reihen
         \begin{align*}
             \sum_{n=1}^{\infty} a_n\quad \sum_{n=1}^{\infty} b_n
         \end{align*}
-        $\sum_{n=1}^{\infty} b_n$ Umordnung von $\sum_{n=1}^{\infty} a_n$, falls Bijektion $\sigma: \naturalnumbers \fromto\naturalnumbers$ existiert mit $b_n = a_{\sigma(n)}$.
+        $\sum_{n=1}^{\infty} b_n$ Umordnung von $\sum_{n=1}^{\infty} a_n$, falls Bijektion $\sigma: \N \fromto\N$ existiert mit $b_n = a_{\sigma(n)}$.
     \end{definition}
 
     \begin{definition}[Unbedingte Konvergenz] % Definition 10
@@ -885,7 +891,7 @@
     \end{definition}
 
     \begin{satz}[Direcklet 1837] % Satz 11
-        Eine Reihe $\sum_{n=0}^{\infty} a_n$, $a_n\in\realnumbers$ ist absolut konvergent genau dann, wenn sie unbedingt konvergiert.
+        Eine Reihe $\sum_{n=0}^{\infty} a_n$, $a_n\in\R$ ist absolut konvergent genau dann, wenn sie unbedingt konvergiert.
         \begin{proof}
             \anf{$\impl$} Sei
             \begin{align*}
@@ -893,14 +899,14 @@
                 \impl \sum_{n=0}^{\infty} \abs{a_n}\text{ konvergent}\\
                 \equivalent \sum_{n=0}^{\infty} \abs{a_n} < \infty
                 \intertext{Wir wenden das Cauchy-Kriterium an}
-                \forall \varepsilon>0~\exists N\in\naturalnumbers\colon \sum_{j=n+1}^{n+p} \abs{a_j} < \varepsilon\quad\forall n\geq N, p\in\naturalnumbers\\
+                \forall \varepsilon>0~\exists N\in\N\colon \sum_{j=n+1}^{n+p} \abs{a_j} < \varepsilon\quad\forall n\geq N, p\in\N\\
                 \impl \sum_{j=n+1}^{\infty}\abs{a_j} = \lim_{p\fromto\infty} \sum_{j=n+1}^{n+p} \abs{a_j} \leq \varepsilon\quad\forall n\geq N\tag{3}
                 \intertext{Wir definieren}
                 s_n \definedas \sum_{j=0}^{\infty} a_j\quad \sum_{n=0}^{\infty} b_n\text{ Umordnung von } s_n\\
-                b_n = a_{\sigma(n)}\quad \sigma: \naturalnumbers_0 \fromto\naturalnumbers_0\text{ Bijektion}\\
+                b_n = a_{\sigma(n)}\quad \sigma: \N_0 \fromto\N_0\text{ Bijektion}\\
                 t_n \definedas \sum_{j=0}^{n} b_j
                 \intertext{Wir wissen $s_n\fromto s$. Zu zeigen: $t_n\fromto s$}
-                \set{1,2,\dots, N} \subseteq \set{\sigma(1), \sigma(2), \dots, \sigma(M)}\tag{Nehmen $M\in\naturalnumbers$}\\
+                \set{1,2,\dots, N} \subseteq \set{\sigma(1), \sigma(2), \dots, \sigma(M)}\tag{Nehmen $M\in\N$}\\
                 \intertext{Ist dann $n\geq M$, dann ist}
                 \set{a_1, a_2, a_3, \dots, a_N}\subseteq \set{b_1, b_2, \dots b_M} = \set{a_{\sigma(1)}, a_{\sigma(2)}, \dots, a_{\sigma(M)}}\\
                 \impl\text{ Alle Glieder $a_1, \dots, a_n$ in der Summe $s_n$ treten in $t_n = t_1 + t_2 + \dots + t_n$ auf}\\
@@ -914,7 +920,7 @@
             \begin{align*}
                 p_n &\definedas (a_n)_{+} \definedas \max\pair{0, a_n}\\
                 q_n &\definedas (a_n)_{-} \definedas \max\pair{0,-a_n} = -\min\pair{0,a_n}\\
-                \impl \abs{a_n} &= p_n + q_n\quad\forall n\in\naturalnumbers_0\\
+                \impl \abs{a_n} &= p_n + q_n\quad\forall n\in\N_0\\
                 \intertext{Wir haben $\sum_{n=0}^{\infty} \abs{a_n}$ konvergiert, aber $\sum_{n=0}^{\infty} p_n = \infty$}
             \end{align*}
             Behauptung: $\sum_{n=0}^{\infty} p_n = \infty$ und $\sum_{n=0}^{\infty} q_n = \infty$. Angenommen $0\leq \sum_{n=0}^{\infty} p_n < \infty$.
@@ -925,7 +931,7 @@
                 \impl \sum_{n=0}^{\infty} \abs{a_n} = \sum_{n=0}^{\infty} \pair{p_n+q_n} = \sum_{n=0}^{\infty} p_n + \sum_{n=0}^{\infty} q_n < \infty\\
                 \text{Widerspruch zu } \sum_{n=0}^{\infty} b_n\text{ ist nicht absolut konvergent}
             \end{align*}
-            Jetzt setze $r_0=0$ und bestimme induktiv $(r_n)_n~r_n < r_{n+1}$ mit $p_0 + p_1 + \dots + p_{r_n} > n + q_0 + q_1 + \dots + q_n~\forall n\in\naturalnumbers$.
+            Jetzt setze $r_0=0$ und bestimme induktiv $(r_n)_n~r_n < r_{n+1}$ mit $p_0 + p_1 + \dots + p_{r_n} > n + q_0 + q_1 + \dots + q_n~\forall n\in\N$.
             $r_q\definedas$ kleinste natürliche Zahl mit $p_0 + p_q + \dots + p_{r_1} > 1 + q_? + q_1$.\\
             $r_2\definedas$ kleinste natürliche Zahl $\geq r_1 + 1$: $p_0 + \dots + p_{r_2} > 2 + q_0 + q_1 + q_2$.\\
             Machen induktiv weiter: Gegeben $r_n$ wähle $r_{n+1} =$ kleinste natürliche Zahl $\geq r_n + 1$ mit $p_0 + p_1 + \dots + p_{r_{n+1}} > n + q_0 + q_1 + \dots + q_n$.\\[10pt]
@@ -941,7 +947,7 @@
 
     \begin{satz}[Nach Riemann 1854]
         \marginnote{[14. Dez]}
-        Ist $\sum_n a_n$ konvergent, aber nicht absolut konvergent. Dann gibt es zu jedem $c\in\realnumbers$ eine Umordnung $\sum_{n}^{} b_n$ von $\sum_{n}^{} a_n$ so, dass $\sum_n b_n$ konvergiert und den Wert $c$ hat ($\sum_{n} b_n = c$).
+        Ist $\sum_n a_n$ konvergent, aber nicht absolut konvergent. Dann gibt es zu jedem $c\in\R$ eine Umordnung $\sum_{n}^{} b_n$ von $\sum_{n}^{} a_n$ so, dass $\sum_n b_n$ konvergiert und den Wert $c$ hat ($\sum_{n} b_n = c$).
 
         \begin{proof}
         (Später)
@@ -952,16 +958,16 @@
     \newpage
 
 
-    \section{[*] $\realnumbers^d$, Konvergenz im $\realnumbers^d$, die komplexen Zahlen $\complexnumbers$ und der Raum $\complexnumbers^d$}
+    \section{[*] $\R^d$, Konvergenz im $\R^d$, die komplexen Zahlen $\C$ und der Raum $\C^d$}
 
-    \subsection{[*] Der Raum $\realnumbers^d$ und Normen}
+    \subsection{[*] Der Raum $\R^d$ und Normen}
 
     \thispagestyle{pagenumberonly}
 
     \begin{definition}
         \begin{align*}
-            \realnumbers^d &\definedas\text{ Vektorraum der reellen $d$-Tupel}\\
-            &=\set{\pair{x_1, x_2, \dots, x_d} ~\middle|~ x_j\in\realnumbers,~ j=1,\dots,d }\\
+            \R^d &\definedas\text{ Vektorraum der reellen $d$-Tupel}\\
+            &=\set{\pair{x_1, x_2, \dots, x_d} ~\middle|~ x_j\in\R,~ j=1,\dots,d }\\
         \end{align*}
     \end{definition}
 
@@ -970,7 +976,7 @@
         \begin{align*}
             x&= \pair{x_1, \dots, x_d}\\
             y&= \pair{y_1, \dots, y_d}
-            \intertext{und $\alpha, \beta \in \realnumbers$, dann gilt}
+            \intertext{und $\alpha, \beta \in \R$, dann gilt}
             \alpha x + \beta y &\definedas \pair{\alpha x_1 + \beta y_1, \alpha x_2 + \beta y_2, \dots, \alpha x_d + \beta y_d}
         \end{align*}
     \end{notation}
@@ -984,19 +990,19 @@
     \end{notation}
 
     \horizontalline
-    Im $\realnumbers$ haben wir Konvergenz über den Betrag definiert. Im $\realnumbers^d$ benötigen wir daher ein ähnliches Konzept. Wir betrachten dafür zunächst einige Beispiele solcher \textit{Normen}.
+    Im $\R$ haben wir Konvergenz über den Betrag definiert. Im $\R^d$ benötigen wir daher ein ähnliches Konzept. Wir betrachten dafür zunächst einige Beispiele solcher \textit{Normen}.
 
     \begin{beispiel}[Euklidische Länge eines Vektors]
-        Für $d=2$ gilt für die euklidische Länge $\norm{x}$ eines Vektors $x\in\realnumbers^2$
+        Für $d=2$ gilt für die euklidische Länge $\norm{x}$ eines Vektors $x\in\R^2$
         \begin{align*}
             \norm{x}^2 &= (x_1)^2 + (x_2)^2\\
             \norm{x} &= \sqrt{(x_1)^2 + (x_2)^2}
         \end{align*}
         Allgemein gilt
         \begin{align*}
-            \norm{x} &\definedas \sqrt{\pair{\sum_{j=1}^{d} (x_j) ^2}}\tag{$x\in\realnumbers^d$}
+            \norm{x} &\definedas \sqrt{\pair{\sum_{j=1}^{d} (x_j) ^2}}\tag{$x\in\R^d$}
             \intertext{Wir schreiben auch}
-            \norm{x}_2 &\definedas \sqrt{\pair{\sum_{j=1}^{d} (x_j) ^2}}\tag{$x\in\realnumbers^d$}
+            \norm{x}_2 &\definedas \sqrt{\pair{\sum_{j=1}^{d} (x_j) ^2}}\tag{$x\in\R^d$}
         \end{align*}
     \end{beispiel}
 
@@ -1009,15 +1015,15 @@
     \end{beispiel}
 
     \begin{definition}[Norm] % Definition 1
-        Eine Norm auf $\realnumbers^d$ (oder einem reellen Vektorraum) ist eine Abbildung
+        Eine Norm auf $\R^d$ (oder einem reellen Vektorraum) ist eine Abbildung
         \begin{align*}
-            \norm{.}: \realnumbers^d\fromto \realnumbers
+            \norm{.}: \R^d\fromto \R
         \end{align*}
         mit folgenden Eigenschaften:
         \begin{enumerate}[label=\alph*)]
-            \item $\norm{x} \geq 0~\forall x\in\realnumbers^d$ sowie $\norm{x} = 0\impl x=0$
-            \item $\forall\lambda\in\realnumbers,~x\in\realnumbers^d\colon \norm{\lambda x} = \abs{\lambda}\cdot\norm{x}$
-            \item $\forall x,y\in\realnumbers^d\colon\norm{x+y} \leq \norm{x} + \norm{y}$\quad\text{(Dreiecksungleichung)}
+            \item $\norm{x} \geq 0~\forall x\in\R^d$ sowie $\norm{x} = 0\impl x=0$
+            \item $\forall\lambda\in\R,~x\in\R^d\colon \norm{\lambda x} = \abs{\lambda}\cdot\norm{x}$
+            \item $\forall x,y\in\R^d\colon\norm{x+y} \leq \norm{x} + \norm{y}$\quad\text{(Dreiecksungleichung)}
         \end{enumerate}
     \end{definition}
 
@@ -1028,7 +1034,7 @@
     \begin{definition}[Äquivalenz von Normen]
         2 Normen $\norm{\cdot}_a$ und $\norm{\cdot}_b$ sind äquivalent, falls
         \begin{align*}
-            \exists c_1, c_2\in\realnumbers\colon c_1\cdot\norm{x}_a \leq \norm{x}_b \leq c_2 \norm{x}_a\quad\forall x\in V
+            \exists c_1, c_2\in\R\colon c_1\cdot\norm{x}_a \leq \norm{x}_b \leq c_2 \norm{x}_a\quad\forall x\in V
         \end{align*}
     \end{definition}
 
@@ -1050,10 +1056,10 @@
         Weisen Sie die Äquivalenz von $\norm{x}_1$ und $\norm{x}_\infty$ analog zu Beispiel~\ref{beispiel:norm-equiv} nach.
     \end{uebung}
 
-    \subsection{[*] Konvergenz im $\realnumbers^d$}
+    \subsection{[*] Konvergenz im $\R^d$}
 
-    \begin{bemerkung}[Abstand zwischen 2 Vektoren im $\realnumbers^d$]
-        Zu jeder Norm auf $\realnumbers^d$ (oder reellen Vektorräumen) definieren wir den Abstand von 2 Vektoren $x,y\in\realnumbers^d$ als $\norm{x-y}$.
+    \begin{bemerkung}[Abstand zwischen 2 Vektoren im $\R^d$]
+        Zu jeder Norm auf $\R^d$ (oder reellen Vektorräumen) definieren wir den Abstand von 2 Vektoren $x,y\in\R^d$ als $\norm{x-y}$.
         \begin{align*}
             d(x,y) &\definedas \norm{x-y}
             \intertext{Mit $z$ als weiterem Vektor gilt}
@@ -1065,9 +1071,9 @@
 
     \begin{folgerung}[Mehrdimensionale $\varepsilon$-Umgebung]
         Bisher basierte unser Konvergenz-Begriff auf dem Abstand von $(x_n)_n$ und $x$ und somit auf einer eindimensionalen $\varepsilon$-Umgebung.\\
-        Wir verallgemeinern dieses Konzept für eine offene Kugel im $\realnumbers^d$ mit $x\in\realnumbers^d$
+        Wir verallgemeinern dieses Konzept für eine offene Kugel im $\R^d$ mit $x\in\R^d$
         \begin{align*}
-            B_\varepsilon(x) \definedas \set{y\in\realnumbers^d\middle |~ \norm{x-y}_2 < \varepsilon}
+            B_\varepsilon(x) \definedas \set{y\in\R^d\middle |~ \norm{x-y}_2 < \varepsilon}
         \end{align*}
     \end{folgerung}
 
@@ -1101,32 +1107,32 @@
         \end{figure}
     \end{visualisierung}
 
-    \begin{definition}[Konvergenz im $\realnumbers^d$] % Definition 2
-        Sei $(x_n)_n$ eine Folge in $\realnumbers^d$ mit $x_n\in\realnumbers^d~\forall n$. Dann konvergiert $(x_n)_n$ gegen $x\in\realnumbers^d$, falls
+    \begin{definition}[Konvergenz im $\R^d$] % Definition 2
+        Sei $(x_n)_n$ eine Folge in $\R^d$ mit $x_n\in\R^d~\forall n$. Dann konvergiert $(x_n)_n$ gegen $x\in\R^d$, falls
         \begin{alignat*}{2}
-            \forall\varepsilon > 0~\exists N\in\naturalnumbers\colon& \norm{x_1-x}_2 <\varepsilon\quad&&\forall n\geq N
+            \forall\varepsilon > 0~\exists N\in\N\colon& \norm{x_1-x}_2 <\varepsilon\quad&&\forall n\geq N
             \intertext{Das heißt}
-            \forall\varepsilon > 0~\exists N\in\naturalnumbers\colon& x_n\in B_{\varepsilon}(x)\quad&&\forall n\geq N
+            \forall\varepsilon > 0~\exists N\in\N\colon& x_n\in B_{\varepsilon}(x)\quad&&\forall n\geq N
         \end{alignat*}
     \end{definition}
 
-    \begin{beobachtung}[Konvergenz in $\realnumbers$ vs $\realnumbers^d$]
-        Es sei ${x_n}\in\realnumbers^d$ mit $x_n = \pair{x_n^1, x_n^2, \dots, x_n^d}$\footnote{Koordinaten von $(x_n)_n$}. Damit ergeben sich die Folgen $(x_n^1)_n$, $(x_n^2)_n$, \dots, $(x_n^d)_n$ in $\realnumbers$.
-        Angenommen $(x_n)_n$ konvergiert gegen $x\in\realnumbers^d$. Dann konvergieren alle Folgen $(x_n^l)_n$ in $\realnumbers$ und $\lim_{\ntoinfty} x_n^l = x^l$
+    \begin{beobachtung}[Konvergenz in $\R$ vs $\R^d$]
+        Es sei ${x_n}\in\R^d$ mit $x_n = \pair{x_n^1, x_n^2, \dots, x_n^d}$\footnote{Koordinaten von $(x_n)_n$}. Damit ergeben sich die Folgen $(x_n^1)_n$, $(x_n^2)_n$, \dots, $(x_n^d)_n$ in $\R$.
+        Angenommen $(x_n)_n$ konvergiert gegen $x\in\R^d$. Dann konvergieren alle Folgen $(x_n^l)_n$ in $\R$ und $\lim_{\ntoinfty} x_n^l = x^l$
 
         \begin{proof}
             \begin{align*}
                 \abs{x_n^{l} - x^{l}}^2 &\leq \sum_{j=1}^{d} \abs{x_n^{j}-x^{j}}^2 = \norm{x_n -x}_2^2\quad \forall l=1,\dots, d\\
                 \impl \abs{x_n^l-x^l} &\leq \norm{x_n-x}_2 \fromto 0\text{ für } n\fromto\infty
             \end{align*}
-            Also konvergiert $(x_n^l)$ gegen $x^l$ in $\realnumbers$ für alle $l=1,\dots,d$.\qedhere
+            Also konvergiert $(x_n^l)$ gegen $x^l$ in $\R$ für alle $l=1,\dots,d$.\qedhere
         \end{proof}
     \end{beobachtung}
 
     \noindent Es gilt sogar die Umkehrung:
 
-    \begin{satz}[Konvergenz im $\realnumbers^d$]
-        Eine Folge $(x_n)_n$ in $\realnumbers^d$ konvergiert genau dann, wenn jede der Koordinatenfolge $(x_n^l)_n$ in $\realnumbers$ konvergiert $\forall l=1,\dots, d$.
+    \begin{satz}[Konvergenz im $\R^d$]
+        Eine Folge $(x_n)_n$ in $\R^d$ konvergiert genau dann, wenn jede der Koordinatenfolge $(x_n^l)_n$ in $\R$ konvergiert $\forall l=1,\dots, d$.
 
         \begin{proof}
             ~\\\anf{$\impl$} Gerade gezeigt.\\
@@ -1135,7 +1141,7 @@
                 \exists x^l &\definedas \lim_{\ntoinfty} x^l_n\quad\forall l=1,\dots, d\\
                 \impl \abs{x_n^l - x^l} &\fromto 0 \text{ für }\ntoinfty\quad\forall l=1,\dots, d\colon\\
                 \intertext{Das heißt}
-                \forall\varepsilon > 0~\exists N_l\in\naturalnumbers\colon \abs{x_n^l - x^l} &< \frac{\varepsilon}{\sqrt{d}}\quad\forall n\geq N_{l}
+                \forall\varepsilon > 0~\exists N_l\in\N\colon \abs{x_n^l - x^l} &< \frac{\varepsilon}{\sqrt{d}}\quad\forall n\geq N_{l}
                 \intertext{Wir definieren}
                 N&\definedas\max\pair{N_1, N_2, \dots, N_d}
                 \intertext{Dann gilt $\forall n>N$}
@@ -1156,27 +1162,27 @@
 
     \begin{bemerkung}
         \marginnote{[19. Dez]}
-        Sei $(a_n)_n\in\realnumbers^d$ mit $a_n = \pair{a_n^1, a_n^2, \dots, a_n^d}$. Reihe $\sum_{n=1}^{\infty} a_n = ??$. Wir betrachten die Partialsummen
+        Sei $(a_n)_n\in\R^d$ mit $a_n = \pair{a_n^1, a_n^2, \dots, a_n^d}$. Reihe $\sum_{n=1}^{\infty} a_n = ??$. Wir betrachten die Partialsummen
         \begin{align*}
             s_n &\definedas \sum_{j=1}^{n} a_j
         \end{align*}
     \end{bemerkung}
 
     \begin{definition}
-        $\sum_{n} a_n$ konvergiert, falls $(s_n)_n$ im $\realnumbers^d$ konvergiert
+        $\sum_{n} a_n$ konvergiert, falls $(s_n)_n$ im $\R^d$ konvergiert
     \end{definition}
 
-    \begin{satz}[Cauchy-Kriterium für Konvergenz im $\realnumbers^d$]
-        Eine Folge $(x_n)_n$ ist genau dann im $\realnumbers^d$ konvergent, wenn $(x_n)_n$ eine Cauchy-Folge ist. Das heißt
+    \begin{satz}[Cauchy-Kriterium für Konvergenz im $\R^d$]
+        Eine Folge $(x_n)_n$ ist genau dann im $\R^d$ konvergent, wenn $(x_n)_n$ eine Cauchy-Folge ist. Das heißt
         \begin{align*}
-            \forall\varepsilon > 0~\exists N\in\naturalnumbers\colon \norm{x_n-x_m}_2 < \varepsilon\quad\forall n,m\geq N
+            \forall\varepsilon > 0~\exists N\in\N\colon \norm{x_n-x_m}_2 < \varepsilon\quad\forall n,m\geq N
         \end{align*}
 
         \begin{proof}
-            \anf{$\impl$} Wie im Fall $\realnumbers$.\\
+            \anf{$\impl$} Wie im Fall $\R$.\\
             \anf{$\Leftarrow$} Sei $(x_n)_n$ Cauchy-Folge.
             \begin{align*}
-                \impl\text{ Alle Koordinaten } &(x_n^j)_n\text{ sind Cauchy-Folgen in }\realnumbers\text{, weil}\\
+                \impl\text{ Alle Koordinaten } &(x_n^j)_n\text{ sind Cauchy-Folgen in }\R\text{, weil}\\
                 \abs{x_n^j-x_m^j} &= \sqrt {\abs{x_n^j-x_m^j}^2} \leq \sqrt {\sum_{l=1}^{d} \abs{x_n^l - x_m^l}^2}\\
                 &= \norm{x_1-x_m}_2\\
                 \impl x_n &\definedas \lim_{\ntoinfty} x_n^j\text{ existiert}\\
@@ -1185,28 +1191,28 @@
         \end{proof}
 
         \begin{proof}[2. Beweis]
-            Wir wollen Satz~\ref{satz:bolzano-weierstrass} im $\realnumbers^d$ zeigen:
-            Jede beschränkte Folge $(x_n)_n$ in $\realnumbers^d$ besitzt eine konvergente Teilfolge. ($(x_n)_n$ ist beschränkt, wenn $\exists R\geq 0\colon \norm{x_n}_2 \leq R~\forall n\in\naturalnumbers$ .Bzw., wenn $x_n\in\set{y\in\realnumbers^d \middle|~ \norm{y}_2 \leq R}$ (abgeschlossene Kugel mit Radius $R$ um 0).).\\
+            Wir wollen Satz~\ref{satz:bolzano-weierstrass} im $\R^d$ zeigen:
+            Jede beschränkte Folge $(x_n)_n$ in $\R^d$ besitzt eine konvergente Teilfolge. ($(x_n)_n$ ist beschränkt, wenn $\exists R\geq 0\colon \norm{x_n}_2 \leq R~\forall n\in\N$ .Bzw., wenn $x_n\in\set{y\in\R^d \middle|~ \norm{y}_2 \leq R}$ (abgeschlossene Kugel mit Radius $R$ um 0).).\\
             \begin{align*}
-                \impl \forall j=1,\dots, d\colon (x_n^j)_n\text{ beschränkte Folge im }\realnumbers^d\\
-                \impl \exists\text{ Teilfolge } (x_n^1)_k\text{ von } (x_n^1)_n\text{, welche in }\realnumbers\text{ konvergiert}\\
-                \impl \text{ Ausdünnung }\sigma: \naturalnumbers\fromto\naturalnumbers\text{ mit } \sigma(k) < \sigma(k+1)\\
+                \impl \forall j=1,\dots, d\colon (x_n^j)_n\text{ beschränkte Folge im }\R^d\\
+                \impl \exists\text{ Teilfolge } (x_n^1)_k\text{ von } (x_n^1)_n\text{, welche in }\R\text{ konvergiert}\\
+                \impl \text{ Ausdünnung }\sigma: \N\fromto\N\text{ mit } \sigma(k) < \sigma(k+1)\\
                 n_k \definedas \sigma(k)\quad\text{Existenz des Grenzwert} x_1 \definedas \lim_{\ntoinfty} x_{\sigma(k)}
                 \intertext{Genauso für $\lim (x^2_n)_n$}
-                \annot{\impl}{\ref{satz:bolzano-weierstrass}} \exists \kappa\colon \naturalnumbers\fromto\naturalnumbers\colon (x^2_{\kappa(k)})_k\text{ konvergent}
+                \annot{\impl}{\ref{satz:bolzano-weierstrass}} \exists \kappa\colon \N\fromto\N\colon (x^2_{\kappa(k)})_k\text{ konvergent}
                 \intertext{Catch: $(x^1_{\sigma(k)}, x^2_{\sigma(k)})_k$ ist im Allgemeinen keine Teilfolge von $(x^1_n, x^2_n)_n$. Lösung betrachte}
                 \pair{x_{\sigma(k)}}_k\text{ Teilfolge von }(x_n)_n\\
                 = \pair{x^1_{\sigma(k)}, x^2_{\sigma(k)}, x^3_{\sigma(k)}, \dots, x^d_{\sigma(k)}, }
                 \intertext{Mache mit $(x^2_{\sigma(k)})_k$ weiter}
                 \annot{\impl}{\ref{satz:bolzano-weierstrass}} \exists\text{ konvergente Teilfolge von } (x^2_{\sigma(k)})_k\\
-                \impl\text{ Ausdünnung } \sigma_2: \naturalnumbers\fromto\naturalnumbers\\
+                \impl\text{ Ausdünnung } \sigma_2: \N\fromto\N\\
                 \impl \pair{x^2_{\sigma(\sigma_2(k))}}_k\text{ konvergent}\\
                 x_2 \definedas \sigma \circ \sigma_{2}\\
                 \impl\text{ Neue Teilfolge } (x_{\kappa_{2}(k)}) = (x^1_{\kappa_{2}(k)},x^2_{\kappa_{2}(k)},x^3_{\kappa_{2}(k)},\dots, x^d_{\kappa_{2}(k)})
                 \intertext{mit $\lim_{k\fromto\infty} x^1_{\kappa_{2}(k)}$ und $\lim_{k\fromto\infty} x^2_{\kappa_{2}(k)}$ existent}
             \end{align*}
             Mache induktiv so weiter, nach maximal $d$ Schritten sind wir fertig.\\
-            Jede Cauchy-Folge in $\realnumbers^d$ ist beschränkt.
+            Jede Cauchy-Folge in $\R^d$ ist beschränkt.
             \begin{proof}
                 \begin{align*}
                     \varepsilon = 1\\
@@ -1216,25 +1222,25 @@
                     \impl \norm{x}_2 \leq \max\pair{\norm{x_1}_2, \norm{x_2}_2,\dots\norm{x_{N-1}}_2, 1+\norm{x_N}_2}
                 \end{align*}
             \end{proof}
-            Auch: Eine Cauchy-Folge im $\realnumbers^d$ ist genau dann konvergent, wenn sie eine konvergente Teilfolge besitzt. (Beweis wie im Fall $d=1$).\\
-            Alle bisherigen Konvergenz-Sätze, welche nicht die Anordnung im $\realnumbers$ benötigen, übertragen sich auf $\realnumbers^d$.\\
+            Auch: Eine Cauchy-Folge im $\R^d$ ist genau dann konvergent, wenn sie eine konvergente Teilfolge besitzt. (Beweis wie im Fall $d=1$).\\
+            Alle bisherigen Konvergenz-Sätze, welche nicht die Anordnung im $\R$ benötigen, übertragen sich auf $\R^d$.\\
             Insbesondere: Reihe $\sum_{n=1}^{\infty} a_n$ ist absolut konvergent, falls $\sum_{n=1}^{\infty} \norm{a_n}_2 < \infty$.\\
-            Ist eine Reihe $\sum_{n=1}^{\infty} a_n$ in $\realnumbers^d$ konvergent, so konvergieren alle Umordnungen gegen den selben Wert. Und es gilt die Umkehrung! (Satz von Direcklet in $\realnumbers^d$)
+            Ist eine Reihe $\sum_{n=1}^{\infty} a_n$ in $\R^d$ konvergent, so konvergieren alle Umordnungen gegen den selben Wert. Und es gilt die Umkehrung! (Satz von Direcklet in $\R^d$)
         \end{proof}
     \end{satz}
 
     \subsection{[*] Die Komplexen Zahlen}
 
     Was sind die komplexen Zahlen?\\
-    $x^2+1$ ist nie Null $\forall x\in\realnumbers$. Wir definieren eine Zahl $i$ mit $i^2=-1$.\\
-    Schreiben $x+iy$ mit $x,y\in\realnumbers$.
+    $x^2+1$ ist nie Null $\forall x\in\R$. Wir definieren eine Zahl $i$ mit $i^2=-1$.\\
+    Schreiben $x+iy$ mit $x,y\in\R$.
     \begin{align*}
     (x_1 + y_1\cdot i)
         \cdot (x_2 + y_2\cdot i) &= x_1\cdot x_2 + x_1\cdot i\cdot y_2 + i\cdot y_1 \cdot x_2 + (i\cdot y_1)\cdot(i\cdot y_2)\\
         &= x_1\cdot x_2 - y_1\cdot y_2 + \pair{x_1\cdot y_2 + y_1\cdot x_2}\cdot i\\
         (x_1+y_1\cdot i) + (x_2 + y_2\cdot i) &= x_1 + x_2 + \pair{y_1+y_2}\cdot i
     \end{align*}
-    Betrachte $\realnumbers^2 = \set{(x,y) \middle|~ x,y\in\realnumbers}$.
+    Betrachte $\R^2 = \set{(x,y) \middle|~ x,y\in\R}$.
     % Visualisierung: Eukldische Ebene
     \begin{align*}
         z &= (x,y)\\
@@ -1256,7 +1262,7 @@
         \cdot (1,0) &= (1,0)\\
         (0,1) \cdot (0,1) &= (0-1,0) = -(1,0)\\
         z\cdot (1,0) &= (x,y)\cdot(1,0)= (x,y) = z
-        \intertext{in $\realnumbers^2$}
+        \intertext{in $\R^2$}
         (x,y) &= x\cdot e_1 + y \cdot e_2\tag{$e_1 = (1,0)$, $e_2 = (0,1)$}\\
         (e_1)^2 &= e_1\quad (e_2)^2 = -e_1
     \end{align*}
@@ -1266,7 +1272,7 @@
         &= x\cdot 1 + y\cdot i\\
         &= x + y\cdot i
     \end{align*}
-    $\complexnumbers = \realnumbers^2$ mit obiger Multiplikation und Addition. Wir identifizieren $\realnumbers$ mit $\realnumbers\times\set{0}$ als Teilmenge von $\complexnumbers$.\\
+    $\C = \R^2$ mit obiger Multiplikation und Addition. Wir identifizieren $\R$ mit $\R\times\set{0}$ als Teilmenge von $\C$.\\
     Was ist das Inverse von $z=x+y\cdot i$?
     \begin{definition}[Komplexe Konjugation]
         $\overline{z} \definedas \overline{x+yi} \definedas x-yi$
@@ -1287,17 +1293,17 @@
 
     \marginnote{[21. Dez]}
 
-    Wie $\realnumbers^d$ wollen wir auch $\complexnumbers^d$ definieren.
+    Wie $\R^d$ wollen wir auch $\C^d$ definieren.
 
-    \begin{definition}[Der Raum $\complexnumbers^d$]
+    \begin{definition}[Der Raum $\C^d$]
         \begin{align*}
-            \complexnumbers^d &\definedas \set{\pair{z_1, \dots, z_d} ~\middle | ~ z_j \in\complexnumbers}\\
-            u &= \pair{u_1, \dots, u_d} \in\realnumbers^d\\
-            w &= \pair{w_1, \dots, w_d} \in\realnumbers^d\\
+            \C^d &\definedas \set{\pair{z_1, \dots, z_d} ~\middle | ~ z_j \in\C}\\
+            u &= \pair{u_1, \dots, u_d} \in\R^d\\
+            w &= \pair{w_1, \dots, w_d} \in\R^d\\
             u+w &= \pair{u_1+w_1,\dots,u_d+w_d}\\
-            \lambda\cdot u &= \pair{\lambda u_1,\dots,\lambda u_d}\tag{$\lambda\in\complexnumbers$}
+            \lambda\cdot u &= \pair{\lambda u_1,\dots,\lambda u_d}\tag{$\lambda\in\C$}
         \end{align*}
-        $\complexnumbers^d$ ist ein komplexer Vektorraum.
+        $\C^d$ ist ein komplexer Vektorraum.
 
         \begin{align*}
             \abs{u} &\definedas \sqrt{\pair{\sum_{j=1}^{d} \abs{u_j}^2}}\tag{Euklidische Länge}\\
@@ -1310,23 +1316,23 @@
 
     \begin{definition}[]
         \begin{align*}
-            \overline{u} &\definedas x - yi\quad (u=x+iy, x,y\in\realnumbers^d)\\
-            \complexnumbers^d &= \realnumbers^{2d}\\[10pt]
+            \overline{u} &\definedas x - yi\quad (u=x+iy, x,y\in\R^d)\\
+            \C^d &= \R^{2d}\\[10pt]
             u &= x + yi\\
             x &= \frac{1}{2}\pair{u+\overline{u}}\quad y = \frac{1}{2i}\pair{u-\overline{u}}
         \end{align*}
     \end{definition}
 
-    Zu ?? im $\realnumbers^d$
+    Zu ?? im $\R^d$
     \begin{align*}
         \norm{x}_2 &= \sqrt{\pair{\sum_{j=1}^{d} \abs{x_j}^2}} \geq c\\
         \norm{\lambda x}_2 &= \sqrt{\pair{\sum_{j=1}^{d} \abs{\lambda x_j}^2}} = \abs{\lambda}\norm{x}_2
     \end{align*}
 
     Wann gilt die Dreiecksungleichung?\\
-    Auf $\realnumbers^d$ gibt es ein Skalarprodukt.\\
+    Auf $\R^d$ gibt es ein Skalarprodukt.\\
     \begin{align*}
-        \sprod{x,y} &\definedas \sum_{j=1}^{d} x_j\cdot y_j\tag{$x,y\in\realnumbers^d$}\\
+        \sprod{x,y} &\definedas \sum_{j=1}^{d} x_j\cdot y_j\tag{$x,y\in\R^d$}\\
         \impl \sprod{x,x} &\definedas \sum_{j=1}^{d} \pair{x_j}^2 = \norm{x}^2_2\\
         \norm{x}_2 &= \sqrt {\sprod{x,x}}
         \intertext{Auch}
@@ -1341,8 +1347,8 @@
     \end{uebung}
 
     \begin{align*}
-        \norm{x}_2^2 &= \sprod{x,x}\quad\forall x\in\realnumbers^d
-        \intertext{Es sei $t\in\realnumbers$}
+        \norm{x}_2^2 &= \sprod{x,x}\quad\forall x\in\R^d
+        \intertext{Es sei $t\in\R$}
         \norm{x+ty}^2_2 &= \sprod{x+ty, x+ty}\\
         &= \sprod{x,x+ty} + \sprod{ty,x+ty}\\
         &= \sprod{x,x} + \sprod{x+ty} + \sprod{ty,x} + \sprod{ty+ty}\\
@@ -1358,7 +1364,7 @@
         &= a\cdot\pair{t^2 - \frac{2b}{a}t + \pair{\frac{b}{a}}^2} + c\\
         &= a\cdot\pair{t-b}^2 - \frac{b^2}{a}+c
         \intertext{Da wir am Anfang der Rechnung eine Norm verwendet haben, muss der Ausdruck nicht-negativ sein}
-        a\cdot\pair{t-b}^2 - \frac{b^2}{a}+c &\geq 0\quad\forall t\in\realnumbers
+        a\cdot\pair{t-b}^2 - \frac{b^2}{a}+c &\geq 0\quad\forall t\in\R
         \intertext{Das heißt wir müssen haben}
         \frac{b^2}{a} + c &\geq 0\\
         \equivalent b^2 \leq ac\\
@@ -1368,7 +1374,7 @@
 
     Und ist $y \neq 0$ und gilt $\abs{\prod{x+y}} = \norm{x}_2 \norm{y}_2$. Dann sind $x$ und $y$ linear abhängig. Das heißt
     \begin{align*}
-        \exists t\in\realnumbers \text{ mit } x = ty
+        \exists t\in\R \text{ mit } x = ty
     \end{align*}
     \begin{proof}
         Dann gilt
@@ -1415,12 +1421,12 @@
         \impl u\cdot v &= \lim_{n\fromto\infty} s_n \cdot \lim_{n\fromto\infty} t_n = \lim_{n\fromto\infty} \pair{s_n\cdot t_n}\\[10pt]
         s_n \cdot t_n &= \sum_{l=0}^{n} a_l \cdot \sum_{j=0}^{n} b_j = \sum_{l=0}^{n} \sum_{j=0}^{n} a_l\cdot b_j
     \end{align*}
-    Fakt: Indexmenge der Produkte $a_l b_j$ ist $\naturalnumbers_0 \times \naturalnumbers_0$.
+    Fakt: Indexmenge der Produkte $a_l b_j$ ist $\N_0 \times \N_0$.
     \begin{align*}
-        = \set{(l,j):~l,j\in\naturalnumbers_0} &= \naturalnumbers_0\times\naturalnumbers_0
+        = \set{(l,j):~l,j\in\N_0} &= \N_0\times\N_0
     \end{align*}
-    Es gibt (viele) Bijektionen $\sigma: \naturalnumbers_0 \fromto \naturalnumbers_0\times\naturalnumbers_0$ zum Beispiel durch Schrägabzählen.\\
-    Frage: Ist $\sigma: \naturalnumbers_0 \fromto \naturalnumbers_0\times\naturalnumbers_0$ eine beliebige Bijektion, gilt dann
+    Es gibt (viele) Bijektionen $\sigma: \N_0 \fromto \N_0\times\N_0$ zum Beispiel durch Schrägabzählen.\\
+    Frage: Ist $\sigma: \N_0 \fromto \N_0\times\N_0$ eine beliebige Bijektion, gilt dann
     \begin{align*}
         \pair{\sum_{n=0}^{\infty} a_n}\cdot\pair{\sum_{n=0}^{\infty} b_n} &= \sum_{n=0}^{\infty} a_{\sigma_1(n)}\cdot b_{\sigma_2(n)}\\
         \sigma(n) &= \pair{\sigma_1(n), \sigma_2(n)}
@@ -1429,7 +1435,7 @@
 
     \begin{satz} % Satz 1
         \label{satz:cauchyprodukt}
-        Seien $\sum_{n=0}^{\infty} a_n$, $\sum_{n=0}^{\infty} b_n$ absolut konvergente Reihen. Dann gilt für jede Bijektion $\sigma: \naturalnumbers_0 \fromto \naturalnumbers_0\times\naturalnumbers_0$
+        Seien $\sum_{n=0}^{\infty} a_n$, $\sum_{n=0}^{\infty} b_n$ absolut konvergente Reihen. Dann gilt für jede Bijektion $\sigma: \N_0 \fromto \N_0\times\N_0$
         \begin{align*}
             \pair{\sum_{n=0}^{\infty} a_n} \cdot \sum_{n=0}^{\infty} b_n &= \sum_{n=0}^{\infty} a_{\sigma_1(n)} \cdot b_{\sigma_2(n)}
             \intertext{Das heißt mit $\sigma(n)=\pair{\sigma_1(n), \sigma_2(n)}$}
@@ -1468,27 +1474,27 @@
             \begin{align*}
                 k' \definedas \sum_{j=0}^{\infty} \abs{a_j} &< \infty\\
                 k'' \definedas \sum_{k=0}^{\infty} \abs{b_k} &< \infty\\
-                n\in\naturalnumbers_0: \pair{\sum_{j=0}^{n} \abs{a_j}}\cdot\pair{\sum_{k=0}^{n} \abs{b_k}}\\
-                &= \sum_{j=0}^{n} \sum_{k=0}^{n} \abs{a_j}\abs{b_k} \leq k'\cdot k''\quad\forall n\in\naturalnumbers_0
+                n\in\N_0: \pair{\sum_{j=0}^{n} \abs{a_j}}\cdot\pair{\sum_{k=0}^{n} \abs{b_k}}\\
+                &= \sum_{j=0}^{n} \sum_{k=0}^{n} \abs{a_j}\abs{b_k} \leq k'\cdot k''\quad\forall n\in\N_0
                 \intertext{Sei}
-                \sigma: \naturalnumbers_0\fromto\naturalnumbers\times\naturalnumbers
+                \sigma: \N_0\fromto\N\times\N
                 \intertext{eine beliebige Bijektion. Behauptung 1: $ \sum_{n=0}^{\infty} c_n$ ist absolut konvergent, wobei}
                 c_n &\definedas a_{\sigma_1(n)}b_{\sigma_2(n)} = a_j b_k\tag{$j=\sigma_1(n)$, $k=\sigma_2(n)$}
-                \intertext{Sei $L\in\naturalnumbers_0$}
+                \intertext{Sei $L\in\N_0$}
                 M_L^1 &\definedas \max_{n=0,1,\dots, L}\pair{\sigma_1(n)}\\
                 M_L^2 &\definedas \max_{n=0,1,\dots, L}\pair{\sigma_2(n)}\\
                 M_L &\definedas \max\pair{M_L^1, M_L^2}\\[10pt]
                 \impl \abs{c_n} &\leq \abs{a_j}\abs{b_n} \text{ für } 0\leq j \leq M_L^1, 0\leq n \leq M_L^2\\
                 \sum_{n=0}^{L} \abs{c_n} &\leq \sum_{j=0}^{M_L} \sum_{k=0}^{M_L} \abs{a_j}\abs{b_k}\\
-                &= \pair{\sum_{j=0}^{M_L} \abs{a_j}}\cdot\pair{\sum_{k=0}^{M_L} \abs{b_k}} \leq k' \cdot k'' < \infty\quad\forall L\in\naturalnumbers_0\\
-                \impl \sum_{n=0}^{\infty} \abs{c_n} &= \sup_{L\in\naturalnumbers_0} \sum_{n=0}^{L} \abs{c_n} \leq k'\cdot k''<\infty
+                &= \pair{\sum_{j=0}^{M_L} \abs{a_j}}\cdot\pair{\sum_{k=0}^{M_L} \abs{b_k}} \leq k' \cdot k'' < \infty\quad\forall L\in\N_0\\
+                \impl \sum_{n=0}^{\infty} \abs{c_n} &= \sup_{L\in\N_0} \sum_{n=0}^{L} \abs{c_n} \leq k'\cdot k''<\infty
                 \intertext{Schritt 2:}
-                s&\definedas \sum_{n=0}^{\infty} c_n \in\realnumbers
-                \intertext{unabhängig von der Reihenfolge, in der man die $c_n$ aufsummiert, wegen absoluter und damit unbedingter Konvergenz. Das heißt für jede Bijektion $\kappa: \naturalnumbers_0\fromto\naturalnumbers_0\times\naturalnumbers_0$ ist}
+                s&\definedas \sum_{n=0}^{\infty} c_n \in\R
+                \intertext{unabhängig von der Reihenfolge, in der man die $c_n$ aufsummiert, wegen absoluter und damit unbedingter Konvergenz. Das heißt für jede Bijektion $\kappa: \N_0\fromto\N_0\times\N_0$ ist}
                 s &= \sum_{n=0}^{\infty} a_{\kappa_1(n)}b_{\kappa_2(n)}\tag{$\sigma\circ\kappa^{-1}$ Bijektion}
                 \intertext{Schritt 3: Wir zeigen, dass}
                 s &= \pair{\sum_{n=0}^{\infty} a_n}\cdot\pair{\sum_{n=0}^{\infty} b_n}
-                \intertext{Sei $\sigma:\naturalnumbers_0\fromto\naturalnumbers_0\times\naturalnumbers_0$ Bijektion durch Quadratabzählen. ($c_0=a_{0} b_0$, $c_1 = a_1 b_0$, $c_2=a_1, b_1$, $c_3=a_0 b_2$)}
+                \intertext{Sei $\sigma:\N_0\fromto\N_0\times\N_0$ Bijektion durch Quadratabzählen. ($c_0=a_{0} b_0$, $c_1 = a_1 b_0$, $c_2=a_1, b_1$, $c_3=a_0 b_2$)}
                 \text{Partialsumme } \sum_{k=0}^{n} c_k &= \sum_{k=0}^{n} a_{\sigma_1(k)} b_{\sigma_2(k)} \text{ mit $\sigma$ Quadratabzählen }
                 \intertext{Wir betrachten die Folge}
                 \sum_{j=0}^{L} \sum_{k=0}^{L} a_j b_k
@@ -1517,22 +1523,22 @@
             \sigma: \interv{0,1}&\fromto\linterv{0,1}\\
             x&\mapsto
             \begin{cases}
-                \frac{1}{n+1},\quad &x=\frac{1}{n} \text{ mit } n\in\naturalnumbers\\
-                x,\quad &x\in\interv{0,1}\exclude(\bigcup_{n\in\naturalnumbers} \frac{1}{n})
+                \frac{1}{n+1},\quad &x=\frac{1}{n} \text{ mit } n\in\N\\
+                x,\quad &x\in\interv{0,1}\exclude(\bigcup_{n\in\N} \frac{1}{n})
             \end{cases}
         \end{align*}
     \end{beispiel}
 
-    \begin{bemerkung}[Beispiel für eine Abzählung von $\naturalnumbers\times\naturalnumbers$]
+    \begin{bemerkung}[Beispiel für eine Abzählung von $\N\times\N$]
         \label{bem:abzaehlen-nxn}
-        Wir wollen eine bijektive Abbildung $\sigma: \naturalnumbers\fromto\naturalnumbers\times\naturalnumbers$ konstruieren.\\
-        Level $l\in\naturalnumbers: A_l = \set{\pair{j,k}: j+k = l+1,~j,k\in\naturalnumbers}$ (schrägen Diagonalen).\\
-        Anzahl Punkte in $\naturalnumbers\times\naturalnumbers$ auf Level $l\leq k$ mit
+        Wir wollen eine bijektive Abbildung $\sigma: \N\fromto\N\times\N$ konstruieren.\\
+        Level $l\in\N: A_l = \set{\pair{j,k}: j+k = l+1,~j,k\in\N}$ (schrägen Diagonalen).\\
+        Anzahl Punkte in $\N\times\N$ auf Level $l\leq k$ mit
         \begin{align*}
             \sum_{l=1}^{k} l &= \frac{k(k+1)}{2}
             \intertext{Schreibe}
-            n &= \frac{k(k+1)}{2} + r\quad r\in\set{0,1,2,\dots, k}, k\in\naturalnumbers
-            \intertext{Das ist eine Eindeutige Zerlegung von $\naturalnumbers$. Definiere}
+            n &= \frac{k(k+1)}{2} + r\quad r\in\set{0,1,2,\dots, k}, k\in\N
+            \intertext{Das ist eine Eindeutige Zerlegung von $\N$. Definiere}
             \sigma{n} &= \pair{\sigma_1(n), \sigma_2(n)}\\
             &\definedas \pair{k-r, r}\\
             \sigma_1(n) &= k-r\\
@@ -1564,7 +1570,7 @@
     \subsection{Exponentialfunktionen}
 
     \begin{definition}[Exponentialfunktion]
-        Es sei $z\in\complexnumbers$. Dann gilt
+        Es sei $z\in\C$. Dann gilt
         \begin{align*}
             e^z = \exp(z)\definedas \sum_{n=0}^{\infty} \frac{z^n}{n!}
         \end{align*}
@@ -1574,11 +1580,11 @@
     \begin{satz}[Eigenschaften der Exponentialfunktion]
         \theoremescape
         \begin{enumerate}[label=(\alph*)]
-            \item Für alle $z\in\complexnumbers$ konvergiert die obige Reihe absolut. (Wohldefiniertheit der $\exp$-Funktion)
-            \item Es gilt $\exp(z_1)\cdot\exp(z_2) = \exp(z_1+z_2)$. Insbesondere ist $\exp(z)\neq 0~\forall z\in\complexnumbers$ und $\exp(z)^{-1} = \exp(-z)$.
+            \item Für alle $z\in\C$ konvergiert die obige Reihe absolut. (Wohldefiniertheit der $\exp$-Funktion)
+            \item Es gilt $\exp(z_1)\cdot\exp(z_2) = \exp(z_1+z_2)$. Insbesondere ist $\exp(z)\neq 0~\forall z\in\C$ und $\exp(z)^{-1} = \exp(-z)$.
             \item $\conj{\exp(z)} = \exp(\conj{z})$
             \item $\abs{\exp(z)} = \exp(\Re(z))$
-            \item $e^x = \exp(x) > 0\quad\forall x\in\realnumbers$
+            \item $e^x = \exp(x) > 0\quad\forall x\in\R$
         \end{enumerate}
 
         \begin{proof}[Beweis (a)]
@@ -1600,7 +1606,7 @@
                 \exp(z)\cdot \exp(-z) &= \exp(z-z) = e^0 = 1\\
                 \impl \Bigg\{
                 \begin{split}
-                    \exp(z), \exp(-z) &\neq 0 \quad \forall z\in\complexnumbers\\
+                    \exp(z), \exp(-z) &\neq 0 \quad \forall z\in\C\\
                     \exp(z)^{-1} &= \exp(-z)
                 \end{split}
             \end{align*}
@@ -1627,20 +1633,20 @@
     \end{satz}
 
     \begin{satz}[Definition von Sinus und Kosinus über Expontentialfunktionen]
-        Für $\alpha\in\realnumbers$ ist $\abs{\exp(i\alpha)}=1$. Wir setzen
+        Für $\alpha\in\R$ ist $\abs{\exp(i\alpha)}=1$. Wir setzen
         \begin{align*}
             \cos(\alpha) \definedas \Re (e^{i\alpha}) &= \frac{1}{2} \cdot\pair{e^{i\alpha} + e^{-i\alpha}}\\
             \sin(\alpha) \definedas \Im (e^{i\alpha}) &= \frac{1}{2i}\cdot\pair{e^{i\alpha}-e^{-i\alpha}}
             \intertext{Dann haben wir}
             -1 \leq \cos \alpha &\leq 1\\
             -1 \leq \sin \alpha &\leq 1
-            \intertext{Außerdem gilt $\forall \alpha\in\realnumbers$}
+            \intertext{Außerdem gilt $\forall \alpha\in\R$}
             \cos(\alpha)^2 + \sin(\alpha)^2 &= 1\\
             \cos(\alpha) + i\cdot\sin(\alpha) &= e^{i\alpha} \tag{Eulersche Gleichung}
         \end{align*}
 
         \begin{proof}
-            Es sei $\alpha\in\realnumbers$.
+            Es sei $\alpha\in\R$.
             \begin{align*}
                 \abs{\exp(i\alpha)}^2 &= \conj{\exp(i\alpha)}\cdot \exp(i\alpha) = \exp(-i\alpha)\cdot \exp(i\alpha) = \exp(0) = 1\\[10pt]
                 \Re(e^{i\alpha}) &= \frac{1}{2}\cdot\pair{e^{i\alpha} + \conj{e^{i\alpha}}} = \frac{1}{2}\cdot\pair{e^{i\alpha} + e^{-i\alpha}} \definedasbackwards \cos \alpha\\
@@ -1659,7 +1665,7 @@
 
     \subsection{}
     \thispagestyle{pagenumberonly}
-    Wir untersuchen Reihen der Form $ \sum_{n=0}^{\infty} a_n\cdot z^n$ oder $ \sum_{n=0}^{\infty} a_n \cdot \pair{z-z_0}^n$, $z_0\in\complexnumbers$ fest, $z\in\complexnumbers$ oder $\realnumbers$, $a_n\in\complexnumbers$.\\
+    Wir untersuchen Reihen der Form $ \sum_{n=0}^{\infty} a_n\cdot z^n$ oder $ \sum_{n=0}^{\infty} a_n \cdot \pair{z-z_0}^n$, $z_0\in\C$ fest, $z\in\C$ oder $\R$, $a_n\in\C$.\\
     Partialsummen:
     \begin{align*}
         s_n(z) &\definedas \sum_{j=0}^{n} a_j\cdot z^j
@@ -1674,7 +1680,7 @@
 
     \begin{definition}[Konvergenzradius]
         \begin{align*}
-            R &\definedas \sup \set{\abs{z}: z\in\complexnumbers \text{ und } \sum_{n=0}^{\infty} a_n \cdot z^n \text{ konvergent } }
+            R &\definedas \sup \set{\abs{z}: z\in\C \text{ und } \sum_{n=0}^{\infty} a_n \cdot z^n \text{ konvergent } }
         \end{align*}
         $R$ ist der Konvergenzradius.
     \end{definition}
@@ -1682,7 +1688,7 @@
     \begin{satz}
         Die Potenzreihe $ \sum_{n=0}^{\infty} a_n z^n$ konvergiert absolut für jedes $z$ in der Kreisscheibe
         \begin{align*}
-            B_R (a) &= \set{z\in\complexnumbers: \abs{z} < R}
+            B_R (a) &= \set{z\in\C: \abs{z} < R}
         \end{align*}
         Für jedes $\abs{z} > R$ divergiert $ \sum_{n=0}^{\infty} a_n \cdot z^n$.
         \begin{proof}
@@ -1690,7 +1696,7 @@
             \begin{align*}
                 \impl (a_n \cdot z^n) \text{ Nullfolge }\\
                 \impl \text{ ist beschränkt }\\
-                \impl K\definedas \sup_{n\in\naturalnumbers} \set{a_n z^n} < \infty
+                \impl K\definedas \sup_{n\in\N} \set{a_n z^n} < \infty
                 \intertext{Sei $0 < r < \abs{z_1}$, $0 < \theta \definedas \frac{r}{\abs{z_1}} < 1$}
                 z &\leq \conj{B_r (a)} = \set{\abs{z} \leq r}\\[10pt]
                 \abs{a_n z^n} &= \abs{a_n}\abs{z^n} = \abs{a_n} \cdot \abs{z}^n &= \abs{a_n} \cdot \abs{z}^n \frac{\abs{z}}{\abs{z_1}} ^n\\
@@ -1722,11 +1728,11 @@
     \begin{bemerkung}
         Wir können auch Potenzreihen der Form
         \begin{align*}
-            \sum_{n=0}^{\infty} a_n z^n, \sum_{n=0}^{\infty} a_n \cdot \pair{z-z_0}^n \text{ mit } a_n\in\realnumbers^d \text{ oder } \complexnumbers^d
+            \sum_{n=0}^{\infty} a_n z^n, \sum_{n=0}^{\infty} a_n \cdot \pair{z-z_0}^n \text{ mit } a_n\in\R^d \text{ oder } \C^d
         \end{align*}
         betrachten. Wir setzen
         \begin{align*}
-            R &= \sup \set{\abs{z}: z\in\complexnumbers und \sum_{n=0}^{\infty} a_n z^n \text{ konvergent } }
+            R &= \sup \set{\abs{z}: z\in\C und \sum_{n=0}^{\infty} a_n z^n \text{ konvergent } }
         \end{align*}
     \end{bemerkung}
 
@@ -1747,7 +1753,7 @@
                 \theta &\definedas \frac{r}{\abs{z_1}} < 1
                 \intertext{Da $ \sum_{n=0}^{\infty}  a_n z_1^n$ konvergiert ist}
                 (a_n z_n^n)_n \text{ Nullfolge also beschränkt }
-                \impl K &= \sup_{n\in\naturalnumbers_0} \abs{a_n z_1^n} = \sup_{n\in\naturalnumbers} \abs{a_n} \abs{z_1}^n < \infty\\
+                \impl K &= \sup_{n\in\N_0} \abs{a_n z_1^n} = \sup_{n\in\N} \abs{a_n} \abs{z_1}^n < \infty\\
                 \intertext{Ist $\abs{z} < r$}
                 \abs{a_n z^n} &= \abs{a_n} \abs{z}^n = \abs{a_n} \abs{z_1}^n \abs{\frac{\abs{z}}{\abs{z_1}}}^n\\
                 \impl \abs{\sum_{n=0}^{\infty} a_n z^n} &\leq \sum_{n=0}^{\infty} \abs{a_n z}^n \leq \sum_{n=0}^{\infty} k \theta^n = \frac{k}{1-\theta} < \infty\quad \forall \abs{z} \leq r
@@ -1759,7 +1765,7 @@
         \label{lemma:temp-4}
         Annahmen wie bei vorherigem Lemma.
         \begin{align*}
-            \impl \text{ Für alle } 0 &< r < \abs{z_1}\quad\forall k\in\naturalnumbers_0\\
+            \impl \text{ Für alle } 0 &< r < \abs{z_1}\quad\forall k\in\N_0\\
             \text{ existiert } M &= M_k, r\geq 0
             \intertext{mit}
             \abs{\sum_{n=k+1}^{\infty} a_n z^n} &\leq M_{k,r} \abs{z}^{k+1}\quad\forall \abs{z} \leq r
@@ -1801,7 +1807,7 @@
         \intertext{Sei $ \sum_{n=0}^{\infty} a_n z^n$ konvergent für ein $z=z_1\neq 0$}
         \impl \forall~ 0< r < \abs{z_1}\colon \text{ existiert }  M_{r,z_1} &> 0
         \intertext{sodass}
-        \forall k\in\naturalnumbers_0\colon \abs{\sum_{n=0}^{\infty} a_n z^n} &\leq M_{r,z_1} \abs{\frac{z}{z_1}}^{k+1}\quad\forall \abs{z} \leq r\\
+        \forall k\in\N_0\colon \abs{\sum_{n=0}^{\infty} a_n z^n} &\leq M_{r,z_1} \abs{\frac{z}{z_1}}^{k+1}\quad\forall \abs{z} \leq r\\
         \abs{\frac{z}{z_1}} &\leq \frac{\abs{z}}{\abs{z_1}} \leq \frac{r}{\abs{z_1}} = \theta < 1
     \end{align*}
 
@@ -1825,13 +1831,13 @@
         Sei $ \sum_{n=0}^{\infty}$ eine Potenzreihe, die für ein $z=z_1\neq 0$ konvergiert.\\
         $(z_j)_j$: Folge $0< \abs{z_j} < \abs{z_1}$, $z_j \fromto 0$, $j\fromto\infty$ mit
         \begin{align*}
-            \sum_{n=0}^{\infty} a_n (z_j)^n &= 0\quad\forall j\in\naturalnumbers\\
-            \impl a_n &= 0\quad\forall n\in\naturalnumbers_0
+            \sum_{n=0}^{\infty} a_n (z_j)^n &= 0\quad\forall j\in\N\\
+            \impl a_n &= 0\quad\forall n\in\N_0
         \end{align*}
         \begin{proof}
             Angenommen nicht alle $a_n=0$
             \begin{align*}
-                \impl B &\definedas \set{n\in\naturalnumbers_0: a_n \neq 0} \neq \emptyset\\
+                \impl B &\definedas \set{n\in\N_0: a_n \neq 0} \neq \emptyset\\
                 \impl B \text{ hat ein kleinstes Element, nennen wir } n_0\\
                 \impl a_0 &= a_1 = \dots = a_{n_0-1} = 0\quad a_{n_0}\neq 0\\
                 f(z) &= \sum_{n=0}^{\infty} a_n z^n = \sum_{n=n_0}^{\infty} a_n z^n = a_{n_0} z^{n_0} + \sum_{n=n_0 + 1}^{\infty} a_n z^n\\
@@ -1845,16 +1851,16 @@
 
     \begin{satz} % Satz 6
         Sei $ \sum_{n=0}^{\infty} a_n z^{n}$, $ \sum_{n=0}^{\infty} b_n z^n$ welche für ein $z=w\neq 0$ konvergieren.\\
-        $(z_j)_j$ Folge in $\complexnumbers$, $z_1\neq 0$, $\forall i, z_i \fromto 0$\\
+        $(z_j)_j$ Folge in $\C$, $z_1\neq 0$, $\forall i, z_i \fromto 0$\\
         mit $ \sum_{n=0}^{\infty} a_n z^n = \sum_{n=0}^{\infty} b_n z_j^n$ für fast alle $z_j$.\\
-        Dann ist $a_n = b_n~\forall n\in\naturalnumbers_0$.
+        Dann ist $a_n = b_n~\forall n\in\N_0$.
         \begin{proof}
             \begin{align*}
                 c_n &= a_n - b_n
                 \intertext{\OBDA sind alle $\abs{z_1} < \abs{w}$}
                 \impl h(z) &\definedas \sum_{n=0}^{\infty} c_n z^n \text{ konvergiert für } z=w\neq 0\\
                 \text{ und } h(z_j) &= 0\quad \forall j\\
-                \annot{\impl}{Satz 5} c_n &= 0\quad \forall n\in\naturalnumbers_0 \equivalent a_n = b_n \quad\forall n\in\naturalnumbers_0
+                \annot{\impl}{Satz 5} c_n &= 0\quad \forall n\in\N_0 \equivalent a_n = b_n \quad\forall n\in\N_0
             \end{align*}
         \end{proof}
     \end{satz}
@@ -1862,7 +1868,7 @@
     \begin{bemerkung}
         Hatten geg. $ \sum_{n=0}^{\infty} a_n z^n$. Dann ist der Konvergenzradius
         \begin{align*}
-            R &= \sup \set{\abs{z} : z\in\complexnumbers \text{ und } \sum_{n=0}^{\infty} a_n z^n \text{ konvergent } }
+            R &= \sup \set{\abs{z} : z\in\C \text{ und } \sum_{n=0}^{\infty} a_n z^n \text{ konvergent } }
         \end{align*}
     \end{bemerkung}
 
@@ -1894,12 +1900,12 @@
 
     \section{[*] Stetige Funktionen einer reellen (oder komplexen) Variablen}
 
-    \subsection{[*] Stetigkeit}
+    \setcounter{subsection}{1}
     \thispagestyle{pagenumberonly}
-    Sei $D\subseteq \realnumbers$ (oder $D\subseteq \complexnumbers$, wenn wir eine komplexe Funktion betrachten) und $D\neq\emptyset$. Außerdem sei $\mathbb{K} = \realnumbers$ oder $\complexnumbers$ (Körper).
+    Sei $D\subseteq \R$ (oder $D\subseteq \C$, wenn wir eine komplexe Funktion betrachten) und $D\neq\emptyset$. Außerdem sei $\K = \R$ oder $\C$ (Körper).
 
     \begin{definition}[$\varepsilon-\delta$ Definition von Stetigkeit]
-        Sei $f: D \fromto \mathbb{K}$. Die Funktion $f$ heißt stetig in $x_0$, falls
+        Sei $f: D \fromto \K$. Die Funktion $f$ heißt stetig in $x_0$, falls
         \begin{align*}
             \forall \varepsilon > 0~\exists \delta > 0\colon \abs{f(x)-f(x_0)} < \varepsilon \text{ für alle } x\in D \text{ mit } \abs{x-x_0} < \delta
         \end{align*}
@@ -1910,7 +1916,7 @@
         \theoremescape
         \begin{enumerate}[label=\arabic*)]
             \item Wir können Stetigkeit auch etwas anschaulicher betrachten: $x$ ist der Input, $f(x)$ der Output. $f$ ist genau dann stetig in $x_0$, wenn der Output $f(x)$ $\varepsilon$-nahe bei $f(x_0)$ ist, sofern Input $x$ $\delta$-nahe bei $x_0$ ist.
-            \item Eine Funktion $f: D\fromto\mathbb{K}^d$ ist stetig in $x_0\in D$, falls
+            \item Eine Funktion $f: D\fromto\K^d$ ist stetig in $x_0\in D$, falls
             \begin{align*}
                 \forall \varepsilon>0~\exists\delta>0\colon \underbrace{\norm{f(x)-f(x_0)}}_{\text{Norm}} &< \varepsilon\qquad \forall x\in D\colon \abs{x-x_0} <\delta
                 \intertext{oder $f:D\fromto V$ (dabei sei $V$ Vektorraum mit Norm $\norm{\cdot}$) ist stetig in $x_0$, falls}
@@ -1924,18 +1930,18 @@
         Die Funktion
         \begin{align*}
             f(x) &\definedas \begin{cases}
-                                 1\quad &x\in\mathbb{Q}\\
-                                 0\quad &x\in\realnumbers\exclude\mathbb{Q}
+                                 1\quad &x\in\Q\\
+                                 0\quad &x\in\R\exclude\Q
             \end{cases}
         \end{align*}
-        ist nirgends stetig auf $\realnumbers$.
+        ist nirgends stetig auf $\R$.
     \end{beispiel}
     \begin{beispiel}
         Die Funktion
         \begin{align*}
             f(x) &\definedas \begin{cases}
-                                 x\quad &x\in\mathbb{Q}\\
-                                 0\quad &x\in\realnumbers\exclude\mathbb{Q}
+                                 x\quad &x\in\Q\\
+                                 0\quad &x\in\R\exclude\Q
             \end{cases}
         \end{align*}
         ist nur stetig in $x_0=0$.
@@ -1954,7 +1960,7 @@
 
     \begin{lemma} % Lemma 2
         \label{lemma:abschaetzung-stetigkeit}
-        Ist $f:D\fromto\mathbb{K}$ (oder $\mathbb{K}^d$) stetig in $x_0\in D$. Dann gilt
+        Ist $f:D\fromto\K$ (oder $\K^d$) stetig in $x_0\in D$. Dann gilt
         \begin{enumerate}[label=\arabic*.]
             \item $\exists \delta > 0$ mit $\abs{f(x)}\leq 1+\abs{f(x_0)}$\quad$\forall x\in D\colon \abs{x-x_0} < \delta$
             \item Ist $f(x_0) \neq 0$ dann existiert ein $\delta>0$ sodass
@@ -1988,8 +1994,8 @@
     \begin{notation}
         Seien
         \begin{align*}
-            f&: D_f \fromto \mathbb{K}\\
-            g&: D_g \fromto \mathbb{K}
+            f&: D_f \fromto \K\\
+            g&: D_g \fromto \K
         \end{align*}
         Wir definieren
         \begin{align*}
@@ -1998,24 +2004,25 @@
         \end{align*}
         und setzen
         \begin{align*}
-            f + g: D_{f+g} &\fromto \mathbb{K},\quad x \mapsto  f(x) + g(x)\\
-            f \cdot g: D_{f+g} &\fromto \mathbb{K},\quad x \mapsto  f(x) \cdot g(x)\\
-            \frac{f}{g}: D_{\frac{f}{g}} &\fromto \mathbb{K},\quad x \mapsto \frac{f(x)}{g(x)}
+            f + g: D_{f+g} &\fromto \K,\quad x \mapsto  f(x) + g(x)\\
+            f \cdot g: D_{f+g} &\fromto \K,\quad x \mapsto  f(x) \cdot g(x)\\
+            \frac{f}{g}: D_{\frac{f}{g}} &\fromto \K,\quad x \mapsto \frac{f(x)}{g(x)}
         \end{align*}
     \end{notation}
 
     \begin{bemerkung}
-        $f+g$ geht auch für $f: D_f \fromto \mathbb{K}^d$, $g: D_g \fromto \mathbb{K}^d$. $f\cdot g$ und $\frac{f}{g}$ gehen auch für $f: D_f \fromto \mathbb{K}^d$, $g: D_g \fromto \mathbb{K}$.
+        $f+g$ geht auch für $f: D_f \fromto \K^d$, $g: D_g \fromto \K^d$. $f\cdot g$ und $\frac{f}{g}$ gehen auch für $f: D_f \fromto \K^d$, $g: D_g \fromto \K$.
     \end{bemerkung}
 
     \newpage
 
     \begin{satz} % Satz 3
-        Seien $f, g: D\fromto \mathbb{K}$ stetig in $x_0\in D$. Dann gilt
+        \label{satz:stetigkeit-arithmetik}
+        Seien $f, g: D\fromto \K$ stetig in $x_0\in D$. Dann gilt
         \begin{enumerate}[label=\arabic*.]
-            \item $f+g: D\fromto\mathbb{K},~x\mapsto f(x)+g(x)$ ist stetig in $x_0$.
-            \item $f\cdot g: D\fromto\mathbb{K},~x\mapsto f(x)\cdot g(x)$ ist stetig in $x_0$.
-            \item Ist $g(x_0)\neq 0$, dann ist $\frac{f}{g}: D_{\frac{f}{g}}\fromto\mathbb{K},~x\mapsto \frac{f(x)}{g(x)}$ stetig in $x_0$.
+            \item $f+g: D\fromto\K,~x\mapsto f(x)+g(x)$ ist stetig in $x_0$.
+            \item $f\cdot g: D\fromto\K,~x\mapsto f(x)\cdot g(x)$ ist stetig in $x_0$.
+            \item Ist $g(x_0)\neq 0$, dann ist $\frac{f}{g}: D_{\frac{f}{g}}\fromto\K,~x\mapsto \frac{f(x)}{g(x)}$ stetig in $x_0$.
         \end{enumerate}
 
         \begin{proof}[Beweis (1.)]
@@ -2044,29 +2051,16 @@
             \end{align*}
         \end{proof}
 
-        \newpage
-
         \begin{proof}[Beweis (3.)]
-            Sei $g(x_0) \neq 0$
+            Es reicht aus, zu zeigen, dass $\frac{1}{g(x)}$ in $x_0$ stetig ist. Dann können wir (2.) anwenden. Wir wählen den Ansatz
             \begin{align*}
-                \frac{f(x)}{g(x)} - \frac{f(x_0)}{g(x_0)} &= \frac{f(x)\cdot g(x_0) - f(x_0)\cdot g(x)}{g(x)\cdot g(x_0)}\\
-                &= \frac{1}{g(x)\cdot g(x_0)}\cdot\interv{\pair{f(x)-f(x_0)}\cdot g(x_0) + f(x_0)\cdot \pair{g(x)-g(x_0)}}\tag{*}
-                \intertext{Aus Lemma~\ref{lemma:abschaetzung-stetigkeit} folgt}
-                \exists \delta_0>0\colon \abs{g(x)} &\geq \frac{1}{2}\abs{g(x_0)}\tag{$x\in D, \abs{x-x_0} < \delta$}\\
-                \intertext{Nach der Stetigkeit von $f$ und $g$ gilt außerdem}
-                \forall\varepsilon >0~\exists \delta_1, \delta_2 > 0\colon \abs{f(x)-f(x_0)} &< \frac{\varepsilon\cdot \abs{g(x_0)}}{4\cdot (1+\abs{g(x)})}\\
-                \abs{g(x)-g(x_0)} &< \frac{\varepsilon\cdot \abs{g(x_0)}^2}{4(1+\abs{f(x)})}\\
-                \impl \abs{\frac{f(x)}{g(x)}- \frac{f(x_0)}{g(x_0)}} &\leq \frac{1}{\abs{g(x)} \cdot \abs{g(x_0)}} \interv{??}\\
-                &< \frac{2}{\abs{g(x)}^2}\cdot\interv{\frac{\varepsilon\cdot g(x_0)^2}{4(1+\abs{g(x)})} + \frac{\abs{f(x_0)}\cdot \abs{g(x_0)}}{4(1+\abs{f(x)})}} \leq \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
+                \abs{\frac{1}{g(x)} - \frac{1}{g(x_0)}} &= \frac{\abs{g(x_0)-g(x)}}{\abs{g(x)\cdot g(x_0)}}
             \end{align*}
+            und schätzen den Term geschickt ab.
         \end{proof}
-
-        \begin{proof}
-            Es reicht aus, zu zeigen, dass $\frac{1}{g(x)}$ in $x_0$ stetig ist.
-            \begin{align*}
-                \abs{\frac{1}{g(x)} - \frac{1}{g(x_0)}} &= \frac{\abs{g(x)-g(x_0)}}{g(x)\cdot g(x_0)}
-            \end{align*}
-        \end{proof}
+        \begin{uebung}
+            Beweisen Sie Teil (3.) des vorherigen Satzes mit einer geschickten Abschätzung.
+        \end{uebung}
     \end{satz}
 
     \newpage
@@ -2077,30 +2071,28 @@
 
     \begin{satz}[Stetigkeit von Polynomen]
         \marginnote{[23. Jan]}
-        Für eine stetige Funktion $f$ und $a$ eine Zahl, dann ist auch $a\cdot f$ stetig.\\
-        Außerdem ist $x^2$ bzw. $z^2$ nach Multiplikation stetig. $\annot{\impl}{Ind.}$ $x^n$ bzw. $z^n$ stetig.\\
-        Damit sind auch alle Polynome stetig auf ganz $\realnumbers$ bzw. $\complexnumbers$.\\
-        Außerdem ist für $P,Q$ Polynome mit $Q(x)\neq 0$ auch die Funktion
+        Für eine stetige Funktion $f$ und eine Zahl $a$, ist auch $a\cdot f$ stetig. Außerdem ist nach Satz~\ref{satz:stetigkeit-arithmetik} $x^2$ bzw. $z^2$ stetig. Es lässt sich induktiv zeigen, dass $x^n$ bzw. $z^n$ damit auch stetig sein müssen.\\
+        Daraus folgt, dass alle Polynome (in $\K$) stetig auf ganz $\K$ sind. Außerdem ist für $P,Q$ Polynome mit $Q(x)\neq 0$ auch die Funktion
         \begin{align*}
             R(x) &= \frac{P(x)}{Q(X)}
         \end{align*}
-        stetig.
+        stetig auf $\K\exclude\set{x\in\K: Q(x) = 0}$.
     \end{satz}
-    
-    \begin{align*}
-        e^x-e^0 &= e^x - 1 = \sum_{n=0}^{\infty} \frac{x^n}{n!}-1 = \sum_{n=1}^{\infty} \frac{x^n}{n!}
-    \end{align*}
-
-    \begin{uebung}
-        Weisen Sie basierend auf der vorherigen Gleichung die Stetigkeit der Funktion $e^x$ nach.
-    \end{uebung}
 
     \begin{korollar}
-        Alle Polynome (reell oder komplex) sind stetig und alle polynomiellen Funktionen $P(x) = \frac{R(x)}{Q(x)}$ sind stetig auf $D_R = \mathbb{K}\exclude\set{x\in\mathbb{K}: Q(x) = 0}$.
+        Alle Polynome (reell oder komplex) sind stetig und alle polynomiellen Funktionen $R(x) = \frac{P(x)}{Q(x)}$ sind stetig auf $D_R = \K\exclude\set{x\in\K: Q(x) = 0}$.
     \end{korollar}
 
+    \begin{uebung}[Stetigkeit von Exponentialfunktionen]
+        Es gilt
+        \begin{align*}
+            e^x-e^0 &= e^x - 1 = \sum_{n=0}^{\infty} \frac{x^n}{n!}-1 = \sum_{n=1}^{\infty} \frac{x^n}{n!}
+        \end{align*}
+        Weisen Sie basierend auf dieser Gleichung und den Abschätzungen für Potenzreihen die Stetigkeit der Funktion $e^x$ zunächst im Punkt $x_0 = 0$ und dann auf ganz $\R$ nach.
+    \end{uebung}
+
     \begin{satz} % Satz 5
-        Sei $f: D\fromto\realnumbers$ (oder $\complexnumbers$, $\realnumbers^d$, $\complexnumbers^d$) mit $D\subseteq\realnumbers$ (oder $\complexnumbers$).\\
+        Sei $f: D\fromto\R$ (oder $\C$, $\R^d$, $\C^d$) mit $D\subseteq\R$ (oder $\C$).\\
         Dann gilt $f$ ist genau dann stetig in $x_0$, wenn für alle Folgen $(x_n)_n \subseteq D$, $x_n \fromto x_0$ folgt, dass $f(x_n) \fromto f(x_0)$ für $\ntoinfty$.
 
         \begin{proof}
@@ -2108,18 +2100,18 @@
             \begin{align*}
                 \forall\varepsilon > 0~\exists\delta>0\colon \abs{f(x)-f(x_0)} < \varepsilon\tag{für $x\in D$, $\abs{x-x_-0}<\delta$}
                 \intertext{Sei $(x_n)_n\subseteq D$ Folge mit Werten aus $D$ mit $x_n\fromto x_0$. Das heißt}
-                \forall \varepsilon > 0~\exists N\in\naturalnumbers\colon \abs{x_n-x_0} < \varepsilon\quad\forall n\geq N\\
+                \forall \varepsilon > 0~\exists N\in\N\colon \abs{x_n-x_0} < \varepsilon\quad\forall n\geq N\\
                 \intertext{Gegeben $\varepsilon$ verwenden wir die Stetigkeits-Eigenschaften}
                 \exists \delta>0\colon \abs{f(x)-f(x_-0)} < \varepsilon\quad \forall x\in D\colon \abs{x-x_0} < \delta\\
                 \intertext{nehmen $\hat{\varepsilon} = \delta$}
-                \impl \exists N\in\naturalnumbers\colon \abs{x_n-x_0} < \delta\quad\forall n\geq N\\
+                \impl \exists N\in\N\colon \abs{x_n-x_0} < \delta\quad\forall n\geq N\\
                 \impl \abs{f(x_n)-f(x_0)} < \varepsilon\quad\forall n\geq N_0
             \end{align*}
             Mit der Definition der Konvergenz folgt dann $f(x_n) \fromto f(x_0)$.\\[10pt]
             \anf{$\Leftarrow$} Kontraposition. Annahme $f$ ist nicht stetig in $x_0$.
             \begin{align*}
                 \impl \exists \varepsilon > 0~\forall \delta > 0\colon \exists x\in D, \abs{x-x_0} < \delta \text{ und } \abs{f(x)-f(x_0)} \geq \varepsilon > 0
-                \intertext{Wählen $\delta = \frac{1}{n}$, $n\in\naturalnumbers$}
+                \intertext{Wählen $\delta = \frac{1}{n}$, $n\in\N$}
                 \impl \exists x_n\in D\colon \abs{x_n-x_0} < \frac{1}{n} \text{ und } \abs{f(x_n)-f(x_0)} \geq \varepsilon\\
                 \impl \text{ Haben } (x_n)_n\subseteq D, x_n \fromto x_0 \text{ und } f(x_n)\not\fromto f(x_0)
             \end{align*}
@@ -2128,8 +2120,8 @@
 
     \begin{satz} % Satz 6
         \label{satz:verkettung-stetigkeit}
-        Sei $f: D_f \fromto\realnumbers$, $D_g\subseteq\realnumbers$, $g: D_g\fromto\realnumbers$. und $f(D_f)\subseteq D_g$.\\
-        Sind $f$ stetig in $x_0$ und $g$ stetig in $y_0=f(x_0)\in D_g$. Dann ist $g\circ f: D_f\fromto\realnumbers$ stetig in $x_0$.
+        Sei $f: D_f \fromto\R$, $D_g\subseteq\R$, $g: D_g\fromto\R$. und $f(D_f)\subseteq D_g$.\\
+        Sind $f$ stetig in $x_0$ und $g$ stetig in $y_0=f(x_0)\in D_g$. Dann ist $g\circ f: D_f\fromto\R$ stetig in $x_0$.
 
         \begin{proof}
             Sei $(x_n)_n\subseteq D_f$ mit $x_n\fromto x_0$. Dann folgt aus dem vorherigen Satz, dass $f(x_n) \fromto f(x_0) = y_0$.\\
@@ -2147,7 +2139,10 @@
     \end{uebung}
 
     \newpage
+
+
     \section{[*] Zwischenwertsatz}
+
     \subsection{[*]}
     \thispagestyle{pagenumberonly}
 
@@ -2156,29 +2151,29 @@
     \begin{beispiel}
         Die Funktion
         \begin{align*}
-            f: \mathbb{Q} &\fromto \realnumbers\\
+            f: \Q &\fromto \R\\
             x &\mapsto
             \begin{cases}
                 1\quad x^2 &> 2\\
                 -1\quad x^2 &< 2
             \end{cases}
         \end{align*}
-        ist eine stetige Funktion auf $\mathbb{Q}$.
+        ist eine stetige Funktion auf $\Q$.
     \end{beispiel}
 
     \begin{satz}[Zwischenwertsatz] % Satz 1
-        Sei $f: \interv{a,b}\fromto\realnumbers$ stetig, $f(a)\neq f(b)$. Dann gibt es zu jedem $c$ zwischen $f(a)$ und $f(b)$ (d.h. $f(a) < c < f(b)$ oder $f(b) < c < f(a)$) ein $\zeta$ zwischen $a$ und $b$ ($a<\zeta < b$) mit $f(\zeta) = c$.\\
-        Dieser Satz funktioniert nicht auf $\complexnumbers$, da wir die Anordnung der reellen Zahlen verwenden und funktioniert nach dem vorherigen Beispiel nicht auf unvollständigen Mengen.
+        Sei $f: \interv{a,b}\fromto\R$ stetig, $f(a)\neq f(b)$. Dann gibt es zu jedem $c$ zwischen $f(a)$ und $f(b)$ (d.h. $f(a) < c < f(b)$ oder $f(b) < c < f(a)$) ein $\zeta$ zwischen $a$ und $b$ ($a<\zeta < b$) mit $f(\zeta) = c$.\\
+        Dieser Satz funktioniert nicht auf $\C$, da wir die Anordnung der reellen Zahlen verwenden und funktioniert nach dem vorherigen Beispiel nicht auf unvollständigen Mengen.
 
         \begin{proof}
             \OBDA sei $f(a) < f(b)$ (sonst ersetzen wir $f$ durch $-f$).\\
             Schritt 1: Sei $f(a) < 0 < f(b)$ und $c=0$. Wir setzen $M\definedas\set{x\in\interv{a,b}: f(x) < 0}$.
             \begin{align*}
                 \impl\Bigg\{\begin{split}
-                         a\in M \text{ das heißt } M\neq\emptyset\\
-                         \forall m\in M\colon m \leq b
+                                a\in M \text{ das heißt } M\neq\emptyset\\
+                                \forall m\in M\colon m \leq b
                 \end{split}
-                \intertext{Setzen $\zeta\definedas \sup M\in\realnumbers$. Behauptung: $f(\zeta) = 0$. Beobachtung: $f$ ist stetig auf $\interv{a,b}$ und angenommen $f(\zeta)\neq 0$}
+                \intertext{Setzen $\zeta\definedas \sup M\in\R$. Behauptung: $f(\zeta) = 0$. Beobachtung: $f$ ist stetig auf $\interv{a,b}$ und angenommen $f(\zeta)\neq 0$}
                 \impl \exists \delta > 0~\forall x\in\pair{\zeta-\delta, \zeta+\delta} \cap\interv{a,b} \text{ hat } f(x) \text{ das gleiche Vorzeichen wie } f(\zeta)
                 \intertext{Nehmen $\varepsilon = \abs{f(\zeta)} > 0$}
                 \impl \exists\delta > 0\colon \abs{f(x)-f(\zeta)} < \abs{f(\zeta)}\\
@@ -2201,16 +2196,19 @@
     \end{satz}
 
     \newpage
+
+
     \section{[*] Satz von Weierstraß}
+
     \subsection{[*]}
     \thispagestyle{pagenumberonly}
 
     \begin{definition} % Definition 1
-        Eine Menge $A\subseteq\realnumbers$ (oder $\complexnumbers$) ist beschränkt, falls
+        Eine Menge $A\subseteq\R$ (oder $\C$) ist beschränkt, falls
         \begin{align*}
             \exists R>0\colon A\subseteq\pair{-R, R}
             \intertext{bzw}
-            A\subseteq B_R(?) \definedas\set{z\in\complexnumbers: \abs{z} < R}
+            A\subseteq B_R(?) \definedas\set{z\in\C: \abs{z} < R}
         \end{align*}
         $A$ ist abgeschlossen, falls für jede Folge $(x_n)_n\subseteq A$, welche konvergiert auf $ \lim_{n\fromto\infty} x_n \in A$.\\
     \end{definition}
@@ -2220,7 +2218,7 @@
     \end{beispiel}
 
     \begin{definition} % Definition 2
-        $K\subseteq\realnumbers$ (oder $\complexnumbers$) ist kompakt, falls jede Folge $(x_n)_n\subseteq K$ eine in $K$ konvergente Teilfolge besitzen. Das heißt
+        $K\subseteq\R$ (oder $\C$) ist kompakt, falls jede Folge $(x_n)_n\subseteq K$ eine in $K$ konvergente Teilfolge besitzen. Das heißt
         \begin{enumerate}[label=(\alph*)]
             \item $(x_N)_n$ hat konvergente Teilfolge und
             \item den Grenzwert $ \lim_{j\fromto\infty} x_n \in K$
@@ -2228,7 +2226,7 @@
     \end{definition}
 
     \begin{satz} % Satz 3
-        $K\subseteq\realnumbers$ (oder $\complexnumbers$) ist genau dann kompakt, wenn $K$ abgeschlossen und beschränkt ist.
+        $K\subseteq\R$ (oder $\C$) ist genau dann kompakt, wenn $K$ abgeschlossen und beschränkt ist.
 
         \begin{proof}
             \anf{$\Leftarrow$}: $K$ ist abgeschlossen und beschränkt. Und $(x_n)_n\subseteq K$ sei beliebige Folge in $K$.
@@ -2240,16 +2238,16 @@
                 \impl K \text{ ist kompakt }
             \end{align*}
             \anf{$\impl$}: Sei $K$ kompakt. Dann ist $K$ auch abgeschlossen. (Warum?)\\
-            $K$ ist auch beschränkt. Wenn $K$ nicht beschränkt ist existiert für jedes $n\in\naturalnumbers$ ein $x_n\in K$ mit $\abs{x_n} > n$.\\
+            $K$ ist auch beschränkt. Wenn $K$ nicht beschränkt ist existiert für jedes $n\in\N$ ein $x_n\in K$ mit $\abs{x_n} > n$.\\
             Die Folge $(x_n)_n$ hat dann aber keine konvergente Teilfolge.
         \end{proof}
     \end{satz}
 
     \begin{satz} % Satz 4
-        Sei $K\subseteq\realnumbers$ (oder $\complexnumbers$) und $f: K\fromto\realnumbers$ (oder $\complexnumbers$) stetig. Dann ist $f(K)$ kompakt.
+        Sei $K\subseteq\R$ (oder $\C$) und $f: K\fromto\R$ (oder $\C$) stetig. Dann ist $f(K)$ kompakt.
         \begin{proof}
             Sei $(y_n)_n$ Folge in $f(k)$. $f(K) \definedas\set{f(x): x\in K}$\\
-            $\impl \forall n\in\naturalnumbers~\exists x_n\in K\colon f(x_n) = y_n$. Nach Definition existiert eine Teilfolge $(x_{n_j})_j$ von $(x_n)_n$, welche gegen ein $x_0\in K$ konvergiert.
+            $\impl \forall n\in\N~\exists x_n\in K\colon f(x_n) = y_n$. Nach Definition existiert eine Teilfolge $(x_{n_j})_j$ von $(x_n)_n$, welche gegen ein $x_0\in K$ konvergiert.
             \begin{align*}
                 x_{n_j} \fromto x_0 \in K\\
                 y_{n_j} \definedas f(x_{n_j})
