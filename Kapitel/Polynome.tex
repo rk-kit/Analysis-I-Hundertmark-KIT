@@ -6,7 +6,7 @@
     \begin{align*}
         P(x) &\definedas a_0 + a_1 \cdot x + a_2 \cdot x^2 + \dots + a_n \cdot x^n
     \end{align*}
-    ein reelles Polynom vom Grad $n$ mit $Grad(P) = n$.
+    ein reelles Polynom vom Grad $n$ mit $\grad(P) = n$.
 \end{definition}
 
 \begin{definition}[Nullpolynom]
@@ -18,7 +18,7 @@
     \begin{align*}
         P(z) &\definedas a_0 + a_1\cdot z + a_2\cdot z^2 + \dots + a_n\cdot z^n
     \end{align*}
-    eine analytisches Polynom mit $Grad(P) = n$.
+    eine analytisches Polynom mit $\grad(P) = n$.
 \end{bemerkung}
 
 \begin{definition}[Grad von speziellen Polynomen]
@@ -29,8 +29,8 @@
     \theoremescape
     \label{satz:eigenschaften-polynome}
     \begin{enumerate}[label=(\roman*)]
-        \item Sei $P$ ein Polynom mit $Grad(P) = n$ und $\lambda\in\R,~\lambda\neq 0$. Dann ist $Grad(\lambda P) = n$.
-        \item Seien $P, Q$ nicht-triviale Polynome mit $Grad(P) = n$ und $Grad(Q)=m$. Dann gilt $PQ$ ist ein Polynom mit $Grad(PQ)=n+m$.
+        \item Sei $P$ ein Polynom mit $\grad(P) = n$ und $\lambda\in\R,~\lambda\neq 0$. Dann ist $Grad(\lambda P) = n$.
+        \item Seien $P, Q$ nicht-triviale Polynome mit $\grad(P) = n$ und $\grad(Q)=m$. Dann gilt $PQ$ ist ein Polynom mit $\grad(PQ)=n+m$.
         \begin{proof}
             \begin{align*}
                 P(x) &= \sum_{j=0}^{n} a_j x^j\\
@@ -57,7 +57,7 @@
             &= P(\zeta) + (x-\zeta) \cdot \underbrace{\sum_{l=0}^{n-1} b_{l+1} \cdot \pair{x-\zeta}^l}_{\definedasbackwards Q(x-\zeta)}\\
             &= P(\zeta) + (x-\zeta)\cdot Q(x-\zeta)
         \end{align*}
-        Dabei gilt außerdem $Grad(Q) = n-1$. Diesen Zusammenhang werden wir später in Satz~\ref{satz:nullstellen-polynome} verwenden, um eine Aussage über die Anzahl an Nullstellen eines Polynoms zu treffen.
+        Dabei gilt außerdem $\grad(Q) = n-1$. Diesen Zusammenhang werden wir später in Satz~\ref{satz:nullstellen-polynome} verwenden, um eine Aussage über die Anzahl an Nullstellen eines Polynoms zu treffen.
     \end{enumerate}
 \end{satz}
 

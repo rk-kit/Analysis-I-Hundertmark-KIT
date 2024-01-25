@@ -281,7 +281,7 @@ Wir sind bisher immer davon ausgegangen, dass wir den Grenzwert einer Folge bere
     ~\\
     Sei $(a_n)_n$ eine Folge mit $a_n = f(a),~f:\N\fromto\R$
     \begin{align*}
-        \impl Bild(f) &= f(\N) \text{ nach oben beschränkt }\\
+        \impl \bild(f) &= f(\N) \text{ nach oben beschränkt }\\
         \impl a&\definedas\sup\pair{f\pair{\N}}\geq a_n \quad\forall n\in\N\qedhere
     \end{align*}
 \end{proof}
@@ -371,8 +371,8 @@ Wir sind bisher immer davon ausgegangen, dass wir den Grenzwert einer Folge bere
             \impl q &= \frac{1}{1+h}\\
             \impl x_n &= q^n = \pair{\frac{1}{1+h}}^n = \frac{1}{(1+h)^n}
             \intertext{Nach Bernoulli (\ref{satz:bernoulli-ungleichung}) gilt $(1+h)^n \geq 1+nh>nh$}
-            \impl q^n &= \frac{1}{(1+h)^n}< \frac{1}{nh}\fromto 0 \text{ für } \ntoinfty\\
-            \impl \abs{q^n-0} &= q^n < \frac{1}{nh} \fromto 0 \text{ für } \ntoinfty
+            \impl q^n &= \frac{1}{(1+h)^n}< \frac{1}{nh}\fromto 0 \text{ für } \ntoinf\\
+            \impl \abs{q^n-0} &= q^n < \frac{1}{nh} \fromto 0 \text{ für } \ntoinf
             \intertext{Für $\varepsilon>0$ wähle $N\geq \frac{1}{\varepsilon\cdot h}\equivalent \frac{1}{N\cdot h}\leq \varepsilon$}
             \impl \forall n\geq N&\colon \abs{q^n-0} = q^n \leq \frac{1}{nh} \leq \frac{1}{Nh} < \varepsilon\qedhere
         \end{align*}
@@ -386,7 +386,7 @@ Wir sind bisher immer davon ausgegangen, dass wir den Grenzwert einer Folge bere
 \newpage
 
 \begin{beispiel}
-    Sei $a>0$, $x_n\definedas a^\frac{1}{n} = \sqrt[n]{a} \fromto 1$ für $\ntoinfty$.\\
+    Sei $a>0$, $x_n\definedas a^\frac{1}{n} = \sqrt[n]{a} \fromto 1$ für $\ntoinf$.\\
     \begin{proof}
         Wir unterscheiden in drei Fälle.
         \theoremescape
@@ -400,12 +400,12 @@ Wir sind bisher immer davon ausgegangen, dass wir den Grenzwert einer Folge bere
                 a&=\pair{1+h_n}^n \geq 1+n\cdot h_n > n\cdot h_n\\
                 \impl h_n &< \frac{a}{n}\\
                 \abs{a^\frac{1}{n}-1} &= a^\frac{1}{n}-1 = h_n < \frac{a}{n}\\
-                \impl \lim_{\ntoinfty} a^\frac{1}{n}&= 1
+                \impl \lim_{\ntoinf} a^\frac{1}{n}&= 1
                 \intertext{\item $0<a<1$}
                 b &\definedas \frac{1}{a} > 1\\
-                \impl \lim_{\ntoinfty} b^\frac{1}{n} &= 1\\
-                \lim_{\ntoinfty} b^\frac{1}{n} &=\lim_{\ntoinfty} \frac{1}{a^\frac{1}{n}}\\
-                \impl \lim_{\ntoinfty} a^{\frac{1}{n}} &= 1\qedhere
+                \impl \lim_{\ntoinf} b^\frac{1}{n} &= 1\\
+                \lim_{\ntoinf} b^\frac{1}{n} &=\lim_{\ntoinf} \frac{1}{a^\frac{1}{n}}\\
+                \impl \lim_{\ntoinf} a^{\frac{1}{n}} &= 1\qedhere
             \end{align*}
         \end{enumerate}
     \end{proof}
@@ -424,7 +424,7 @@ Wir sind bisher immer davon ausgegangen, dass wir den Grenzwert einer Folge bere
         &= 1 + n\cdot h_n + \frac{n\cdot(n-1)}{2}\cdot(h_n)^2\\
         &> \frac{n\cdot (n-1)}{2}\cdot \pair{h_n}^2\\
         \impl h_n^2 &< \frac{2n}{n\cdot (n-1)} = \frac{2}{n-1}\\
-        0 &< h_n < \sqrt{\frac{2}{n-1}} \fromto 0 \text{ für } \ntoinfty\\
+        0 &< h_n < \sqrt{\frac{2}{n-1}} \fromto 0 \text{ für } \ntoinf\\
         \impl \lim h_n &= 0\\
         \equivalent \lim n^{\frac{1}{n}} &= 1
     \end{align*}
@@ -451,9 +451,9 @@ Wir sind bisher immer davon ausgegangen, dass wir den Grenzwert einer Folge bere
 \begin{satz}[Eigenschaften von Kehrwerten von Folgen]
     \theoremescape
     \begin{enumerate}[label=(\alph*)]
-        \item Falls $x_n\fromto \infty$ für $\ntoinfty$, so folgt $\frac{1}{x_n}\fromto 0$ für $\ntoinfty$.
-        \item Ist $(x_n)_n$ eine Nullfolge mit $x_n > 0$ für fast alle $n\in\N$, so ist $\frac{1}{x_n}\fromto \infty$ für $\ntoinfty$.\\
-        Falls $x_n < 0$ für fast alle $n$, so folgt $\frac{1}{x_n} \fromto -\infty$ für $\ntoinfty$.
+        \item Falls $x_n\fromto \infty$ für $\ntoinf$, so folgt $\frac{1}{x_n}\fromto 0$ für $\ntoinf$.
+        \item Ist $(x_n)_n$ eine Nullfolge mit $x_n > 0$ für fast alle $n\in\N$, so ist $\frac{1}{x_n}\fromto \infty$ für $\ntoinf$.\\
+        Falls $x_n < 0$ für fast alle $n$, so folgt $\frac{1}{x_n} \fromto -\infty$ für $\ntoinf$.
     \end{enumerate}
 
     \begin{proof}[Beweis (a)]
@@ -471,7 +471,7 @@ Wir sind bisher immer davon ausgegangen, dass wir den Grenzwert einer Folge bere
 \end{uebung}
 
 \begin{beispiel}
-    $\frac{n}{2^n}\fromto 0$ für $\ntoinfty$ (Sogar $\forall k\in\N\colon \frac{n^k}{2^n} \fromto 0$ für $\ntoinfty$)
+    $\frac{n}{2^n}\fromto 0$ für $\ntoinf$ (Sogar $\forall k\in\N\colon \frac{n^k}{2^n} \fromto 0$ für $\ntoinf$)
 
     \begin{proof}
         Zu zeigen: $x_n = \frac{2^n}{n}\fromto \infty$
@@ -639,12 +639,12 @@ ist monoton fallend, weil
 \end{align*}
 $(x_n)_{n}$ ist monoton fallend und nach unten beschränkt.
 \begin{align*}
-    \annot{\impl}{\ref{satz:monoton-konv}} x = \lim_{\ntoinfty} x_{n} = \lim_{n\fromto\infty} \sup_{l\geq n} a_l = \inf \sup_{l\geq n} a_l
+    \annot{\impl}{\ref{satz:monoton-konv}} x = \lim_{\ntoinf} x_{n} = \lim_{n\fromto\infty} \sup_{l\geq n} a_l = \inf \sup_{l\geq n} a_l
 \end{align*}
 \noindent existiert.\\[10pt]
 Genauso: $y_n\definedas \inf_{l\geq n} a_l \impl y_n < y_{n+1}$ und $y_n$ ist nach oben beschränkt und damit existiert:
 \begin{align*}
-    y = \lim_{\ntoinfty} y_n = \lim_{n\fromto\infty} \inf_{l\geq n} a_l = \sup \inf_{l\geq n} a_j
+    y = \lim_{\ntoinf} y_n = \lim_{n\fromto\infty} \inf_{l\geq n} a_l = \sup \inf_{l\geq n} a_j
 \end{align*}
 
 \begin{definition}[Limes superior und inferior] % Definition 1

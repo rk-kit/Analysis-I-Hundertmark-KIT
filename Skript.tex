@@ -57,38 +57,51 @@
 % Long equations
 \allowdisplaybreaks
 
-% Paranthese
+% \left \right
 \newcommand{\set}[1]{\left\{#1\right\}}
 \newcommand{\pair}[1]{\left(#1\right)}
-\newcommand{\abs}[1]{\left|#1\right|}
-\newcommand{\norm}[1]{\abs{\abs{#1}}}
+\newcommand{\of}[1]{\left(#1\right)}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \newcommand{\linterv}[1]{\left[#1\right)}
 \newcommand{\rinterv}[1]{\left(#1\right]}
 \newcommand{\interv}[1]{\left[#1\right]}
+\newcommand{\sprod}[1]{\left<#1\right>}
 
 % Shorten commands
 \newcommand{\equivalent}[0]{\Leftrightarrow{}}
 \newcommand{\impl}[0]{\Rightarrow{}}
+\newcommand{\fromto}{\rightarrow{}}
 \newcommand{\definedas}[0]{\coloneqq}
 \newcommand{\definedasbackwards}[0]{\eqqcolon}
 \newcommand{\definedasequiv}[0]{\ratio\Leftrightarrow{}}
-\newcommand{\infinity}[0]{\infty}
 \newcommand{\exclude}[0]{\setminus}
 \renewcommand{\emptyset}{\varnothing}
+\newcommand{\sbset}{\subseteq}
+
+\newcommand{\ntoinf}[0]{n\fromto\infty}
+\newcommand{\toinf}{\fromto\infty}
+\newcommand{\fa}{\;\forall\,}
+\newcommand{\ex}{\;\exists\,}
+\newcommand{\conj}[1]{\overline{#1}}
+
 \newcommand{\annot}[3][]{\overset{\text{#3}}#1{#2}}
 \newcommand{\nn}[0]{\\[2\baselineskip]}
 \newcommand{\anf}[1]{\glqq{}#1\grqq}
-\newcommand{\sprod}[1]{\left<#1\right>}
 \newcommand{\OBDA}{o.B.d.A.}
 \newcommand{\theoremescape}{\leavevmode}
-\newcommand{\fromto}{\rightarrow{}}
 \newcommand{\aligntoright}[2]{\hfill#1\hspace{#2\textwidth}~}
 \newcommand{\horizontalline}[0]{\par\noindent\rule{0.05\textwidth}{0.1pt}\\}
-\newcommand{\ntoinfty}[0]{n\fromto\infty}
 \newcommand{\rgbcolor}[3]{rgb,255:red,#1;green,#2;blue,#3}
-\renewcommand{\Re}{\text{Re}}
-\renewcommand{\Im}{\text{Im}}
-\newcommand{\conj}[1]{\overline{#1}}
+
+\let\Re\relax
+\let\Im\relax
+
+% MathOperators
+\DeclareMathOperator{\grad}{Grad}
+\DeclareMathOperator{\bild}{Bild}
+\DeclareMathOperator{\Re}{Re}
+\DeclareMathOperator{\Im}{Im}
 
 % Mengenbezeichner
 \newcommand{\R}{\mathbb{R}}
@@ -97,6 +110,15 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\K}{\mathbb{K}}
+
+% Unfassbar hässlich, aber effektiv für temporäre schnelle Lösungen
+\def\:={\coloneqq}
+\def\->{\fromto}
+\def\=>{\impl}
+\def\<={\leq}
+\def\>={\geq}
+\def\!={\neq}
+\def\!={\neq}
 
 % Envs
 \newenvironment{induktionsanfang}{
@@ -583,8 +605,8 @@
                 \intertext{Wähle $p=1$}
                 \sum_{j=n+1}^{n+1} a_{j} &= a_{j+1}\\
                 \impl \abs{a_{n+1}} &< \varepsilon\quad \forall n\geq N_{\varepsilon}\\
-                \impl \lim_{\ntoinfty} a_{n+1} &= 0\\
-                \impl \lim_{\ntoinfty} a_{n} &= 0\qedhere
+                \impl \lim_{\ntoinf} a_{n+1} &= 0\\
+                \impl \lim_{\ntoinf} a_{n} &= 0\qedhere
             \end{align*}
         \end{proof}
     \end{korollar}
@@ -742,7 +764,7 @@
         \begin{proof}
             Wir wenden die bereits gezeigt Formel für $e$ an:
             \begin{align*}
-                e &= \lim_{\ntoinfty} \pair{1+\frac{1}{n}}^n\\[10pt]
+                e &= \lim_{\ntoinf} \pair{1+\frac{1}{n}}^n\\[10pt]
                 \pair{1+\frac{1}{n}}^n &= \sum_{k=0}^{n}\binom{n}{k} \pair{\frac{1}{n}}^k\\
                 &= \sum_{k=0}^{n} \frac{n\cdot(n-1)\cdot(n-k+1)}{k!\cdot n^k}\\
                 &= \sum_{k=0}^{n} \frac{1}{k!} \cdot \prod_{j=0}^{k-1} \frac{n-j}{n}\\
@@ -752,10 +774,10 @@
                 \pair{1+\frac{1}{n}}^n &= \sum_{k=0}^{n} \frac{1}{k!} \cdot \prod_{j=0}^{k-1} 1-\frac{j}{n}\\
                 &\geq \sum_{k=0}^{m} \frac{1}{k!}\cdot \prod_{j=0}^{k-1} \pair{1-\frac{j}{n}}\tag{$\forall n>m$}\\
                 \intertext{Wir halten $m\in\N$ fest}
-                \impl e &= \lim_{\ntoinfty} \pair{1+\frac{1}{n}}^n \geq \lim_{\ntoinfty} \sum_{k=0}^{m} \frac{1}{k!}\cdot \prod_{j=0}^{k-1} \pair{1-\frac{j}{n}}\\
-                &= \sum_{k=0}^{m} \frac{1}{k!} \cdot \prod_{j=0}^{k-1} \underbrace{\lim_{\ntoinfty} \pair{1-\frac{j}{n}}}_{=1}\\
+                \impl e &= \lim_{\ntoinf} \pair{1+\frac{1}{n}}^n \geq \lim_{\ntoinf} \sum_{k=0}^{m} \frac{1}{k!}\cdot \prod_{j=0}^{k-1} \pair{1-\frac{j}{n}}\\
+                &= \sum_{k=0}^{m} \frac{1}{k!} \cdot \prod_{j=0}^{k-1} \underbrace{\lim_{\ntoinf} \pair{1-\frac{j}{n}}}_{=1}\\
                 &= \sum_{n=0}^{m} \frac{1}{k!}\tag{$\forall m\in\N$}\\
-                \impl e&\geq \lim_{\ntoinfty} \sum_{k=0}^{m} \frac{1}{k!} = \sum_{k=0}^{\infty} \frac{1}{k!} = e\\
+                \impl e&\geq \lim_{\ntoinf} \sum_{k=0}^{m} \frac{1}{k!} = \sum_{k=0}^{\infty} \frac{1}{k!} = e\\
                 \impl e &\leq e' \land e'\leq e\\
                 \impl e &= e'\qedhere
             \end{align*}
@@ -827,9 +849,9 @@
         \label{satz:wurzelkriterium}
         Sei $(a_n)_n$ eine reelle Folge.
         \begin{enumerate}[label=(\roman*)]
-            \item Ist $\limsup_{\ntoinfty} \sqrt[n]{\abs{a_n}} < 1$, dann konvergiert $\sum_{n=0}^{\infty} a_n$ absolut.
-            \item Ist $\limsup_{\ntoinfty} \sqrt[n]{\abs{a_n}} > 1$, dann ist $\sum_{n=0}^{\infty} a_n$ divergent.
-            \item Ist $\limsup_{\ntoinfty} \sqrt[n]{\abs{a_n}} = 1$, so ist keine Aussage möglich.
+            \item Ist $\limsup_{\ntoinf} \sqrt[n]{\abs{a_n}} < 1$, dann konvergiert $\sum_{n=0}^{\infty} a_n$ absolut.
+            \item Ist $\limsup_{\ntoinf} \sqrt[n]{\abs{a_n}} > 1$, dann ist $\sum_{n=0}^{\infty} a_n$ divergent.
+            \item Ist $\limsup_{\ntoinf} \sqrt[n]{\abs{a_n}} = 1$, so ist keine Aussage möglich.
         \end{enumerate}
         \begin{proof}[Beweis (iii)]
             \begin{align*}
@@ -854,7 +876,7 @@
         \begin{proof}[Beweis (ii)]
             Sei
             \begin{align*}
-                \hat{q}&\definedas \limsup_{\ntoinfty} \sqrt[n]{\abs{a_n}} > 1\\
+                \hat{q}&\definedas \limsup_{\ntoinf} \sqrt[n]{\abs{a_n}} > 1\\
                 \varepsilon &\definedas \frac{\hat{q}-1}{2}>0\\
                 q&\definedas \hat{q}-\varepsilon = \frac{1+\hat{q}}{2} > 1\\
                 \impl \sqrt[n]{\abs{a_n}} &> \hat{q}-\varepsilon \definedasbackwards q > 1\tag{für unendlich viele $n$}\\
@@ -912,7 +934,7 @@
                 \impl\text{ Diese Terme heben sich in $s_n-t_n$ gegenseitig auf, sofern $n\geq M$ ist}\\
                 \impl \abs{s_n-t_n} \leq \sum_{j\geq N+1, j=\sigma{k}\text{ für ein }k\in\set{1,\dots, M}}^{} \abs{a_j}\\
                 \leq \sum_{j=??}^{\infty} \abs{a_j} \leq \varepsilon\\
-                \impl s_n - t_n \fromto 0\text{ für }\ntoinfty
+                \impl s_n - t_n \fromto 0\text{ für }\ntoinf
             \end{align*}
             Da $(s_n)_n$ gegen $s$ konvergiert, konvergiert auch $(t_n)_n$ gegen $s$. Somit konvergiert $\sum_{n=0}^{\infty} b_n$ und hat die selbe Summe wie $\sum_{n=0}^{\infty} a_n$.\\[10pt]
             \anf{$\Leftarrow$} Angenommen $\sum_{n=0}^{\infty} a_n$ ist unbedingt konvergent, aber nicht absolut konvergent.
@@ -1117,7 +1139,7 @@
 
     \begin{beobachtung}[Konvergenz in $\R$ vs $\R^d$]
         Es sei ${x_n}\in\R^d$ mit $x_n = \pair{x_n^1, x_n^2, \dots, x_n^d}$\footnote{Koordinaten von $(x_n)_n$}. Damit ergeben sich die Folgen $(x_n^1)_n$, $(x_n^2)_n$, \dots, $(x_n^d)_n$ in $\R$.
-        Angenommen $(x_n)_n$ konvergiert gegen $x\in\R^d$. Dann konvergieren alle Folgen $(x_n^l)_n$ in $\R$ und $\lim_{\ntoinfty} x_n^l = x^l$
+        Angenommen $(x_n)_n$ konvergiert gegen $x\in\R^d$. Dann konvergieren alle Folgen $(x_n^l)_n$ in $\R$ und $\lim_{\ntoinf} x_n^l = x^l$
 
         \begin{proof}
             \begin{align*}
@@ -1137,8 +1159,8 @@
             ~\\\anf{$\impl$} Gerade gezeigt.\\
             \anf{$\Leftarrow$} Angenommen
             \begin{align*}
-                \exists x^l &\definedas \lim_{\ntoinfty} x^l_n\quad\forall l=1,\dots, d\\
-                \impl \abs{x_n^l - x^l} &\fromto 0 \text{ für }\ntoinfty\quad\forall l=1,\dots, d\colon\\
+                \exists x^l &\definedas \lim_{\ntoinf} x^l_n\quad\forall l=1,\dots, d\\
+                \impl \abs{x_n^l - x^l} &\fromto 0 \text{ für }\ntoinf\quad\forall l=1,\dots, d\colon\\
                 \intertext{Das heißt}
                 \forall\varepsilon > 0~\exists N_l\in\N\colon \abs{x_n^l - x^l} &< \frac{\varepsilon}{\sqrt{d}}\quad\forall n\geq N_{l}
                 \intertext{Wir definieren}
@@ -1148,7 +1170,7 @@
                 &= d\cdot\frac{\varepsilon^2}{d} = \varepsilon^2\\
                 \impl \norm{x_n-x}_2 &< \varepsilon\quad\forall n\geq N
                 \intertext{Wir definieren den Grenzwert}
-                x&\definedas (x^1, x^2, \dots, x^d)\quad x^j\definedas \lim_{\ntoinfty} x_n^j\qedhere
+                x&\definedas (x^1, x^2, \dots, x^d)\quad x^j\definedas \lim_{\ntoinf} x_n^j\qedhere
             \end{align*}
         \end{proof}
     \end{satz}
@@ -1184,8 +1206,8 @@
                 \impl\text{ Alle Koordinaten } &(x_n^j)_n\text{ sind Cauchy-Folgen in }\R\text{, weil}\\
                 \abs{x_n^j-x_m^j} &= \sqrt {\abs{x_n^j-x_m^j}^2} \leq \sqrt {\sum_{l=1}^{d} \abs{x_n^l - x_m^l}^2}\\
                 &= \norm{x_1-x_m}_2\\
-                \impl x_n &\definedas \lim_{\ntoinfty} x_n^j\text{ existiert}\\
-                \impl x &= \lim_{\ntoinfty} x_n\text{ existiert}\qedhere
+                \impl x_n &\definedas \lim_{\ntoinf} x_n^j\text{ existiert}\\
+                \impl x &= \lim_{\ntoinf} x_n\text{ existiert}\qedhere
             \end{align*}
         \end{proof}
 
@@ -1196,7 +1218,7 @@
                 \impl \forall j=1,\dots, d\colon (x_n^j)_n\text{ beschränkte Folge im }\R^d\\
                 \impl \exists\text{ Teilfolge } (x_n^1)_k\text{ von } (x_n^1)_n\text{, welche in }\R\text{ konvergiert}\\
                 \impl \text{ Ausdünnung }\sigma: \N\fromto\N\text{ mit } \sigma(k) < \sigma(k+1)\\
-                n_k \definedas \sigma(k)\quad\text{Existenz des Grenzwert} x_1 \definedas \lim_{\ntoinfty} x_{\sigma(k)}
+                n_k \definedas \sigma(k)\quad\text{Existenz des Grenzwert} x_1 \definedas \lim_{\ntoinf} x_{\sigma(k)}
                 \intertext{Genauso für $\lim (x^2_n)_n$}
                 \annot{\impl}{\ref{satz:bolzano-weierstrass}} \exists \kappa\colon \N\fromto\N\colon (x^2_{\kappa(k)})_k\text{ konvergent}
                 \intertext{Catch: $(x^1_{\sigma(k)}, x^2_{\sigma(k)})_k$ ist im Allgemeinen keine Teilfolge von $(x^1_n, x^2_n)_n$. Lösung betrachte}
@@ -2092,7 +2114,7 @@
 
     \begin{satz} % Satz 5
         Sei $f: D\fromto\R$ (oder $\C$, $\R^d$, $\C^d$) mit $D\subseteq\R$ (oder $\C$).\\
-        Dann gilt $f$ ist genau dann stetig in $x_0$, wenn für alle Folgen $(x_n)_n \subseteq D$, $x_n \fromto x_0$ folgt, dass $f(x_n) \fromto f(x_0)$ für $\ntoinfty$.
+        Dann gilt $f$ ist genau dann stetig in $x_0$, wenn für alle Folgen $(x_n)_n \subseteq D$, $x_n \fromto x_0$ folgt, dass $f(x_n) \fromto f(x_0)$ für $\ntoinf$.
 
         \begin{proof}
             \anf{$\impl$} $f$ ist stetig in $x_0$. Dann gilt
@@ -2278,7 +2300,7 @@
     \end{korollar}
 
     \begin{beispiel}
-        $f: \R \fromto\R,~x\mapsto \frac{1}{x^2+1}$ stetig. $Bild(f) = f(\R) = \linterv{0,1}$ nicht kompakt.
+        $f: \R \fromto\R,~x\mapsto \frac{1}{x^2+1}$ stetig. $\bild(f) = f(\R) = \linterv{0,1}$ nicht kompakt.
     \end{beispiel}
 
     \begin{satz}[Weiherstraß' Hauptlehrsatz]
@@ -2304,7 +2326,7 @@
                 Wähle $\varepsilon = \frac{1}{n} \impl x_n \in K,~f(x_n) > M - \frac{1}{n}$\\
                 $\impl \exists$ maximierende Folge $(x_n)_n\subseteq K$ mit
                 \begin{align*}
-                \underbrace{M-\frac{1}{n}}_{\fromto M} < f(x_n) \leq M
+                    \underbrace{M-\frac{1}{n}}_{\fromto M} < f(x_n) \leq M
                 \end{align*}
                 das heißt nach Satz~\ref{satz:sandwich} $f(x_n)\fromto M$ für $n\fromto\infty$.\\
                 $K$ kompakt $\impl (x_n)_n)$ hat eine konvergente Teilfolge. und $(x_{n_j})_j$ hat Grenzwert $\overline{x}\definedas \lim_{j\fromto\infty} x_{n_j}$.\\
@@ -2318,7 +2340,7 @@
             Schritt 2: Entweder nehme minimierende Folge $(y_n)_n$, $m\leq f(y_n) \leq m-\frac{1}{n}$. Dann Teilfolge etc.\\
             Oder: Wende Schritt 1 auf $H: K\fromto\R,~x\fromto -f(x)$ an.
         \end{proof}
-        
+
         \begin{beispiel}
             \begin{align*}
                 f(x) &= \frac{1}{x^2+1}
@@ -2329,7 +2351,10 @@
     \end{satz}
 
     \newpage
+
+
     \section{[*] Grenzwerte von Funktionen}
+
     \subsection{[*]}
     \thispagestyle{pagenumberonly}
     \begin{definition}[Häufungspunkt]
@@ -2407,7 +2432,7 @@
         \begin{align*}
             \lim_{n\fromto x_0} f(x) = a\quad\equivalent\quad \lim_{n\fromto x_0} f_j(x) = a_j\tag{für alle $1\leq j\leq d$}
         \end{align*}
-        
+
         \begin{proof}
             Sei $\abs{f(x)-a}$ Eukldischer Abstand von $f(x)$ zu $a$.
             \begin{align*}
@@ -2416,7 +2441,7 @@
             \end{align*}
         \end{proof}
     \end{lemma}
-    
+
     \begin{satz} % Satz 5
         Es sei $D\subseteq \R, f,g: D\fromto \C$ und $ \lim_{x\fromto x_0} f(x) = a$, $\lim_{x\fromto x_0} g(x) = b$. So folgt
         \begin{enumerate}[label=(\alph*)]
