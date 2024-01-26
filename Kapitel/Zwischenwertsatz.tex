@@ -1,0 +1,69 @@
+\setcounter{subsection}{1}
+\thispagestyle{pagenumberonly}
+
+Stetigkeit sagt uns, dass die Werte, die eine Funktion für nahe $x_1$ und $x_2$ annimmt, nah beieinander liegen. Können wir also davon ausgehen, dass eine beliebige stetige Funktion, die zwei unterschiedliche Werte hat, auch alle Werte dazwischen annimmt?
+
+\begin{beispiel}[Fehlende Zwischenwerte für nicht-reelle stetige Funktionen]
+    Die Funktion
+    \begin{minipage}{.5\textwidth}
+        \begin{align*}
+            f: \Q &\fromto \R\\
+            x &\mapsto
+            \begin{cases}
+                1\quad &x^2 > 2\\
+                -1\quad &x^2 < 2
+            \end{cases}
+        \end{align*}
+    \end{minipage}
+    \begin{minipage}{.5\textwidth}
+        \centering
+        \begin{figure}[H]
+            \begin{tikzpicture}
+                \draw[->] (-3,0) -- (3,0);
+                \draw[->] (0,-1.25) -- (0,1.25);
+                \draw (-3, 0.6) -- (-1, 0.6);
+                \draw (1, 0.6) -- (3, 0.6);
+                \draw (-1, -0.6) -- (1, -0.6);
+                \draw[dotted] (-1, 0.6) -- (-1, -0.6) node[above] {\footnotesize$-\sqrt{2}~~$};
+                \draw[dotted] (1, 0.6) -- (1, -0.6) node[above] {\footnotesize$\sqrt{2}$};
+            \end{tikzpicture}
+        \end{figure}
+    \end{minipage}
+    nimmt nur die Werte $-1$ und $1$ an, aber ist eine stetige Funktion auf $\Q$, weil $\sqrt{2}\not\in\Q$. (Übung)
+\end{beispiel}
+
+\begin{satz}[Zwischenwertsatz] % Satz 1
+    \label{satz:zwischenwertsatz}
+    Sei $f: \interv{a,b}\fromto\R$ stetig und $f(a)\neq f(b)$. Dann gibt es zu jedem $c$ zwischen $f(a)$ und $f(b)$ (d.h. $f(a) < c < f(b)$ oder $f(b) < c < f(a)$) ein $\zeta\in\interv{a,b}$ mit $f(\zeta) = c$.
+
+    \begin{proof}
+        O.B.d.A. sei $f(a) < f(b)$ (sonst ersetzen wir $f$ durch $-f$).\\[10pt]
+        Schritt 1: Sei $f(a) < 0 < f(b)$ und $c=0$. Wir setzen $M\definedas\set{x\in\interv{a,b}: f(x) < 0}$. Dann ist $a\in M \impl M\neq\emptyset$. Wir setzen $\zeta\definedas \sup M\in\R$.\\
+        Angenommen $f(\zeta) \neq 0$. Dann gilt indirekt nach Lemma~\ref{lemma:abschaetzung-stetigkeit}\footnote{Die gleiche Aussage lässt sich auch direkt über das $\varepsilon$-$\delta$-Kriterium und Stetigkeit zeigen}
+        \begin{align*}
+            \impl \exists \delta > 0~\forall x\in\pair{\zeta-\delta, \zeta+\delta} \cap\interv{a,b} \text{ hat } f(x) \text{ das gleiche Vorzeichen wie } f(\zeta)\tag{1}
+        \end{align*}
+        1. Fall: $f(\zeta)>0$.
+        \begin{align*}
+            \annot{\impl}{(1)} \exists \delta > 0\colon f(x) &> 0\quad\forall x\in\interv{a,b}\cap\pair{\zeta-\delta, \zeta+\delta}\\
+            \impl f(x) &> 0\quad\fa \zeta-\frac{\delta}{2} \leq x \leq \min\set{b, \zeta+\delta}
+            \intertext{Da $\zeta$ eine obere Schranke für $M$ ist, muss dann auch $\zeta-\frac{\delta}{2}$ eine obere Schranke für $M$ sein, weil die Werte von $f$ dazwischen positiv bleiben.}
+            \impl \zeta-\frac{\delta}{2} &\text{ ist kleinere obere Schranke für } M \text{ als } \zeta\tag{Widerspruch}
+        \end{align*}
+        2. Fall: $f(\zeta) < 0$.
+        \begin{align*}
+            \annot[{&}]{\impl}{(1)} \exists\delta > 0\colon f(x) < 0 \quad\forall x\in\interv{a,b}\cap \pair{\zeta-\delta, \zeta+\delta}
+            \intertext{Wir können \OBDA annehmen, dass $\zeta+\delta \leq b$}
+            &\impl f\of{\zeta+\frac{\delta}{2}} < 0 \impl \zeta+\frac{\delta}{2}\in M\\
+            &\impl \zeta \text{ keine obere Schranke in } M
+        \end{align*}
+        Damit ist $f\of{\zeta} = 0$.\\[10pt]
+        Schritt 2: Wenn wir ein $c'\neq 0$ zwischen $f(a)$ und $f(b)$ wählen wollen, können wir unsere Funktion einfach um $c'$ verschieben und dann gilt nach Schritt 1, dass $f(\zeta) - c' = 0 \impl f(\zeta) = c'$.
+    \end{proof}
+\end{satz}
+
+\begin{bemerkung}
+    Dieser Satz funktioniert nicht auf $\C$, da wir die Anordnung der reellen Zahlen verwenden und funktioniert nach dem vorherigen Beispiel nicht auf unvollständigen Mengen.
+\end{bemerkung}
+
+\newpage

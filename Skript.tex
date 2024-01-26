@@ -88,7 +88,7 @@
 \newcommand{\annot}[3][]{\overset{\text{#3}}#1{#2}}
 \newcommand{\nn}[0]{\\[2\baselineskip]}
 \newcommand{\anf}[1]{\glqq{}#1\grqq}
-\newcommand{\OBDA}{o.B.d.A.}
+\newcommand{\OBDA}{o.B.d.A. }
 \newcommand{\theoremescape}{\leavevmode}
 \newcommand{\aligntoright}[2]{\hfill#1\hspace{#2\textwidth}~}
 \newcommand{\horizontalline}[0]{\par\noindent\rule{0.05\textwidth}{0.1pt}\\}
@@ -1919,434 +1919,138 @@
     \newpage
 
 
-    \section{[*] Stetige Funktionen einer reellen (oder komplexen) Variablen}
+    \section{Stetige Funktionen einer reellen (oder komplexen) Variablen}
+    \input{Kapitel/Stetigkeit}
 
-    \setcounter{subsection}{1}
+
+    \section{Der Zwischenwertsatz}
+    \input{Kapitel/Zwischenwertsatz}
+
+
+    \section{[*] Der Satz von Weierstraß}
     \thispagestyle{pagenumberonly}
-    Sei $D\subseteq \R$ (oder $D\subseteq \C$, wenn wir eine komplexe Funktion betrachten) und $D\neq\emptyset$. Außerdem sei $\K = \R$ oder $\C$ (Körper).
 
-    \begin{definition}[$\varepsilon-\delta$ Definition von Stetigkeit]
-        Sei $f: D \fromto \K$. Die Funktion $f$ heißt stetig in $x_0$, falls
+    \subsection{Beschränkte, abgeschlossene und kompakte Mengen}
+
+    \begin{definition}[Beschränkte Mengen] % Definition 1
+        Eine Menge $A\subseteq\R$ ist beschränkt, falls
         \begin{align*}
-            \forall \varepsilon > 0~\exists \delta > 0\colon \abs{f(x)-f(x_0)} < \varepsilon \text{ für alle } x\in D \text{ mit } \abs{x-x_0} < \delta
+            \exists R>0\colon &A\subseteq\pair{-R, R}
+            \intertext{bzw. eine Menge $A\sbset\C$ ist beschränkt, falls}
+            \exists R>0\colon &A\subseteq B_R(0) \definedas\set{z\in\C: \abs{z} < R}
         \end{align*}
-        $f$ ist stetig in $D$, falls es in jedem Punkt $x_0\in D$ stetig ist.
     \end{definition}
 
-    \begin{bemerkung}
-        \theoremescape
-        \begin{enumerate}[label=\arabic*)]
-            \item Wir können Stetigkeit auch etwas anschaulicher betrachten: $x$ ist der Input, $f(x)$ der Output. $f$ ist genau dann stetig in $x_0$, wenn der Output $f(x)$ $\varepsilon$-nahe bei $f(x_0)$ ist, sofern Input $x$ $\delta$-nahe bei $x_0$ ist.
-            \item Eine Funktion $f: D\fromto\K^d$ ist stetig in $x_0\in D$, falls
-            \begin{align*}
-                \forall \varepsilon>0~\exists\delta>0\colon \underbrace{\norm{f(x)-f(x_0)}}_{\text{Norm}} &< \varepsilon\qquad \forall x\in D\colon \abs{x-x_0} <\delta
-                \intertext{oder $f:D\fromto V$ (dabei sei $V$ Vektorraum mit Norm $\norm{\cdot}$) ist stetig in $x_0$, falls}
-                \forall \varepsilon>0~\exists\delta>0\colon \norm{f(x)-f(x_0)} &< \varepsilon\qquad \forall x\in D\colon \abs{x-x_0} <\delta
-            \end{align*}
-            \item Stetigkeit ist eine lokale Eigenschaft.
-        \end{enumerate}
-    \end{bemerkung}
-
-    \begin{beispiel}[Dirichlet-Funktion]
-        Die Funktion
-        \begin{align*}
-            f(x) &\definedas \begin{cases}
-                                 1\quad &x\in\Q\\
-                                 0\quad &x\in\R\exclude\Q
-            \end{cases}
-        \end{align*}
-        ist nirgends stetig auf $\R$.
-    \end{beispiel}
-    \begin{beispiel}
-        Die Funktion
-        \begin{align*}
-            f(x) &\definedas \begin{cases}
-                                 x\quad &x\in\Q\\
-                                 0\quad &x\in\R\exclude\Q
-            \end{cases}
-        \end{align*}
-        ist nur stetig in $x_0=0$.
-    \end{beispiel}
-    \begin{beispiel}
-        \begin{align*}
-            f(x) &\definedas \begin{cases}
-                                 \sin\pair{\frac{1}{x}}\quad &x\neq 0\\
-                                 0\quad &x = 0
-            \end{cases}
-        \end{align*}
-        ist nicht stetig in 0.
-    \end{beispiel}
-
-    \newpage
-
-    \begin{lemma} % Lemma 2
-        \label{lemma:abschaetzung-stetigkeit}
-        Ist $f:D\fromto\K$ (oder $\K^d$) stetig in $x_0\in D$. Dann gilt
-        \begin{enumerate}[label=\arabic*.]
-            \item $\exists \delta > 0$ mit $\abs{f(x)}\leq 1+\abs{f(x_0)}$\quad$\forall x\in D\colon \abs{x-x_0} < \delta$
-            \item Ist $f(x_0) \neq 0$ dann existiert ein $\delta>0$ sodass
-            \begin{align*}
-                \frac{1}{2}\abs{f(x_0)} &\leq \abs{f(x)} \leq \frac{3}{2} \abs{f(x_0)} \text{ für } x\in D \text{ mit } \abs{x-x_0} < \delta
-            \end{align*}
-        \end{enumerate}
-
-        \begin{proof}[Beweis (1.)]
-            Wähle $\varepsilon = 1$
-            \begin{align*}
-                \impl \exists\delta > 0\colon \abs{f(x)-f(x_0)} &< \varepsilon\quad x\in D,~\abs{x-x_0} < \delta\\[10pt]
-                \impl \abs{f(x)} &= \abs{f(x)-f(x_0)+f(x_0)}\\
-                &\leq \underbrace{\abs{f(x)-f(x_0)}}_{< 1} + \abs{f(x_0)}\leq 1 + \abs{f(x_0)}\qedhere
-            \end{align*}
-        \end{proof}
-        \begin{proof}[Beweis (2.)]
-            Ist $f(x_0) \neq 0$, wähle $\varepsilon = \frac{1}{2}\cdot\abs{f(x_0)} > 0$, $\delta > 0$.
-            \begin{align*}
-                \abs{f(x)-f(x_0)} &< \varepsilon = \frac{1}{2} \abs{f(x_0)} \tag{$x\in D, \abs{x-x_0} < \delta$}\\[10pt]
-                \impl \abs{f(x)} &= \abs{f(x_0)+f(x)-f(x_0)}\\
-                &\leq \abs{f(x_0)} + \abs{f(x) - f(x_0)}\\
-                &\leq \abs{f(x_0)}+\frac{1}{2}\abs{f(x_0)} = \frac{3}{2}\abs{f(x_0)}\\[10pt]
-                \abs{f(x)} &= \abs{f(x_0)+f(x)-f(x_0)}\\
-                &\geq \abs{f(x_0)} - \abs{f(x)-f(x_0)}\\
-                &\geq \abs{f(x_0)} - \frac{1}{2} \abs{f(x_0)} = \frac{1}{2}\abs{f(x_0)}\qedhere
-            \end{align*}
-        \end{proof}
-    \end{lemma}
-
-    \begin{notation}
-        Seien
-        \begin{align*}
-            f&: D_f \fromto \K\\
-            g&: D_g \fromto \K
-        \end{align*}
-        Wir definieren
-        \begin{align*}
-            D_{f+g} &\definedas D_f \cap D_g\\
-            D_{\frac{f}{g}} &\definedas D_{f+g} \exclude\set{x\in D_g: g(x)=0}
-        \end{align*}
-        und setzen
-        \begin{align*}
-            f + g: D_{f+g} &\fromto \K,\quad x \mapsto  f(x) + g(x)\\
-            f \cdot g: D_{f+g} &\fromto \K,\quad x \mapsto  f(x) \cdot g(x)\\
-            \frac{f}{g}: D_{\frac{f}{g}} &\fromto \K,\quad x \mapsto \frac{f(x)}{g(x)}
-        \end{align*}
-    \end{notation}
-
-    \begin{bemerkung}
-        $f+g$ geht auch für $f: D_f \fromto \K^d$, $g: D_g \fromto \K^d$. $f\cdot g$ und $\frac{f}{g}$ gehen auch für $f: D_f \fromto \K^d$, $g: D_g \fromto \K$.
-    \end{bemerkung}
-
-    \newpage
-
-    \begin{satz} % Satz 3
-        \label{satz:stetigkeit-arithmetik}
-        Seien $f, g: D\fromto \K$ stetig in $x_0\in D$. Dann gilt
-        \begin{enumerate}[label=\arabic*.]
-            \item $f+g: D\fromto\K,~x\mapsto f(x)+g(x)$ ist stetig in $x_0$.
-            \item $f\cdot g: D\fromto\K,~x\mapsto f(x)\cdot g(x)$ ist stetig in $x_0$.
-            \item Ist $g(x_0)\neq 0$, dann ist $\frac{f}{g}: D_{\frac{f}{g}}\fromto\K,~x\mapsto \frac{f(x)}{g(x)}$ stetig in $x_0$.
-        \end{enumerate}
-
-        \begin{proof}[Beweis (1.)]
-            \begin{align*}
-                \abs{f(x)+g(x)-(f(x_0)+g(x_0))} &\leq \abs{f(x)-f(x_0)} + \abs{g(x)-g(x_0)}
-                \intertext{Nach der Stetigkeit der beiden einzelnen Funktionen gilt}
-                \forall\varepsilon>0~\exists \delta_1, \delta_2 > 0\colon \abs{f(x)-f(x_0)} &< \frac{\varepsilon}{2}\tag{$x\in D, \abs{x-x_0} < \delta_1$}\\
-                \abs{g(x)-g(x_0)} &< \frac{\varepsilon}{2}\tag{$x\in D, \abs{x-x_0} < \delta_2$}
-                \intertext{Ist $\delta\definedas\min \set{\delta_1, \delta_2} > 0$}
-                \impl \forall\varepsilon>0\colon \abs{f(x)+g(x)-(f(x_0)+g(x_0))} &< \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon\tag{$x\in D, \abs{x-x_0} < \delta$}
-            \end{align*}
-        \end{proof}
-
-        \begin{proof}[Beweis (2.)]
-            Aus Lemma~\ref{lemma:abschaetzung-stetigkeit} folgt
-            \begin{align*}
-                \exists \delta_0 > 0\colon \abs{g(x)} &\leq 1 + \abs{g(x_0)} \qquad\forall x\in D\colon \abs{x-x_0} < \delta_0
-                \intertext{Mit der Stetigkeit von $f$ und $g$ in $x_0$ gilt}
-                \forall\varepsilon >0~\exists \delta_1, \delta_2 > 0\colon \abs{f(x)-f(x_0)} &< \frac{\varepsilon}{2\cdot(1+\abs{g(x_0)})}\tag{$x\in D, \abs{x-x_0} < \delta_1$}\\
-                \abs{g(x)-g(x_0)} &< \frac{\varepsilon}{2\cdot(1+\abs{f(x)})}\tag{$x\in D, \abs{x-x_0} < \delta_2$}
-                \intertext{Wir definieren $\delta\definedas \min(\delta_0, \delta_1, \delta_2)$}
-                \impl \abs{f(x)\cdot g(x)-(f(x_0)\cdot g(x_0))} &\leq \abs{f(x)-f(x_0)}\cdot\abs{g(x)} + \abs{f(x_0)}\cdot\abs{g(x)-g(x_0)}\\
-                &\leq \frac{\varepsilon}{2\cdot(1+\abs{g(x_0)})}\cdot \abs{g(x)} + \frac{\varepsilon}{2\cdot(1+\abs{f(x)})}\cdot \abs{f(x_0)}\\
-                &\leq \frac{\varepsilon}{2\cdot(1+\abs{g(x_0)})}\cdot \pair{1+\abs{g(x_0)}} + \frac{\varepsilon}{2\cdot(1+\abs{f(x)})}\cdot \pair{1+\abs{f(x)}}\\
-                &\leq \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon\tag{$x\in D, \abs{x-x_0} < \delta$}
-            \end{align*}
-        \end{proof}
-
-        \begin{proof}[Beweis (3.)]
-            Es reicht aus, zu zeigen, dass $\frac{1}{g(x)}$ in $x_0$ stetig ist. Dann können wir (2.) anwenden. Wir wählen den Ansatz
-            \begin{align*}
-                \abs{\frac{1}{g(x)} - \frac{1}{g(x_0)}} &= \frac{\abs{g(x_0)-g(x)}}{\abs{g(x)\cdot g(x_0)}}
-            \end{align*}
-            und schätzen den Term geschickt ab.
-        \end{proof}
-        \begin{uebung}
-            Beweisen Sie Teil (3.) des vorherigen Satzes mit einer geschickten Abschätzung.
-        \end{uebung}
-    \end{satz}
-
-    \newpage
-
-    %%%%%%%%%%%%%%%%%%%%%%%%
-    % 23. Januar 2023
-    %%%%%%%%%%%%%%%%%%%%%%%%
-
-    \begin{satz}[Stetigkeit von Polynomen]
-        \marginnote{[23. Jan]}
-        Für eine stetige Funktion $f$ und eine Zahl $a$, ist auch $a\cdot f$ stetig. Außerdem ist nach Satz~\ref{satz:stetigkeit-arithmetik} $x^2$ bzw. $z^2$ stetig. Es lässt sich induktiv zeigen, dass $x^n$ bzw. $z^n$ damit auch stetig sein müssen.\\
-        Daraus folgt, dass alle Polynome (in $\K$) stetig auf ganz $\K$ sind. Außerdem ist für $P,Q$ Polynome mit $Q(x)\neq 0$ auch die Funktion
-        \begin{align*}
-            R(x) &= \frac{P(x)}{Q(X)}
-        \end{align*}
-        stetig auf $\K\exclude\set{x\in\K: Q(x) = 0}$.
-    \end{satz}
-
-    \begin{korollar}
-        Alle Polynome (reell oder komplex) sind stetig und alle polynomiellen Funktionen $R(x) = \frac{P(x)}{Q(x)}$ sind stetig auf $D_R = \K\exclude\set{x\in\K: Q(x) = 0}$.
-    \end{korollar}
-
-    \begin{uebung}[Stetigkeit von Exponentialfunktionen]
-        Es gilt
-        \begin{align*}
-            e^x-e^0 &= e^x - 1 = \sum_{n=0}^{\infty} \frac{x^n}{n!}-1 = \sum_{n=1}^{\infty} \frac{x^n}{n!}
-        \end{align*}
-        Weisen Sie basierend auf dieser Gleichung und den Abschätzungen für Potenzreihen die Stetigkeit der Funktion $e^x$ zunächst im Punkt $x_0 = 0$ und dann auf ganz $\R$ nach.
-    \end{uebung}
-
-    \begin{satz} % Satz 5
-        Sei $f: D\fromto\R$ (oder $\C$, $\R^d$, $\C^d$) mit $D\subseteq\R$ (oder $\C$).\\
-        Dann gilt $f$ ist genau dann stetig in $x_0$, wenn für alle Folgen $(x_n)_n \subseteq D$, $x_n \fromto x_0$ folgt, dass $f(x_n) \fromto f(x_0)$ für $\ntoinf$.
-
-        \begin{proof}
-            \anf{$\impl$} $f$ ist stetig in $x_0$. Dann gilt
-            \begin{align*}
-                \forall\varepsilon > 0~\exists\delta>0\colon \abs{f(x)-f(x_0)} < \varepsilon\tag{für $x\in D$, $\abs{x-x_-0}<\delta$}
-                \intertext{Sei $(x_n)_n\subseteq D$ Folge mit Werten aus $D$ mit $x_n\fromto x_0$. Das heißt}
-                \forall \varepsilon > 0~\exists N\in\N\colon \abs{x_n-x_0} < \varepsilon\quad\forall n\geq N\\
-                \intertext{Gegeben $\varepsilon$ verwenden wir die Stetigkeits-Eigenschaften}
-                \exists \delta>0\colon \abs{f(x)-f(x_-0)} < \varepsilon\quad \forall x\in D\colon \abs{x-x_0} < \delta\\
-                \intertext{nehmen $\hat{\varepsilon} = \delta$}
-                \impl \exists N\in\N\colon \abs{x_n-x_0} < \delta\quad\forall n\geq N\\
-                \impl \abs{f(x_n)-f(x_0)} < \varepsilon\quad\forall n\geq N_0
-            \end{align*}
-            Mit der Definition der Konvergenz folgt dann $f(x_n) \fromto f(x_0)$.\\[10pt]
-            \anf{$\Leftarrow$} Kontraposition. Annahme $f$ ist nicht stetig in $x_0$.
-            \begin{align*}
-                \impl \exists \varepsilon > 0~\forall \delta > 0\colon \exists x\in D, \abs{x-x_0} < \delta \text{ und } \abs{f(x)-f(x_0)} \geq \varepsilon > 0
-                \intertext{Wählen $\delta = \frac{1}{n}$, $n\in\N$}
-                \impl \exists x_n\in D\colon \abs{x_n-x_0} < \frac{1}{n} \text{ und } \abs{f(x_n)-f(x_0)} \geq \varepsilon\\
-                \impl \text{ Haben } (x_n)_n\subseteq D, x_n \fromto x_0 \text{ und } f(x_n)\not\fromto f(x_0)
-            \end{align*}
-        \end{proof}
-    \end{satz}
-
-    \begin{satz} % Satz 6
-        \label{satz:verkettung-stetigkeit}
-        Sei $f: D_f \fromto\R$, $D_g\subseteq\R$, $g: D_g\fromto\R$. und $f(D_f)\subseteq D_g$.\\
-        Sind $f$ stetig in $x_0$ und $g$ stetig in $y_0=f(x_0)\in D_g$. Dann ist $g\circ f: D_f\fromto\R$ stetig in $x_0$.
-
-        \begin{proof}
-            Sei $(x_n)_n\subseteq D_f$ mit $x_n\fromto x_0$. Dann folgt aus dem vorherigen Satz, dass $f(x_n) \fromto f(x_0) = y_0$.\\
-            \begin{align*}
-                y_n\fromto y_0 \text{ stetig in } y\\
-                \intertext{Nach dem vorherigen Satz folgt}
-                \impl g(f(x_n)) g(y_n) \fromto g(y_0) = g(f(x_0))\\
-                \impl g\circ f \text{ ist stetig }
-            \end{align*}
-        \end{proof}
-    \end{satz}
-
-    \begin{uebung}
-        Zeigen Sie Satz~\ref{satz:verkettung-stetigkeit} mit dem $\varepsilon$-$\delta$-Kriterium der Stetigkeit.
-    \end{uebung}
-
-    \newpage
-
-
-    \section{[*] Zwischenwertsatz}
-
-    \subsection{[*]}
-    \thispagestyle{pagenumberonly}
-
-    % Erklärung für den Zwischenwertsatz
-
-    \begin{beispiel}
-        Die Funktion
-        \begin{align*}
-            f: \Q &\fromto \R\\
-            x &\mapsto
-            \begin{cases}
-                1\quad x^2 &> 2\\
-                -1\quad x^2 &< 2
-            \end{cases}
-        \end{align*}
-        ist eine stetige Funktion auf $\Q$.
-    \end{beispiel}
-
-    \begin{satz}[Zwischenwertsatz] % Satz 1
-        Sei $f: \interv{a,b}\fromto\R$ stetig, $f(a)\neq f(b)$. Dann gibt es zu jedem $c$ zwischen $f(a)$ und $f(b)$ (d.h. $f(a) < c < f(b)$ oder $f(b) < c < f(a)$) ein $\zeta$ zwischen $a$ und $b$ ($a<\zeta < b$) mit $f(\zeta) = c$.\\
-        Dieser Satz funktioniert nicht auf $\C$, da wir die Anordnung der reellen Zahlen verwenden und funktioniert nach dem vorherigen Beispiel nicht auf unvollständigen Mengen.
-
-        \begin{proof}
-            \OBDA sei $f(a) < f(b)$ (sonst ersetzen wir $f$ durch $-f$).\\
-            Schritt 1: Sei $f(a) < 0 < f(b)$ und $c=0$. Wir setzen $M\definedas\set{x\in\interv{a,b}: f(x) < 0}$.
-            \begin{align*}
-                \impl\Bigg\{\begin{split}
-                                a\in M \text{ das heißt } M\neq\emptyset\\
-                                \forall m\in M\colon m \leq b
-                \end{split}
-                \intertext{Setzen $\zeta\definedas \sup M\in\R$. Behauptung: $f(\zeta) = 0$. Beobachtung: $f$ ist stetig auf $\interv{a,b}$ und angenommen $f(\zeta)\neq 0$}
-                \impl \exists \delta > 0~\forall x\in\pair{\zeta-\delta, \zeta+\delta} \cap\interv{a,b} \text{ hat } f(x) \text{ das gleiche Vorzeichen wie } f(\zeta)
-                \intertext{Nehmen $\varepsilon = \abs{f(\zeta)} > 0$}
-                \impl \exists\delta > 0\colon \abs{f(x)-f(\zeta)} < \abs{f(\zeta)}\\
-                ???
-            \end{align*}
-            1. Fall: $f(\zeta)>0$. Insbesondere $\zeta > a$. Aus der Beobachtung folgt
-            \begin{align*}
-                \exists \delta > 0\colon f(x) > 0\quad\forall x\in\interv{a,b}\cap\pair{\zeta-\delta, \zeta+\delta}\\
-                f(x) > 0\quad\forall \zeta - \frac{\delta}{2}\leq x \leq \max\set{b, \zeta + \delta}\\
-                \impl \zeta-\frac{\delta}{2} \text{ ist auch obere Schranke für } M\\
-                \impl \text{$\zeta$ ist aber kleinste obere Schranke für $M$. Widerspruch}
-            \end{align*}
-            2. Fall: $f(\zeta) < 0$.
-            \begin{align*}
-                \impl \exists\delta > 0\colon f(x) < 0 \quad\forall x\in\interv{a,b}\cap \pair{\zeta-\delta, \zeta+\delta}\\
-                \impl f(\zeta + \frac{\delta}{2}) < 0 \impl \text{ $\zeta$ ist keine obere Schranke für $M$. Widerspruch }
-            \end{align*}
-            Damit ist $f(\zeta) = 0$.
-        \end{proof}
-    \end{satz}
-
-    \newpage
-
-
-    \section{[*] Satz von Weierstraß}
-
-    \subsection{[*]}
-    \thispagestyle{pagenumberonly}
-
-    \begin{definition} % Definition 1
-        Eine Menge $A\subseteq\R$ (oder $\C$) ist beschränkt, falls
-        \begin{align*}
-            \exists R>0\colon A\subseteq\pair{-R, R}
-            \intertext{bzw}
-            A\subseteq B_R(?) \definedas\set{z\in\C: \abs{z} < R}
-        \end{align*}
-        $A$ ist abgeschlossen, falls für jede Folge $(x_n)_n\subseteq A$, welche konvergiert auf $ \lim_{n\fromto\infty} x_n \in A$.\\
+    \begin{definition}[Abgeschlossene Mengen]
+        Eine Menge $A$ ist abgeschlossen, falls für jede konvergente Folge $(x_n)_n\subseteq A$ gilt, dass $\lim_{n\fromto\infty} x_n \in A$.
     \end{definition}
 
     \begin{beispiel}
-        $\interv{a,b}$ ist abgeschlossen und beschränkt. $\pair{0,1}$ ist nicht abgeschlossen.
+        $\interv{a,b}$ ist abgeschlossen und beschränkt für $-\infty < a < b < \infty$. $\pair{0,1}$ ist beschränkt, aber nicht abgeschlossen.
     \end{beispiel}
 
-    \begin{definition} % Definition 2
+    \begin{definition}[Kompakte Mengen] % Definition 2
         $K\subseteq\R$ (oder $\C$) ist kompakt, falls jede Folge $(x_n)_n\subseteq K$ eine in $K$ konvergente Teilfolge besitzen. Das heißt
-        \begin{enumerate}[label=(\alph*)]
-            \item $(x_N)_n$ hat konvergente Teilfolge und
-            \item den Grenzwert $ \lim_{j\fromto\infty} x_n \in K$
+        \begin{enumerate}[label=\arabic*.]
+            \item $(x_n)_n$ hat konvergente Teilfolge $(x_{n_j})_j$ und
+            \item Der Grenzwert der Teilfolge $\lim_{j\fromto\infty} x_{n_j} \in K$
         \end{enumerate}
     \end{definition}
 
     \begin{satz} % Satz 3
-        $K\subseteq\R$ (oder $\C$) ist genau dann kompakt, wenn $K$ abgeschlossen und beschränkt ist.
+        \label{satz:kompaktheit}
+        $K\subseteq\K$ ist genau dann kompakt, wenn $K$ abgeschlossen und beschränkt ist.
 
         \begin{proof}
-            \anf{$\Leftarrow$}: $K$ ist abgeschlossen und beschränkt. Und $(x_n)_n\subseteq K$ sei beliebige Folge in $K$.
+            \anf{$\Leftarrow$}: $K$ ist abgeschlossen und beschränkt. Und $(x_n)_n\subseteq K$ sei beliebige Folge in $K$. Dann ist $(x_n)_n$ beschränkte Folge. Nach Korollar~\ref{korollar:beschr-konv-teilfolge} existiert eine konvergente Teilfolge $(x_{n_j})_j$ von $(x_n)_n$. Da $K$ abgeschlossen ist, gilt
             \begin{align*}
-                \impl (x_n)_n \text{ ist beschränkte Folge }
-                \impl \exists \text{ konvergente Teilfolge } (x_{n_j})_j \text{ von } (x_n)_n\\
-                \intertext{$K$ ist abgeschlossen. Das heißt}
-                x = \lim_{j\fromto\infty} x_{n_j} \in K\\
-                \impl K \text{ ist kompakt }
+                \lim_{j\toinf} x_{n_j}\in K
             \end{align*}
-            \anf{$\impl$}: Sei $K$ kompakt. Dann ist $K$ auch abgeschlossen. (Warum?)\\
-            $K$ ist auch beschränkt. Wenn $K$ nicht beschränkt ist existiert für jedes $n\in\N$ ein $x_n\in K$ mit $\abs{x_n} > n$.\\
-            Die Folge $(x_n)_n$ hat dann aber keine konvergente Teilfolge.
+            \anf{$\impl$}: Sei $K$ kompakt. Dann ist $K$ auch abgeschlossen. (Folgt aus Definition)\\
+            Wenn $K$ nicht beschränkt wäre, existiert für jedes $n\in\N$ ein $x_n\in K$ mit $\abs{x_n} > n$. Die Folge $(x_n)_n$ hat dann aber keine konvergente Teilfolge.
         \end{proof}
     \end{satz}
+
+    \subsection{Kompaktheit unter Abbildungen}
 
     \begin{satz} % Satz 4
-        Sei $K\subseteq\R$ (oder $\C$) und $f: K\fromto\R$ (oder $\C$) stetig. Dann ist $f(K)$ kompakt.
+        \label{satz:kompaktheit-unter-abbildung}
+        Sei $K\subseteq\K$ kompakt und $f: K\fromto\K$ stetig. Dann ist $f(K) = \set{f(x): x\in K}$ kompakt.
         \begin{proof}
-            Sei $(y_n)_n$ Folge in $f(k)$. $f(K) \definedas\set{f(x): x\in K}$\\
-            $\impl \forall n\in\N~\exists x_n\in K\colon f(x_n) = y_n$. Nach Definition existiert eine Teilfolge $(x_{n_j})_j$ von $(x_n)_n$, welche gegen ein $x_0\in K$ konvergiert.
+            Sei $(y_n)_n$ Folge in $f(K)$, also $(y_n)_n\sbset\bild\of{f}$. Dann folgt
             \begin{align*}
-                x_{n_j} \fromto x_0 \in K\\
-                y_{n_j} \definedas f(x_{n_j})
+                \impl \fa n\in\N\ex& x_n\in K\colon f(x_n) = y_n
+                \intertext{Nach Kompaktheit von $K$ existiert eine Teilfolge $(x_{n_j})_j$ von $(x_n)_n$ welche gegen ein $x_0\in K$ konvergiert}
+                x_{n_j} &\fromto x_0\in K
+                \intertext{Wir definieren}
+                (y_{n_j})_j &\definedas f(x_{n_j})
+                \intertext{Nach Satz~\ref{satz:stetigkeit-folgenkriterium} und der Stetigkeit von $f$ gilt}
+                y_{n_j} = f(x_{n_j}) &\fromto f(x_0) \definedasbackwards y_0
             \end{align*}
-            $f$ stetig $\impl$ $\underbrace{f(x_{n_j})}_{=y_n} \fromto f(x_0) \definedasbackwards y_0$.\\
-            $\impl$ Teilfolge $(y_{n_j})_j$ konvergiert und $y_0=f(x_0) \in f(K)$. Das heißt nach Definition ist $f(K)$ kompakt.
+            Das heißt Teilfolge $(y_{n_j})_j$ konvergiert und $y_0=f(x_0) \in f(K)$. Nach Def. ist $f(K)$ kompakt.
         \end{proof}
-        Insbesondere ist $f(K)$ abgeschlossen und beschränkt
     \end{satz}
 
     %%%%%%%%%%%%%%%%%%%%%%%%
     % 25. Januar 2023
     %%%%%%%%%%%%%%%%%%%%%%%%
 
-    \begin{satz} % Satz 4???
-        \marginnote{[25. Jan]}
-        Sei $K\subseteq\K$ kompakt und $f: K \fromto\K$ stetig. Dann ist $f(K) = \set{f(x): x\in K}$ ist kompakt.
-        \begin{proof}
-            Berechnen $y_n\in f(K)$. $\exists x_n\in K\colon y_n = f(x_n) \impl (x_n)_n\in K$
-        \end{proof}
-    \end{satz}
-
     \begin{korollar} % Korollar 5
-        \label{korollar:5}
+        \label{korollar:stetigkeit-unter-abbildung}
+        \marginnote{[25. Jan]}
         Ist $f: K\fromto\K$ stetig und ist $K$ kompakt, so ist $f(K)$ abgeschlossen und beschränkt.
         \begin{proof}
-            Folgt durch Satz 3 und 4.
+            Folgt direkt aus Satz~\ref{satz:kompaktheit} und Satz~\ref{satz:kompaktheit-unter-abbildung}.
         \end{proof}
     \end{korollar}
 
     \begin{beispiel}
-        $f: \R \fromto\R,~x\mapsto \frac{1}{x^2+1}$ stetig. $\bild(f) = f(\R) = \linterv{0,1}$ nicht kompakt.
+        $f: \R \fromto\R,~x\mapsto \frac{1}{1+x^2}$ stetig. Aber $\bild(f) = f(\R) = \rinterv{0,1}$ nicht kompakt.
     \end{beispiel}
 
-    \begin{satz}[Weiherstraß' Hauptlehrsatz]
+    \subsection{[*] Der Hauptlehrsatz von Weierstraß}
+
+    \begin{satz}[Weierstraß' Hauptlehrsatz] % Satz 6
+        \label{satz:weierstrass-maximum-minimum}
         Ist $K\neq \emptyset$ kompakt und $f: K\fromto\R$ stetig so nimmt $f$ sein Maximum und Minimum an. Das heißt
         \begin{align*}
-            \exists \underline{x}\in K,~\overline{x}\in K\colon f(\underline{x}) \leq f(x) \leq f(\overline{x}) \quad\forall x\in K
+            \exists \underline{x}\in K,\overline{x}\in K\colon f(\underline{x}) \leq f(x) \leq f(\overline{x}) \quad\forall x\in K
         \end{align*}
         Das heißt es gilt
         \begin{align*}
-            f(\underline{x}) = \inf_{x\in K} f(x)\\
-            f(\overline{x}) = \sup_{x\in K} f(x)
+            f(\underline{x}) = \inf_{x\in K} f(x)\quad f(\overline{x}) = \sup_{x\in K} f(x)
         \end{align*}
         \begin{proof}
-            Korollar~\ref{korollar:5} $\impl f(x)$ ist beschränkt und abgeschlossene Teilmenge von $\R$.\\
+            Nach Korollar~\ref{korollar:stetigkeit-unter-abbildung} $\impl f(K)$ ist beschränkt und abgeschlossene Teilmenge von $\R$.\\
             \begin{align*}
-                \impl M\definedas \sup_{x\in K} f(x) \in \R\\
-                m\definedas \inf_{x\in K} f(x) \in \R\\
-                \intertext{und $m\leq f(x)\leq M\quad\forall x\in K$}
+                \impl M&\definedas \sup_{x\in K} f(x) \in \R\\
+                m&\definedas \inf_{x\in K} f(x) \in \R\\
+                \impl m&\leq f(x)\leq M\quad\forall x\in K
             \end{align*}
             Schritt 1: $\exists \overline{x}\in K\colon f(\overline{x}) = M$.
             \begin{proof}
-                Da $M=\sup_{x\in K} f(x)$ gilt $\forall \varepsilon >0~\exists x\in K\colon f(x) > M-\varepsilon$.\\
-                Wähle $\varepsilon = \frac{1}{n} \impl x_n \in K,~f(x_n) > M - \frac{1}{n}$\\
-                $\impl \exists$ maximierende Folge $(x_n)_n\subseteq K$ mit
+                Da $M=\sup_{x\in K} f(x)$ gilt
                 \begin{align*}
-                    \underbrace{M-\frac{1}{n}}_{\fromto M} < f(x_n) \leq M
-                \end{align*}
-                das heißt nach Satz~\ref{satz:sandwich} $f(x_n)\fromto M$ für $n\fromto\infty$.\\
-                $K$ kompakt $\impl (x_n)_n)$ hat eine konvergente Teilfolge. und $(x_{n_j})_j$ hat Grenzwert $\overline{x}\definedas \lim_{j\fromto\infty} x_{n_j}$.\\
-                Haben
-                \begin{align*}
-                    M- \frac{1}{n_j}\leq f(x_{n_j}= < M)\\
-                    \impl M\leq f(\overline{x}) \leq M\\
-                    \impl \exists \overline{x}\in K\colon f(\overline{x}) = M
+                    \forall \varepsilon >0~\exists x\in K\colon f(x) > M-\varepsilon
+                    \intertext{Wähle $\varepsilon=\frac{1}{n}$}
+                    \impl \ex x_n\in K\colon f(x_n) > M - \frac{1}{n}\\
+                    \impl \ex \text{maximierende Folge } (x_n)_n \sbset K \text{ mit } \underbrace{M-\frac{1}{n}}_{\fromto M} < f(x_n) \leq M
+                    \intertext{das heißt nach Satz~\ref{satz:sandwich} geht $f(x_n)\fromto M$ für $\ntoinf$. Da $K$ kompakt ist, hat $(x_n)_n$ eine konvergente Teilfolge $(x_{n_j})_j$ mit Grenzwert $\overline{x}\definedas \lim_{j\toinf} x_{n_j} \in K$}
+                    \impl M - \frac{1}{n_j} \leq f(x_{n_j}) < M\\
+                    \impl M \leq f(\overline{x}) < M\\
+                    \impl \ex \overline{x}\in K\colon f(\overline{x}) = M
                 \end{align*}
             \end{proof}
-            Schritt 2: Entweder nehme minimierende Folge $(y_n)_n$, $m\leq f(y_n) \leq m-\frac{1}{n}$. Dann Teilfolge etc.\\
-            Oder: Wende Schritt 1 auf $H: K\fromto\R,~x\fromto -f(x)$ an.
+            \noindent Schritt 2: Entweder minimierende Folge $(y_n)_n$ mit $m\leq f(y_n) < m+\frac{1}{n}$. Dann Teilfolge etc.\\
+            Oder: Wende Schritt 1 auf $h: K\fromto\R,~x\fromto -f(x)$ an.
         \end{proof}
 
         \begin{beispiel}
+            Die Funktion $f: \R\fromto\R$ mit
             \begin{align*}
-                f(x) &= \frac{1}{x^2+1}
+                f(x) &= \frac{1}{x^2+1}\quad\impl\quad 0 < f(x)\leq 1~\fa x\in\R
             \end{align*}
-            nicht kompakt $\impl$ Satz funktioniert nicht.\\
-            $0<f(x)<1\quad\forall x\in\R$ nimmt Maximum an, aber nicht Minimum.
+            ist auf $\R$ (nicht kompakt) definiert und nimmt ihr Maximum, aber nicht ihr Minimum an.
         \end{beispiel}
     \end{satz}
 
