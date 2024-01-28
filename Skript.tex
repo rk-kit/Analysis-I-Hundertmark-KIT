@@ -86,6 +86,7 @@
 \newcommand{\conj}[1]{\overline{#1}}
 
 \newcommand{\annot}[3][]{\overset{\text{#3}}#1{#2}}
+\newcommand{\biglim}[1]{{\displaystyle \lim_{#1}}}
 \newcommand{\nn}[0]{\\[2\baselineskip]}
 \newcommand{\anf}[1]{\glqq{}#1\grqq}
 \newcommand{\OBDA}{o.B.d.A. }
@@ -1928,144 +1929,21 @@
 
 
     \section{Der Satz von Weierstraß}
+    \input{Kapitel/Satz_Weierstrass}
+
+
+    \section{Grenzwerte von Funktionen}
+
+    \setcounter{subsection}{1}
     \thispagestyle{pagenumberonly}
-
-    \subsection{Beschränkte, abgeschlossene und kompakte Mengen}
-
-    \begin{definition}[Beschränkte Mengen] % Definition 1
-        Eine Menge $A\subseteq\R$ ist beschränkt, falls
+    \begin{definition}[Häufungspunkte]
+        $A\subseteq\K$ hat den Häufungspunkt $x_0\in\K$, falls
         \begin{align*}
-            \exists R>0\colon &A\subseteq\pair{-R, R}
-            \intertext{bzw. eine Menge $A\sbset\C$ ist beschränkt, falls}
-            \exists R>0\colon &A\subseteq B_R(0) \definedas\set{z\in\C: \abs{z} < R}
+            \forall\varepsilon > 0~\exists x\in A\exclude\set{x_0}\colon \abs{x-x_0} < \varepsilon
         \end{align*}
     \end{definition}
 
-    \begin{definition}[Abgeschlossene Mengen]
-        Eine Menge $A$ ist abgeschlossen, falls für jede konvergente Folge $(x_n)_n\subseteq A$ gilt, dass $\lim_{n\fromto\infty} x_n \in A$.
-    \end{definition}
-
-    \begin{beispiel}
-        $\interv{a,b}$ ist abgeschlossen und beschränkt für $-\infty < a < b < \infty$. $\pair{0,1}$ ist beschränkt, aber nicht abgeschlossen.
-    \end{beispiel}
-
-    \begin{definition}[Kompakte Mengen] % Definition 2
-        $K\subseteq\R$ (oder $\C$) ist kompakt, falls jede Folge $(x_n)_n\subseteq K$ eine in $K$ konvergente Teilfolge besitzen. Das heißt
-        \begin{enumerate}[label=\arabic*.]
-            \item $(x_n)_n$ hat konvergente Teilfolge $(x_{n_j})_j$ und
-            \item Der Grenzwert der Teilfolge $\lim_{j\fromto\infty} x_{n_j} \in K$
-        \end{enumerate}
-    \end{definition}
-
-    \begin{satz} % Satz 3
-        \label{satz:kompaktheit}
-        $K\subseteq\K$ ist genau dann kompakt, wenn $K$ abgeschlossen und beschränkt ist.
-
-        \begin{proof}
-            \anf{$\Leftarrow$}: $K$ ist abgeschlossen und beschränkt. Und $(x_n)_n\subseteq K$ sei beliebige Folge in $K$. Dann ist $(x_n)_n$ beschränkte Folge. Nach Korollar~\ref{korollar:beschr-konv-teilfolge} existiert eine konvergente Teilfolge $(x_{n_j})_j$ von $(x_n)_n$. Da $K$ abgeschlossen ist, gilt
-            \begin{align*}
-                \lim_{j\toinf} x_{n_j}\in K
-            \end{align*}
-            \anf{$\impl$}: Sei $K$ kompakt. Dann ist $K$ auch abgeschlossen. (Folgt aus Definition)\\
-            Wenn $K$ nicht beschränkt wäre, existiert für jedes $n\in\N$ ein $x_n\in K$ mit $\abs{x_n} > n$. Die Folge $(x_n)_n$ hat dann aber keine konvergente Teilfolge.
-        \end{proof}
-    \end{satz}
-
-    \subsection{Kompaktheit unter Abbildungen}
-
-    \begin{satz} % Satz 4
-        \label{satz:kompaktheit-unter-abbildung}
-        Sei $K\subseteq\K$ kompakt und $f: K\fromto\K$ stetig. Dann ist $f(K) = \set{f(x): x\in K}$ kompakt.
-        \begin{proof}
-            Sei $(y_n)_n$ Folge in $f(K)$, also $(y_n)_n\sbset\bild\of{f}$. Dann folgt
-            \begin{align*}
-                \impl \fa n\in\N\ex& x_n\in K\colon f(x_n) = y_n
-                \intertext{Nach Kompaktheit von $K$ existiert eine Teilfolge $(x_{n_j})_j$ von $(x_n)_n$ welche gegen ein $x_0\in K$ konvergiert}
-                x_{n_j} &\fromto x_0\in K
-                \intertext{Wir definieren}
-                (y_{n_j})_j &\definedas f(x_{n_j})
-                \intertext{Nach Satz~\ref{satz:stetigkeit-folgenkriterium} und der Stetigkeit von $f$ gilt}
-                y_{n_j} = f(x_{n_j}) &\fromto f(x_0) \definedasbackwards y_0
-            \end{align*}
-            Das heißt Teilfolge $(y_{n_j})_j$ konvergiert und $y_0=f(x_0) \in f(K)$. Nach Def. ist $f(K)$ kompakt.
-        \end{proof}
-    \end{satz}
-
-    %%%%%%%%%%%%%%%%%%%%%%%%
-    % 25. Januar 2023
-    %%%%%%%%%%%%%%%%%%%%%%%%
-
-    \begin{korollar} % Korollar 5
-        \label{korollar:stetigkeit-unter-abbildung}
-        \marginnote{[25. Jan]}
-        Ist $f: K\fromto\K$ stetig und ist $K$ kompakt, so ist $f(K)$ abgeschlossen und beschränkt.
-        \begin{proof}
-            Folgt direkt aus Satz~\ref{satz:kompaktheit} und Satz~\ref{satz:kompaktheit-unter-abbildung}.
-        \end{proof}
-    \end{korollar}
-
-    \begin{beispiel}
-        $f: \R \fromto\R,~x\mapsto \frac{1}{1+x^2}$ stetig. Aber $\bild(f) = f(\R) = \rinterv{0,1}$ nicht kompakt.
-    \end{beispiel}
-
-    \subsection{Der Hauptlehrsatz von Weierstraß}
-
-    \begin{satz}[Weierstraß' Hauptlehrsatz] % Satz 6
-        \label{satz:weierstrass-maximum-minimum}
-        Ist $K\neq \emptyset$ kompakt und $f: K\fromto\R$ stetig so nimmt $f$ sein Maximum und Minimum an. Das heißt
-        \begin{align*}
-            \exists \underline{x}\in K,\overline{x}\in K\colon f(\underline{x}) \leq f(x) \leq f(\overline{x}) \quad\forall x\in K
-        \end{align*}
-        Das heißt es gilt
-        \begin{align*}
-            f(\underline{x}) = \inf_{x\in K} f(x)\quad f(\overline{x}) = \sup_{x\in K} f(x)
-        \end{align*}
-        \begin{proof}
-            Nach Korollar~\ref{korollar:stetigkeit-unter-abbildung} $\impl f(K)$ ist beschränkt und abgeschlossene Teilmenge von $\R$.\\
-            \begin{align*}
-                \impl M&\definedas \sup_{x\in K} f(x) \in \R\\
-                m&\definedas \inf_{x\in K} f(x) \in \R\\
-                \impl m&\leq f(x)\leq M\quad\forall x\in K
-            \end{align*}
-            Schritt 1: $\exists \overline{x}\in K\colon f(\overline{x}) = M$.
-            \begin{proof}
-                Da $M=\sup_{x\in K} f(x)$ gilt
-                \begin{align*}
-                    \forall \varepsilon >0~\exists x\in K\colon f(x) &> M-\varepsilon
-                    \intertext{Wähle $\varepsilon=\frac{1}{n}$}
-                    \impl \ex x_n\in K\colon f(x_n) &> M - \frac{1}{n}\\
-                    \impl \ex \text{maximierende Folge } (x_n)_n &\sbset K \text{ mit } \underbrace{M-\frac{1}{n}}_{\fromto M} < f(x_n) \leq M
-                    \intertext{Das heißt nach Satz~\ref{satz:sandwich} geht $f(x_n)\fromto M$ für $\ntoinf$. Da $K$ kompakt ist, hat $(x_n)_n$ eine konvergente Teilfolge $(x_{n_j})_j$ mit Grenzwert $\overline{x}\definedas \lim_{j\toinf} x_{n_j} \in K$}
-                    \impl M - \frac{1}{n_j} \leq f(x_{n_j}) &< M\\
-                    \impl M \leq f(\overline{x}) &< M\\
-                    \impl \ex \overline{x}\in K\colon f(\overline{x}) &= M\qedhere
-                \end{align*}
-            \end{proof}
-            \noindent Schritt 2: Entweder minimierende Folge $(y_n)_n$ mit $m\leq f(y_n) < m+\frac{1}{n}$. Dann Teilfolge, etc.\\
-            Oder: Wende Schritt 1 auf $h: K\fromto\R,~x\fromto -f(x)$ an.
-        \end{proof}
-
-        \begin{beispiel}
-            Die Funktion $f: \R\fromto\R$ mit
-            \begin{align*}
-                f(x) &= \frac{1}{x^2+1}\quad\impl\quad 0 < f(x)\leq 1~\fa x\in\R
-            \end{align*}
-            ist auf $\R$ (nicht kompakt) definiert und nimmt ihr Maximum, aber nicht ihr Minimum an.
-        \end{beispiel}
-    \end{satz}
-
-    \newpage
-
-
-    \section{[*] Grenzwerte von Funktionen}
-
-    \subsection{[*]}
-    \thispagestyle{pagenumberonly}
-    \begin{definition}[Häufungspunkt]
-        $A\subseteq\K$ hat den Häufungspunkt $x_0\in\K$, falls $\forall\varepsilon > 0~\exists x\in A\exclude\set{x_0}\colon \abs{x-x_0} < \varepsilon$.\\
-        Das heißt $0<\abs{x-x_0} < \varepsilon$.
-    \end{definition}
-    \begin{definition}
+    \begin{definition}[Diskrete Punkte]
         Für $A\subseteq\K$ ist $x_0\in A$ ein diskreter Punkt, falls
         \begin{align*}
             \exists \varepsilon > 0\colon \abs{x-x_0} \geq \varepsilon\quad\forall x\in A\exclude\set{x_0}
@@ -2073,106 +1951,109 @@
     \end{definition}
 
     \begin{bemerkung}
-        Häufungspunkte müssen keine Elemente von $A$ sein.\\
-        $x_0$ ist genau dann ein Häufungspunkt von $A$, wenn $\exists$ Folge $(x_n)_n\subseteq A\exclude\set{x_0}$ mit $x_n\fromto x_0$ für $n\fromto\infty$. ($0<\abs{x_n-x_0}\fromto 0$)
+        \theoremescape
+        \begin{enumerate}[label=(\roman*)]
+            \item Häufungspunkte müssen keine Elemente von $A$ sein.
+            \item $x_0$ ist genau dann ein Häufungspunkt von $A$, wenn $\exists$ Folge $(x_n)_n\subseteq A\exclude\set{x_0}$ mit $x_n\fromto x_0$ für $n\fromto\infty$ (weil $0<\abs{x_n-x_0}\fromto 0$)
+        \end{enumerate}
     \end{bemerkung}
 
     \begin{definition}[Grenzwerte von Funktionen]
-        Sei $f: D\fromto\R$ (oder $\R^d$) und $x_0$ Häufungspunkt von $D$. Wir sagen $f(x)$ strebt gegen $a$, bei Annäherung von $x$ gegen $x_0$; geschrieben
+        Sei $f: D\fromto\R$ (oder $\R^d$) und $x_0$ Häufungspunkt von $D$. Wir sagen $f(x)$ strebt gegen $a$ bei Annäherung von $x$ gegen $x_0$ -- geschrieben $f(x)\fromto a$ für $x\fromto x_0$ oder $\biglim{x\fromto x_0} f(x) = a$ -- falls
         \begin{align*}
-            f(x)\fromto a \text{ für } x\fromto x_0
-            \intertext{oder}
-            \lim_{x\fromto x_0} f(x) = a
+            \forall \varepsilon > 0~\exists \delta > 0\colon \abs{f(x)-a} < \varepsilon \text{ für alle } x\in D,~0 < \abs{x-x_0} < \delta
         \end{align*}
-        falls
-        \begin{align*}
-            \forall \varepsilon > 0~\exists \delta > 0\colon \abs{f(x)-a} < \varepsilon \text{ für alle } x\in D, 0 < \abs{x-x_0} < \delta
-        \end{align*}
-        Sagen $a$ ist der Limes oder Grenzwert von $f(x)$ oder $f(x)$ konvergiert gegen $a$ für $x\fromto x_0$.
+        Wir sagen $a$ ist der Limes oder Grenzwert von $f(x)$ oder $f(x)$ konvergiert gegen $a$ für $x\fromto x_0$.
     \end{definition}
 
     \begin{bemerkung}
-        $f(x)\fromto a, x\fromto x_0$ genau dann, wenn
+        Es gilt $f(x)\fromto a$ für $x\fromto x_0$ genau dann, wenn
         \begin{align*}
-            \forall\varepsilon > 0~\exists \delta > 0\colon \abs{f(x)-a} < \varepsilon \text{ für alle } x\in D\cap B_{\delta}(x_0)\\
-            B_{\delta}(x_0) = \set{x~|0 < \abs{x-x_0} < \delta}\tag{punktierter $\delta$-Ball um $x_0$}\\
-            \dot{B}_{\delta}(x_0) = B_{\delta}(x_0) \exclude\set{x_0}
+            \forall\varepsilon > 0~\exists \delta > 0\colon \abs{f(x)-a} &< \varepsilon\quad\fa x\in D\cap \dot{B}_{\delta}(x_0)\\
+            \dot{B}_{\delta}(x_0) &\definedas \set{x~\middle|~0 < \abs{x-x_0} < \delta}\\
+            \dot{B}_{\delta}(x_0) &= B_{\delta}(x_0) \exclude\set{x_0}\tag{punktierter $\delta$-Ball um $x_0$}
         \end{align*}
     \end{bemerkung}
 
     \begin{satz}
-        Sei $f:D\fromto\R$ (oder $\R^d$) und $x_0$ Häufungspunkt von $D$. Dann gilt $ \lim{x\fromto x_0} f(x) = a$ genau dann, wenn für jede Folge $(x_n)_n\subseteq D\exclude\set{x_0}$ mit $x_n\fromto x_0$ folgt $ \lim_{n\fromto\infty} f(x_n) = a$.
+        \label{satz:16-3}
+        Sei $f: D\fromto\R$ (oder $\R^d$) und $x_0$ Häufungspunkt von $D$. Dann gilt $\biglim{x\fromto x_0} f(x) = a$ genau dann, wenn für jede Folge $(x_n)_n\subseteq D\exclude\set{x_0}$ mit $x_n\fromto x_0$ folgt $ \biglim{n\fromto\infty} f(x_n) = a$.
         \begin{proof}
-            \anf{$\impl$}: Klar nach Definition (Selber machen)\\
-            \anf{$\Rightarrow$}: Kontraposition. Angenommen $ \lim_{n\fromto\infty} f(x) \neq a$.
+            \anf{$\impl$}: Klar nach Definition. (Selber machen)\\
+            \anf{$\Leftarrow$}: Kontraposition. Angenommen $ \biglim{n\fromto\infty} f(x) \neq a$.
             \begin{align*}
-                \impl \exists\varepsilon > 0~\forall \delta > 0\colon \abs{f(x)-a} \geq \varepsilon \text{ für } x\in D\exclude\set{x_0}, \abs{x-x_0} < \delta
+                \impl \exists\varepsilon > 0~\forall \delta > 0&\colon \abs{f(x)-a} \geq \varepsilon \text{ für ein } x\in D\exclude\set{x_0}\colon \abs{x-x_0} < \delta
                 \intertext{Nehmen $\delta = \frac{1}{n}$}
-                \impl \exists \text{ Folge } (x_n)_n\subseteq D\exclude\set{x_0} \text{ mit } x_n\fromto x_0 \text{ und } \abs{f(x_n)-a} \geq \varepsilon\\
-                \impl f(x_n) \text{ konvergiert nicht gegen } a
+                \impl \exists \text{ Folge } &(x_n)_n\subseteq D\exclude\set{x_0} \text{ mit } x_n\fromto x_0 \text{ und } \abs{f(x_n)-a} \geq \varepsilon\\
+                \impl f(x_n) &\text{ konvergiert nicht gegen } a\qedhere
             \end{align*}
         \end{proof}
     \end{satz}
 
     \begin{beispiel}
-        $D = \R\exclude\set{1}$. $f(x) = \frac{x^2-1}{x-1}$.\\
-        $\impl \lim_{x\fromto 1} f(x) = 2$\\
+        Für $D = \R\exclude\set{1}$, $f(x) = \frac{x^2-1}{x-1}$ gilt $\biglim{x\fromto 1} f(x) = 2$\\
         \begin{align*}
-            f(x) = \frac{x^2-1}{x-1} = \frac{(x+1)(x-1)}{x-1} = x + 1 \fromto 2 \text{ für } n\fromto\infty
+            f(x) = \frac{x^2-1}{x-1} = \frac{(x+1)(x-1)}{x-1} = x + 1 \fromto 2 \text{ für } x\fromto 1
         \end{align*}
     \end{beispiel}
 
-    \begin{beispiel}
-        $f: \interv{a, 1}\fromto \R^3$ Kurve.
+    \newpage
+
+    \begin{beispiel}[Ausblick: Differenzierbarkeit und Ableitung]
+        $f: \interv{0,T}\fromto \R^3$ Kurve.
         \begin{align*}
-            f(h) &= \frac{f(t+h)-f(t)}{h}\tag{$h\neq 0$}
-            \intertext{falls $\lim_{n\fromto 0} f(x)$ existiert, nennen wir $f$ in $t$ differenzierbar, Ableitung $f'(t) = \lim_{n\fromto 0} f(n)$ (zum Beispiel Geschwindigkeit)}
+            \varphi(h) &= \frac{f(t+h)-f(t)}{h}\tag{$h\neq 0$}
+            \intertext{Falls $\biglim{h\fromto 0} \varphi(h)$ existiert, nennen wir $f$ in $t$ differenzierbar und definieren die Ableitung}
+            f'(t) &\definedas \lim_{h\fromto 0} \varphi(h)
         \end{align*}
     \end{beispiel}
 
     \begin{lemma} % Lemma 4
         \label{lemma:16-4}
-        Für $f: D\fromto\R^d$, $f=(f_1, \dots, f_d)$, $x_0$ Häufungspunkt von $D$ und $a=(a_1, \dots, a_d)$ gilt.
+        Für $f: D\fromto\R^d$, $f=(f_1, \dots, f_d)$, $x_0$ Häufungspunkt von $D$, $a=(a_1, \dots, a_d)$ gilt
         \begin{align*}
-            \lim_{n\fromto x_0} f(x) = a\quad\equivalent\quad \lim_{n\fromto x_0} f_j(x) = a_j\tag{für alle $1\leq j\leq d$}
+            \lim_{x\fromto x_0} f(x) = a\quad\equivalent\quad \lim_{n\fromto x_0} f_j(x) = a_j~~\forall 1\leq j\leq d
         \end{align*}
 
         \begin{proof}
-            Sei $\abs{f(x)-a}$ Eukldischer Abstand von $f(x)$ zu $a$.
+            Sei $\norm{f(x)-a}$ Eukldischer Abstand von $f(x)$ zu $a$.
             \begin{align*}
-                = \pair{\sum_{j=1}^{d} \abs{f_j(x) - a_j}^2}^{0.5}\\
-                \impl \forall 1\leq j\leq d\colon \abs{f_j(x) - a_j} \leq \abs{f(x) - a} \leq \sqrt{d}\cdot\max_{1\leq l\leq d} \abs{f_l(x) - a_l}
+                \norm{f(x)-a} &= \sqrt{\sum_{j=1}^{d} \pair{f_j(x) - a_j}^2}\\
+                \impl \forall 1\leq j\leq d\colon \abs{f_j(x) - a_j} &\leq \norm{f(x) - a} \leq \sqrt{d}\cdot\max_{1\leq l\leq d} \abs{f_l(x) - a_l}\qedhere
             \end{align*}
         \end{proof}
     \end{lemma}
 
     \begin{satz} % Satz 5
-        Es sei $D\subseteq \R, f,g: D\fromto \C$ und $ \lim_{x\fromto x_0} f(x) = a$, $\lim_{x\fromto x_0} g(x) = b$. So folgt
+        \label{satz:16-5}
+        Es sei $D\subseteq\R$ und $f,g: D\fromto \C$. Gilt $\biglim{x\fromto x_0} f(x) = a$, $\biglim{x\fromto x_0} g(x) = b$ so folgt
         \begin{enumerate}[label=(\alph*)]
-            \item $\lim_{x\fromto x_0} (\lambda f(x) + \mu g(x)) = \lambda a + \mu b$, $\lambda, \mu\in \C$
-            \item $\lim_{x\fromto x_0} f(x)\cdot g(x) = a\cdot b$
-            \item Ist $b \neq 0$ so gilt $\lim_{x\fromto x_0} \frac{f(x)}{g(x)} = \frac{a}{b}$
-            \item Sind $f,g: D\fromto \R^d$ so gilt $\lim_{x\fromto x_0} (\lambda f(x) + \mu g(x)) = \lambda a + \mu b$, $\lambda, \mu\in \R$
+            \item $\biglim{x\fromto x_0} (\lambda f(x) + \mu g(x)) = \lambda a + \mu b\quad(\lambda, \mu\in \C)$
+            \item $\biglim{x\fromto x_0} f(x)\cdot g(x) = a\cdot b$
+            \item Ist $b \neq 0$ so gilt $\biglim{x\fromto x_0} \frac{f(x)}{g(x)} = \frac{a}{b}$
+            \item Sind $f,g: D\fromto \R^d$ so gilt $\biglim{x\fromto x_0} (\lambda f(x) + \mu g(x)) = \lambda a + \mu b\quad(\lambda, \mu\in \R)$
         \end{enumerate}
         \begin{proof}[Beweis (c)]
             Wegen (b) reicht es zu zeigen, dass $\frac{1}{g(x)} \fromto \frac{1}{b}$ für $x\fromto x_0$
             \begin{align*}
-                \abs{\frac{1}{g(x_0)} - \frac{1}{b}} &= \frac{\abs{b-g(x)}}{\abs{b}\abs{g(x)}}
-                \intertext{Sei $\varepsilon >0$ beliebig $\impl \exists\delta > 0$ so dass für $x\in D$, $0 < \abs{x-x_0} < \delta$ auch $\abs{g(x)-b)} < \min\set{\frac{\abs{b}}{2}, \frac{\abs{b}^2}{2}\varepsilon}$. Für diese $x$ gilt}
-                \abs{g(x)} = \abs{b+g(x)-b} \geq \abs{b}-\abs{g(x)-b} > \abs{b} - \frac{\abs{b}}{2} = \frac{\abs{b}}{2}
+                \abs{\frac{1}{g(x)} - \frac{1}{b}} &= \frac{\abs{b-g(x)}}{\abs{g(x)}\cdot\abs{b}}
+                \intertext{Sei $\varepsilon >0$ beliebig $\impl \exists\delta > 0$ sodass für $x\in D$, $0 < \abs{x-x_0} < \delta$ auch $\abs{g(x)-b} < \min\set{\frac{\abs{b}}{2}, \frac{\abs{b}^2}{2}\cdot\varepsilon}$. Für diese $x$ gilt}
+                \abs{g(x)} = \abs{b+g(x)-b} &\geq \abs{b}-\abs{g(x)-b} > \abs{b} - \frac{\abs{b}}{2} = \frac{\abs{b}}{2}
                 \intertext{und somit auch}
-                \abs{\frac{1}{g(x)} - \frac{1}{b}} &= \frac{\abs{g(x)-b}}{\abs{g(x)}\abs{b}} \leq \frac{2}{\abs{b}^2}\cdot\abs{g(x)-b} < \frac{2}{\abs{b}^2} \frac{\abs{b}^2}{2}\cdot\varepsilon = \varepsilon
+                \abs{\frac{1}{g(x)} - \frac{1}{b}} = \frac{\abs{g(x)-b}}{\abs{g(x)}\cdot\abs{b}} &\leq \frac{2}{\abs{b}^2}\cdot\abs{g(x)-b} < \frac{2}{\abs{b}^2}\cdot \frac{\abs{b}^2}{2}\cdot\varepsilon = \varepsilon\qedhere
             \end{align*}
         \end{proof}
     \end{satz}
+
     \begin{uebung}
         Beweisen Sie die übrigen Aussagen des vorherigen Satzes.
     \end{uebung}
 
-    \begin{satz}[Cauchykriterium für Existenz von $\lim_{x\fromto x_0} f(x)$] % Satz 6
-        Sei $x$ Häufungspunkt von $D$, $f: D\fromto \R$ (oder $\R^d$). Dann gilt, dass $\lim_{x\fromto x_0} f(x)$ genau dann existiert, wenn
+    \begin{satz}[Cauchykriterium für Existenz von $\biglim{x\fromto x_0} f(x)$] % Satz 6
+        \label{satz:16-6}
+        Sei $x$ Häufungspunkt von $D$ und $f: D\fromto \R$ (oder $\R^d$). Dann gilt, dass $\biglim{x\fromto x_0} f(x)$ genau dann existiert, wenn
         \begin{align*}
-            \forall \varepsilon > 0~\exists\delta>0 \text{ sodass für } x,y\in D, 0 < \abs{x-x_0} < \delta, 0 < \abs{y-y_0} < \delta\\
+            \forall \varepsilon > 0~\exists\delta>0 \text{ sodass für } x,y\in D \text{ mit } 0 < \abs{x-x_0} < \delta, 0 < \abs{y-y_0} < \delta\\
             \abs{f(x)-f(y)} < \varepsilon \text{ ist }
         \end{align*}
     \end{satz}

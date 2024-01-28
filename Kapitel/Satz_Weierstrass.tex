@@ -1,0 +1,127 @@
+\thispagestyle{pagenumberonly}
+
+\subsection{Beschränkte, abgeschlossene und kompakte Mengen}
+
+\begin{definition}[Beschränkte Mengen] % Definition 1
+    Eine Menge $A\subseteq\R$ ist beschränkt, falls
+    \begin{align*}
+        \exists R>0\colon &A\subseteq\pair{-R, R}
+        \intertext{bzw. eine Menge $A\sbset\C$ ist beschränkt, falls}
+        \exists R>0\colon &A\subseteq B_R(0) \definedas\set{z\in\C: \abs{z} < R}
+    \end{align*}
+\end{definition}
+
+\begin{definition}[Abgeschlossene Mengen]
+    Eine Menge $A$ ist abgeschlossen, falls für jede konvergente Folge $(x_n)_n\subseteq A$ gilt, dass $\lim_{n\fromto\infty} x_n \in A$.
+\end{definition}
+
+\begin{beispiel}
+    $\interv{a,b}$ ist abgeschlossen und beschränkt für $-\infty < a < b < \infty$. $\pair{0,1}$ ist beschränkt, aber nicht abgeschlossen.
+\end{beispiel}
+
+\begin{definition}[Kompakte Mengen] % Definition 2
+    $K\subseteq\R$ (oder $\C$) ist kompakt, falls jede Folge $(x_n)_n\subseteq K$ eine in $K$ konvergente Teilfolge besitzen. Das heißt
+    \begin{enumerate}[label=\arabic*.]
+        \item $(x_n)_n$ hat konvergente Teilfolge $(x_{n_j})_j$ und
+        \item Der Grenzwert der Teilfolge $\lim_{j\fromto\infty} x_{n_j} \in K$
+    \end{enumerate}
+\end{definition}
+
+\begin{satz} % Satz 3
+    \label{satz:kompaktheit}
+    $K\subseteq\K$ ist genau dann kompakt, wenn $K$ abgeschlossen und beschränkt ist.
+
+    \begin{proof}
+        \anf{$\Leftarrow$}: $K$ ist abgeschlossen und beschränkt. Und $(x_n)_n\subseteq K$ sei beliebige Folge in $K$. Dann ist $(x_n)_n$ beschränkte Folge. Nach Korollar~\ref{korollar:beschr-konv-teilfolge} existiert eine konvergente Teilfolge $(x_{n_j})_j$ von $(x_n)_n$. Da $K$ abgeschlossen ist, gilt
+        \begin{align*}
+            \lim_{j\toinf} x_{n_j}\in K
+        \end{align*}
+        \anf{$\impl$}: Sei $K$ kompakt. Dann ist $K$ auch abgeschlossen. (Folgt aus Definition)\\
+        Wenn $K$ nicht beschränkt wäre, existiert für jedes $n\in\N$ ein $x_n\in K$ mit $\abs{x_n} > n$. Die Folge $(x_n)_n$ hat dann aber keine konvergente Teilfolge.
+    \end{proof}
+\end{satz}
+
+\subsection{Kompaktheit unter Abbildungen}
+
+\begin{satz} % Satz 4
+    \label{satz:kompaktheit-unter-abbildung}
+    Sei $K\subseteq\K$ kompakt und $f: K\fromto\K$ stetig. Dann ist $f(K) = \set{f(x): x\in K}$ kompakt.
+    \begin{proof}
+        Sei $(y_n)_n$ Folge in $f(K)$, also $(y_n)_n\sbset\bild\of{f}$. Dann folgt
+        \begin{align*}
+            \impl \fa n\in\N\ex& x_n\in K\colon f(x_n) = y_n
+            \intertext{Nach Kompaktheit von $K$ existiert eine Teilfolge $(x_{n_j})_j$ von $(x_n)_n$ welche gegen ein $x_0\in K$ konvergiert}
+            x_{n_j} &\fromto x_0\in K
+            \intertext{Wir definieren}
+            (y_{n_j})_j &\definedas f(x_{n_j})
+            \intertext{Nach Satz~\ref{satz:stetigkeit-folgenkriterium} und der Stetigkeit von $f$ gilt}
+            y_{n_j} = f(x_{n_j}) &\fromto f(x_0) \definedasbackwards y_0
+        \end{align*}
+        Das heißt Teilfolge $(y_{n_j})_j$ konvergiert und $y_0=f(x_0) \in f(K)$. Nach Def. ist $f(K)$ kompakt.
+    \end{proof}
+\end{satz}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% 25. Januar 2023
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{korollar} % Korollar 5
+    \label{korollar:stetigkeit-unter-abbildung}
+    \marginnote{[25. Jan]}
+    Ist $f: K\fromto\K$ stetig und ist $K$ kompakt, so ist $f(K)$ abgeschlossen und beschränkt.
+    \begin{proof}
+        Folgt direkt aus Satz~\ref{satz:kompaktheit} und Satz~\ref{satz:kompaktheit-unter-abbildung}.
+    \end{proof}
+\end{korollar}
+
+\begin{beispiel}
+    $f: \R \fromto\R,~x\mapsto \frac{1}{1+x^2}$ stetig. Aber $\bild(f) = f(\R) = \rinterv{0,1}$ nicht kompakt.
+\end{beispiel}
+
+\subsection{Der Hauptlehrsatz von Weierstraß}
+
+\begin{satz}[Weierstraß' Hauptlehrsatz] % Satz 6
+    \label{satz:weierstrass-maximum-minimum}
+    Ist $K\neq \emptyset$ kompakt und $f: K\fromto\R$ stetig so nimmt $f$ sein Maximum und Minimum an. Das heißt
+    \begin{align*}
+        \exists \underline{x}\in K,\overline{x}\in K\colon f(\underline{x}) \leq f(x) \leq f(\overline{x}) \quad\forall x\in K
+    \end{align*}
+    Das heißt es gilt
+    \begin{align*}
+        f(\underline{x}) = \inf_{x\in K} f(x)\quad f(\overline{x}) = \sup_{x\in K} f(x)
+    \end{align*}
+    \begin{proof}
+        Nach Korollar~\ref{korollar:stetigkeit-unter-abbildung} $\impl f(K)$ ist beschränkt und abgeschlossene Teilmenge von $\R$.\\
+        \begin{align*}
+            \impl M&\definedas \sup_{x\in K} f(x) \in \R\\
+            m&\definedas \inf_{x\in K} f(x) \in \R\\
+            \impl m&\leq f(x)\leq M\quad\forall x\in K
+        \end{align*}
+        Schritt 1: $\exists \overline{x}\in K\colon f(\overline{x}) = M$.
+        \begin{proof}
+            Da $M=\sup_{x\in K} f(x)$ gilt
+            \begin{align*}
+                \forall \varepsilon >0~\exists x\in K\colon f(x) &> M-\varepsilon
+                \intertext{Wähle $\varepsilon=\frac{1}{n}$}
+                \impl \ex x_n\in K\colon f(x_n) &> M - \frac{1}{n}\\
+                \impl \ex \text{maximierende Folge } (x_n)_n &\sbset K \text{ mit } \underbrace{M-\frac{1}{n}}_{\fromto M} < f(x_n) \leq M
+                \intertext{Das heißt nach Satz~\ref{satz:sandwich} geht $f(x_n)\fromto M$ für $\ntoinf$. Da $K$ kompakt ist, hat $(x_n)_n$ eine konvergente Teilfolge $(x_{n_j})_j$ mit Grenzwert $\overline{x}\definedas \lim_{j\toinf} x_{n_j} \in K$}
+                \impl M - \frac{1}{n_j} \leq f(x_{n_j}) &< M\\
+                \impl M \leq f(\overline{x}) &< M\\
+                \impl \ex \overline{x}\in K\colon f(\overline{x}) &= M\qedhere
+            \end{align*}
+        \end{proof}
+        \noindent Schritt 2: Entweder minimierende Folge $(y_n)_n$ mit $m\leq f(y_n) < m+\frac{1}{n}$. Dann Teilfolge, etc.\\
+        Oder: Wende Schritt 1 auf $h: K\fromto\R,~x\fromto -f(x)$ an.
+    \end{proof}
+
+    \begin{beispiel}
+        Die Funktion $f: \R\fromto\R$ mit
+        \begin{align*}
+            f(x) &= \frac{1}{x^2+1}\quad\impl\quad 0 < f(x)\leq 1~\fa x\in\R
+        \end{align*}
+        ist auf $\R$ (nicht kompakt) definiert und nimmt ihr Maximum, aber nicht ihr Minimum an.
+    \end{beispiel}
+\end{satz}
+
+\newpage
