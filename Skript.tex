@@ -2056,7 +2056,198 @@
             \forall \varepsilon > 0~\exists\delta>0 \text{ sodass für } x,y\in D \text{ mit } 0 < \abs{x-x_0} < \delta, 0 < \abs{y-y_0} < \delta\\
             \abs{f(x)-f(y)} < \varepsilon \text{ ist }
         \end{align*}
+
+        %%%%%%%%%%%%%%%%%%%%%%%%
+        % 30. Januar 2023
+        %%%%%%%%%%%%%%%%%%%%%%%%
+
+        \begin{proof}
+            \marginnote{[30. Jan]}
+            \anf{$\impl$}: Wir haben $\ex a\in\R$ (oder $\R^d$) sodass
+            \begin{align*}
+                \fa \varepsilon > 0\ex \delta > 0\colon \abs{f(x)-a} &< \frac{\varepsilon}{2} \text{ für } 0 < \abs{x-x_0} < \delta\\
+                \impl \abs{f(x)-f(y)} = \abs{f(x)-a + a - f(y)} &\leq \abs{f(x)-a} + \abs{a-f(y)} < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
+            \end{align*}
+            \anf{$\Leftarrow$}: Wir müssen zeigen, dass für jede Folge $(x_n)_n\sbset D, x_n \neq x_0, x_n\fromto x_0$ folgt $f(x_0)\fromto a$ für $\ntoinf$
+            \begin{align*}
+                \intertext{1. Schritt: Sei $(x_n)_n\sbset D, x_n\fromto x_0, x_n\neq x_0$. Haben}
+                \abs{f(x)-f(y)} &< \varepsilon\quad\forall 0 < \abs{x-x_0} < \delta~0<\abs{y-x_0} < \delta\\
+                \intertext{Da $x_n\fromto x_0$}
+                \impl \ex N\in\N\colon \abs{x_n - x_0} &< \delta\quad\fa n\geq N\\
+                \impl \fa n,m\geq N\colon \abs{f(x_n)-f(x_m)} &< \delta\\
+                \impl (f(x_n))_n &\text{ ist eine Cauchy-Folge}\\
+                \impl \lim_{\ntoinf} f(x_n) &\definedasbackwards a \text{ existiert}
+                \intertext{2. Schritt: $a$ ist unabhängig von der gewählten Folge $(x_n)_n$. Sei $(y_n)_n\sbset D, y_n\fromto x_0, y_n\neq x_0$}
+                \impl b&\:= \lim_{\ntoinf} f(y_n) \text{ existiert auch nach Schritt 1}
+                \intertext{Warum ist $a=b$? Wir basteln eine neue Folge $x_1, y_1, x_2, y_2, \dots, x_n, y_n, \dots$}
+                z_{2n} &\:= y_n\\
+                z_{2n+1} &\:= y_{n}\\
+                \impl z_n &\fromto x_0\\
+                \annot{\impl}{Schritt 1} c &\:= \lim_{\ntoinf} f(z_n) \text{ existiert}
+                \intertext{Teilfolgen konvergieren auch gegen $c$}
+                c &= \lim_{\ntoinf} f(z_n) = \lim_{\ntoinf} f(y_n) = b\\
+                &= \lim_{\ntoinf} f(z_{2n+1}) = \lim_{\ntoinf} f(x_n) = a\\
+                \impl a &= b
+            \end{align*}
+            Das heißt für jede Folge $(x_n)_n\sbset D, x_n\fromto x_0$ konvergiert $f(x_0)$ gegen ein eindeutiges $a$.
+        \end{proof}
     \end{satz}
+
+    \begin{definition} % Definition 7
+        Sei $D\sbset\R$, $f: D \fromto \R$ (oder $\R^d$), $x_0$ Häufungspunkt in $D$. Dann heißt $a$ rechtsseitiger Grenzwert von $f$ in $x_0$, falls
+        \begin{align*}
+            \fa\varepsilon > 0\ex\delta > 0\colon \abs{f(x)-a} < \varepsilon \text{ für } 0 < x-x_0 < \delta, x\in D
+        \end{align*}
+        Wir schreiben $f(x + 0) = \biglim{x\fromto x_0^+} f(x) = \biglim{x\searrow x_0} f(x)$.\\
+        $a$ heißt linksseitiger Grenzwert, falls
+        \begin{align*}
+            \fa\varepsilon > 0\ex\delta > 0\colon \abs{f(x)-a} < \varepsilon \text{ für } -\delta < x-x_0 < 0, x\in D
+        \end{align*}
+        Wir schreiben $f(x_0) - 0 = \biglim{x\fromto x_0^-} f(x) = \biglim{x\nearrow x_0} f(x)$.\\
+        Wir sagen $f$ hat Grenzwert $a$ für $x\->\infty$, falls $D$ nach oben unbeschränkt ist und
+        \begin{align*}
+            \fa\varepsilon > 0\ex k\colon \abs{f(x)-a} < \varepsilon\quad\fa x\in D, x>k
+        \end{align*}
+        $a=\biglim{x\->\infty} f(x)$ und ähnlich für $\biglim{x\-> -\infty} f(x)$. ($h(x) = f(-x)$)
+    \end{definition}
+
+    \begin{satz} % Satz 8
+        \label{satz:16-8}
+        Sei $D\sbset \R$, $f: D\-> \R$ (oder $\R^d$), $x_0$ HP von $D$. Dann gilt
+        \begin{align*}
+            f \text{ ist stetig in } x_0 &\equivalent \lim_{x\fromto x_0} f(x) = f(x_0)\\
+            &\equivalent \lim_{x\nearrow x_0} f(x) = \lim_{x\searrow x_0} f(x) = f(x_0)
+        \end{align*}
+    \end{satz}
+
+    \begin{uebung}
+        Beweisen Sie Satz~\ref{satz:16-8}.
+    \end{uebung}
+
+    \newpage
+
+
+    \section{[*] Gleichmäßige Stetigkeit und gleichmäßge Konvergenz}
+
+    \subsection{[*]}
+
+    \begin{definition}[Gleichmäßige Stetigkeit] % Def 1
+        Sei $f: D\-> \R$ (oder $\R^d$) und $D\sbset\K$. $f$ heißt gleichmäßig stetig auf $D$, falls
+        \begin{align*}
+            \fa\varepsilon > 0\colon \abs{f(x)-f(y)} < \varepsilon \text{ für reelle } x,y\in D \text{ mit } \abs{x-y} < \delta
+        \end{align*}
+    \end{definition}
+
+    \begin{beispiel}
+        \begin{align*}
+            f: \R\->\R,~x\mapsto\frac{1}{1+x^2}
+        \end{align*}
+        ist gleichmäßig stetig. (Übung)
+    \end{beispiel}
+    \begin{beispiel}
+        \begin{align*}
+            f: \rinterv{a,b}\-> \R,~x\mapsto \frac{1}{x}
+        \end{align*}
+        ist stetig, aber nicht gleichmäßig stetig.
+        \begin{proof}
+            Für $0 < x < y = 2x$ gilt
+            \begin{align*}
+                \abs{f(x)-f(y)} &= \abs{\frac{1}{x} - \frac{1}{y}} = \frac{\abs{y-x}}{xy} = \frac{1}{y}\geq 1
+            \end{align*}
+        \end{proof}
+    \end{beispiel}
+
+    \begin{definition}[Lipschitz-Stetigkeit]
+        Eine Funktion $f: D\->\R$ (oder $\R^d$) heißt Lipschitz-stetig, falls
+        \begin{align*}
+            \ex L\geq 0\colon \abs{f(x)-f(y)} \leq L\cdot\abs{x-y}\quad\forall x,y\in D
+        \end{align*}
+        Jede Lipschitz-stetige Funktion ist gleichmäßig stetig. $(\delta = \frac{\varepsilon}{L})$
+    \end{definition}
+
+    \begin{satz}[Heine, 1872] % Satz 3
+        \label{satz:17-3}
+        Sei $K\sbset\R$ kompakt und $f: K\->\R$ (oder $\R^d$) stetig. Dann ist $f$ gleichmäßig stetig.
+        \begin{proof}
+            Angenommen $f$ ist nicht gleichmäßig stetig.
+            \begin{align*}
+                \impl\ex\varepsilon > 0\fa \delta > 0\ex x,y\in K\colon\abs{x-y} < \delta \text{ und } \abs{f(x)-f(y)} > \varepsilon
+                \intertext{Wähle $\delta = \frac{1}{n}$}
+                \impl\ex x_n, y_n\sbset K\colon \abs{x_n- y_n} < \frac{1}{n}\\
+                \intertext{aber $\abs{f(x_n)-f(y_n)} \geq \varepsilon > 0$}
+                \impl x_n - y_n \-> 0 \text{ für } n\->\infty
+                \intertext{Da $K$ kompakt}
+                \impl \ex \text{ Konvergente TF } (y_{n_l})_l \text{ von } (y_n)_n\quad (n_1 < n_2 < n_3 < \dots < n_l < n_{l+1})\\
+                y\:= \lim_{l\toinf} (y_{n_l}) \text{ existiert } \in K\\
+                \abs{x_{n_l} - y} = \abs{x_{n_l} - y_{n_l} + y_{n_l} - y} \leq \abs{x_{n_l} - y_{n_l}} + \abs{x_{n_l} - y}\fromto 0\\
+                \impl \abs{f(x_{n_l}) - f(y_{n_l})} \geq \varepsilon > 0
+                \intertext{Aber}
+                \abs{f(x_{n_l}) - f(y_{n_l})} = \abs{f(x_{n_l}) - f(y) + f(y) - f(y_{n_l})} \leq \underbrace{\abs{f(x_{n_l}) - f(y)}}_{\-> 0} + \underbrace{\abs{f(y)-f(y_{n_l})}}_{\-> 0}\tag{Widerspruch}
+            \end{align*}
+        \end{proof}
+    \end{satz}
+
+    \begin{definition} % Def 4
+        Wir betrachten Folgen von Funktionen $f_n: D\-> \R$ (oder $\R^d$) $\leadsto$ Folge $(f_n)_n$ von Funktionen.\\
+        $(f_n)_n$, $f_n: D\->\R$ (oder $\R^d$) konvergiert punktweise falls
+        \begin{align*}
+            \lim_{\ntoinf} f_n(x) \text{ existiert für jedes } x\in D
+        \end{align*}
+        Das heißt $(f_n(x))_n$ ist konvergente Folge $\fa x\in\R$.\\
+        Dann setzen wir
+        \begin{align*}
+            f(x) \:= \lim_{\ntoinf} f_n(x)
+        \end{align*}
+        definiert eine Funktion $f: D\-> \R$ (oder $\R^d$). Sogar $f$ ist der punktweise Limes der Funktionenfolge $f_n$. $f_n(x)\-> f(x)~\fa x\in D$
+    \end{definition}
+
+    \begin{beispiel}
+        \begin{align*}
+            f_n(x) &= x^n\quad 0 \leq x \leq 1
+            \intertext{konvergiert punktweise gegen}
+            f(x) &= \begin{cases}
+                        0\quad &\text{für } 0 \leq x < 1\\
+                        1\quad &\text{für } x = 1
+            \end{cases}
+        \end{align*}
+    \end{beispiel}
+
+    \begin{beispiel}
+        \begin{align*}
+            f_n(x) &= x^{\frac{1}{n}}\quad 0 \leq x \leq 1
+            \intertext{stetig und punktweise konvergent gegen}
+            f(x) &= \begin{cases}
+                        0\quad&x = 0\\
+                        1\quad&0 < x \leq 1
+            \end{cases}
+        \end{align*}
+    \end{beispiel}
+
+    \begin{beispiel}
+        \begin{align*}
+            f_n(x) &= (1-x^2)^{\frac{n}{2}}\quad -1 \leq x \leq 1
+            \intertext{stetig und punktweise konvergent gegen}
+            f(x) &= \begin{cases}
+                        1\quad&x = 0\\
+                        0\quad&0 < \abs{x}\leq 1
+            \end{cases}
+        \end{align*}
+    \end{beispiel}
+
+    \begin{definition}[Gleichmäßige Konvergenz. Weierstraß 1841] % Definition 5
+        $D\sbset\R$, Funktionenfolge $f_n: D\->\R$ (oder $\R^d$). $(f_n)_n$ konvergiert gleichmäßig gegen $f: D\->\R$ (oder $\R^d$) falls
+        \begin{align*}
+            \fa\varepsilon > 0\ex N\in \N \text{ mit } \abs{f_n(x) - f(x)} < \varepsilon\quad\fa n\geq N, x\in D
+        \end{align*}
+    \end{definition}
+
+    \begin{bemerkung}
+        Also ist
+        \begin{align*}
+            \sup_{x\in D} \abs{f_n(x) - f(x)} &\leq \varepsilon\\
+            \lim_{\ntoinf} \sup_{x\in D}\abs{f(_n(x) - f(x))} &= 0
+        \end{align*}
+    \end{bemerkung}
 
 
 \end{document}
