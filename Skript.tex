@@ -112,6 +112,11 @@
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\K}{\mathbb{K}}
 
+\newcommand\imaginarysubsection[1]{
+    \refstepcounter{subsection}
+    \subsectionmark{#1}
+}
+
 % Unfassbar hässlich, aber effektiv für temporäre schnelle Lösungen
 \def\:={\coloneqq}
 \def\->{\fromto}
@@ -1684,9 +1689,9 @@
 
 
     \section{[*] Potenzreihen}
-
-    \subsection{}
+    \imaginarysubsection{Potenzreihen}
     \thispagestyle{pagenumberonly}
+
     Wir untersuchen Reihen der Form $ \sum_{n=0}^{\infty} a_n\cdot z^n$ oder $ \sum_{n=0}^{\infty} a_n \cdot \pair{z-z_0}^n$, $z_0\in\C$ fest, $z\in\C$ oder $\R$, $a_n\in\C$.\\
     Partialsummen:
     \begin{align*}
@@ -1933,9 +1938,9 @@
 
 
     \section{Grenzwerte von Funktionen}
-
-    \setcounter{subsection}{1}
+    \imaginarysubsection{Grenzwerte von Funktionen}
     \thispagestyle{pagenumberonly}
+
     \begin{definition}[Häufungspunkte]
         $A\subseteq\K$ hat den Häufungspunkt $x_0\in\K$, falls
         \begin{align*}
@@ -2016,7 +2021,7 @@
         \end{align*}
 
         \begin{proof}
-            Sei $\norm{f(x)-a}$ Eukldischer Abstand von $f(x)$ zu $a$.
+            Sei $\norm{f(x)-a}$ Euklidischer Abstand von $f(x)$ zu $a$.
             \begin{align*}
                 \norm{f(x)-a} &= \sqrt{\sum_{j=1}^{d} \pair{f_j(x) - a_j}^2}\\
                 \impl \forall 1\leq j\leq d\colon \abs{f_j(x) - a_j} &\leq \norm{f(x) - a} \leq \sqrt{d}\cdot\max_{1\leq l\leq d} \abs{f_l(x) - a_l}\qedhere
@@ -2128,8 +2133,8 @@
 
 
     \section{[*] Gleichmäßige Stetigkeit und gleichmäßge Konvergenz}
-
-    \subsection{[*]}
+    \imaginarysubsection{Gleichmäßige Stetigkeit und gleichmäßge Konvergenz}
+    \thispagestyle{pagenumberonly}
 
     \begin{definition}[Gleichmäßige Stetigkeit] % Def 1
         Sei $f: D\-> \R$ (oder $\R^d$) und $D\sbset\K$. $f$ heißt gleichmäßig stetig auf $D$, falls
