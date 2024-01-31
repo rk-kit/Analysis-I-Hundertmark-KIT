@@ -105,7 +105,7 @@
                 \intertext{Wähle $\varepsilon=\frac{1}{n}$}
                 \impl \ex x_n\in K\colon f(x_n) &> M - \frac{1}{n}\\
                 \impl \ex \text{maximierende Folge } (x_n)_n &\sbset K \text{ mit } \underbrace{M-\frac{1}{n}}_{\fromto M} < f(x_n) \leq M
-                \intertext{Das heißt nach Satz~\ref{satz:sandwich} geht $f(x_n)\fromto M$ für $\ntoinf$. Da $K$ kompakt ist, hat $(x_n)_n$ eine konvergente Teilfolge $(x_{n_j})_j$ mit Grenzwert $\overline{x}\definedas \lim_{j\toinf} x_{n_j} \in K$}
+                \intertext{Das heißt nach Satz~\ref{satz:sandwich} geht $f(x_n)\fromto M$ für $\ntoinf$. Da $K$ kompakt ist, hat $(x_n)_n$ eine konvergente Teilfolge $(x_{n_j})_j$ mit Grenzwert $\overline{x}\definedas \biglim{j\toinf} x_{n_j} \in K$}
                 \impl M - \frac{1}{n_j} \leq f(x_{n_j}) &< M\\
                 \impl M \leq f(\overline{x}) &< M\\
                 \impl \ex \overline{x}\in K\colon f(\overline{x}) &= M\qedhere

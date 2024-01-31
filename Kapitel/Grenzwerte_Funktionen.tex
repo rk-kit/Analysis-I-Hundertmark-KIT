@@ -1,0 +1,197 @@
+\subsection{Definition und Grenzwertsätze}
+\thispagestyle{pagenumberonly}
+
+\begin{definition}[Häufungspunkte]
+    $A\subseteq\K$ hat den Häufungspunkt $x_0\in\K$, falls
+    \begin{align*}
+        \forall\varepsilon > 0~\exists x\in A\exclude\set{x_0}\colon \abs{x-x_0} < \varepsilon
+    \end{align*}
+\end{definition}
+
+\begin{definition}[Diskrete Punkte]
+    Für $A\subseteq\K$ ist $x_0\in A$ ein diskreter Punkt, falls
+    \begin{align*}
+        \exists \varepsilon > 0\colon \abs{x-x_0} \geq \varepsilon\quad\forall x\in A\exclude\set{x_0}
+    \end{align*}
+\end{definition}
+
+\begin{bemerkung}
+    \theoremescape
+    \begin{enumerate}[label=(\roman*)]
+        \item Häufungspunkte müssen keine Elemente von $A$ sein.
+        \item $x_0$ ist genau dann ein Häufungspunkt von $A$, wenn $\exists$ Folge $(x_n)_n\subseteq A\exclude\set{x_0}$ mit $x_n\fromto x_0$ für $n\fromto\infty$ (weil $0<\abs{x_n-x_0}\fromto 0$)
+    \end{enumerate}
+\end{bemerkung}
+
+\begin{definition}[Grenzwerte von Funktionen]
+    Sei $f: D\fromto\R$ (oder $\R^d$) und $x_0$ Häufungspunkt von $D$. Wir sagen $f(x)$ strebt gegen $a$ bei Annäherung von $x$ gegen $x_0$ -- geschrieben $f(x)\fromto a$ für $x\fromto x_0$ oder $\biglim{x\fromto x_0} f(x) = a$ -- falls
+    \begin{align*}
+        \forall \varepsilon > 0~\exists \delta > 0\colon \abs{f(x)-a} < \varepsilon \text{ für alle } x\in D,~0 < \abs{x-x_0} < \delta
+    \end{align*}
+    Wir sagen $a$ ist der Limes oder Grenzwert von $f(x)$ oder $f(x)$ konvergiert gegen $a$ für $x\fromto x_0$.
+\end{definition}
+
+\begin{bemerkung}
+    Es gilt $f(x)\fromto a$ für $x\fromto x_0$ genau dann, wenn
+    \begin{align*}
+        \forall\varepsilon > 0~\exists \delta > 0\colon \abs{f(x)-a} &< \varepsilon\quad\fa x\in D\cap \dot{B}_{\delta}(x_0)\\
+        \dot{B}_{\delta}(x_0) &\definedas \set{x~\middle|~0 < \abs{x-x_0} < \delta}\\
+        \dot{B}_{\delta}(x_0) &= B_{\delta}(x_0) \exclude\set{x_0}\tag{punktierter $\delta$-Ball um $x_0$}
+    \end{align*}
+\end{bemerkung}
+
+\begin{satz}
+    \label{satz:funktionen-grenzwerte-folgenkrit}
+    Sei $f: D\fromto\R$ (oder $\R^d$) und $x_0$ Häufungspunkt von $D$. Dann gilt $\biglim{x\fromto x_0} f(x) = a$ genau dann, wenn für jede Folge $(x_n)_n\subseteq D\exclude\set{x_0}$ mit $x_n\fromto x_0$ folgt $ \biglim{n\fromto\infty} f(x_n) = a$.
+    \begin{proof}
+        \anf{$\impl$}: Klar nach Definition. (Selber machen)\\
+        \anf{$\Leftarrow$}: Kontraposition. Angenommen $ \biglim{n\fromto\infty} f(x) \neq a$.
+        \begin{align*}
+            \impl \exists\varepsilon > 0~\forall \delta > 0&\colon \abs{f(x)-a} \geq \varepsilon \text{ für ein } x\in D\exclude\set{x_0}\colon \abs{x-x_0} < \delta
+            \intertext{Nehmen $\delta = \frac{1}{n}$}
+            \impl \exists \text{ Folge } &(x_n)_n\subseteq D\exclude\set{x_0} \text{ mit } x_n\fromto x_0 \text{ und } \abs{f(x_n)-a} \geq \varepsilon\\
+            \impl f(x_n) &\text{ konvergiert nicht gegen } a\qedhere
+        \end{align*}
+    \end{proof}
+\end{satz}
+
+\begin{beispiel}
+    Für $D = \R\exclude\set{1}$, $f(x) = \frac{x^2-1}{x-1}$ gilt $\biglim{x\fromto 1} f(x) = 2$\\
+    \begin{align*}
+        f(x) = \frac{x^2-1}{x-1} = \frac{(x+1)(x-1)}{x-1} = x + 1 \fromto 2 \text{ für } x\fromto 1
+    \end{align*}
+\end{beispiel}
+
+\newpage
+
+\begin{beispiel}[Ausblick: Differenzierbarkeit und Ableitung]
+    $f: \interv{0,T}\fromto \R^3$ Kurve.
+    \begin{align*}
+        \varphi(h) &= \frac{f(t+h)-f(t)}{h}\tag{$h\neq 0$}
+        \intertext{Falls $\biglim{h\fromto 0} \varphi(h)$ existiert, nennen wir $f$ in $t$ differenzierbar und definieren die Ableitung}
+        f'(t) &\definedas \lim_{h\fromto 0} \varphi(h)
+    \end{align*}
+\end{beispiel}
+
+\begin{lemma}[Zerlegung von Grenzwerten im $\R^d$] % Lemma 4
+    Für $f: D\fromto\R^d$, $f=(f_1, \dots, f_d)$, $x_0$ Häufungspunkt von $D$, $a=(a_1, \dots, a_d)$ gilt
+    \begin{align*}
+        \lim_{x\fromto x_0} f(x) = a\quad\equivalent\quad \lim_{n\fromto x_0} f_j(x) = a_j~~\forall 1\leq j\leq d
+    \end{align*}
+
+    \begin{proof}
+        Sei $\norm{f(x)-a}$ Euklidischer Abstand von $f(x)$ zu $a$.
+        \begin{align*}
+            \norm{f(x)-a} &= \sqrt{\sum_{j=1}^{d} \pair{f_j(x) - a_j}^2}\\
+            \impl \forall 1\leq j\leq d\colon \abs{f_j(x) - a_j} &\leq \norm{f(x) - a} \leq \sqrt{d}\cdot\max_{1\leq l\leq d} \abs{f_l(x) - a_l}\qedhere
+        \end{align*}
+    \end{proof}
+\end{lemma}
+
+\begin{satz} % Satz 5
+    \label{satz:funktionen-grenzwerte-arithmetik}
+    Es sei $D\subseteq\R$ und $f,g: D\fromto \C$. Gilt $\biglim{x\fromto x_0} f(x) = a$, $\biglim{x\fromto x_0} g(x) = b$ so folgt
+    \begin{enumerate}[label=(\alph*)]
+        \item $\biglim{x\fromto x_0} (\lambda f(x) + \mu g(x)) = \lambda a + \mu b\quad(\lambda, \mu\in \C)$
+        \item $\biglim{x\fromto x_0} f(x)\cdot g(x) = a\cdot b$
+        \item Ist $b \neq 0$ so gilt $\biglim{x\fromto x_0} \frac{f(x)}{g(x)} = \frac{a}{b}$
+        \item Sind $f,g: D\fromto \R^d$ so gilt $\biglim{x\fromto x_0} (\lambda f(x) + \mu g(x)) = \lambda a + \mu b\quad(\lambda, \mu\in \R)$
+    \end{enumerate}
+    \begin{proof}[Beweis (c)]
+        Wegen (b) reicht es zu zeigen, dass $\frac{1}{g(x)} \fromto \frac{1}{b}$ für $x\fromto x_0$
+        \begin{align*}
+            \abs{\frac{1}{g(x)} - \frac{1}{b}} &= \frac{\abs{b-g(x)}}{\abs{g(x)}\cdot\abs{b}}
+            \intertext{Sei $\varepsilon >0$ beliebig $\impl \exists\delta > 0$ sodass für $x\in D$, $0 < \abs{x-x_0} < \delta$ auch $\abs{g(x)-b} < \min\set{\frac{\abs{b}}{2}, \frac{\abs{b}^2}{2}\cdot\varepsilon}$. Für diese $x$ gilt}
+            \abs{g(x)} = \abs{b+g(x)-b} &\geq \abs{b}-\abs{g(x)-b} > \abs{b} - \frac{\abs{b}}{2} = \frac{\abs{b}}{2}
+            \intertext{und somit auch}
+            \abs{\frac{1}{g(x)} - \frac{1}{b}} = \frac{\abs{g(x)-b}}{\abs{g(x)}\cdot\abs{b}} &\leq \frac{2}{\abs{b}^2}\cdot\abs{g(x)-b} < \frac{2}{\abs{b}^2}\cdot \frac{\abs{b}^2}{2}\cdot\varepsilon = \varepsilon\qedhere
+        \end{align*}
+    \end{proof}
+\end{satz}
+
+\begin{uebung}
+    Beweisen Sie die übrigen Aussagen des vorherigen Satzes.
+\end{uebung}
+
+\newpage
+
+\begin{satz}[Cauchykriterium für Existenz von $\biglim{x\fromto x_0} f(x)$] % Satz 6
+    \label{satz:funktionen-grenzwerte-cauchy}
+    Sei $x_0$ Häufungspunkt von $D$ und $f: D\fromto \R$ (oder $\R^d$). Dann gilt, dass $\biglim{x\fromto x_0} f(x)$ genau dann existiert, wenn
+    \begin{align*}
+        \forall \varepsilon > 0~\exists\delta>0 \text{ sodass für } x,y\in D \text{ mit } 0 < \abs{x-x_0} < \delta, 0 < \abs{y-x_0} < \delta\\
+        \abs{f(x)-f(y)} < \varepsilon \text{ ist }
+    \end{align*}
+
+    %%%%%%%%%%%%%%%%%%%%%%%%
+    % 30. Januar 2023
+    %%%%%%%%%%%%%%%%%%%%%%%%
+
+    \begin{proof}
+        \marginnote{[30. Jan]}
+        \anf{$\impl$}: Wir haben $\ex a\in\R$ (oder $\R^d$) sodass
+        \begin{align*}
+            \fa \varepsilon > 0\ex \delta > 0\colon \abs{f(x)-a} &< \frac{\varepsilon}{2} \text{ für } 0 < \abs{x-x_0} < \delta\\
+            \impl \abs{f(x)-f(y)} &= \abs{f(x)-a + a - f(y)}\\
+            &\leq \abs{f(x)-a} + \abs{a-f(y)}\\
+            &< \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
+        \end{align*}
+        \anf{$\Leftarrow$}: Wir müssen zeigen, dass für jede Folge $(x_n)_n\sbset D$, $x_n \neq x_0$, $x_n\fromto x_0$ folgt $f(x_0)\fromto a$ für $\ntoinf$. 1. Schritt: Sei $(x_n)_n\sbset D$, $x_n\fromto x_0$, $x_n\neq x_0$. Haben
+        \begin{align*}
+            \fa\varepsilon > 0\ex\delta > 0\colon \abs{f(x)-f(y)} &< \varepsilon\quad\fa 0 < \abs{x-x_0} < \delta \land 0<\abs{y-x_0} < \delta\\
+            \intertext{Da $x_n\fromto x_0$}
+            \impl \ex N\in\N\colon \abs{x_n - x_0} &< \delta\quad\fa n\geq N\\
+            \impl \fa n,m\geq N\colon \abs{f(x_n)-f(x_m)} &< \varepsilon\\
+            \impl (f(x_n))_n \text{ ist } & \text{eine Cauchy-Folge}\\
+            \impl \lim_{\ntoinf} f(x_n) &\definedasbackwards a \text{ existiert}
+            \intertext{2. Schritt: $a$ ist unabhängig von der gewählten Folge $(x_n)_n$. Sei $(y_n)_n\sbset D$, $y_n\fromto x_0$, $y_n\neq x_0$}
+            \impl b&\definedas \lim_{\ntoinf} f(y_n) \text{ existiert auch nach Schritt 1}
+            \intertext{Warum ist $a=b$? Wir basteln eine neue Folge $x_1, y_1, x_2, y_2, \dots, x_n, y_n, \dots$}
+            z_{2n} &\definedas y_n\\
+            z_{2n+1} &\definedas x_{n}\\
+            \impl z_n &\fromto x_0\\
+            \annot{\impl}{Schritt 1} c &\definedas \lim_{\ntoinf} f(z_n) \text{ existiert}
+            \intertext{Teilfolgen konvergieren auch gegen $c$}
+            c &= \lim_{\ntoinf} f(z_{2n}) = \lim_{\ntoinf} f(y_n) = b\\
+            &= \lim_{\ntoinf} f(z_{2n+1}) = \lim_{\ntoinf} f(x_n) = a\\
+            \impl a &= b
+        \end{align*}
+        Das heißt für jede Folge $(x_n)_n\sbset D, x_n\fromto x_0$ konvergiert $f(x_0)$ gegen ein eindeutiges $a$.
+    \end{proof}
+\end{satz}
+
+\subsection{Links-/Rechtsseitige Grenzwerte und Verhalten gegen $\infty$}
+
+\begin{definition}[Links- und rechtsseitige Grenzwerte] % Definition 7
+    Sei $D\sbset\R$, $f: D \fromto \R$ (oder $\R^d$), $x_0$ Häufungspunkt in $D$. Dann heißt $a$ rechtsseitiger Grenzwert von $f$ in $x_0$, falls
+    \begin{align*}
+        \fa\varepsilon > 0\ex\delta > 0\colon \abs{f(x)-a} < \varepsilon\quad \text{ für } 0 < x-x_0 < \delta,~x\in D
+    \end{align*}
+    Wir schreiben $f(x + 0) = \biglim{x\fromto x_0^+} f(x) = \biglim{x\searrow x_0} f(x)$.\\
+    $a$ heißt linksseitiger Grenzwert, falls
+    \begin{align*}
+        \fa\varepsilon > 0\ex\delta > 0\colon \abs{f(x)-a} < \varepsilon\quad \text{ für } -\delta < x-x_0 < 0,~x\in D
+    \end{align*}
+    Wir schreiben $f(x_0) - 0 = \biglim{x\fromto x_0^-} f(x) = \biglim{x\nearrow x_0} f(x)$.
+    \horizontalline
+    Wir sagen $f$ hat Grenzwert $a$ für $x\fromto\infty$, falls $D$ nach oben unbeschränkt ist und
+    \begin{align*}
+        \fa\varepsilon > 0\ex k\colon \abs{f(x)-a} < \varepsilon\quad\fa x\in D, x>k
+    \end{align*}
+    Wir schreiben $a=\biglim{x\fromto\infty} f(x)$. Das gleiche funktioniert ähnlich für $\biglim{x\fromto -\infty} f(x)$. (Betrachten Sie $\biglim{x\toinf} h(x)$ mit $h(x) = f(-x)$)
+\end{definition}
+
+\begin{satz} % Satz 8
+    \label{satz:equiv-stetigkeit-grenzwerte}
+    Sei $D\sbset \R$, $f: D\fromto \R$ (oder $\R^d$), $x_0$ HP von $D$. Dann gilt
+    \begin{align*}
+        f \text{ ist stetig in } x_0 &\equivalent \lim_{x\fromto x_0} f(x) = f(x_0)\\
+        &\equivalent \lim_{x\nearrow x_0} f(x) = \lim_{x\searrow x_0} f(x) = f(x_0)
+    \end{align*}
+\end{satz}
+
+\begin{uebung}
+    Beweisen Sie Satz~\ref{satz:equiv-stetigkeit-grenzwerte}.
+\end{uebung}
+
+\newpage
