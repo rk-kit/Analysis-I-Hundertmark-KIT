@@ -27,7 +27,6 @@
 
 % Font-Encoding
 \usepackage[T1]{fontenc}
-\usepackage{lmodern}
 
 % Theorems
 \newtheorem{blockelement}{Blockelement}[subsection]
@@ -1942,7 +1941,7 @@
 
     \section{[*] Gleichmäßige Stetigkeit und gleichmäßge Konvergenz}
 
-    \subsection{[*] Gleichmäßige und Lipschitz-Stetigkeit}
+    \subsection{Gleichmäßige und Lipschitz-Stetigkeit}
     \thispagestyle{pagenumberonly}
 
     \begin{definition}[Gleichmäßige Stetigkeit] % Def 1
@@ -1989,19 +1988,21 @@
         \begin{proof}
             Angenommen $f$ ist nicht gleichmäßig stetig.
             \begin{align*}
-                \impl\ex\varepsilon > 0\fa \delta > 0\ex x,y\in K\colon\abs{x-y} < \delta \text{ und } \abs{f(x)-f(y)} > \varepsilon
+                \impl\ex\varepsilon > 0\fa \delta > 0\ex x,y\in &K\colon\abs{x-y} < \delta \text{ und } \abs{f(x)-f(y)} > \varepsilon
                 \intertext{Wähle $\delta = \frac{1}{n}$}
-                \impl\ex x_n, y_n\sbset K\colon \abs{x_n- y_n} < \frac{1}{n}\\
-                \intertext{aber $\abs{f(x_n)-f(y_n)} \geq \varepsilon > 0$}
-                \impl x_n - y_n \fromto 0 \text{ für } n\fromto\infty
-                \intertext{Da $K$ kompakt}
-                \impl \ex \text{ Konvergente TF } (y_{n_l})_l \text{ von } (y_n)_n\quad (n_1 < n_2 < n_3 < \dots < n_l < n_{l+1})\\
-                y\definedas \lim_{l\toinf} (y_{n_l}) \text{ existiert } \in K\\
-                \abs{x_{n_l} - y} = \abs{x_{n_l} - y_{n_l} + y_{n_l} - y} \leq \abs{x_{n_l} - y_{n_l}} + \abs{x_{n_l} - y}\fromto 0\\
-                \impl \abs{f(x_{n_l}) - f(y_{n_l})} \geq \varepsilon > 0
+                \impl\ex x_n, y_n\sbset K\colon \abs{x_n- y_n} &< \frac{1}{n} \text{ aber } \abs{f(x_n)-f(y_n)} \geq \varepsilon > 0\\
+                \impl x_n - y_n &\fromto 0 \text{ für } n\fromto\infty
+                \intertext{Da $K$ kompakt $\ex$Konvergente TF $(y_{n_l})_l$ von $(y_n)_n$ nach Satz~\ref{satz:bolzano-weierstrass}}
+                y &\definedas \lim_{l\toinf} (y_{n_l}) \text{ existiert in } K
+                \intertext{Für eine Teilfolge $(x_{n_l})_l$ von $(x_n)_n$ gilt}
+                \abs{x_{n_l} - y} &= \abs{x_{n_l} - y_{n_l} + y_{n_l} - y}\\
+                &\leq \underbrace{\abs{x_{n_l} - y_{n_l}}}_{<\frac{1}{n}\fromto 0} + \underbrace{\abs{y_{n_l} - y}}_{\fromto 0}\fromto 0\\
+                \impl \abs{f(x_{n_l}) - f(y_{n_l})} &\geq \varepsilon > 0
                 \intertext{Aber}
-                \abs{f(x_{n_l}) - f(y_{n_l})} = \abs{f(x_{n_l}) - f(y) + f(y) - f(y_{n_l})} \leq \underbrace{\abs{f(x_{n_l}) - f(y)}}_{\fromto 0} + \underbrace{\abs{f(y)-f(y_{n_l})}}_{\fromto 0}\tag{Widerspruch}
+                \abs{f(x_{n_l}) - f(y_{n_l})} &= \abs{f(x_{n_l}) - f(y) + f(y) - f(y_{n_l})}\\
+                &\leq \underbrace{\abs{f(x_{n_l}) - f(y)}}_{\fromto 0} + \underbrace{\abs{f(y)-f(y_{n_l})}}_{\fromto 0}
             \end{align*}
+            Damit ergibt sich ein Widerspruch zur Stetigkeit von $f$ und $f$ ist damit gleichmäßig stetig.
         \end{proof}
     \end{satz}
 
