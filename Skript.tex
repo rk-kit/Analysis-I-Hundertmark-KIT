@@ -2081,7 +2081,7 @@
 
     \begin{notation}[Supremumsnorm]
         \marginnote{[01. Feb]}
-        Es sei $f: D\-> \R$ (oder $\R^d$, $\C$). Dann schreiben wir
+        Es sei $f: D\fromto \R$ (oder $\R^d$, $\C$). Dann schreiben wir
         \begin{align*}
             \norm{f}_{\infty} &\definedas \norm{f}_{D,\infty} = \norm{f}_{?}\\
             &= \sup_{x\in D} \abs{f(x)}
@@ -2090,7 +2090,7 @@
     \end{notation}
 
     \begin{satz}[Cauchy-Kriterium für gleichmäßige Konvergenz]
-        Es sei $(f_n)_n$, $f_n: D\-> \R$ (oder $\R^d$). Dann konvergiert $(f_n)_n$ genau dann gleichmäßig gegen $f$, wenn
+        Es sei $(f_n)_n$, $f_n: D\fromto \R$ (oder $\R^d$). Dann konvergiert $(f_n)_n$ genau dann gleichmäßig gegen $f$, wenn
         \begin{align*}
             \fa\varepsilon > 0\ex N\in\N\colon \abs{f_n(x) - f_m(x)} < \varepsilon\quad\forall x\in D, n,m\geq N
         \end{align*}
@@ -2114,7 +2114,7 @@
 
     \begin{satz}[Weierstraß 1861] % Satz 7
         \label{satz:17-7}
-        Seien $f_n: D \-> \R$ (oder $\R^d$, $\C$) stetige Funktionen, welche gleichmäßig gegen eine Funktion $f$ konvergieren. Dann ist $f$ stetig!
+        Seien $f_n: D \fromto \R$ (oder $\R^d$, $\C$) stetige Funktionen, welche gleichmäßig gegen eine Funktion $f$ konvergieren. Dann ist $f$ stetig!
         \begin{proof}
             Geg. $x_0\in D, x\in D$.
             \begin{align*}
@@ -2133,7 +2133,7 @@
 
     \begin{satz}[Weierstraß' M-Test] % Satz 8
         \label{satz:17-8}
-        Eine Reihe $ \sum_{n=0}^{\infty} f_n$ von Funktionen $f_n: D\-> \R$ (oder $\R^d$) konvergiert gleichmäßig, wenn sie eine konvergente Majorante hat, das heißt $\ex M_n\geq 0, N_0\in \N$ mit
+        Eine Reihe $ \sum_{n=0}^{\infty} f_n$ von Funktionen $f_n: D\fromto \R$ (oder $\R^d$) konvergiert gleichmäßig, wenn sie eine konvergente Majorante hat, das heißt $\ex M_n\geq 0, N_0\in \N$ mit
         \begin{align*}
             \abs{f_n(x)} &\leq M_n\quad\forall x\in D, n\geq N_0
             \intertext{und}
@@ -2146,9 +2146,9 @@
                 \intertext{Wir betrachten $n,m\geq N_0$}
                 \abs{s_n(x) - s_m(x)} &= \abs{\sum_{j=m+1}^{n} f_j(x)} \leq \sum_{j=m+1}^{n} \underbrace{\abs{f_j(x)}}_{\leq M_j}\\
                 &\leq \sum_{j=m+1}^{n} M_j\\
-                \impl \abs{s_n(x) - s_m(x)} &\leq \underbrace{\sum_{j=m+1}^{n} M_j}_{\-> 0}
+                \impl \abs{s_n(x) - s_m(x)} &\leq \underbrace{\sum_{j=m+1}^{n} M_j}_{\fromto 0}
                 \intertext{Haben}
-                \impl \sup_{n\geq m} \sup_{x\in D} \abs{s_n(x) - s_m(x)} &\-> 0 \text{ für } m\->\infty\\
+                \impl \sup_{n\geq m} \sup_{x\in D} \abs{s_n(x) - s_m(x)} &\fromto 0 \text{ für } m\fromto\infty\\
                 \equivalent s_{n} \text{ konvergiert gleichmäßig auf } &D
                 \intertext{$s_n(x)$ stetig, da endliche Summen von stetigen Funktionen stetig sind}
                 \impl s(x) &= \lim_{\ntoinf} s_n(x) \text{ ist stetig nach Satz~\ref{satz:17-7}}\qedhere
@@ -2157,7 +2157,7 @@
     \end{satz}
 
     \begin{anwendung}[Potenzreihen]
-        Satz~\ref{satz:17-7} und Satz~\ref{satz:17-8} gelten auch für Funktionen $f_n: D\-> \C$, $D\sbset \C$. Potenzreihe
+        Satz~\ref{satz:17-7} und Satz~\ref{satz:17-8} gelten auch für Funktionen $f_n: D\fromto \C$, $D\sbset \C$. Potenzreihe
         \begin{align*}
             f(x) &= \sum_{n=0}^{\infty} a_n x^n\\
             s_n(x) &= \sum_{j=0}^{n} \underbrace{a_{j} x^j}_{\text{Polynom, daher stetig}}
@@ -2171,8 +2171,8 @@
             \impl \frac{\abs{z}}{\abs{z_1}} \leq \frac{R-\delta}{R-\frac{\delta}{2}} = q < 1\\
             \impl \abs{\sum_{n=k+1}^{\infty} a_n z^n} \leq M \cdot q^{k+1}\\
             \impl \abs{s(z) - s_k(z)} &= \abs{\sum_{n=k+1}^{\infty} a_n z^n}\\
-            &\leq M \cdot q^{k+1} \-> 0 \text{ für } k\-> \infty\\
-            \sup_{\abs{z} < R - \delta} \abs{s(z) - s_k(z)} &\leq M \cdot q^{k+1} \-> 0 \text{ für } k\->\infty
+            &\leq M \cdot q^{k+1} \fromto 0 \text{ für } k\fromto \infty\\
+            \sup_{\abs{z} < R - \delta} \abs{s(z) - s_k(z)} &\leq M \cdot q^{k+1} \fromto 0 \text{ für } k\fromto\infty
             \intertext{Partialsummen}
             s_k(z) &= \sum_{n=0}^{k} a_n z^n \text{ konvergiert gleichmäßig gegen } s(z) \text{ für alle } \abs{z} \leq R-\delta
         \end{align*}
@@ -2181,13 +2181,13 @@
 
     \begin{satz}[Weierstraß] % Satz 9
         \label{satz:17-9}
-        Sei $a <b$, $f: \interv{a,b}\-> \R$ stetig. Dann gilt es existiert eine Folge von Polynomen $(P_n)_n$, welche gleichmäßig auf $\interv{a,b}$ gegen $f$ konvergiert. Das heißt $\norm{f-P_n}_{\infty}  = \biglim{\ntoinf} \sup_{a \leq x \leq b} \abs{f(x) - P_n(x)} = 0$
+        Sei $a <b$, $f: \interv{a,b}\fromto \R$ stetig. Dann gilt es existiert eine Folge von Polynomen $(P_n)_n$, welche gleichmäßig auf $\interv{a,b}$ gegen $f$ konvergiert. Das heißt $\norm{f-P_n}_{\infty}  = \biglim{\ntoinf} \sup_{a \leq x \leq b} \abs{f(x) - P_n(x)} = 0$
 
         \begin{proof}
-            O.B.d.A. $a=0$, $b=1$ -- sonst ist $g: \interv{0,1} \-> \interv{a,b}, x\mapsto (b-a)x + a$ stetig und bijektiv und wir haben $h: \interv{0,1} \-> \R, x\mapsto h(x) = f(g(x))$.\\
+            O.B.d.A. $a=0$, $b=1$ -- sonst ist $g: \interv{0,1} \fromto \interv{a,b}, x\mapsto (b-a)x + a$ stetig und bijektiv und wir haben $h: \interv{0,1} \fromto \R, x\mapsto h(x) = f(g(x))$.\\
             Def. Bernstein Polynome
             \begin{align*}
-                P_n(x) &\:= \sum_{k=0}^{n} \binom{n}{k} x^k \cdot\pair{1-x}^{n-k} \cdot f\of{\frac{k}{n}}\tag{$n\in\N$}
+                P_n(x) &\definedas \sum_{k=0}^{n} \binom{n}{k} x^k \cdot\pair{1-x}^{n-k} \cdot f\of{\frac{k}{n}}\tag{$n\in\N$}
                 \intertext{Haben}
                 a)&\quad\sum_{k=0}^{n} \binom{n}{k}x^k \cdot \pair{1-x}^{n-k} = \pair{x+(1-x)}^n = 1\tag{Bernoulli}\\
                 b)&\quad \sum_{k=0}^{n} k\binom{n}{k}x^k\cdot (1-x)^{n-k} = n\cdot x\\
@@ -2242,34 +2242,34 @@
 
     \begin{definition} % Definition 1
         \marginnote{[06. Feb]}
-        Es seien $D = \pair{a,b}\sbset\R$, $x\in D$ und $f: D\-> \R$. $f$ heißt im Punkt $x$ von rechts differenzierbar, falls
+        Es seien $D = \pair{a,b}\sbset\R$, $x\in D$ und $f: D\fromto \R$. $f$ heißt im Punkt $x$ von rechts differenzierbar, falls
         \begin{align*}
-            f'_+ &= \lim_{h\-> 0_+} \frac{f(x+h)-f(x)}{h}
+            f'_+ &= \lim_{h\fromto 0_+} \frac{f(x+h)-f(x)}{h}
             \intertext{existiert. $f$ ist von links differenzierbar, falls}
-            f'_- &= \lim_{h\-> 0_-} \frac{f(x+h)-f(x)}{h}
+            f'_- &= \lim_{h\fromto 0_-} \frac{f(x+h)-f(x)}{h}
         \end{align*}
         $f$ ist im Punkt $x$ differenzierbar, falls $f'_+, f'_-$ existieren und $f'_+ = f'_-$. Das ist äquivalent zu der Existenz von
         \begin{align*}
-            \lim_{\substack{h\-> 0\\ h\neq 0}} \frac{f(x+h)-f(x)}{h}
+            \lim_{\substack{h\fromto 0\\ h\neq 0}} \frac{f(x+h)-f(x)}{h}
         \end{align*}
     \end{definition}
 
     \begin{satz} % Satz 2
         \label{satz:18-2}
-        Sei $a\in\pair{c,d}\sbset\R$. Die Funktion $f: \pair{a,b}\->\R$ ist genau dann im Punkt $a$ differenzierbar, wenn $\ex C\in\R$ mit $f(x) = f(a)+C\cdot\pair{x-a} + \varphi\of{x}$ wobei
+        Sei $a\in\pair{c,d}\sbset\R$. Die Funktion $f: \pair{a,b}\fromto\R$ ist genau dann im Punkt $a$ differenzierbar, wenn $\ex C\in\R$ mit $f(x) = f(a)+C\cdot\pair{x-a} + \varphi\of{x}$ wobei
         \begin{align*}
-            \lim_{x\-> a} \frac{\varphi\of{x}}{x-a} = 0
+            \lim_{x\fromto a} \frac{\varphi\of{x}}{x-a} = 0
         \end{align*}
         \begin{proof}
-            \anf{$\impl$}: Sei $f$ differenzierbar. $\varphi \:= f(x)-f(a) - f'(a)\cdot\pair{x-a}$. Also $C=f'\of{a}$.
+            \anf{$\impl$}: Sei $f$ differenzierbar. $\varphi \definedas f(x)-f(a) - f'(a)\cdot\pair{x-a}$. Also $C=f'\of{a}$.
             \begin{align*}
-                \frac{\varphi\of{x}}{x-a} &= \underbrace{\frac{f(x)-f(a)}{x-a}}_{\-> f'(a)} - f'(a) \-> 0
+                \frac{\varphi\of{x}}{x-a} &= \underbrace{\frac{f(x)-f(a)}{x-a}}_{\fromto f'(a)} - f'(a) \fromto 0
             \end{align*}
-            \anf{$\Leftarrow$}: Es gilt $f(x) = f(a)+C\cdot\pair{x-a} + \varphi\of{x}, \frac{\varphi(x)}{x-a}\-> 0$ für $x\-> a$
+            \anf{$\Leftarrow$}: Es gilt $f(x) = f(a)+C\cdot\pair{x-a} + \varphi\of{x}, \frac{\varphi(x)}{x-a}\fromto 0$ für $x\fromto a$
             \begin{align*}
                 \frac{f(x)-f(a)}{x-a} &= C + \frac{\varphi(x)}{x-a}\\
-                \impl \abs{\frac{f(x)-f(a)}{x-a} - C} &\-> 0\\
-                \impl \frac{f(x)-f(a)}{x-a} &\-> C\\
+                \impl \abs{\frac{f(x)-f(a)}{x-a} - C} &\fromto 0\\
+                \impl \frac{f(x)-f(a)}{x-a} &\fromto C\\
                 \impl f \text{ ist differenzierbar}&\qedhere
             \end{align*}
         \end{proof}
@@ -2279,7 +2279,7 @@
         \theoremescape
         \label{korollar:18-2}
         \begin{enumerate}[label=(\roman*)]
-            \item $f$ ist differenzierbar $\impl f$ ist stetig im Punkt $a$. ($x\-> a, f(x)-f(a) = C\cdot\pair{x-a} + \frac{\varphi(x)}{x-a}\cdot\pair{x-a}\-> 0$)
+            \item $f$ ist differenzierbar $\impl f$ ist stetig im Punkt $a$. ($x\fromto a, f(x)-f(a) = C\cdot\pair{x-a} + \frac{\varphi(x)}{x-a}\cdot\pair{x-a}\fromto 0$)
             \item Sei $f'(a) \neq 0$. Dann $\ex h_0$, sodass $\fa h$ mit $\abs{h} < h_0, h\neq 0$ gilt $\abs{f(x)-f(a)}\geq\frac{1}{2}\abs{f'(a)}\cdot\abs{x-a}$.
             \item $\ex h_0$, so dass für alle $x$ mit $\abs{x-a} < h_0, x\neq a$ gilt
             \begin{align*}
@@ -2292,21 +2292,21 @@
         \begin{proof}[Beweis (ii)]
             \begin{align*}
                 f(x) &= f(a) + f'(a)\cdot\pair{x-a} + \frac{\varphi(x)}{x-a}\cdot\pair{x-a}\\
-                \abs{f(x)-f(a)} &\geq \abs{f'(a)}\abs{x-a} = \underbrace{\abs{\frac{\varphi(x)}{x-a}}}_{\-> 0}\cdot\abs{x-a}\geq \frac{1}{2}\abs{f'(a)}\abs{x-a}
+                \abs{f(x)-f(a)} &\geq \abs{f'(a)}\abs{x-a} = \underbrace{\abs{\frac{\varphi(x)}{x-a}}}_{\fromto 0}\cdot\abs{x-a}\geq \frac{1}{2}\abs{f'(a)}\abs{x-a}
             \end{align*}
         \end{proof}
         \begin{proof}[Beweis (iii)]
             1.
             \begin{align*}
-                \abs{f(x)-f(a)} &\leq \abs{f'(a)}\abs{x-a} + \underbrace{\frac{\varphi(x)}{x-a}}_{\-> 0} \cdot \abs{x-a} \leq 2\abs{f'(a)}\cdot\abs{x-a}
+                \abs{f(x)-f(a)} &\leq \abs{f'(a)}\abs{x-a} + \underbrace{\frac{\varphi(x)}{x-a}}_{\fromto 0} \cdot \abs{x-a} \leq 2\abs{f'(a)}\cdot\abs{x-a}
                 \intertext{2.}
-                \abs{f(x)-f(a)} &\leq \abs{\underbrace{f'(a)}_{\-> 0} \cdot \pair{x-a} + \underbrace{\frac{\varphi(x)}{x-a}}_{\-> 0}\cdot\pair{x-a}} \leq \varepsilon\abs{x-a}
+                \abs{f(x)-f(a)} &\leq \abs{\underbrace{f'(a)}_{\fromto 0} \cdot \pair{x-a} + \underbrace{\frac{\varphi(x)}{x-a}}_{\fromto 0}\cdot\pair{x-a}} \leq \varepsilon\abs{x-a}
             \end{align*}
         \end{proof}
     \end{korollar}
 
     \begin{satz} % Satz 3
-        Seien $f, g: (a,b)\-> \R$ differenzierbar, $\lambda\in\R$, $x\in\pair{a,b}$. Dann gilt
+        Seien $f, g: (a,b)\fromto \R$ differenzierbar, $\lambda\in\R$, $x\in\pair{a,b}$. Dann gilt
         \begin{enumerate}[label=(\roman*)]
             \item $\pair{f+g}'\of{x} = f'(x)+g'(x)$
             \item $\pair{\lambda\cdot f}'\of{x} = \lambda\cdot f'(x)$
@@ -2314,9 +2314,9 @@
         \end{enumerate}
         \begin{proof}[Beweis (iii)]
             \begin{align*}
-                &\lim_{\substack{h\-> 0\\ h\neq 0}} \frac{f(x+h)g(x+h) - f(x)g(x)}{h}\\
-                &= \lim_{h\-> 0} \frac{f(x+h)g(x+h) - f(x+h)g(x) + f(x+h)g(x) - f(x)g(x)}{h}\\
-                &= \lim_{h\-> 0} f(x+h)\cdot \underbrace{\frac{g(x+h)-g(x)}{h}}_{\-> g'(x)} + \lim_{h\-> 0} g(x) \cdot \underbrace{\frac{f(x+h)-f(x)}{h}}_{\-> f'(x)} = f(x) \cdot g'(x) + g(x)f'(x)
+                &\lim_{\substack{h\fromto 0\\ h\neq 0}} \frac{f(x+h)g(x+h) - f(x)g(x)}{h}\\
+                &= \lim_{h\fromto 0} \frac{f(x+h)g(x+h) - f(x+h)g(x) + f(x+h)g(x) - f(x)g(x)}{h}\\
+                &= \lim_{h\fromto 0} f(x+h)\cdot \underbrace{\frac{g(x+h)-g(x)}{h}}_{\fromto g'(x)} + \lim_{h\fromto 0} g(x) \cdot \underbrace{\frac{f(x+h)-f(x)}{h}}_{\fromto f'(x)} = f(x) \cdot g'(x) + g(x)f'(x)
             \end{align*}
         \end{proof}
     \end{satz}
@@ -2326,28 +2326,28 @@
     \end{uebung}
 
     \begin{satz}[Kettenregel] % Satz 4
-        Seien $f: \pair{a,b}\-> \R$ und $g: (c,d)\-> \R$ die Funktionen mit $f(a,b) \sbset \pair{c,d}$. Funktion $f$ sei im Punkt $x$ differenzierbar und $g$ sei im Punkt $y\:= f(x)$ differenzierbar. Dann gilt $\pair{g\circ f}'(x) = g'(f(x)) \cdot f'(x)$.
+        Seien $f: \pair{a,b}\fromto \R$ und $g: (c,d)\fromto \R$ die Funktionen mit $f(a,b) \sbset \pair{c,d}$. Funktion $f$ sei im Punkt $x$ differenzierbar und $g$ sei im Punkt $y\definedas f(x)$ differenzierbar. Dann gilt $\pair{g\circ f}'(x) = g'(f(x)) \cdot f'(x)$.
         \begin{proof}
-            $F(x) \:= g(f(x))$
+            $F(x) \definedas g(f(x))$
             \begin{align*}
-                \lim_{\substack{h\-> 0\\ h\neq 0}} \frac{F(x+h)-F(x)}{h}
+                \lim_{\substack{h\fromto 0\\ h\neq 0}} \frac{F(x+h)-F(x)}{h}
                 \intertext{Fall 1: $f'(x) \neq 0$}
                 \annot{\impl}{\ref{korollar:18-2}} \ex h_0, \abs{h} < h_0\abs{f(x+h)-f(x)} \geq \frac{1}{2}\abs{f'(x)}\abs{h} \neq 0\\
-                \impl \lim_{h\-> 0} \frac{F(x+h)-F(x)}{h} &= \lim_{h\-> 0} \frac{\pair{F(x+h) - F(x)}\cdot\pair{f(x+h)-f(x)}}{\pair{f(x+h)-f(x)}h}\\
-                &= \lim_{h\-> 0} \frac{g(f(x+h))-g(f(x))}{f(x+h)-f(x)} \cdot \underbrace{\frac{f(x+h)-f(x)}{h}}_{\-> f'(x)}
+                \impl \lim_{h\fromto 0} \frac{F(x+h)-F(x)}{h} &= \lim_{h\fromto 0} \frac{\pair{F(x+h) - F(x)}\cdot\pair{f(x+h)-f(x)}}{\pair{f(x+h)-f(x)}h}\\
+                &= \lim_{h\fromto 0} \frac{g(f(x+h))-g(f(x))}{f(x+h)-f(x)} \cdot \underbrace{\frac{f(x+h)-f(x)}{h}}_{\fromto f'(x)}
                 \intertext{$f(x)=y$ und $f(x+h) = y + \Delta y$}
                 \frac{g(y+\Delta y) - g(y)}{\Delta y}\\
                 \Delta y &= f(x+h) -f(x)\impl \Delta y \neq 0\\
-                \abs{\Delta y} &\leq \frac{1}{2}\abs{f'(x)}\cdot\abs{x+h-x} \-> 0\\
-                \lim_{h\-> 0} \frac{g(y+\Delta y) - g(y)}{\Delta y} &= \lim_{\Delta y \-> 0} \frac{g(y+\Delta y) - g(y)}{\Delta y} = g'(y) = g'(f(x))\\
-                \impl \frac{F(x+h)-F(x)}{h} \-> g'(f(x)) \cdot f'(x)
+                \abs{\Delta y} &\leq \frac{1}{2}\abs{f'(x)}\cdot\abs{x+h-x} \fromto 0\\
+                \lim_{h\fromto 0} \frac{g(y+\Delta y) - g(y)}{\Delta y} &= \lim_{\Delta y \fromto 0} \frac{g(y+\Delta y) - g(y)}{\Delta y} = g'(y) = g'(f(x))\\
+                \impl \frac{F(x+h)-F(x)}{h} \fromto g'(f(x)) \cdot f'(x)
                 \intertext{Fall 2: $f'(x) = 0$}
-                \lim_{h\-> 0} \frac{F(x+h)-F(x)}{h}\\
+                \lim_{h\fromto 0} \frac{F(x+h)-F(x)}{h}\\
                 \abs{\frac{g(f(x+h)) - g(f(x))}{h}} \leq \frac{C\abs{f(x+h)-f(x)}}{h}
                 \intertext{mit $C=\max\set{2\abs{g'(f(x))}, 1}$}
                 \leq \frac{C\varepsilon \abs{x+h-h}}{h} = C\cdot\varepsilon\\
-                \impl \lim_{h\-> 0} \frac{F(x+h)-F(x)}{h} &= 0\\
-                f'(x) = 0 \impl \lim_{h\-> 0} \frac{g(f(x+h))-g(f(x))}{h} = 0\\
+                \impl \lim_{h\fromto 0} \frac{F(x+h)-F(x)}{h} &= 0\\
+                f'(x) = 0 \impl \lim_{h\fromto 0} \frac{g(f(x+h))-g(f(x))}{h} = 0\\
                 \equivalent \pair{g\circ f}'(x) &= 0\\
                 g'(f(x))\cdot f'(x) &= 0
                 \intertext{Damit folgt insgesamt}
@@ -2369,10 +2369,10 @@
     \begin{beispiel}
         $a\in\C$, $x\in\R$. Wir wollen $e^{ax}$ ableiten
         \begin{align*}
-            \pair{e^{ax}}' &= \lim_{h\-> 0} \frac{e^{a(x+h)} - e^{ax}}{h} = \lim_{h\-> 0}\frac{e^{ax}-1}{h} = e^{ah} \lim_{h\-> 0} \frac{e^{ah}-1}{h}\\
+            \pair{e^{ax}}' &= \lim_{h\fromto 0} \frac{e^{a(x+h)} - e^{ax}}{h} = \lim_{h\fromto 0}\frac{e^{ax}-1}{h} = e^{ah} \lim_{h\fromto 0} \frac{e^{ah}-1}{h}\\
             e^{ah} &= \sum_{n=0}^{\infty} \frac{(ah)^n}{n!} = 1 + ah + (ah)^2 \sum_{n=2}^{\infty} \frac{(aH)^(n-2)}{n!}
             \intertext{$\abs{h} < \frac{1}{\abs{a}}$}
-            ... &= e^{ax} \lim_{h\-> 0} \frac{ah}{h} = a\cdot e^{ax}\tag{$a\in\C$}
+            ... &= e^{ax} \lim_{h\fromto 0} \frac{ah}{h} = a\cdot e^{ax}\tag{$a\in\C$}
         \end{align*}
     \end{beispiel}
 
