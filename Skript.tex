@@ -1579,7 +1579,7 @@
     \par\noindent\rule{\textwidth}{0.4pt}
 
     %%%%%%%%%%%%%%%%%%%%%%%%
-    % 16. Januar 2023
+    % 16. Januar 2024
     %%%%%%%%%%%%%%%%%%%%%%%%
 
     \begin{bemerkung}
@@ -1822,7 +1822,7 @@
     \newpage
 
     %%%%%%%%%%%%%%%%%%%%%%%%
-    % 18. Januar 2023
+    % 18. Januar 2024
     %%%%%%%%%%%%%%%%%%%%%%%%
 
     Bessere Version von Lemma~\ref{lemma:temp-4}:
@@ -2076,7 +2076,7 @@
     \end{bemerkung}
 
     %%%%%%%%%%%%%%%%%%%%%%%%
-    % 01. Februar 2023
+    % 01. Februar 2024
     %%%%%%%%%%%%%%%%%%%%%%%%
 
     \begin{notation}[Supremumsnorm]
@@ -2232,7 +2232,7 @@
     \newpage
 
     %%%%%%%%%%%%%%%%%%%%%%%%
-    % 06. Februar 2023
+    % 06. Februar 2024
     %%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -2392,6 +2392,184 @@
             ... &= e^{ax} \lim_{h\fromto 0} \frac{ah}{h} = a\cdot e^{ax}\tag{$a\in\C$}
         \end{align*}
     \end{beispiel}
+
+    \newpage
+
+    %%%%%%%%%%%%%%%%%%%%%%%%
+    % 08. Februar 2024
+    %%%%%%%%%%%%%%%%%%%%%%%%
+
+    \begin{beispiel}[Ableitung von $\sin$ und $\cos$]
+        \marginnote{[08. Feb]}
+        \begin{align*}
+            \pair{\sin x}' &= \pair{\Im e^{ix}}' = \Im \pair{e^{ix}}' = \Im\pair{i\cdot e^{ix}} = \Im\of{i\cdot\pair{\cos x + i\cdot \sin x}} = \cos x
+            \intertext{Analog lässt sich zeigen, dass gilt}
+            \pair{\cos x}' &= -\sin x
+        \end{align*}
+    \end{beispiel}
+    \begin{beispiel}[Ableitung von $\tan$]
+        \begin{align*}
+            \pair{\tan x}' &= \pair{\frac{\sin x}{\cos x}}' = \frac{\cos x \cdot \cos x -\pair{-\sin x \cdot \sin x}}{\cos^2 x} = \frac{\cos^2 x + \sin^2 x}{\cos^2 x} \frac{1}{\cos^2 x} = \frac{1}{\cos^2 x}
+        \end{align*}
+    \end{beispiel}
+
+    \begin{satz}[Ableitung der Umkehrfunktion] % Satz 6
+        \label{satz:ableitung-umkehrfunktion}
+        Sei $f: \pair{a,b} \fromto \pair{c,d}$ eine bijektive Abbildung, die im Punkt $x\in\pair{a,b}$ differenzierbar ist. Dann ist die Funktion $f^{-1}$ an der Stelle $y=f\of{x}$ differenzierbar und es gilt
+        \begin{align*}
+            \pair{f^{-1}}'\of{y} = \frac{1}{f'\of{x}}
+        \end{align*}
+        \begin{proof}
+            \begin{align*}
+                \lim_{h\fromto 0} \frac{\overbrace{f^{-1}\of{y+h}}^{\definedasbackwards \xi} - f^{-1}\of{y}}{h} &= \lim_{h\fromto 0}\frac{\xi - x}{f\of{\xi} - f\of{x}}\\
+                &= \lim_{h\fromto 0} \frac{1}{\frac{f\of{\xi} - f\of{x}}{\xi-x}}\\
+                &= \frac{1}{\lim_{h\fromto 0} \frac{f\of{\xi} - f\of{x}}{\xi-x}}
+                \intertext{Wegen der Monotonie und Stetigkeit von $f$ können wir umformen zu}
+                &= \frac{1}{\lim_{\xi\fromto x} \frac{f\of{\xi} - f\of{x}}{\xi-x}}\\
+                &= \frac{1}{f'\of{x}}\qedhere
+            \end{align*}
+        \end{proof}
+    \end{satz}
+
+    \begin{beispiel}[Ableitung des Logarithmus]
+        Wir definieren $f\definedas e^x$. Damit gilt
+        \begin{align*}
+            \log y &= f^{-1}\of{y}\\
+            \log\pair{e^x} &= x\\
+            \pair{\log y}' &= \frac{1}{\pair{e^x}'_{\lvert y=e^x}} = \frac{1}{\pair{e^x}_{\lvert y=e^x}} = \frac{1}{y}
+        \end{align*}
+    \end{beispiel}
+
+    \begin{beispiel}[Ableitung von $\arccos$]
+        Es sei $y\in\pair{-1, 1}$. Dann gilt
+        \begin{align*}
+            \pair{\arccos y}' &= \frac{1}{\pair{\cos x}'_{\lvert \cos x = y}} = \frac{1}{-\sin\of{\cos\of{x}}}\\
+            &= \frac{1}{\pm\sqrt{1-\cos^2\of{\arccos y}}} = \pm \frac{1}{\sqrt{1-y^2}}
+        \end{align*}
+    \end{beispiel}
+
+    \subsection{Lokale Extrema und Mittelwertsätze}
+
+    \begin{definition}[Lokales Maximum und Minimum] % Definition 7
+        Sei $f: \pair{a,b} \fromto\R$. Man sagt $f$ habe in $x\in\pair{a,b}$ ein lokales Maximum (bzw. Minimum), wenn ein $\varepsilon > 0$ existiert, so dass
+        \begin{align*}
+            f\of{x} \geq f\of{\xi}\quad \forall \xi\in\pair{x-\varepsilon, x+\varepsilon}
+            \intertext{bzw.}
+            f\of{x} \leq f\of{\xi}\quad \forall \xi\in\pair{x-\varepsilon, x+\varepsilon}
+        \end{align*}
+    \end{definition}
+
+    \begin{satz}[Ableitung bei lokalen Extrema]
+        \label{satz:ableitung-extrem}
+        Sei $f: \pair{a,b} \fromto \R$ differenzierbar und $x\in\pair{a,b}$ ein lokales Extremum. Dann gilt $f'\of{x} = 0$.
+        \begin{proof}
+            $\ex \varepsilon > 0$, $f\of{\xi} \leq f\of{x}$, $\xi\in\pair{x-\varepsilon, x+\varepsilon}$
+            \begin{align*}
+                f'_{+}\of{x} &= \lim_{\substack{\xi\fromto x\\ \xi > x}} \frac{f\of{\xi} - f\of{x}}{\xi - x} \leq 0\\
+                f'_{-}\of{x} &= \lim_{\substack{\xi\fromto x\\ \xi < x}} \frac{f\of{\xi} - f\of{x}}{\xi - x} \geq 0\\
+                \impl f'_{+} &= f'_{-} = 0\qedhere
+            \end{align*}
+        \end{proof}
+    \end{satz}
+
+    \begin{bemerkung}
+        Die Umkehrung gilt nicht. Wir betrachten $f: x\mapsto x^3$ mit $f'(0) = 3x^2 = 0$, aber die Funktion hat an der Stelle $x=0$ kein lokales Maximum oder Minimum.
+    \end{bemerkung}
+
+    \begin{bemerkung}
+        \begin{align*}
+            \pair{x^{\alpha}}' &= \pair{e^{\log x^{\alpha}}} = \pair{e^{\alpha\log x}}'
+            \intertext{Nach Kettenregel}
+            &= e^{\alpha \log x} \cdot \alpha \cdot \pair{\log x}' = \frac{\alpha x^{\alpha}}{x} = \alpha \cdot x^{\alpha-1}
+        \end{align*}
+    \end{bemerkung}
+
+
+    \begin{bemerkung}
+        Sei $f$ auf $\interv{a,b}$ stetig und auf $\pair{a,b}$ differenzierbar. Dann kann das Maximum/Minimum der Funktion auch auf den Intervall-Grenzen $a$ und $b$ liegen, obwohl die Ableitung für diese nicht bestimmbar ist.
+    \end{bemerkung}
+
+    \begin{satz}[Satz von Rolle]
+        \label{satz:von-rolle}
+        Sei $a < b$, $f: \interv{a,b} \fromto \R$ eine stetige Funktion mit $f(a) = f(b)$. Die Funktion $f$ sei in $\pair{a,b}$ differenzierbar. Dann $\ex\xi\in\pair{a,b}$ mit $f'\of{\xi} = 0$.
+        \begin{proof}
+            ~\\
+            Fall 1. $f$ ist eine konstante Funktion. Dann gilt $f' = 0$.\\
+            Fall 2. $f$ ist keine konstante Funktion. Das heißt nach Satz~\ref{satz:weierstrass-maximum-minimum} $\ex x$ mit $f\of{x} \neq f\of{a}$. Wenn $f(x) > f(a)$, dann existiert ein lokales Maximum bei $x_0\in\pair{a,b}$ und wenn $f(x) < f(a)$, dann existiert ein lokales Minimum bei $x_0\in\pair{a,b}$. Damit ist $f'\of{x_0} = 0$.
+        \end{proof}
+    \end{satz}
+
+    \begin{satz}[Mittelwertsatz]
+        \label{satz:mittelwertsatz}
+        Sei $a < b$, $f:\interv{a,b}\fromto\R$ stetig und in $\pair{a,b}$ differenzierbar. Dann gilt
+        \begin{align*}
+            \ex\xi\in\pair{a,b}\colon f\of{b} - f\of{a} = f'\of{\xi}\cdot\pair{b-a}
+        \end{align*}
+        \begin{proof}
+            \begin{align*}
+                F(x) &= f(x) - \frac{f\of{b}-f\of{a}}{b-a}\cdot\pair{x-a}\\
+                F(a) &= f(a) - \frac{f(b)-f(a)}{b-a}\cdot 0\\
+                F(b) &= f(b) - \frac{f(b)-f(a)}{b-a}\cdot\pair{b-a} = f\of{a}\\
+                \impl F(a) &= F(b)
+                \intertext{Damit gilt nach Satz~\ref{satz:von-rolle}}
+                \impl \ex\xi \text{ mit } F'\of{\xi} &= 0\\
+                \impl F'\of{\xi} &= f'\of{\xi} - \frac{f\of{b} - f\of{a}}{b-a} = 0\\
+                \impl f(b) - f(a) &= f'\of{\xi}\cdot\pair{b-a}\qedhere
+            \end{align*}
+        \end{proof}
+    \end{satz}
+
+    \begin{bemerkung}
+        Der Mittelwertsatz sagt aus, dass es einen Punkt auf der Funktion gibt, dessen Tangente parallel zu einer affin-linearen Funktion durch $f(a)$ und $f(b)$ läuft. % TODO: vis
+    \end{bemerkung}
+
+    \begin{korollar} % Korollar 10
+        Es gilt genau dann $f'(x) = 0$ für alle $x\in\pair{a,b}$, wenn $f(x)$ eine konstante Funktion in $\interv{a,b}$ ist.
+        \begin{proof}
+            \begin{align*}
+                f(x_1) - f(x_2) \annot[{&}]{=}{\ref{satz:mittelwertsatz}} f'\of{\xi}\cdot\pair{x_1 - x_2} = 0\cdot\pair{x_1 - x_2}\\
+                \impl f(x_1) &= f(x_2)\qedhere
+            \end{align*}
+        \end{proof}
+    \end{korollar}
+
+    \begin{satz} % Satz 11
+        Seien $f$ und $g$ stetig auf $\interv{a,b}$ und auf $\pair{a,b}$ differenzierbar. Dann gilt
+        \begin{align*}
+            \ex\xi\in\pair{a,b}\colon \interv{f(b)-f(a)}\cdot g'\of{\xi} &= \interv{g(b)-g(a)}\cdot f'\of{\xi}
+        \end{align*}
+        \begin{proof}
+            \begin{align*}
+                h(t) &= \interv{f(b)-f(a)}\cdot g(t) - \interv{g(b)-g(a)}\cdot f(t)\\
+                \impl h(a) &= h(b)\\
+                \impl \ex \xi \in\pair{a,b} &\text{ mit } h'\of{\xi} = 0\\
+                \impl \interv{f(b)-f(a)}\cdot g'\of{\xi} &- \interv{g(b)-g(a)}\cdot f'\of{\xi} = 0\\
+                \impl \interv{f(b)-f(a)}\cdot g'\of{\xi} &= \interv{g(b)-g(a)}\cdot f'\of{\xi}\qedhere
+            \end{align*}
+        \end{proof}
+    \end{satz}
+
+    \begin{definition}[Ableitungen höherer Ordnung] % Definition 11
+        Wir definieren für die zweite Ableitung
+        \begin{align*}
+            f'' &= \pair{f'}'
+            \intertext{und allgemein}
+            f^{(n)} &= \pair{f^{(n-1)}}'
+        \end{align*}
+    \end{definition}
+
+    \begin{satz}[Der Taylorsche Satz] % Satz 12
+        Es sei $f$ eine reelle Funktion auf $\interv{a,b}$ und $f^{(n-1)}$ sei stetig auf $\interv{a,b}$ und $f^{(n)}$ existiere auf $\pair{a,b}$. Sei
+        \begin{align*}
+            P_n(t) &= \sum_{k=0}^{n-1} \frac{f^{(k)}\of{\alpha}}{k!}\cdot\pair{t-\alpha}^k
+            \intertext{Dann $\ex\xi\in\pair{a,b}$ so dass}
+            f\of{\beta} &= P_n\of{\beta} + \frac{f^{(n)}\of{\xi}}{n!}\cdot\pair{\beta-\alpha}^n
+        \end{align*}
+    \end{satz}
+
+    \begin{bemerkung}
+        Der Taylorsche Satz ist eine Verallgemeinerung des Mittelwertsatzes.
+    \end{bemerkung}
 
 
 \end{document}
