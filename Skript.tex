@@ -2236,19 +2236,20 @@
     %%%%%%%%%%%%%%%%%%%%%%%%
 
 
-    \section{Ableitung (Differention)}
+    \section{[*] Ableitung (Differention)}
     \thispagestyle{pagenumberonly}
-    \imaginarysubsection{Ableitung}
+
+    \subsection{[*] Ableitung als Grenzwert}
 
     \begin{definition} % Definition 1
         \marginnote{[06. Feb]}
         Es seien $D = \pair{a,b}\sbset\R$, $x\in D$ und $f: D\fromto \R$. $f$ heißt im Punkt $x$ von rechts differenzierbar, falls
         \begin{align*}
-            f'_+ &= \lim_{h\fromto 0_+} \frac{f(x+h)-f(x)}{h}
+            f'_+ &\definedas \lim_{h\fromto 0_+} \frac{f(x+h)-f(x)}{h}
             \intertext{existiert. $f$ ist von links differenzierbar, falls}
-            f'_- &= \lim_{h\fromto 0_-} \frac{f(x+h)-f(x)}{h}
+            f'_- &\definedas \lim_{h\fromto 0_-} \frac{f(x+h)-f(x)}{h}
         \end{align*}
-        $f$ ist im Punkt $x$ differenzierbar, falls $f'_+, f'_-$ existieren und $f'_+ = f'_-$. Das ist äquivalent zu der Existenz von
+        existiert. $f$ ist im Punkt $x$ differenzierbar, falls $f'_+$ und $f'_-$ existieren und $f'_+ = f'_-$. Das ist äquivalent zu der Existenz von
         \begin{align*}
             \lim_{\substack{h\fromto 0\\ h\neq 0}} \frac{f(x+h)-f(x)}{h}
         \end{align*}
@@ -2261,16 +2262,16 @@
             \lim_{x\fromto a} \frac{\varphi\of{x}}{x-a} = 0
         \end{align*}
         \begin{proof}
-            \anf{$\impl$}: Sei $f$ differenzierbar. $\varphi \definedas f(x)-f(a) - f'(a)\cdot\pair{x-a}$. Also $C=f'\of{a}$.
+            \anf{$\impl$}: Sei $f$ differenzierbar. Wir wählen $\varphi\of{x} \definedas f(x)-f(a) - f'(a)\cdot\pair{x-a}$ und $C=f'\of{a}$.
             \begin{align*}
-                \frac{\varphi\of{x}}{x-a} &= \underbrace{\frac{f(x)-f(a)}{x-a}}_{\fromto f'(a)} - f'(a) \fromto 0
+                \lim_{x\fromto a} \frac{\varphi\of{x}}{x-a} &= \lim_{x\fromto a} \underbrace{\frac{f(x)-f(a)}{x-a}}_{\fromto f'(a)} - f'(a) = 0
             \end{align*}
-            \anf{$\Leftarrow$}: Es gilt $f(x) = f(a)+C\cdot\pair{x-a} + \varphi\of{x}, \frac{\varphi(x)}{x-a}\fromto 0$ für $x\fromto a$
+            \anf{$\Leftarrow$}: Es gilt $f(x) = f(a)+C\cdot\pair{x-a} + \varphi\of{x}$ und $\frac{\varphi(x)}{x-a}\fromto 0$ für $x\fromto a$
             \begin{align*}
-                \frac{f(x)-f(a)}{x-a} &= C + \frac{\varphi(x)}{x-a}\\
-                \impl \abs{\frac{f(x)-f(a)}{x-a} - C} &\fromto 0\\
-                \impl \frac{f(x)-f(a)}{x-a} &\fromto C\\
-                \impl f \text{ ist differenzierbar}&\qedhere
+                &\impl \frac{f(x)-f(a)}{x-a} = C + \frac{\varphi(x)}{x-a}\\
+                &\impl \abs{\frac{f(x)-f(a)}{x-a} - C} \fromto 0\\
+                &\impl \frac{f(x)-f(a)}{x-a}\fromto C\\
+                &\impl f \text{ ist in $a$ differenzierbar}\qedhere
             \end{align*}
         \end{proof}
     \end{satz}
@@ -2279,7 +2280,7 @@
         \theoremescape
         \label{korollar:18-2}
         \begin{enumerate}[label=(\roman*)]
-            \item $f$ ist differenzierbar $\impl f$ ist stetig im Punkt $a$. ($x\fromto a, f(x)-f(a) = C\cdot\pair{x-a} + \frac{\varphi(x)}{x-a}\cdot\pair{x-a}\fromto 0$)
+            \item $f$ ist differenzierbar $\impl f$ ist stetig im Punkt $a$.
             \item Sei $f'(a) \neq 0$. Dann $\ex h_0$, sodass $\fa h$ mit $\abs{h} < h_0, h\neq 0$ gilt $\abs{f(x)-f(a)}\geq\frac{1}{2}\abs{f'(a)}\cdot\abs{x-a}$.
             \item $\ex h_0$, so dass für alle $x$ mit $\abs{x-a} < h_0, x\neq a$ gilt
             \begin{align*}
@@ -2288,6 +2289,12 @@
                 \abs{f(x)-f(a)} &\leq \varepsilon\abs{x-a} \text{ für } f'(a) = 0\tag{$\fa\varepsilon > 0$, $h_0$ ist von $\varepsilon$ abhängig}
             \end{align*}
         \end{enumerate}
+
+        \begin{proof}[Beweis (i)]
+            \begin{align*}
+                x\fromto a, f(x)-f(a) = C\cdot\pair{x-a} + \frac{\varphi(x)}{x-a}\cdot\pair{x-a}\fromto 0
+            \end{align*}
+        \end{proof}
 
         \begin{proof}[Beweis (ii)]
             \begin{align*}
@@ -2305,18 +2312,22 @@
         \end{proof}
     \end{korollar}
 
+    \subsection{[*] Ableitungsregeln}
+
     \begin{satz} % Satz 3
+        \label{satz:ableitungsregeln}
         Seien $f, g: (a,b)\fromto \R$ differenzierbar, $\lambda\in\R$, $x\in\pair{a,b}$. Dann gilt
         \begin{enumerate}[label=(\roman*)]
             \item $\pair{f+g}'\of{x} = f'(x)+g'(x)$
             \item $\pair{\lambda\cdot f}'\of{x} = \lambda\cdot f'(x)$
-            \item $\pair{f\cdot g}'\of{x} = f'(x)g(x) + g'(x)f(x)$\quad\quad(Produktregel)
+            \item $\pair{f\cdot g}'\of{x} = f'(x)\cdot g(x) + g'(x)\cdot f(x)$\quad\quad(Produktregel)
         \end{enumerate}
         \begin{proof}[Beweis (iii)]
             \begin{align*}
-                &\lim_{\substack{h\fromto 0\\ h\neq 0}} \frac{f(x+h)g(x+h) - f(x)g(x)}{h}\\
+                \pair{f+g}'\of{x} &= \lim_{h\fromto 0} \frac{f(x+h)g(x+h) - f(x)g(x)}{h}\\
                 &= \lim_{h\fromto 0} \frac{f(x+h)g(x+h) - f(x+h)g(x) + f(x+h)g(x) - f(x)g(x)}{h}\\
-                &= \lim_{h\fromto 0} f(x+h)\cdot \underbrace{\frac{g(x+h)-g(x)}{h}}_{\fromto g'(x)} + \lim_{h\fromto 0} g(x) \cdot \underbrace{\frac{f(x+h)-f(x)}{h}}_{\fromto f'(x)} = f(x) \cdot g'(x) + g(x)f'(x)
+                &= \lim_{h\fromto 0} f(x+h)\cdot \underbrace{\frac{g(x+h)-g(x)}{h}}_{\fromto g'(x)} + \lim_{h\fromto 0} g(x) \cdot \underbrace{\frac{f(x+h)-f(x)}{h}}_{\fromto f'(x)}\\
+                &= f(x) \cdot g'(x) + g(x)\cdot f'(x)\qedhere
             \end{align*}
         \end{proof}
     \end{satz}
@@ -2326,7 +2337,11 @@
     \end{uebung}
 
     \begin{satz}[Kettenregel] % Satz 4
-        Seien $f: \pair{a,b}\fromto \R$ und $g: (c,d)\fromto \R$ die Funktionen mit $f(a,b) \sbset \pair{c,d}$. Funktion $f$ sei im Punkt $x$ differenzierbar und $g$ sei im Punkt $y\definedas f(x)$ differenzierbar. Dann gilt $\pair{g\circ f}'(x) = g'(f(x)) \cdot f'(x)$.
+        \label{satz:kettenregel}
+        Seien $f: \pair{a,b}\fromto \R$ und $g: (c,d)\fromto \R$ Funktionen mit $f\interv{\pair{a,b}} \sbset \pair{c,d}$. Die Funktion $f$ sei im Punkt $x\in\pair{a,b}$ differenzierbar und $g$ sei im Punkt $y\definedas f(x)$ differenzierbar. Dann gilt
+        \begin{align*}
+            \pair{g\circ f}'(x) = g'(f(x)) \cdot f'(x)
+        \end{align*}
         \begin{proof}
             $F(x) \definedas g(f(x))$
             \begin{align*}
@@ -2357,11 +2372,13 @@
     \end{satz}
 
     \begin{satz}[Quotientenregel] % Satz 5
-        $\pair{\frac{v}{u}}' = \frac{v'U - u'v}{u^2}$
+        Für zwei differenzierbare Funktionen $u,v$ gilt
+        \begin{align*}
+            \pair{\frac{v}{u}}' = \frac{v'\cdot u - u'\cdot v}{u^2}
+        \end{align*}
         \begin{proof}
             \begin{align*}
-                \pair{\frac{v}{u}} &= \pair{v\cdot\frac{1}{u}} = f\cdot \frac{1}{u} + \frac{v}{u^2}\cdot u'\cdot (-1)\\
-                &= \frac{v'u - u'v}{u^2}
+                \pair{\frac{v}{u}}' &= \pair{v\cdot\frac{1}{u}}' = v'\cdot \frac{1}{u} + v\cdot\frac{1}{u^2}\cdot u'\cdot (-1) = \frac{v'u - u'v}{u^2}\qedhere
             \end{align*}
         \end{proof}
     \end{satz}
@@ -2369,7 +2386,7 @@
     \begin{beispiel}
         $a\in\C$, $x\in\R$. Wir wollen $e^{ax}$ ableiten
         \begin{align*}
-            \pair{e^{ax}}' &= \lim_{h\fromto 0} \frac{e^{a(x+h)} - e^{ax}}{h} = \lim_{h\fromto 0}\frac{e^{ax}-1}{h} = e^{ah} \lim_{h\fromto 0} \frac{e^{ah}-1}{h}\\
+            \pair{e^{ax}}' &= \lim_{h\fromto 0} \frac{e^{a(x+h)} - e^{ax}}{h} = \lim_{h\fromto 0}e^{ah} \cdot \frac{e^{ax}-1}{h} = e^{ah}\cdot \lim_{h\fromto 0} \frac{e^{ah}-1}{h}\\
             e^{ah} &= \sum_{n=0}^{\infty} \frac{(ah)^n}{n!} = 1 + ah + (ah)^2 \sum_{n=2}^{\infty} \frac{(aH)^(n-2)}{n!}
             \intertext{$\abs{h} < \frac{1}{\abs{a}}$}
             ... &= e^{ax} \lim_{h\fromto 0} \frac{ah}{h} = a\cdot e^{ax}\tag{$a\in\C$}
