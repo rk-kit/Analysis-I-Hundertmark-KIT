@@ -2236,7 +2236,7 @@
     %%%%%%%%%%%%%%%%%%%%%%%%
 
 
-    \section{[*] Ableitung (Differention)}
+    \section{[*] Ableitung (engl. Differention)}
     \thispagestyle{pagenumberonly}
 
     \subsection{[*] Ableitung als Grenzwert}
@@ -2386,10 +2386,11 @@
     \begin{beispiel}
         $a\in\C$, $x\in\R$. Wir wollen $e^{ax}$ ableiten
         \begin{align*}
-            \pair{e^{ax}}' &= \lim_{h\fromto 0} \frac{e^{a(x+h)} - e^{ax}}{h} = \lim_{h\fromto 0}e^{ah} \cdot \frac{e^{ax}-1}{h} = e^{ah}\cdot \lim_{h\fromto 0} \frac{e^{ah}-1}{h}\\
-            e^{ah} &= \sum_{n=0}^{\infty} \frac{(ah)^n}{n!} = 1 + ah + (ah)^2 \sum_{n=2}^{\infty} \frac{(aH)^(n-2)}{n!}
-            \intertext{$\abs{h} < \frac{1}{\abs{a}}$}
-            ... &= e^{ax} \lim_{h\fromto 0} \frac{ah}{h} = a\cdot e^{ax}\tag{$a\in\C$}
+            \pair{e^{ax}}' &= \lim_{h\fromto 0} \frac{e^{a(x+h)} - e^{ax}}{h} = \lim_{h\fromto 0}e^{ax} \cdot \frac{e^{ah}-1}{h} = e^{ax}\cdot \lim_{h\fromto 0} \frac{e^{ah}-1}{h}\\
+            e^{ah} &= \sum_{n=0}^{\infty} \frac{(ah)^n}{n!} = 1 + ah + (ah)^2\cdot\sum_{n=2}^{\infty} \frac{(ah)^{n-2}}{n!}
+            \intertext{Wir schätzen den letzten Teil der Gleichung mit $\abs{h} < \frac{1}{\abs{a}}$ ab}
+            \abs{ \sum_{n=2}^{\infty} \frac{(ah)^{n-2}}{n!}} &\leq \sum_{n=2}^{\infty} \frac{1}{n!} < e\\
+            \impl e^{ax} \lim_{h\fromto 0} \frac{1+ah+(ah)^2\cdot e}{h} = a\cdot e^{ax}\tag{$a\in\C$}
         \end{align*}
     \end{beispiel}
 
@@ -2443,7 +2444,7 @@
     \begin{beispiel}[Ableitung von $\arccos$]
         Es sei $y\in\pair{-1, 1}$. Dann gilt
         \begin{align*}
-            \pair{\arccos y}' &= \frac{1}{\pair{\cos x}'_{\lvert \cos x = y}} = \frac{1}{-\sin\of{\cos\of{x}}}\\
+            \pair{\arccos y}' &= \frac{1}{\pair{\cos x}'_{\lvert \cos x = y}} = \frac{1}{-\sin\of{\arccos\of{y}}}\\
             &= \frac{1}{\pm\sqrt{1-\cos^2\of{\arccos y}}} = \pm \frac{1}{\sqrt{1-y^2}}
         \end{align*}
     \end{beispiel}
@@ -2494,8 +2495,8 @@
         Sei $a < b$, $f: \interv{a,b} \fromto \R$ eine stetige Funktion mit $f(a) = f(b)$. Die Funktion $f$ sei in $\pair{a,b}$ differenzierbar. Dann $\ex\xi\in\pair{a,b}$ mit $f'\of{\xi} = 0$.
         \begin{proof}
             ~\\
-            Fall 1. $f$ ist eine konstante Funktion. Dann gilt $f' = 0$.\\
-            Fall 2. $f$ ist keine konstante Funktion. Das heißt nach Satz~\ref{satz:weierstrass-maximum-minimum} $\ex x$ mit $f\of{x} \neq f\of{a}$. Wenn $f(x) > f(a)$, dann existiert ein lokales Maximum bei $x_0\in\pair{a,b}$ und wenn $f(x) < f(a)$, dann existiert ein lokales Minimum bei $x_0\in\pair{a,b}$. Damit ist $f'\of{x_0} = 0$.
+            \textsc{Fall 1.} $f$ ist eine konstante Funktion. Dann gilt $f' = 0$.\\
+            \textsc{Fall 2.} $f$ ist keine konstante Funktion. Das heißt nach Satz~\ref{satz:weierstrass-maximum-minimum} $\ex x$ mit $f\of{x} \neq f\of{a}$. Wenn $f(x) > f(a)$, dann existiert ein lokales Maximum bei $x_0\in\pair{a,b}$ und wenn $f(x) < f(a)$, dann existiert ein lokales Minimum bei $x_0\in\pair{a,b}$. Damit ist $f'\of{x_0} = 0$.
         \end{proof}
     \end{satz}
 
