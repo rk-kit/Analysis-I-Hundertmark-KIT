@@ -2485,7 +2485,6 @@
         \end{align*}
     \end{bemerkung}
 
-
     \begin{bemerkung}
         Sei $f$ auf $\interv{a,b}$ stetig und auf $\pair{a,b}$ differenzierbar. Dann kann das Maximum/Minimum der Funktion auch auf den Intervall-Grenzen $a$ und $b$ liegen, obwohl die Ableitung für diese nicht bestimmbar ist.
     \end{bemerkung}
@@ -2535,6 +2534,7 @@
     \end{korollar}
 
     \begin{satz} % Satz 11
+        \label{satz:18-11}
         Seien $f$ und $g$ stetig auf $\interv{a,b}$ und auf $\pair{a,b}$ differenzierbar. Dann gilt
         \begin{align*}
             \ex\xi\in\pair{a,b}\colon \interv{f(b)-f(a)}\cdot g'\of{\xi} &= \interv{g(b)-g(a)}\cdot f'\of{\xi}
@@ -2562,15 +2562,139 @@
     \begin{satz}[Der Taylorsche Satz] % Satz 12
         Es sei $f$ eine reelle Funktion auf $\interv{a,b}$ und $f^{(n-1)}$ sei stetig auf $\interv{a,b}$ und $f^{(n)}$ existiere auf $\pair{a,b}$. Sei
         \begin{align*}
-            P_n(t) &= \sum_{k=0}^{n-1} \frac{f^{(k)}\of{\alpha}}{k!}\cdot\pair{t-\alpha}^k
+            P_{n-1}(t) &= \sum_{k=0}^{n-1} \frac{f^{(k)}\of{\alpha}}{k!}\cdot\pair{t-\alpha}^k
             \intertext{Dann $\ex\xi\in\pair{a,b}$ so dass}
-            f\of{\beta} &= P_n\of{\beta} + \frac{f^{(n)}\of{\xi}}{n!}\cdot\pair{\beta-\alpha}^n
+            f\of{\beta} &= P_{n-1}\of{\beta} + \frac{f^{(n)}\of{\xi}}{n!}\cdot\pair{\beta-\alpha}^n
         \end{align*}
+
+        %%%%%%%%%%%%%%%%%%%%%%%%
+        % 13. Februar 2023
+        %%%%%%%%%%%%%%%%%%%%%%%%
+
+        \begin{proof}
+            \marginnote{[13. Feb]}
+            \begin{align*}
+                M&\definedas \frac{f(\beta)-P_{n-1}\of{\beta}}{\pair{\beta-\alpha}^n}\quad\in\R\\
+                g(t) &\definedas f(t)-P_{n-1}\of{t} - M \cdot \pair{t-\alpha}^n\quad \alpha\leq t\leq\beta\\
+                g\of{\alpha} &= f\of{\alpha} - \underbrace{0 - f\of{\alpha}}_{P_{n-1}\of{\alpha}} - 0 = 0\\
+                g'\of{\alpha} &= f'\of{\alpha} - f'\of{\alpha} - 0 = 0\\
+                \vdots\\
+                g^{(n-1)}\of{\alpha} &= 0\\[10pt]
+                g\of{\beta} &= f\of{\beta} - P_{n-1}\of{\beta} - \frac{f\of{\beta} - P_{n-1}\of{\beta}}{\pair{\beta-\alpha}^n}\cdot \pair{\beta-\alpha}^n = 0
+                \intertext{1. Schritt}
+                g\of{\alpha} &= 0,~g\of{\beta} = 0
+                \intertext{Nach Satz~\ref{satz:von-rolle}}
+                \impl \ex x_1\colon g'(x_1) &= 0
+                \intertext{2. Schritt}
+                g'\of{\alpha} &= 0,~g'\of{x_1} = 0\\
+                \impl \ex x_2\in\pair{\alpha, x_1}\colon g''(x_2) &= 0\\[10pt]
+                g''(\alpha) &= 0,~g''\of{x_2} = 0\\
+                \vdots\\
+                \impl\ex x_n \in\pair{\alpha, x_{n-1}}\colon g^{(n)}\of{x_n} &= 0\tag{$\xi\definedas x_n$}\\
+                f^{(n)}\of{\xi} - 0 - M\cdot n! &= 0\\
+                M = \frac{f^{(n)}\of{\xi}}{n!} &= \frac{f\of{\beta}-P_{n-1}\of{\beta}}{\pair{\beta-\alpha}^n}\\
+                \equivalent f\of{\beta} - P_{n-1}\of{\beta} &= \frac{f^{(n)}\of{\xi}}{n!}\cdot\pair{\beta-\alpha}^n\\
+                f\of{\beta} &= P_{n-1}\of{\beta} + \frac{f^{(n)}\of{\beta}}{n!}\pair{\beta-\alpha}^n\qedhere
+            \end{align*}
+        \end{proof}
     \end{satz}
 
     \begin{bemerkung}
         Der Taylorsche Satz ist eine Verallgemeinerung des Mittelwertsatzes.
     \end{bemerkung}
+
+    \begin{notation}[Taylor-Polynom]
+        Alternative Schreibweise:
+        \begin{align*}
+            P_{n-1}\of{t} &= T_n\of{f,\alpha}
+        \end{align*}
+    \end{notation}
+
+    \begin{korollar}[Monotonie] % Korollar 14
+        Sei $f$ auf $\pair{a,b}$ differenzierbar mit $f' > 0$ (bzw. $f' < 0$). Dann ist $f$ streng monoton wachsend (bzw. fallend) auf $\pair{a,b}$.
+        \begin{proof}
+            Seien $x_1, x_2\in\pair{a,b}$ mit $x_2 > x_1$. Nach Satz~\ref{satz:mittelwertsatz} gilt
+            \begin{align*}
+                f(x_2) - f(x_1) &= \underbrace{f'(\xi)}_{> 0}\cdot\underbrace{\pair{x_2 - x_1}}_{> 0} > 0\qedhere
+            \end{align*}
+            Der Beweis für fallende Funktionen funktioniert analog.
+        \end{proof}
+    \end{korollar}
+
+    \begin{bemerkung}[Über Max und Min]
+        Es seien $f$ differenzierbare Funktion und $x_0$ lokales Extremum von $f$ und sei $f''\of{x_0}$ existent und positiv (bzw. negativ). Dann ist $x_0$ ein lokales Minimum (bzw. Maximum).
+
+        \begin{proof}
+            \begin{align*}
+                f''\of{x_0} &= \lim_{\xi\fromto x_0} \frac{f'\of{\xi} - f'\of{x_0}}{\xi-x_0} > 0\\
+                \impl \ex\varepsilon > 0\colon \frac{f'\of{\xi} - f'\of{x_0}}{\xi-x_0} > 0\quad\forall\xi, 0 < \abs{x-\xi} < \varepsilon
+                \impl \begin{cases}
+                          f'\of{\xi} < 0,~\xi < x_0, 0 < \abs{\xi-x_0} < \varepsilon\\
+                          f'\of{\xi} > 0,~\xi > x_0, 0 < \abs{\xi-x_0} < \varepsilon
+                \end{cases}
+            \end{align*}
+            Da die Funktion vor $x_0$ fällt und danach steigt, ist $x_0$ ein lokales Minimum.
+        \end{proof}
+    \end{bemerkung}
+
+    \subsection{Die Regel von l'Hospital}
+
+    \begin{satz}[Regel von de l'Hospital] % Satz 16
+        \label{satz:l-hospital}
+        Seien $f$ und $g$ differenzierbar in $\pair{a,b}$. Sei ferner $g'\of{x} \neq 0$ für alle $x\in\pair{a,b}$ und es gelte
+        \begin{align*}
+            \frac{f'(x)}{g'(x)} \fromto A \text{ für } x \fromto a\tag{(1)}
+            \intertext{Außerdem gilt}
+            f(x) \fromto 0 \text{ und } g(x)\fromto 0 \text{ für } x\fromto a\tag{(2)}
+            \intertext{\underline{oder}}
+            g(x)\fromto \infty \text{ für } x\fromto a\tag{(2)}
+            \intertext{Dann gilt}
+            \frac{f(x)}{g(x)}\fromto A
+        \end{align*}
+        Die analoge Behauptung war für $x\fromto b$ oder für $g(x)\fromto -\infty$.
+
+        \begin{bemerkung}
+            $g'(a) = 0$ ist bei der Anwendung des Satzes erlaubt.
+        \end{bemerkung}
+
+        \begin{proof}
+            Sei $A < \infty$
+            \begin{align*}
+                \impl\ex q > A
+                \intertext{Sei $A < r < q$}
+                \impl \frac{f'(x)}{g'(x)} < r \text{ für } a < x < a + \varepsilon_0
+                \intertext{Nach Satz~\ref{satz:18-11} gilt mit $a < x < y < a + \varepsilon_0$}
+                \frac{f(x)-f(y)}{g(x)-g(y)} = \frac{f'(\xi)}{g'(\xi)}  < r
+                \intertext{\textsc{Fall 1.} $f(x)\fromto 0, g(x)\fromto 0$ für $x\fromto a$}
+                \impl g(y) \neq 0, \text{ weil } g(a) = 0,~g'(a)\neq 0\\
+                \lim_{x\fromto a} \frac{\overbrace{f(x)}_{\fromto 0}-f(y)}{\underbrace{g(x)}_{\fromto 0}-g(y)} &= \lim_{x\fromto a} \frac{f(y)}{g(y)} \leq r < q\\
+                \impl \fa a < y < a + \varepsilon_0\colon \frac{f(y)}{g(y)} &< q\\
+                \impl \lim_{y\fromto a} \frac{f(y)}{g(y)} &< q
+                \intertext{\textsc{Fall 1.} $g(x)\fromto\infty$ für $x\fromto a$. Dann gilt mit $a < x < y < a + \varepsilon_0$}
+                \frac{f(x)-f(y)}{g(x)-g(y)} &< r\\
+                \impl \frac{\frac{f(x)}{g(x)}- \frac{f(y)}{g(x)}}{1 - \frac{g(y)}{g(x)}} &< r\\
+                \impl \frac{\frac{f(x)}{g(x)}}{1} &\leq r < q\\
+                \impl\fa q > A\colon \frac{f(x)}{g(x)} < q
+            \end{align*}
+            Sei $A > -\infty$
+            \begin{align*}
+                \impl\ex p < A, p < r < A\\
+                \frac{f(x)-f(y)}{g(x)-g(y)} &= \frac{f'\of{\xi}}{g'\of{xi}} &> r > p\quad a < x < y < a + \varepsilon_0
+                \intertext{Mit der gleichen Argumentation wie davor ergibt sich}
+                \frac{f(x)}{g(x)} &> p\\
+                \impl \frac{f(x)}{g(x)} &\fromto A\qedhere
+            \end{align*}
+        \end{proof}
+    \end{satz}
+    
+    \begin{beispiel}
+        \begin{align*}
+            \lim_{x\fromto 1_-} \interv{\ln x \cdot \ln\of{1-x}} &= \lim_{x\fromto 1_-} \frac{\ln\pair{1-x}}{\frac{1}{\ln\of{x}}}\\
+            &= \lim_{x\fromto 1_-} \frac{\frac{1}{1-x}\cdot\pair{-1}}{-\frac{1}{\ln^2\of{x}} \cdot \frac{1}{x}}\\
+            &= \lim_{x\fromto 1_-} \frac{x\cdot\ln^2\of{x}}{1-x}\\
+            &= \lim_{x\fromto 1_-} \frac{2\ln\of{x}\cdot \frac{1}{x}}{-1} = 0
+        \end{align*}
+    \end{beispiel}
 
 
 \end{document}
