@@ -94,6 +94,7 @@
 \newcommand{\aligntoright}[2]{\hfill#1\hspace{#2\textwidth}~}
 \newcommand{\horizontalline}[0]{\par\noindent\rule{0.05\textwidth}{0.1pt}\\}
 \newcommand{\rgbcolor}[3]{rgb,255:red,#1;green,#2;blue,#3}
+\newcommand{\fixedspace}[2]{\makebox[#1][l]{#2}}
 
 \let\Re\relax
 \let\Im\relax
@@ -2239,7 +2240,7 @@
     \section{[*] Ableitung (engl. Differention)}
     \thispagestyle{pagenumberonly}
 
-    \subsection{[*] Ableitung als Grenzwert}
+    \subsection{Ableitung als Grenzwert}
 
     \begin{definition} % Definition 1
         \marginnote{[06. Feb]}
@@ -2257,7 +2258,7 @@
 
     \begin{satz} % Satz 2
         \label{satz:18-2}
-        Sei $a\in\pair{c,d}\sbset\R$. Die Funktion $f: \pair{a,b}\fromto\R$ ist genau dann im Punkt $a$ differenzierbar, wenn $\ex C\in\R$ mit $f(x) = f(a)+C\cdot\pair{x-a} + \varphi\of{x}$ wobei
+        Sei $a\in\pair{c,d}\sbset\R$. Die Funktion $f: \pair{c,d}\fromto\R$ ist genau dann im Punkt $a$ differenzierbar, wenn $\ex C\in\R$ mit $f(x) = f(a)+C\cdot\pair{x-a} + \varphi\of{x}$ wobei
         \begin{align*}
             \lim_{x\fromto a} \frac{\varphi\of{x}}{x-a} = 0
         \end{align*}
@@ -2278,41 +2279,47 @@
 
     \begin{korollar}
         \theoremescape
-        \label{korollar:18-2}
+        \label{korollar:abschaetzungen-ableitung}
         \begin{enumerate}[label=(\roman*)]
-            \item $f$ ist differenzierbar $\impl f$ ist stetig im Punkt $a$.
-            \item Sei $f'(a) \neq 0$. Dann $\ex h_0$, sodass $\fa h$ mit $\abs{h} < h_0, h\neq 0$ gilt $\abs{f(x)-f(a)}\geq\frac{1}{2}\abs{f'(a)}\cdot\abs{x-a}$.
-            \item $\ex h_0$, so dass für alle $x$ mit $\abs{x-a} < h_0, x\neq a$ gilt
+            \item Wenn $f$ im Punkt $a$ differenzierbar ist, dann ist $f$ im Punkt $a$ auch stetig.
+            \item Sei $f'(a) \neq 0$. Dann gilt
             \begin{align*}
-                \abs{f(x)-f(a)} &\leq 2\abs{f'(a)}\abs{x-a}\text{ für }\abs{f'(a)}\neq 0
-                \intertext{und}
-                \abs{f(x)-f(a)} &\leq \varepsilon\abs{x-a} \text{ für } f'(a) = 0\tag{$\fa\varepsilon > 0$, $h_0$ ist von $\varepsilon$ abhängig}
+                \exists h_0~\forall h=x-a \text{ mit } \abs{h} < h_0,~h\neq 0\colon \abs{f(x)-f(a)}\geq\frac{1}{2}\abs{f'(a)}\cdot\abs{x-a}
             \end{align*}
+            \newpage
+            \item $\exists h_0$, so dass für alle $x$ mit $\abs{x-a} < h_0,~x\neq a$ gilt
+            \begin{enumerate}[label=(\arabic*)]
+                \item \fixedspace{6cm}{$\abs{f(x)-f(a)} \leq 2\abs{f'(a)}\cdot\abs{x-a}$} für $f'(a)\neq 0$
+                \item \fixedspace{6cm}{$\abs{f(x)-f(a)} \leq \varepsilon\cdot\abs{x-a}$} für $f'(a) = 0$ \quad ($\forall\varepsilon > 0$, $h_0$ ist von $\varepsilon$ abhängig)
+            \end{enumerate}
         \end{enumerate}
 
         \begin{proof}[Beweis (i)]
+            Für $x\fromto a$ gilt
             \begin{align*}
-                x\fromto a, f(x)-f(a) = C\cdot\pair{x-a} + \frac{\varphi(x)}{x-a}\cdot\pair{x-a}\fromto 0
+                f(x)-f(a) &= C\cdot\underbrace{\pair{x-a}}_{\fromto 0} + \underbrace{\frac{\varphi(x)}{x-a}}_{\fromto 0}\cdot\underbrace{\pair{x-a}}_{\fromto 0}\fromto 0\qedhere
             \end{align*}
         \end{proof}
 
         \begin{proof}[Beweis (ii)]
+            Für $x\fromto a$ gilt
             \begin{align*}
                 f(x) &= f(a) + f'(a)\cdot\pair{x-a} + \frac{\varphi(x)}{x-a}\cdot\pair{x-a}\\
-                \abs{f(x)-f(a)} &\geq \abs{f'(a)}\abs{x-a} = \underbrace{\abs{\frac{\varphi(x)}{x-a}}}_{\fromto 0}\cdot\abs{x-a}\geq \frac{1}{2}\abs{f'(a)}\abs{x-a}
+                \abs{f(x)-f(a)} &\geq \abs{f'(a)}\cdot\abs{x-a} - \underbrace{\abs{\frac{\varphi(x)}{x-a}}}_{\fromto 0}\cdot\abs{x-a}\geq \frac{1}{2}\cdot\abs{f'(a)}\cdot\abs{x-a}\qedhere
             \end{align*}
         \end{proof}
         \begin{proof}[Beweis (iii)]
-            1.
+        (1)
+            Für $x\fromto a$ gilt
             \begin{align*}
-                \abs{f(x)-f(a)} &\leq \abs{f'(a)}\abs{x-a} + \underbrace{\frac{\varphi(x)}{x-a}}_{\fromto 0} \cdot \abs{x-a} \leq 2\abs{f'(a)}\cdot\abs{x-a}
-                \intertext{2.}
-                \abs{f(x)-f(a)} &\leq \abs{\underbrace{f'(a)}_{\fromto 0} \cdot \pair{x-a} + \underbrace{\frac{\varphi(x)}{x-a}}_{\fromto 0}\cdot\pair{x-a}} \leq \varepsilon\abs{x-a}
+                \abs{f(x)-f(a)} &\leq \abs{f'(a)}\cdot\abs{x-a} + \underbrace{\abs{\frac{\varphi(x)}{x-a}}}_{\fromto 0} \cdot \abs{x-a} \leq 2\abs{f'(a)}\cdot\abs{x-a}
+                \intertext{(2)}
+                \abs{f(x)-f(a)} &= \abs{\underbrace{f'(a)}_{\fromto 0} \cdot \pair{x-a} + \underbrace{\frac{\varphi(x)}{x-a}}_{\fromto 0}\cdot\pair{x-a}} \leq \varepsilon\cdot\abs{x-a}\qedhere
             \end{align*}
         \end{proof}
     \end{korollar}
 
-    \subsection{[*] Ableitungsregeln}
+    \subsection{Ableitungsregeln}
 
     \begin{satz} % Satz 3
         \label{satz:ableitungsregeln}
@@ -2343,28 +2350,23 @@
             \pair{g\circ f}'(x) = g'(f(x)) \cdot f'(x)
         \end{align*}
         \begin{proof}
-            $F(x) \definedas g(f(x))$
+            Wir definieren $F(x) \definedas g(f(x))$ und unterscheiden zwei Fälle.\\
+            \textsc{Fall 1.} $f'(x) \neq 0$. Nach Korollar~\ref{korollar:abschaetzungen-ableitung} gilt
             \begin{align*}
-                \lim_{\substack{h\fromto 0\\ h\neq 0}} \frac{F(x+h)-F(x)}{h}
-                \intertext{Fall 1: $f'(x) \neq 0$}
-                \annot{\impl}{\ref{korollar:18-2}} \ex h_0, \abs{h} < h_0\abs{f(x+h)-f(x)} \geq \frac{1}{2}\abs{f'(x)}\abs{h} \neq 0\\
-                \impl \lim_{h\fromto 0} \frac{F(x+h)-F(x)}{h} &= \lim_{h\fromto 0} \frac{\pair{F(x+h) - F(x)}\cdot\pair{f(x+h)-f(x)}}{\pair{f(x+h)-f(x)}h}\\
+                \ex h_0, \abs{h} < h_0\colon \abs{f(x+h)-f(x)} &\geq \frac{1}{2}\abs{f'(x)}\abs{h} \neq 0\\
+                \lim_{h\fromto 0} \frac{F(x+h)-F(x)}{h} &= \lim_{h\fromto 0} \frac{\pair{F(x+h) - F(x)}\cdot\pair{f(x+h)-f(x)}}{\pair{f(x+h)-f(x)}\cdot h}\\
                 &= \lim_{h\fromto 0} \frac{g(f(x+h))-g(f(x))}{f(x+h)-f(x)} \cdot \underbrace{\frac{f(x+h)-f(x)}{h}}_{\fromto f'(x)}
                 \intertext{$f(x)=y$ und $f(x+h) = y + \Delta y$}
-                \frac{g(y+\Delta y) - g(y)}{\Delta y}\\
-                \Delta y &= f(x+h) -f(x)\impl \Delta y \neq 0\\
-                \abs{\Delta y} &\leq \frac{1}{2}\abs{f'(x)}\cdot\abs{x+h-x} \fromto 0\\
-                \lim_{h\fromto 0} \frac{g(y+\Delta y) - g(y)}{\Delta y} &= \lim_{\Delta y \fromto 0} \frac{g(y+\Delta y) - g(y)}{\Delta y} = g'(y) = g'(f(x))\\
-                \impl \frac{F(x+h)-F(x)}{h} \fromto g'(f(x)) \cdot f'(x)
-                \intertext{Fall 2: $f'(x) = 0$}
-                \lim_{h\fromto 0} \frac{F(x+h)-F(x)}{h}\\
-                \abs{\frac{g(f(x+h)) - g(f(x))}{h}} \leq \frac{C\abs{f(x+h)-f(x)}}{h}
-                \intertext{mit $C=\max\set{2\abs{g'(f(x))}, 1}$}
-                \leq \frac{C\varepsilon \abs{x+h-h}}{h} = C\cdot\varepsilon\\
-                \impl \lim_{h\fromto 0} \frac{F(x+h)-F(x)}{h} &= 0\\
-                f'(x) = 0 \impl \lim_{h\fromto 0} \frac{g(f(x+h))-g(f(x))}{h} = 0\\
-                \equivalent \pair{g\circ f}'(x) &= 0\\
-                g'(f(x))\cdot f'(x) &= 0
+                \lim_{h\fromto 0} \frac{g(f(x+h))-g(f(x))}{f(x+h)-f(x)} &= \lim_{h\fromto 0} \frac{g(y+\Delta y) - g(y)}{\Delta y}\tag{$\Delta y \neq 0$}\\
+                &= \lim_{\Delta y \fromto 0} \frac{g(y+\Delta y) - g(y)}{\Delta y}\\
+                &= g'(y) = g'(f(x))\\
+                \impl \frac{F(x+h)-F(x)}{h} &\fromto g'(f(x)) \cdot f'(x)
+                \intertext{\textsc{Fall 2.} $f'(x) = 0$. Dann gilt nach Korollar~\ref{korollar:abschaetzungen-ableitung}}
+                \abs{\frac{g(f(x+h)) - g(f(x))}{h}} &\leq \frac{c\cdot\abs{f(x+h)-f(x)}}{h}\\
+                &\leq \frac{c\cdot\varepsilon\cdot \abs{x+h-x}}{h}\\
+                &= c\cdot\varepsilon\\
+                \intertext{mit $c=\max\set{2\cdot\abs{g'(f(x))}, 1}$ und $\varepsilon$ beliebig klein}
+                \impl \lim_{h\fromto 0} \frac{F(x+h)-F(x)}{h} = 0 &= g'\of{f\of{x}} \cdot 0 = g'\of{f\of{x}}\cdot f'\of{x}\\
                 \intertext{Damit folgt insgesamt}
                 \pair{g\circ f}'(x) &= g'(f(x))\cdot f'(x)\qedhere
             \end{align*}
@@ -2372,6 +2374,7 @@
     \end{satz}
 
     \begin{satz}[Quotientenregel] % Satz 5
+        \label{satz:quotient-ableitung}
         Für zwei differenzierbare Funktionen $u,v$ gilt
         \begin{align*}
             \pair{\frac{v}{u}}' = \frac{v'\cdot u - u'\cdot v}{u^2}
@@ -2383,18 +2386,16 @@
         \end{proof}
     \end{satz}
 
-    \begin{beispiel}
-        $a\in\C$, $x\in\R$. Wir wollen $e^{ax}$ ableiten
+    \begin{beispiel}[Ableitung der Exponentialfunktion]
+        Es sei $a\in\C$, $x\in\R$. Wir wollen $e^{ax}$ ableiten
         \begin{align*}
             \pair{e^{ax}}' &= \lim_{h\fromto 0} \frac{e^{a(x+h)} - e^{ax}}{h} = \lim_{h\fromto 0}e^{ax} \cdot \frac{e^{ah}-1}{h} = e^{ax}\cdot \lim_{h\fromto 0} \frac{e^{ah}-1}{h}\\
             e^{ah} &= \sum_{n=0}^{\infty} \frac{(ah)^n}{n!} = 1 + ah + (ah)^2\cdot\sum_{n=2}^{\infty} \frac{(ah)^{n-2}}{n!}
             \intertext{Wir schätzen den letzten Teil der Gleichung mit $\abs{h} < \frac{1}{\abs{a}}$ ab}
             \abs{ \sum_{n=2}^{\infty} \frac{(ah)^{n-2}}{n!}} &\leq \sum_{n=2}^{\infty} \frac{1}{n!} < e\\
-            \impl e^{ax} \lim_{h\fromto 0} \frac{1+ah+(ah)^2\cdot e}{h} = a\cdot e^{ax}\tag{$a\in\C$}
+            \impl \pair{e^{ax}}' &= e^{ax}\cdot \lim_{h\fromto 0} \frac{1+ah+(ah)^2\cdot e - 1}{h} = a\cdot e^{ax}\tag{$a\in\C$}
         \end{align*}
     \end{beispiel}
-
-    \newpage
 
     %%%%%%%%%%%%%%%%%%%%%%%%
     % 08. Februar 2024
@@ -2410,7 +2411,7 @@
     \end{beispiel}
     \begin{beispiel}[Ableitung von $\tan$]
         \begin{align*}
-            \pair{\tan x}' &= \pair{\frac{\sin x}{\cos x}}' = \frac{\cos x \cdot \cos x -\pair{-\sin x \cdot \sin x}}{\cos^2 x} = \frac{\cos^2 x + \sin^2 x}{\cos^2 x} \frac{1}{\cos^2 x} = \frac{1}{\cos^2 x}
+            \pair{\tan x}' &= \pair{\frac{\sin x}{\cos x}}' = \frac{\cos x \cdot \cos x -\pair{-\sin x \cdot \sin x}}{\cos^2 x} = \frac{\cos^2 x + \sin^2 x}{\cos^2 x} = \frac{1}{\cos^2 x}
         \end{align*}
     \end{beispiel}
 
@@ -2422,12 +2423,10 @@
         \end{align*}
         \begin{proof}
             \begin{align*}
-                \lim_{h\fromto 0} \frac{\overbrace{f^{-1}\of{y+h}}^{\definedasbackwards \xi} - f^{-1}\of{y}}{h} &= \lim_{h\fromto 0}\frac{\xi - x}{f\of{\xi} - f\of{x}}\\
-                &= \lim_{h\fromto 0} \frac{1}{\frac{f\of{\xi} - f\of{x}}{\xi-x}}\\
-                &= \frac{1}{\lim_{h\fromto 0} \frac{f\of{\xi} - f\of{x}}{\xi-x}}
+                \pair{f^{-1}}'\of{y} &= \lim_{h\fromto 0} \frac{\overbrace{f^{-1}\of{y+h}}^{\definedasbackwards \xi} - f^{-1}\of{y}}{h} = \lim_{h\fromto 0}\frac{\xi - x}{f\of{\xi} - f\of{x}}\\
+                &= \lim_{h\fromto 0} \frac{1}{\frac{f\of{\xi} - f\of{x}}{\xi-x}} = \frac{1}{\lim_{h\fromto 0} \frac{f\of{\xi} - f\of{x}}{\xi-x}}
                 \intertext{Wegen der Monotonie und Stetigkeit von $f$ können wir umformen zu}
-                &= \frac{1}{\lim_{\xi\fromto x} \frac{f\of{\xi} - f\of{x}}{\xi-x}}\\
-                &= \frac{1}{f'\of{x}}\qedhere
+                &= \frac{1}{\lim_{\xi\fromto x} \frac{f\of{\xi} - f\of{x}}{\xi-x}} = \frac{1}{f'\of{x}}\qedhere
             \end{align*}
         \end{proof}
     \end{satz}
@@ -2441,6 +2440,15 @@
         \end{align*}
     \end{beispiel}
 
+    \begin{bemerkung}[Ableitung von Potenzen]
+        \footnote{In VL erst im nächsten Unterkapitel behandelt}
+        \begin{align*}
+            \pair{x^{\alpha}}' &= \pair{e^{\log x^{\alpha}}} = \pair{e^{\alpha\log x}}'
+            \intertext{Nach Satz~\ref{satz:kettenregel}}
+            &= e^{\alpha \log x} \cdot \alpha \cdot \pair{\log x}' = \frac{\alpha x^{\alpha}}{x} = \alpha \cdot x^{\alpha-1}
+        \end{align*}
+    \end{bemerkung}
+
     \begin{beispiel}[Ableitung von $\arccos$]
         Es sei $y\in\pair{-1, 1}$. Dann gilt
         \begin{align*}
@@ -2449,7 +2457,7 @@
         \end{align*}
     \end{beispiel}
 
-    \subsection{Lokale Extrema und Mittelwertsätze}
+    \subsection{[*] Lokale Extrema und Mittelwertsätze}
 
     \begin{definition}[Lokales Maximum und Minimum] % Definition 7
         Sei $f: \pair{a,b} \fromto\R$. Man sagt $f$ habe in $x\in\pair{a,b}$ ein lokales Maximum (bzw. Minimum), wenn ein $\varepsilon > 0$ existiert, so dass
@@ -2478,14 +2486,6 @@
     \end{bemerkung}
 
     \begin{bemerkung}
-        \begin{align*}
-            \pair{x^{\alpha}}' &= \pair{e^{\log x^{\alpha}}} = \pair{e^{\alpha\log x}}'
-            \intertext{Nach Kettenregel}
-            &= e^{\alpha \log x} \cdot \alpha \cdot \pair{\log x}' = \frac{\alpha x^{\alpha}}{x} = \alpha \cdot x^{\alpha-1}
-        \end{align*}
-    \end{bemerkung}
-
-    \begin{bemerkung}
         Sei $f$ auf $\interv{a,b}$ stetig und auf $\pair{a,b}$ differenzierbar. Dann kann das Maximum/Minimum der Funktion auch auf den Intervall-Grenzen $a$ und $b$ liegen, obwohl die Ableitung für diese nicht bestimmbar ist.
     \end{bemerkung}
 
@@ -2495,9 +2495,11 @@
         \begin{proof}
             ~\\
             \textsc{Fall 1.} $f$ ist eine konstante Funktion. Dann gilt $f' = 0$.\\
-            \textsc{Fall 2.} $f$ ist keine konstante Funktion. Das heißt nach Satz~\ref{satz:weierstrass-maximum-minimum} $\ex x$ mit $f\of{x} \neq f\of{a}$. Wenn $f(x) > f(a)$, dann existiert ein lokales Maximum bei $x_0\in\pair{a,b}$ und wenn $f(x) < f(a)$, dann existiert ein lokales Minimum bei $x_0\in\pair{a,b}$. Damit ist $f'\of{x_0} = 0$.
+            \textsc{Fall 2.} $f$ ist keine konstante Funktion. Das heißt nach Satz~\ref{satz:weierstrass-maximum-minimum} $\exists x$ mit $f\of{x} \neq f\of{a}$. Wenn $f(x) > f(a)$, dann existiert ein lokales Maximum bei $x_0\in\pair{a,b}$ und wenn $f(x) < f(a)$, dann existiert ein lokales Minimum bei $x_0\in\pair{a,b}$. Damit ist $f'\of{x_0} = 0$.
         \end{proof}
     \end{satz}
+
+    \newpage
 
     \begin{satz}[Mittelwertsatz]
         \label{satz:mittelwertsatz}
@@ -2507,27 +2509,44 @@
         \end{align*}
         \begin{proof}
             \begin{align*}
-                F(x) &= f(x) - \frac{f\of{b}-f\of{a}}{b-a}\cdot\pair{x-a}\\
-                F(a) &= f(a) - \frac{f(b)-f(a)}{b-a}\cdot 0\\
+                F(x) &\definedas f(x) - \frac{f\of{b}-f\of{a}}{b-a}\cdot\pair{x-a}\\
+                F(a) &= f(a) - \frac{f(b)-f(a)}{b-a}\cdot 0 = f(a)\\
                 F(b) &= f(b) - \frac{f(b)-f(a)}{b-a}\cdot\pair{b-a} = f\of{a}\\
                 \impl F(a) &= F(b)
                 \intertext{Damit gilt nach Satz~\ref{satz:von-rolle}}
                 \impl \ex\xi \text{ mit } F'\of{\xi} &= 0\\
-                \impl F'\of{\xi} &= f'\of{\xi} - \frac{f\of{b} - f\of{a}}{b-a} = 0\\
+                \impl f'\of{\xi} - \frac{f\of{b} - f\of{a}}{b-a} &= 0\\
                 \impl f(b) - f(a) &= f'\of{\xi}\cdot\pair{b-a}\qedhere
             \end{align*}
         \end{proof}
     \end{satz}
 
-    \begin{bemerkung}
-        Der Mittelwertsatz sagt aus, dass es einen Punkt auf der Funktion gibt, dessen Tangente parallel zu einer affin-linearen Funktion durch $f(a)$ und $f(b)$ läuft. % TODO: vis
-    \end{bemerkung}
+    \begin{visualisierung}[Geometrische Anschauung des Mittelwertsatzes]
+        Der Mittelwertsatz sagt aus, dass es einen Punkt auf jeder differenzierbaren Funktion gibt, dessen Tangente parallel zu einer affin-linearen Funktion durch $f(a)$ und $f(b)$ läuft.
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \draw[->] (0, 0) -- (4, 0);
+                \draw[->] (0, 0) -- (0, 4);
+                \draw (0, 0.1) -- (0, -0.1) node[below] {$a$};
+                \draw (4.21*.6, 0.1) -- (4.21*.6, -0.1) node[below] {$\xi$};
+                \draw (5*.6, 0.1) -- (5*.6, -0.1) node[below] {$b$};
+                \fill (0,0) circle[radius=1.5pt];
+                \fill (5*.6,6*0.6*0.6) circle[radius=1.5pt];
+                \draw[scale=0.6, domain=0:5, smooth, variable=\x] plot ({\x}, {(-43/120 *\x*\x*\x*\x+71/20*\x*\x*\x-1337/120*\x*\x+259/20*\x)*0.6});
+                \draw[scale=0.6, domain=-1:6, smooth, variable=\x] plot ({\x}, {(\x*6/5)*0.6});
+                \draw[scale=0.6, domain=-1:6, smooth, variable=\x, dashed] plot ({\x}, {(\x*6/5+4.35)*0.6});
+            \end{tikzpicture}
+            \caption{Tangente an der Stelle $x=\xi$\\parallel zur Geraden durch die beiden Punkte}
+        \end{figure}
+    \end{visualisierung}
 
     \begin{korollar} % Korollar 10
         Es gilt genau dann $f'(x) = 0$ für alle $x\in\pair{a,b}$, wenn $f(x)$ eine konstante Funktion in $\interv{a,b}$ ist.
         \begin{proof}
             \begin{align*}
-                f(x_1) - f(x_2) \annot[{&}]{=}{\ref{satz:mittelwertsatz}} f'\of{\xi}\cdot\pair{x_1 - x_2} = 0\cdot\pair{x_1 - x_2}\\
+                f(x_1) - f(x_2) \annot[{&}]{=}{\ref{satz:mittelwertsatz}} f'\of{\xi}\cdot\pair{x_1 - x_2}\\
+                &= 0\cdot\pair{x_1 - x_2}\\
                 \impl f(x_1) &= f(x_2)\qedhere
             \end{align*}
         \end{proof}
@@ -2541,31 +2560,34 @@
         \end{align*}
         \begin{proof}
             \begin{align*}
-                h(t) &= \interv{f(b)-f(a)}\cdot g(t) - \interv{g(b)-g(a)}\cdot f(t)\\
+                h(t) &\definedas \interv{f(b)-f(a)}\cdot g(t) - \interv{g(b)-g(a)}\cdot f(t)\\
                 \impl h(a) &= h(b)\\
-                \impl \ex \xi \in\pair{a,b} &\text{ mit } h'\of{\xi} = 0\\
+                \annot{\impl}{\ref{satz:mittelwertsatz}} \ex \xi \in\pair{a,b} &\text{ mit } h'\of{\xi} = 0\\
                 \impl \interv{f(b)-f(a)}\cdot g'\of{\xi} &- \interv{g(b)-g(a)}\cdot f'\of{\xi} = 0\\
                 \impl \interv{f(b)-f(a)}\cdot g'\of{\xi} &= \interv{g(b)-g(a)}\cdot f'\of{\xi}\qedhere
             \end{align*}
         \end{proof}
     \end{satz}
 
-    \begin{definition}[Ableitungen höherer Ordnung] % Definition 11
+    \begin{notation}[Ableitungen höherer Ordnung] % Definition 11
         Wir definieren für die zweite Ableitung
         \begin{align*}
             f'' &= \pair{f'}'
             \intertext{und allgemein}
             f^{(n)} &= \pair{f^{(n-1)}}'
         \end{align*}
-    \end{definition}
+    \end{notation}
 
     \begin{satz}[Der Taylorsche Satz] % Satz 12
-        Es sei $f$ eine reelle Funktion auf $\interv{a,b}$ und $f^{(n-1)}$ sei stetig auf $\interv{a,b}$ und $f^{(n)}$ existiere auf $\pair{a,b}$. Sei
+        \label{satz:taylor}
+        Es sei $f$ eine reelle Funktion auf $\interv{a,b}$ und $f^{(n-1)}$ sei stetig auf $\interv{a,b}$ und $f^{(n)}$ existiere auf $\pair{a,b}$. Sei $\pair{\alpha,\beta}\subseteq \interv{a,b}$ und
         \begin{align*}
-            P_{n-1}(t) &= \sum_{k=0}^{n-1} \frac{f^{(k)}\of{\alpha}}{k!}\cdot\pair{t-\alpha}^k
-            \intertext{Dann $\ex\xi\in\pair{a,b}$ so dass}
+            P_{n-1}(t) &= \sum_{k=0}^{n-1} \frac{f^{(k)}\of{\alpha}}{k!}\cdot\pair{t-\alpha}^k\tag{\footnotemark}
+            \intertext{Dann $\ex\xi\in\pair{\alpha,\beta}$ so dass}
             f\of{\beta} &= P_{n-1}\of{\beta} + \frac{f^{(n)}\of{\xi}}{n!}\cdot\pair{\beta-\alpha}^n
         \end{align*}
+
+        \footnotetext{In manchen Lehrbüchern wird auch $T_n\of{f,\alpha}$ als alternative Schreibweise zu $P_{n}\of{t}$ verwendet.}
 
         %%%%%%%%%%%%%%%%%%%%%%%%
         % 13. Februar 2023
@@ -2599,18 +2621,14 @@
         \end{proof}
     \end{satz}
 
+    \newpage
+
     \begin{bemerkung}
-        Der Taylorsche Satz ist eine Verallgemeinerung des Mittelwertsatzes.
+        Der Taylorsche Satz ist eine Verallgemeinerung des Mittelwertsatzes für höhere Ableitungen.
     \end{bemerkung}
 
-    \begin{notation}[Taylor-Polynom]
-        Alternative Schreibweise:
-        \begin{align*}
-            P_{n-1}\of{t} &= T_n\of{f,\alpha}
-        \end{align*}
-    \end{notation}
-
     \begin{korollar}[Monotonie] % Korollar 14
+        \label{korollar:monotonie}
         Sei $f$ auf $\pair{a,b}$ differenzierbar mit $f' > 0$ (bzw. $f' < 0$). Dann ist $f$ streng monoton wachsend (bzw. fallend) auf $\pair{a,b}$.
         \begin{proof}
             Seien $x_1, x_2\in\pair{a,b}$ mit $x_2 > x_1$. Nach Satz~\ref{satz:mittelwertsatz} gilt
@@ -2627,27 +2645,29 @@
         \begin{proof}
             \begin{align*}
                 f''\of{x_0} &= \lim_{\xi\fromto x_0} \frac{f'\of{\xi} - f'\of{x_0}}{\xi-x_0} > 0\\
-                \impl \ex\varepsilon > 0\colon \frac{f'\of{\xi} - f'\of{x_0}}{\xi-x_0} > 0\quad\forall\xi, 0 < \abs{x-\xi} < \varepsilon
-                \impl \begin{cases}
-                          f'\of{\xi} < 0,~\xi < x_0, 0 < \abs{\xi-x_0} < \varepsilon\\
-                          f'\of{\xi} > 0,~\xi > x_0, 0 < \abs{\xi-x_0} < \varepsilon
+                &\impl \ex\varepsilon > 0\colon \frac{f'\of{\xi} - f'\of{x_0}}{\xi-x_0} > 0\quad\forall\xi, 0 < \abs{x_0-\xi} < \varepsilon\\
+                &\impl \begin{cases}
+                           f'\of{\xi} < 0 \text{ für } \xi < x_0~\leadsto \text{ Funktion fällt}\\
+                           f'\of{\xi} > 0 \text{ für } \xi > x_0~\leadsto \text{ Funktion steigt}
                 \end{cases}
             \end{align*}
             Da die Funktion vor $x_0$ fällt und danach steigt, ist $x_0$ ein lokales Minimum.
         \end{proof}
     \end{bemerkung}
 
-    \subsection{Die Regel von l'Hospital}
+    \newpage
+
+    \subsection{[*] Die Regel von l'Hospital}
 
     \begin{satz}[Regel von de l'Hospital] % Satz 16
         \label{satz:l-hospital}
         Seien $f$ und $g$ differenzierbar in $\pair{a,b}$. Sei ferner $g'\of{x} \neq 0$ für alle $x\in\pair{a,b}$ und es gelte
         \begin{align*}
-            \frac{f'(x)}{g'(x)} \fromto A \text{ für } x \fromto a\tag{(1)}
-            \intertext{Außerdem gilt}
-            f(x) \fromto 0 \text{ und } g(x)\fromto 0 \text{ für } x\fromto a\tag{(2)}
+            \frac{f'(x)}{g'(x)} \fromto A \text{ für } x \fromto a\tag{1}
+            \intertext{Außerdem gelte}
+            f(x) \fromto 0 \text{ und } g(x)\fromto 0 \text{ für } x\fromto a\tag{2}
             \intertext{\underline{oder}}
-            g(x)\fromto \infty \text{ für } x\fromto a\tag{(2)}
+            g(x)\fromto \infty \text{ für } x\fromto a\tag{2}
             \intertext{Dann gilt}
             \frac{f(x)}{g(x)}\fromto A
         \end{align*}
@@ -2686,7 +2706,7 @@
             \end{align*}
         \end{proof}
     \end{satz}
-    
+
     \begin{beispiel}
         \begin{align*}
             \lim_{x\fromto 1_-} \interv{\ln x \cdot \ln\of{1-x}} &= \lim_{x\fromto 1_-} \frac{\ln\pair{1-x}}{\frac{1}{\ln\of{x}}}\\
