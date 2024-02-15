@@ -47,6 +47,7 @@
 \newtheorem{konzept}[blockelement]{Konzept}
 \newtheorem{visualisierung}[blockelement]{Visualisierung}
 \newtheorem{anwendung}[blockelement]{Anwendung}
+\newtheorem{skizze}[blockelement]{Skizze}
 
 % Marginnotes left
 \makeatletter
@@ -131,6 +132,17 @@
     \rule{0pt}{3ex}\noindent
     \begin{minipage}[t]{0.11\textwidth}
     {I-Anfang}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.89\textwidth}
+    }
+    {
+    \end{minipage}
+}
+\newenvironment{induktionsvoraussetzung}{
+    \rule{0pt}{3ex}\noindent
+    \begin{minipage}[t]{0.11\textwidth}
+    {I-Vor.}
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.89\textwidth}
@@ -2207,8 +2219,8 @@
                 \intertext{Nach dem Satz von Heine ist $f$ stetig auf $\interv{0,1}$ das heißt}
                 \fa\varepsilon > 0\ex\delta > 0\colon\abs{f(x)-f(y)} < \varepsilon \text{ für } x,y\in\interv{0,1}, \abs{x-y} < \delta
                 \intertext{Teilen Summen in 2 Gebiete auf}
-                A_1 &:= \set{0 \leq k \leq n: \abs{x-\frac{k}{n}} < \delta}\\
-                A_2 &:= \set{0 \leq k \leq n: \abs{x-\frac{k}{n}} \geq \delta}\\
+                A_1 &\definedas \set{0 \leq k \leq n: \abs{x-\frac{k}{n}} < \delta}\\
+                A_2 &\definedas \set{0 \leq k \leq n: \abs{x-\frac{k}{n}} \geq \delta}\\
                 \impl \abs{f(x) - P_n(x)} \leq \underbrace{\sum_{k<A_1}^{} \binom{n}{k} x^k (1-k)^{n-k} \abs{f(x) - f(\frac{k}{n})}}_{\definedasbackwards \delta_1}\\
                 + \underbrace{\sum_{k<A_2}^{} \binom{n}{k} x^k (1-k)^{n-k} \abs{f(x) - f(\frac{k}{n})}}_{\definedasbackwards \delta_2}\\
                 s_1 < \varepsilon \sum_{k < A1}^{} \binom{n}{k} x^k (1-x)^{n-k} < \varepsilon\\
@@ -2716,5 +2728,215 @@
         \end{align*}
     \end{beispiel}
 
+    \newpage
+
+    %%%%%%%%%%%%%%%%%%%%%%%%
+    % 15. Februar 2024
+    %%%%%%%%%%%%%%%%%%%%%%%%
+
+
+    \section{[*] Konvexität}
+    \thispagestyle{pagenumberonly}
+    \imaginarysubsection{[*] Konvexität}
+
+    \begin{skizze}
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \draw[->] (-2, 0) -- (2, 0);
+                \draw[->] (0, -2) -- (0, 2);
+                \draw[scale=1, domain=-2:2, smooth, variable=\x] plot ({\x}, {\x});
+            \end{tikzpicture}
+            \caption{}
+        \end{figure}
+
+        Wähle ein $\lambda\in\pair{0,1}$ und formuliere die Interpolation $r=\lambda x + \pair{1-\lambda}y$
+    \end{skizze}
+
+    \begin{definition}[Konvexität/Konkavität]
+        Sei $f: D\fromto \R$ wobei $D\subseteq \R$ ein Intervall. Die Funktion $f$ heißt konvex (bzw. konkav), falls für alle $x,y\in D$ und alle $\lambda \in\pair{0,1}$ gilt
+        \begin{align*}
+            f\of{\lambda x + \pair{1-\lambda}y} \underbrace{\leq}_{\text{bzw. } \geq} \lambda f\of{x} + \pair{1-\lambda} f\of{y}
+        \end{align*}
+    \end{definition}
+
+    \begin{beispiel}
+        Wir betrachten $f: \R\fromto\R$ mit $x\mapsto x^2$. Sei $x,y\in\R$ und \OBDA sei $y\geq x$, sei $\lambda\in\pair{0,1}$. Dann ist zu zeigen
+        \begin{align*}
+            f\of{\lambda x + \pair{1-\lambda}y} &\leq \lambda f\of{x} + \pair{1-\lambda} f\of{y}\\
+            \equivalent \pair{x+\pair{1-\lambda}y}^2 &\leq \lambda x^{2} + \pair{1-\lambda}y^2\\
+            \equivalent \lambda^2 x^2 + 2\lambda\pair{1-\lambda}xy + \pair{1-\lambda}^{2y^2} & \leq \lambda x^2 + \pair{1-\lambda}y^2\\
+            \equivalent \lambda\pair{\lambda -1}x^2 + \pair{1-\lambda}\pair{1-\lambda-1} y^2 + \lambda\pair{1-\lambda} 2xy &\leq 0\\
+            \equivalent \underbrace{\lambda\pair{\lambda -1}}_{\leq 0}\interv{x^2+y^2+2xy} &\leq 0\\
+            \equivalent x^2+y^2+2xy &\geq 0\\
+            \equivalent \pair{x+y}^2 &\geq 0
+        \end{align*}
+    \end{beispiel}
+
+    \begin{satz} % Satz 1
+        Sei $D\subseteq\R$ ein offenes Intervall und $f: D\fromto\R$ eine auf $D$ zweimal differenzierbare Abbildung. Dann gilt
+        \begin{align*}
+            f \text{ ist konvex }\quad \equivalent\quad \forall x\in D\colon f''(x)\geq 0
+        \end{align*}
+        \begin{proof}
+            \anf{$\Leftarrow$}: Da $f'' > 0$ auf $D$, ist $f'$ auf $D$ monoton wachsend. Sei $x,y\in D$, \OBDA sei $y>x$ und $\lambda\in\pair{0,1}$ und $r=\lambda x + \pair{1-\lambda}y$.
+            Es gilt nach Konstruktion, dass $x < r < y$. Wir untersuchen die Intervalle $\pair{x,r}\definedasbackwards D_1$ und $\pair{r,y}\definedasbackwards D_{2}$. Nach Satz~\ref{satz:mittelwertsatz} gilt
+            \begin{align*}
+                \exists \xi_1\in D_1~\exists \xi_2\in D_2\colon \xi_1 < \xi_2 \land\\
+                \frac{f(r)-f(x)}{r-x} = f'\of{\xi_1} &\leq \frac{f(y)-f(r)}{y-r} = f'\of{\xi_2}
+                \intertext{Beachte $r-x = \lambda x + \pair{1-\lambda}y - x = \pair{1-\lambda}\pair{y-x}$ und $y-r = \lambda\pair{y-x}$}
+                \impl \frac{f(r)-f(x)}{\pair{1-\lambda}{y-x}} &\leq \frac{f(y)-f(r)}{\lambda\pair{y-x}}\\
+                \impl f(r) &\leq \pair{1-\lambda} f(y) + \lambda f(x)\\
+                \impl f(\lambda x + \pair{1-\lambda} y) &\leq \pair{1-\lambda} f(y) + \lambda f(x)\\
+                \impl f \text{ ist konvex}
+            \end{align*}
+            \anf{$\impl$}: Wir führen einen Beweis mit Kontraposition. Angenommen es existiert ein $x_0\in D$ so, dass $f''(x_0) < 0$. Wir definieren die Hilfsfunktion
+            \begin{align*}
+                \varphi\of{x} &= f(x) + c\cdot\pair{x-x_0}\\
+                \impl \varphi'\of{x} &= f'\of{x} + c\\
+                \impl \varphi'\of{x_0} &= f'\of{x_0} + c
+                \intertext{Wähle $c=f'\of{x_0}$}
+                \impl \varphi'\of{x_0} &= 0
+                \intertext{Es gilt $\varphi''\of{x_0} = f''\of{x_0} < 0$}
+                \impl \varphi \text{ hat in } x_0\in D \text{ ein isoliertes Maximum}\\
+                \impl \exists t > 0\colon \varphi\of{x_0-t} < \varphi\of{x_0} \land \varphi\of{x_0+t} < \varphi\of{x_0}\\
+                \impl f(x_0) = \varphi\of{x_0} &> \frac{1}{2}\pair{\varphi\of{x_0+t} + \varphi\of{x_0-t}}\\
+                \impl f(x_0) &> \frac{1}{2}\pair{f(x_0+t) + f(x_0-t)}\\
+                \impl f(x_0) &> \frac{1}{2}\pair{f(x_0+t)+f(x_0-t)}
+                \intertext{Wir wählen $y=x_0+t$, $x=x_0-t$,$\lambda = \frac{1}{2}$}
+                \impl f(\lambda x + \pair{1-\lambda}y) &> \frac{1}{2}f(x) + \pair{1-\lambda}f(y)\\
+                \impl f \text{ ist nicht konvex}&\qedhere
+            \end{align*}
+        \end{proof}
+    \end{satz}
+
+    \begin{beispiel}
+        Wir betrachten $f: \pair{0,\infty}\fromto\R$, $x\mapsto x^r$ für $r\in\R$
+        \begin{align*}
+            f'\of{x} &= r\cdot x^{r-1}\\
+            \impl f''(x) &= r\cdot\pair{r-1}\cdot x^{r-2}
+        \end{align*}
+        Für $r\geq 1$ ist $f$ auf $\pair{0,\infty}$ konvex, für $r < 1$ konvex.
+    \end{beispiel}
+
+    \begin{beispiel}
+        $f: \R\fromto\R$, $x\mapsto e^{\lambda x}$
+        \begin{align*}
+            f''(x) &= \lambda^2 e^{\lambda x} > 0
+        \end{align*}
+        ist konvex auf $\R$.
+    \end{beispiel}
+
+    \begin{beispiel}
+        $f: \pair{0, \infty}\fromto\R$, $x\mapsto\ln\of{x}$
+        \begin{align*}
+            f''(x) &= \frac{-1}{x^2} < 0
+        \end{align*}
+        ist konkav auf $\pair{0, \infty}$.
+    \end{beispiel}
+
+    \begin{beispiel}
+        $f: \interv{-\frac{\pi}{2}, \frac{\pi}{2}}$, $x\mapsto \arctan\of{x}$
+        \begin{align*}
+            f'(x) &= \frac{1}{1+x^2} = \pair{1+x^2}^{-1}\\
+            \impl f''(x) &= \pair{1+x^2}^{-2}\cdot 2x
+        \end{align*}
+        ist konkav im Intervall $\interv{0, \frac{\pi}{2}}$ und konvex in $\interv{-\frac{\pi}{2}, 0}$.
+    \end{beispiel}
+
+    \begin{lemma} % Lemma 2
+        \label{lemma:konvex-verkettung}
+        Seien $D_1, D_2\sbset\R$ Intervalle und $f: D_1\fromto D_2$ und $g: D_2\fromto \R$. Dann gilt
+        \begin{enumerate}[label=(\roman*)]
+            \item Falls $f$ konvex, $g$ konvex und monoton wachsend $\impl g\circ f: D_1\fromto\R$ ist konvex
+            \item Falls $f$ konkav, $g$ konkav und monoton fallend $\impl g \circ f: D_1\fromto \R$ ist konvex
+        \end{enumerate}
+
+        \begin{proof}[Beweis (i)]
+            Es seien $x,y\in D_1$ mit $x < y$ und $\lambda\in\pair{0,1}$ dann ist
+            \begin{align*}
+                \pair{g\circ f}\of{\lambda x + \pair{1-\lambda}y} &= g\of{f\of{\lambda x + \pair{1-\lambda} y}}\\
+                \impl \pair{g\circ f}\of{\lambda x + \pair{1-\lambda} y} &\leq \pair{g\circ f}\of{x} + \pair{g\circ f}\of{y}\qedhere
+            \end{align*}
+        \end{proof}
+        Der Beweis von (ii) funktioniert analog.
+    \end{lemma}
+
+    \begin{lemma} % Lemma 3
+        \label{lemma:konvex-umkehrabbildung}
+        Es seien $D, B\sbset\R$ Intervalle und $f: D\fromto B$ bijektiv mit $f^{-1}: B\fromto D$ Umkehrabbildung. Dann gilt
+        \begin{enumerate}[label=(\roman*)]
+            \item $f$ ist monoton wachsend und konvex $\equivalent f^{-1}$ ist monoton wachsend und konkav
+            \item $f$ ist monoton fallend und konvex $\equivalent f^{-1}$ ist monoton fallend und konvex
+            \item $f$ ist monoton fallend und konkav $\equivalent f^{-1}$ ist monoton fallend und konkav
+        \end{enumerate}
+    \end{lemma}
+
+    \begin{uebung}
+        Beweisen Sie Lemma~\ref{lemma:konvex-umkehrabbildung}.
+    \end{uebung}
+
+    \begin{satz}[Ungleichung von Jensen]
+        \label{satz:ungleichung-jensen}
+        Sei $f: D\fromto\R$ konvex bzw. konkav, sowie $x_1,\dots, x_n\in D$ und $\lambda_1, \dots, \lambda_n\in\pair{0,1}$ mit $ \sum_{}^{} \lambda_i = 1$. Dann ist
+        \begin{align*}
+            f\of{\sum_{i=1}^{n} \lambda_i x_i} &\leq \sum_{i=1}^{n} \lambda_i f\of{x_i}
+            \intertext{bzw.}
+            f\of{\sum_{i=1}^{n} \lambda_i x_i} &\geq \sum_{i=1}^{n} \lambda_i f\of{x_i}
+        \end{align*}
+
+        \begin{proof}
+            Wir nutzen vollständige Induktion.\\
+            \begin{induktionsanfang}
+                $n=2$ gilt wegen Konvexität
+            \end{induktionsanfang}
+            \begin{induktionsvoraussetzung}
+                Es gelte die Behauptung für ein festes, aber beliebiges $n\in\N$ mit $n\geq 2$.
+            \end{induktionsvoraussetzung}
+            \begin{induktionsschritt}
+                $n\fromto n+1$
+                \begin{align*}
+                    f\of{\sum_{i=1}^{n} \lambda_i x_i} &= f\of{\pair{1-\lambda_{n+1}} \sum_{i=1}^{n} \frac{\lambda_i}{1-\lambda_{n+1}} x_i + \lambda_{n+1}\cdot x_{n+1} }\\
+                    &\leq \pair{1-\lambda_{n+1}} + \pair{ \sum_{i=1}^{n} \frac{x_i}{1-\lambda_{n+1}}} + \lambda_{n+1} \cdot f\of{x_{n+1}}\\
+                    \annot[{&}]{\leq}{IV} \pair{1-\lambda_{n+1}} \pair{\sum_{x_i}^{1-\lambda_{n+1}} } f(x_i) + \lambda_{n+1} f(x_{n+1})
+                \end{align*}
+                Nach Induktion folgt die Behauptung.
+            \end{induktionsschritt}
+        \end{proof}
+    \end{satz}
+
+    \begin{korollar}[Ungleichung vom arithmetisch-geometrischen Mittel] % Korollar 1
+        $x_1, \dots, x_n\in \R$
+        \begin{align*}
+            \sqrt[n]{\prod_{i=1}^{n} n} &\leq \frac{ \sum_{i=1}^{n} x_i}{n}
+        \end{align*}
+        \begin{proof}
+            $f: \pair{0,\infty}$, $x\mapsto \ln\of{x}$ ist konkav.
+            \begin{align*}
+                \annot{\impl}{\ref{satz:ungleichung-jensen}} \ln\of{ \sum_{i=1}^{n} \lambda_i x_i} &\geq \sum_{i=1}^{n} \lambda_i \ln\of{x_i}\\
+                \impl \sum_{i=1}^{n} \lambda_i x_i \geq e^{\sum_{i=1}^{n} \lambda_i \ln\of{x_i}} = \prod_{i=1}^{n}  e^{\ln\of{x_i}} = \prod_{i=1}^{n}  x_i^{\lambda_i}
+                \intertext{Wähle $\lambda = \frac{1}{n}$}
+                \impl \frac{\sum_{i=1}^{n} x_i}{n} &\geq \sqrt[n]{\prod_{i=1}^{n} n}\qedhere
+            \end{align*}
+        \end{proof}
+    \end{korollar}
+
+    \begin{korollar}[Ungleichung von Hölder] % Korollar 2
+        \label{korollar:hoelder}
+        Seien $p,q\in\pair{1,\infty}$ mit
+        \begin{align*}
+            \frac{1}{p} + \frac{1}{q} = 1
+        \end{align*}
+        $x=\pair{x_1, \dots, x_n}\in\C^n$, $\pair{y_1, \dots, y_n}\in\C^n$
+        \begin{align*}
+            \norm{x}_p &= \pair{\sum_{}^{} \abs{x_i}^p}^{\frac{1}{p}}\\
+            \sum_{i=1}^{n} \abs{x_i y_i} &\leq \norm{x}_p \cdot \norm{y}_p
+            \impl \ln\of{\frac{1}{p} + \frac{1}{q}} &\geq \frac{1}{p}\ln\of{x} + \frac{1}{q}\ln\of{y}\\
+            \impl \frac{1}{p}x + \frac{1}{q}y &\geq x^{\frac{1}{p}} y^{\frac{1}{q}}
+            \intertext{Wir definieren ??}
+            \impl \sum_{k}^{}  \frac{\abs{x_i}\abs{y_i}}{\norm{x}_p\norm{y}_q} &\leq \sum_{k}^{} ?? = 1\\
+            \impl \sum_{k}^{} \abs{x_n}\abs{y_n} &\leq \norm{x}_p\norm{y}_q
+        \end{align*}
+    \end{korollar}
 
 \end{document}
