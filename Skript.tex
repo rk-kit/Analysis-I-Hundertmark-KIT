@@ -61,7 +61,7 @@
 % \left \right
 \newcommand{\set}[1]{\left\{#1\right\}}
 \newcommand{\pair}[1]{\left(#1\right)}
-\newcommand{\of}[1]{\left(#1\right)}
+\newcommand{\of}[1]{\mathopen{}\mathclose{}\bgroup\left(#1\aftergroup\egroup\right)}
 \newcommand{\abs}[1]{\left\lvert#1\right\rvert}
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \newcommand{\linterv}[1]{\left[#1\right)}
@@ -2737,75 +2737,83 @@
 
     \section{[*] Konvexität}
     \thispagestyle{pagenumberonly}
-    \imaginarysubsection{[*] Konvexität}
 
-    \begin{skizze}
+    \subsection{Konvexe und konkave Funktionen}
+
+    \begin{skizze}[Konvexe Funktion]
+        \marginnote{[15. Feb]}
+        Wähle ein $\lambda\in\pair{0,1}$ und formuliere die Interpolation $r=\lambda x + \pair{1-\lambda}\cdot y$.
         \begin{figure}[H]
             \centering
             \begin{tikzpicture}
-                \draw[->] (-2, 0) -- (2, 0);
-                \draw[->] (0, -2) -- (0, 2);
-                \draw[scale=1, domain=-2:2, smooth, variable=\x] plot ({\x}, {\x});
-            \end{tikzpicture}
-            \caption{}
-        \end{figure}
+                \draw[->] (-1, 0) -- (3, 0);
+                \draw[->] (0, -1) -- (0, 4);
+                \draw (-0.95*0.5, 0.1) -- (-0.95*0.5, -0.1) node[below] {$x$};
+                \draw (5.2*0.5, 0.1) -- (5.2*0.5, -0.1) node[below] {$y$};
 
-        Wähle ein $\lambda\in\pair{0,1}$ und formuliere die Interpolation $r=\lambda x + \pair{1-\lambda}y$
+                \fill (-0.95*.5,0.7875*.5) circle[radius=1.5pt] node[left] {$f(x)$};
+                \fill (5.2*.5,5.4*.5) circle[radius=1.5pt] node[right] {$f(y)$};
+                \draw[domain=-2:6, smooth, variable=\x] plot ({0.5*\x}, {(0.2*(\x-0.25)^2+0.5)*0.5}) node[anchor=east] {$f$};
+                \draw[domain=-0.95:5.2, smooth, variable=\x, dashed] plot ({0.5*\x}, {(0.75*\x+1.5)*0.5});
+            \end{tikzpicture}
+            \caption{Konvexe Funktion mit eingezeichneter Sekante}
+        \end{figure}
+        \noindent Wir erhalten die Sekantengleichung $\lambda f(x) +\pair{1-\lambda}\cdot f(y)$. Die Funktion ist konvex, wenn sie unter der Sekante verläuft. Das heißt
+        \begin{align*}
+            \lambda f(x) +\pair{1-\lambda} f(y) \geq f\of{x+\pair{1-\lambda}\cdot y}\quad\forall\lambda\in\pair{0,1} \text{ und } x,y\in D
+        \end{align*}
     \end{skizze}
 
     \begin{definition}[Konvexität/Konkavität]
         Sei $f: D\fromto \R$ wobei $D\subseteq \R$ ein Intervall. Die Funktion $f$ heißt konvex (bzw. konkav), falls für alle $x,y\in D$ und alle $\lambda \in\pair{0,1}$ gilt
         \begin{align*}
-            f\of{\lambda x + \pair{1-\lambda}y} \underbrace{\leq}_{\text{bzw. } \geq} \lambda f\of{x} + \pair{1-\lambda} f\of{y}
+            f\of{\lambda x + \pair{1-\lambda}\cdot y} \underset{\text{bzw. } \geq}{\leq} \lambda f(x) + \pair{1-\lambda}\cdot f(y)
         \end{align*}
     \end{definition}
 
     \begin{beispiel}
-        Wir betrachten $f: \R\fromto\R$ mit $x\mapsto x^2$. Sei $x,y\in\R$ und \OBDA sei $y\geq x$, sei $\lambda\in\pair{0,1}$. Dann ist zu zeigen
+        Wir betrachten $f: \R\fromto\R$ mit $x\mapsto x^2$. Sei $x,y\in\R$ und \OBDA sei $y\geq x$, $\lambda\in\pair{0,1}$. Dann ist zu zeigen
         \begin{align*}
-            f\of{\lambda x + \pair{1-\lambda}y} &\leq \lambda f\of{x} + \pair{1-\lambda} f\of{y}\\
-            \equivalent \pair{x+\pair{1-\lambda}y}^2 &\leq \lambda x^{2} + \pair{1-\lambda}y^2\\
-            \equivalent \lambda^2 x^2 + 2\lambda\pair{1-\lambda}xy + \pair{1-\lambda}^{2y^2} & \leq \lambda x^2 + \pair{1-\lambda}y^2\\
-            \equivalent \lambda\pair{\lambda -1}x^2 + \pair{1-\lambda}\pair{1-\lambda-1} y^2 + \lambda\pair{1-\lambda} 2xy &\leq 0\\
-            \equivalent \underbrace{\lambda\pair{\lambda -1}}_{\leq 0}\interv{x^2+y^2+2xy} &\leq 0\\
-            \equivalent x^2+y^2+2xy &\geq 0\\
-            \equivalent \pair{x+y}^2 &\geq 0
+            f\of{\lambda x + \pair{1-\lambda}\cdot y} &\leq \lambda f\of{x} + \pair{1-\lambda}\cdot  f\of{y}\\
+            \equivalent \pair{\lambda x+\pair{1-\lambda}\cdot y}^2 &\leq \lambda x^{2} + \pair{1-\lambda}\cdot y^2\\
+            \equivalent \lambda^2 x^2 + 2\lambda\pair{1-\lambda}\cdot xy + \pair{1-\lambda}^{2}\cdot y^2 & \leq \lambda x^2 + \pair{1-\lambda}\cdot y^2\\
+            \equivalent \lambda\cdot\pair{\lambda -1}\cdot x^2 + \pair{1-\lambda}\cdot\pair{1-\lambda-1}\cdot y^2 + \lambda\pair{1-\lambda}\cdot 2xy &\leq 0\\
+            \equivalent \lambda\pair{\lambda -1}\cdot\interv{x^2+y^2-2xy} &\leq 0\\
+            \equivalent x^2+y^2-2xy &\geq 0\\
+            \equivalent \pair{x-y}^2 &\geq 0
         \end{align*}
     \end{beispiel}
 
-    \begin{satz} % Satz 1
+    \begin{satz}[Konvexität und zweite Ableitung] % Satz 1
         Sei $D\subseteq\R$ ein offenes Intervall und $f: D\fromto\R$ eine auf $D$ zweimal differenzierbare Abbildung. Dann gilt
         \begin{align*}
             f \text{ ist konvex }\quad \equivalent\quad \forall x\in D\colon f''(x)\geq 0
         \end{align*}
         \begin{proof}
-            \anf{$\Leftarrow$}: Da $f'' > 0$ auf $D$, ist $f'$ auf $D$ monoton wachsend. Sei $x,y\in D$, \OBDA sei $y>x$ und $\lambda\in\pair{0,1}$ und $r=\lambda x + \pair{1-\lambda}y$.
-            Es gilt nach Konstruktion, dass $x < r < y$. Wir untersuchen die Intervalle $\pair{x,r}\definedasbackwards D_1$ und $\pair{r,y}\definedasbackwards D_{2}$. Nach Satz~\ref{satz:mittelwertsatz} gilt
+            \anf{$\Leftarrow$}: Da $f'' > 0$ auf $D$, ist $f'$ auf $D$ monoton wachsend. Sei $x,y\in D$, \OBDA sei $y>x$ und $\lambda\in\pair{0,1}$, $r\definedas\lambda x + \pair{1-\lambda}\cdot y$.
+            Es gilt nach Konstruktion, dass $x < r < y$. Wir untersuchen die Intervalle $D_1\definedas\pair{x,r}$ und $D_{2}\definedas\pair{r,y}$. Nach Satz~\ref{satz:mittelwertsatz} gilt $\exists \xi_1\in D_1,\xi_2\in D_2, \xi_1 < \xi_2$ sodass
             \begin{align*}
-                \exists \xi_1\in D_1~\exists \xi_2\in D_2\colon \xi_1 < \xi_2 \land\\
-                \frac{f(r)-f(x)}{r-x} = f'\of{\xi_1} &\leq \frac{f(y)-f(r)}{y-r} = f'\of{\xi_2}
-                \intertext{Beachte $r-x = \lambda x + \pair{1-\lambda}y - x = \pair{1-\lambda}\pair{y-x}$ und $y-r = \lambda\pair{y-x}$}
-                \impl \frac{f(r)-f(x)}{\pair{1-\lambda}{y-x}} &\leq \frac{f(y)-f(r)}{\lambda\pair{y-x}}\\
-                \impl f(r) &\leq \pair{1-\lambda} f(y) + \lambda f(x)\\
-                \impl f(\lambda x + \pair{1-\lambda} y) &\leq \pair{1-\lambda} f(y) + \lambda f(x)\\
-                \impl f \text{ ist konvex}
-            \end{align*}
-            \anf{$\impl$}: Wir führen einen Beweis mit Kontraposition. Angenommen es existiert ein $x_0\in D$ so, dass $f''(x_0) < 0$. Wir definieren die Hilfsfunktion
-            \begin{align*}
+                \frac{f(r)-f(x)}{r-x} = f'\of{\xi_1} &\leq f'\of{\xi_2} = \frac{f(y)-f(r)}{y-r}
+                \intertext{Beachte $r-x = \lambda x + \pair{1-\lambda}\cdot y - x = \pair{1-\lambda}\pair{y-x}$ und $y-r = \lambda\pair{y-x}$}
+                \impl \frac{f(r)-f(x)}{\pair{1-\lambda}\pair{y-x}} &\leq \frac{f(y)-f(r)}{\lambda\pair{y-x}}\\
+                \impl f(r) &\leq \pair{1-\lambda}\cdot f(y) + \lambda f(x)\\
+                \impl f(\lambda x + \pair{1-\lambda}\cdot y) &\leq \pair{1-\lambda}\cdot f(y) + \lambda f(x)\\
+                \impl f &\text{ ist konvex}
+                \intertext{\anf{$\impl$}: Wir führen einen Beweis mit Kontraposition. Angenommen es existiert ein $x_0\in D$ so, dass $f''(x_0) < 0$. Wir definieren die Hilfsfunktion}
                 \varphi\of{x} &= f(x) + c\cdot\pair{x-x_0}\\
                 \impl \varphi'\of{x} &= f'\of{x} + c\\
                 \impl \varphi'\of{x_0} &= f'\of{x_0} + c
-                \intertext{Wähle $c=f'\of{x_0}$}
+                \intertext{Wähle $c=-f'\of{x_0}$}
                 \impl \varphi'\of{x_0} &= 0
                 \intertext{Es gilt $\varphi''\of{x_0} = f''\of{x_0} < 0$}
-                \impl \varphi \text{ hat in } x_0\in D \text{ ein isoliertes Maximum}\\
-                \impl \exists t > 0\colon \varphi\of{x_0-t} < \varphi\of{x_0} \land \varphi\of{x_0+t} < \varphi\of{x_0}\\
+                \impl \varphi \text{ hat in } &x_0\in D \text{ ein isoliertes Maximum}\\
+                \impl \exists t > 0\colon \varphi\of{x_0-t} &< \varphi\of{x_0} \land \varphi\of{x_0+t} < \varphi\of{x_0}\\
                 \impl f(x_0) = \varphi\of{x_0} &> \frac{1}{2}\pair{\varphi\of{x_0+t} + \varphi\of{x_0-t}}\\
-                \impl f(x_0) &> \frac{1}{2}\pair{f(x_0+t) + f(x_0-t)}\\
+                \impl f(x_0) &> \frac{1}{2}\pair{f(x_0+t)+ct + f(x_0-t)-ct}\\
                 \impl f(x_0) &> \frac{1}{2}\pair{f(x_0+t)+f(x_0-t)}
-                \intertext{Wir wählen $y=x_0+t$, $x=x_0-t$,$\lambda = \frac{1}{2}$}
-                \impl f(\lambda x + \pair{1-\lambda}y) &> \frac{1}{2}f(x) + \pair{1-\lambda}f(y)\\
-                \impl f \text{ ist nicht konvex}&\qedhere
+                \intertext{Wir wählen $y=x_0+t$, $x=x_0-t$, $\lambda = \frac{1}{2}$}
+                \impl f(\lambda x + \pair{1-\lambda}\cdot y) &> \frac{1}{2}f(x) + \pair{1-\lambda}f(y)\\
+                \impl f &\text{ ist nicht konvex}\qedhere
             \end{align*}
         \end{proof}
     \end{satz}
@@ -2814,21 +2822,21 @@
         Wir betrachten $f: \pair{0,\infty}\fromto\R$, $x\mapsto x^r$ für $r\in\R$
         \begin{align*}
             f'\of{x} &= r\cdot x^{r-1}\\
-            \impl f''(x) &= r\cdot\pair{r-1}\cdot x^{r-2}
+            f''(x) &= r\cdot\pair{r-1}\cdot x^{r-2}
         \end{align*}
-        Für $r\geq 1$ ist $f$ auf $\pair{0,\infty}$ konvex, für $r < 1$ konvex.
+        Für $r\geq 1$ und $r\leq 0$ ist $f$ auf $\pair{0,\infty}$ konvex, für $r\in\pair{0,1}$ konkav.
     \end{beispiel}
 
     \begin{beispiel}
-        $f: \R\fromto\R$, $x\mapsto e^{\lambda x}$
+        Die Funktion $f: \R\fromto\R$, $x\mapsto e^{\lambda x}$
         \begin{align*}
-            f''(x) &= \lambda^2 e^{\lambda x} > 0
+            f''(x) &= \lambda^2\cdot e^{\lambda x} > 0
         \end{align*}
         ist konvex auf $\R$.
     \end{beispiel}
 
     \begin{beispiel}
-        $f: \pair{0, \infty}\fromto\R$, $x\mapsto\ln\of{x}$
+        Die Funktion $f: \pair{0, \infty}\fromto\R$, $x\mapsto\ln\of{x}$
         \begin{align*}
             f''(x) &= \frac{-1}{x^2} < 0
         \end{align*}
@@ -2836,12 +2844,12 @@
     \end{beispiel}
 
     \begin{beispiel}
-        $f: \interv{-\frac{\pi}{2}, \frac{\pi}{2}}$, $x\mapsto \arctan\of{x}$
+        Die Funktion $f: \interv{-\frac{\pi}{2}, \frac{\pi}{2}}$, $x\mapsto \arctan\of{x}$
         \begin{align*}
             f'(x) &= \frac{1}{1+x^2} = \pair{1+x^2}^{-1}\\
-            \impl f''(x) &= \pair{1+x^2}^{-2}\cdot 2x
+            \impl f''(x) &= -\pair{1+x^2}^{-2}\cdot 2x
         \end{align*}
-        ist konkav im Intervall $\interv{0, \frac{\pi}{2}}$ und konvex in $\interv{-\frac{\pi}{2}, 0}$.
+        ist konvex im Intervall $\interv{-\frac{\pi}{2}, 0}$ und konkav in $\interv{0, \frac{\pi}{2}}$.
     \end{beispiel}
 
     \begin{lemma} % Lemma 2
@@ -2855,11 +2863,11 @@
         \begin{proof}[Beweis (i)]
             Es seien $x,y\in D_1$ mit $x < y$ und $\lambda\in\pair{0,1}$ dann ist
             \begin{align*}
-                \pair{g\circ f}\of{\lambda x + \pair{1-\lambda}y} &= g\of{f\of{\lambda x + \pair{1-\lambda} y}}\\
-                \impl \pair{g\circ f}\of{\lambda x + \pair{1-\lambda} y} &\leq \pair{g\circ f}\of{x} + \pair{g\circ f}\of{y}\qedhere
+                \pair{g\circ f}\of{\lambda x + \pair{1-\lambda}\cdot y} &= g\of{f\of{\lambda x + \pair{1-\lambda}\cdot y}}\\
+                \impl \pair{g\circ f}\of{\lambda x + \pair{1-\lambda}\cdot y} &\leq \pair{g\circ f}\of{x} + \pair{1-\lambda}\cdot\pair{g\circ f}\of{y}\qedhere
             \end{align*}
         \end{proof}
-        Der Beweis von (ii) funktioniert analog.
+        \noindent Der Beweis von (ii) funktioniert analog.
     \end{lemma}
 
     \begin{lemma} % Lemma 3
@@ -2876,6 +2884,8 @@
         Beweisen Sie Lemma~\ref{lemma:konvex-umkehrabbildung}.
     \end{uebung}
 
+    \subsection{Ungleichungen von Jensen und Hölder}
+
     \begin{satz}[Ungleichung von Jensen]
         \label{satz:ungleichung-jensen}
         Sei $f: D\fromto\R$ konvex bzw. konkav, sowie $x_1,\dots, x_n\in D$ und $\lambda_1, \dots, \lambda_n\in\pair{0,1}$ mit $ \sum_{}^{} \lambda_i = 1$. Dann ist
@@ -2888,7 +2898,7 @@
         \begin{proof}
             Wir nutzen vollständige Induktion.\\
             \begin{induktionsanfang}
-                $n=2$ gilt wegen Konvexität
+                $n=2$ gilt wegen Definition der Konvexität.
             \end{induktionsanfang}
             \begin{induktionsvoraussetzung}
                 Es gelte die Behauptung für ein festes, aber beliebiges $n\in\N$ mit $n\geq 2$.
@@ -2896,47 +2906,57 @@
             \begin{induktionsschritt}
                 $n\fromto n+1$
                 \begin{align*}
-                    f\of{\sum_{i=1}^{n} \lambda_i x_i} &= f\of{\pair{1-\lambda_{n+1}} \sum_{i=1}^{n} \frac{\lambda_i}{1-\lambda_{n+1}} x_i + \lambda_{n+1}\cdot x_{n+1} }\\
-                    &\leq \pair{1-\lambda_{n+1}} + \pair{ \sum_{i=1}^{n} \frac{x_i}{1-\lambda_{n+1}}} + \lambda_{n+1} \cdot f\of{x_{n+1}}\\
-                    \annot[{&}]{\leq}{IV} \pair{1-\lambda_{n+1}} \pair{\sum_{x_i}^{1-\lambda_{n+1}} } f(x_i) + \lambda_{n+1} f(x_{n+1})
+                    f\of{\sum_{i=1}^{n+1} \lambda_i x_i} &= f\of{\underbrace{\pair{1-\lambda_{n+1}}}_{1-\theta}\cdot \underbrace{\sum_{i=1}^{n} \frac{\lambda_i}{1-\lambda_{n+1}}\cdot x_i}_{x} + \underbrace{\lambda_{n+1}}_{\theta}\cdot \underbrace{x_{n+1}}_{y}}
+                    \intertext{Nach der Konvexität von $f$ gilt damit}
+                    &\leq \pair{1-\lambda_{n+1}}\cdot f\of{\sum_{i=1}^{n} \frac{\lambda_i}{1-\lambda_{n+1}}\cdot x_i} + \lambda_{n+1} \cdot f\of{x_{n+1}}\\
+                    \annot[{&}]{\leq}{IV} \pair{1-\lambda_{n+1}}\cdot \pair{\sum_{i=1}^{n} \frac{\lambda_i}{1-\lambda_{n+1}}\cdot f\of{x_i}} + \lambda_{n+1}\cdot f(x_{n+1})\\
+                    &= \sum_{i=1}^{n+1} \lambda_i f\of{x_i}
                 \end{align*}
-                Nach Induktion folgt die Behauptung.
+                Nach Induktion folgt die Behauptung.\qedhere
             \end{induktionsschritt}
         \end{proof}
     \end{satz}
 
+
     \begin{korollar}[Ungleichung vom arithmetisch-geometrischen Mittel] % Korollar 1
-        $x_1, \dots, x_n\in \R$
+        Es seien $x_1, \dots, x_n\in \R$. Dann gilt
         \begin{align*}
-            \sqrt[n]{\prod_{i=1}^{n} n} &\leq \frac{ \sum_{i=1}^{n} x_i}{n}
+            \sqrt[n]{\prod_{i=1}^{n} x_i} &\leq \frac{1}{n}\cdot \sum_{i=1}^{n} x_i
         \end{align*}
         \begin{proof}
             $f: \pair{0,\infty}$, $x\mapsto \ln\of{x}$ ist konkav.
             \begin{align*}
                 \annot{\impl}{\ref{satz:ungleichung-jensen}} \ln\of{ \sum_{i=1}^{n} \lambda_i x_i} &\geq \sum_{i=1}^{n} \lambda_i \ln\of{x_i}\\
-                \impl \sum_{i=1}^{n} \lambda_i x_i \geq e^{\sum_{i=1}^{n} \lambda_i \ln\of{x_i}} = \prod_{i=1}^{n}  e^{\ln\of{x_i}} = \prod_{i=1}^{n}  x_i^{\lambda_i}
-                \intertext{Wähle $\lambda = \frac{1}{n}$}
-                \impl \frac{\sum_{i=1}^{n} x_i}{n} &\geq \sqrt[n]{\prod_{i=1}^{n} n}\qedhere
+                \impl \sum_{i=1}^{n} \lambda_i x_i &\geq \exp\of{\sum_{i=1}^{n} \lambda_i\cdot \ln\of{x_i}}\\
+                &= \prod_{i=1}^{n}  e^{\ln\of{x_i^{\lambda_i}}}\\
+                &= \prod_{i=1}^{n}  x_i^{\lambda_i}
+                \intertext{Wähle $\lambda_i = \frac{1}{n}$}
+                \impl \frac{1}{n}\cdot\sum_{i=1}^{n} x_i &\geq \sqrt[n]{\prod_{i=1}^{n} x_i}\qedhere
             \end{align*}
         \end{proof}
     \end{korollar}
 
+    \newpage
+
     \begin{korollar}[Ungleichung von Hölder] % Korollar 2
         \label{korollar:hoelder}
-        Seien $p,q\in\pair{1,\infty}$ mit
+        Seien $p,q\in\pair{1,\infty}$ mit $\frac{1}{p} + \frac{1}{q} = 1$, $x = \pair{x_1, \dots, x_n}\in\C^n$, $y = \pair{y_1, \dots, y_n}\in\C^n$. Wir definieren die $p$-Norm
         \begin{align*}
-            \frac{1}{p} + \frac{1}{q} = 1
+            \norm{x}_p &\definedas \pair{\sum_{i=1}^{n} \abs{x_i}^p}^{\frac{1}{p}}
+            \intertext{Dann gilt}
+            \sum_{i=1}^{n} \abs{x_i y_i} &\leq \norm{x}_p \cdot \norm{y}_q
         \end{align*}
-        $x=\pair{x_1, \dots, x_n}\in\C^n$, $\pair{y_1, \dots, y_n}\in\C^n$
-        \begin{align*}
-            \norm{x}_p &= \pair{\sum_{}^{} \abs{x_i}^p}^{\frac{1}{p}}\\
-            \sum_{i=1}^{n} \abs{x_i y_i} &\leq \norm{x}_p \cdot \norm{y}_p
-            \impl \ln\of{\frac{1}{p} + \frac{1}{q}} &\geq \frac{1}{p}\ln\of{x} + \frac{1}{q}\ln\of{y}\\
-            \impl \frac{1}{p}x + \frac{1}{q}y &\geq x^{\frac{1}{p}} y^{\frac{1}{q}}
-            \intertext{Wir definieren ??}
-            \impl \sum_{k}^{}  \frac{\abs{x_i}\abs{y_i}}{\norm{x}_p\norm{y}_q} &\leq \sum_{k}^{} ?? = 1\\
-            \impl \sum_{k}^{} \abs{x_n}\abs{y_n} &\leq \norm{x}_p\norm{y}_q
-        \end{align*}
+        \begin{proof}
+            Da $\frac{1}{p} + \frac{1}{q} = 1$ und $\ln$ konvex gilt für beliebige $\zeta, \eta\in\R$
+            \begin{align*}
+                \ln\of{\frac{1}{p} + \frac{1}{q}} &\geq \frac{1}{p}\ln\of{\zeta} + \frac{1}{q}\ln\of{\eta}\\
+                \impl \frac{\zeta}{p} + \frac{\eta}{q} &\geq \zeta^{\frac{1}{p}} \eta^{\frac{1}{q}}
+                \intertext{Wir definieren}
+                \zeta_k \definedas \frac{\abs{x_k}^p}{\norm{x}_p^p}\quad&\quad\eta_n \definedas \frac{\abs{y_n}^q}{\norm{y}_q^q}\\
+                \impl \sum_{k=1}^{n} \frac{\abs{x_k}\abs{y_k}}{\norm{x}_p\norm{y}_q} &\leq \sum_{k=1}^{n} \frac{1}{p}\cdot\frac{\abs{x_k}^p}{\norm{x}_p^p} + \frac{1}{q}\cdot\frac{\abs{y_k}^q}{\norm{y}_q^q}\\
+                \impl \sum_{k=1}^{n} \abs{x_k}\abs{y_k} &\leq \norm{x}_p\cdot \norm{y}_q\qedhere
+            \end{align*}
+        \end{proof}
     \end{korollar}
-
+    \par\noindent\rule[0.25\baselineskip]{\textwidth}{0.4pt}
 \end{document}
