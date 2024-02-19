@@ -784,8 +784,8 @@
             \begin{align*}
                 e &= \lim_{\ntoinf} \pair{1+\frac{1}{n}}^n\\[10pt]
                 \pair{1+\frac{1}{n}}^n &= \sum_{k=0}^{n}\binom{n}{k} \pair{\frac{1}{n}}^k\\
-                &= \sum_{k=0}^{n} \frac{n\cdot(n-1)\cdot(n-k+1)}{k!\cdot n^k}\\
-                &= \sum_{k=0}^{n} \frac{1}{k!} \cdot \prod_{j=0}^{k-1} \frac{n-j}{n}\\
+                &= \sum_{k=0}^{n} \frac{n\cdot(n-1)\cdot \dots \cdot (n-k+1)}{k!\cdot n^k}\\
+                &= \sum_{k=0}^{n} \frac{1}{k!} \cdot \underbrace{\prod_{j=0}^{k-1}}_{\leq 1} \frac{n-j}{n}\\
                 &\leq \sum_{k=0}^{n} \frac{1}{k!} \leq \sum_{k=0}^{\infty} \frac{1}{k!}\\[10pt]
                 \impl e &\leq \sum_{n=0}^{\infty} \frac{1}{n!}
                 \intertext{Noch zu zeigen: $e'\leq e$}
@@ -929,7 +929,7 @@
         Andernfalls heißt $\sum_{n=0}^{\infty} a_n$ bedingt konvergent.
     \end{definition}
 
-    \begin{satz}[Direcklet 1837] % Satz 11
+    \begin{satz}[Dirichlet 1837] % Satz 11
         Eine Reihe $\sum_{n=0}^{\infty} a_n$, $a_n\in\R$ ist absolut konvergent genau dann, wenn sie unbedingt konvergiert.
         \begin{proof}
             \anf{$\impl$} Sei
@@ -941,7 +941,7 @@
                 \forall \varepsilon>0~\exists N\in\N\colon \sum_{j=n+1}^{n+p} \abs{a_j} < \varepsilon\quad\forall n\geq N, p\in\N\\
                 \impl \sum_{j=n+1}^{\infty}\abs{a_j} = \lim_{p\fromto\infty} \sum_{j=n+1}^{n+p} \abs{a_j} \leq \varepsilon\quad\forall n\geq N\tag{3}
                 \intertext{Wir definieren}
-                s_n \definedas \sum_{j=0}^{\infty} a_j\quad \sum_{n=0}^{\infty} b_n\text{ Umordnung von } s_n\\
+                s_n \definedas \sum_{j=0}^{n} a_j\quad \sum_{n=0}^{\infty} b_n\text{ Umordnung von } \sum_{n=0}^{\infty} a_n\\
                 b_n = a_{\sigma(n)}\quad \sigma: \N_0 \fromto\N_0\text{ Bijektion}\\
                 t_n \definedas \sum_{j=0}^{n} b_j
                 \intertext{Wir wissen $s_n\fromto s$. Zu zeigen: $t_n\fromto s$}
@@ -950,8 +950,8 @@
                 \set{a_1, a_2, a_3, \dots, a_N}\subseteq \set{b_1, b_2, \dots b_M} = \set{a_{\sigma(1)}, a_{\sigma(2)}, \dots, a_{\sigma(M)}}\\
                 \impl\text{ Alle Glieder $a_1, \dots, a_n$ in der Summe $s_n$ treten in $t_n = t_1 + t_2 + \dots + t_n$ auf}\\
                 \impl\text{ Diese Terme heben sich in $s_n-t_n$ gegenseitig auf, sofern $n\geq M$ ist}\\
-                \impl \abs{s_n-t_n} \leq \sum_{j\geq N+1, j=\sigma{k}\text{ für ein }k\in\set{1,\dots, M}}^{} \abs{a_j}\\
-                \leq \sum_{j=??}^{\infty} \abs{a_j} \leq \varepsilon\\
+                \impl \abs{s_n-t_n} \leq \sum_{j\geq N+1, j=\sigma(k) \text{ für ein }k\in\set{1,\dots, M}}^{} \abs{a_j}\\
+                \leq \sum_{j=N+1}^{\infty} \abs{a_j} \leq \varepsilon\\
                 \impl s_n - t_n \fromto 0\text{ für }\ntoinf
             \end{align*}
             Da $(s_n)_n$ gegen $s$ konvergiert, konvergiert auch $(t_n)_n$ gegen $s$. Somit konvergiert $\sum_{n=0}^{\infty} b_n$ und hat die selbe Summe wie $\sum_{n=0}^{\infty} a_n$.\\[10pt]
@@ -960,25 +960,31 @@
                 p_n &\definedas (a_n)_{+} \definedas \max\pair{0, a_n}\\
                 q_n &\definedas (a_n)_{-} \definedas \max\pair{0,-a_n} = -\min\pair{0,a_n}\\
                 \impl \abs{a_n} &= p_n + q_n\quad\forall n\in\N_0\\
-                \intertext{Wir haben $\sum_{n=0}^{\infty} \abs{a_n}$ konvergiert, aber $\sum_{n=0}^{\infty} p_n = \infty$}
+                \intertext{Wir haben $\sum_{n=0}^{\infty} a_n$ konvergiert, aber $\sum_{n=0}^{\infty} \abs{a_n} = \infty$}
             \end{align*}
-            Behauptung: $\sum_{n=0}^{\infty} p_n = \infty$ und $\sum_{n=0}^{\infty} q_n = \infty$. Angenommen $0\leq \sum_{n=0}^{\infty} p_n < \infty$.
+            Behauptung: $\sum_{n=0}^{\infty} p_n = \infty$ und $\sum_{n=0}^{\infty} q_n = \infty$. \\[10pt]
+            Angenommen $0\leq \sum_{n=0}^{\infty} p_n < \infty$.
             \begin{align*}
-                \impl \sum_{n=0}^{\infty} \pair{p_n - a_n}\text{ konvergiert}\\
-                \impl \sum_{n=0}^{\infty} a_n < \infty
+              \impl \sum_{n=0}^{\infty} \underbrace{\pair{p_n - a_n}}_{=q_n}\text{ konvergiert}\\
+                \impl \sum_{n=0}^{\infty} q_n < \infty
                 \intertext{Da $\abs{a_n} = p_n + q_n$}
                 \impl \sum_{n=0}^{\infty} \abs{a_n} = \sum_{n=0}^{\infty} \pair{p_n+q_n} = \sum_{n=0}^{\infty} p_n + \sum_{n=0}^{\infty} q_n < \infty\\
-                \text{Widerspruch zu } \sum_{n=0}^{\infty} b_n\text{ ist nicht absolut konvergent}
+                \text{Widerspruch zu } \sum_{n=0}^{\infty} a_n\text{ ist nicht absolut konvergent}
             \end{align*}
             Jetzt setze $r_0=0$ und bestimme induktiv $(r_n)_n~r_n < r_{n+1}$ mit $p_0 + p_1 + \dots + p_{r_n} > n + q_0 + q_1 + \dots + q_n~\forall n\in\N$.
-            $r_q\definedas$ kleinste natürliche Zahl mit $p_0 + p_q + \dots + p_{r_1} > 1 + q_? + q_1$.\\
+            $r_q\definedas$ kleinste natürliche Zahl mit $p_0 + p_q + \dots + p_{r_1} > 1 + q_0 + q_1$.\\
             $r_2\definedas$ kleinste natürliche Zahl $\geq r_1 + 1$: $p_0 + \dots + p_{r_2} > 2 + q_0 + q_1 + q_2$.\\
             Machen induktiv weiter: Gegeben $r_n$ wähle $r_{n+1} =$ kleinste natürliche Zahl $\geq r_n + 1$ mit $p_0 + p_1 + \dots + p_{r_{n+1}} > n + q_0 + q_1 + \dots + q_n$.\\[10pt]
-            Umordnung $p_0 - q_0 + p_1 + \dots + p_{r_1} - q_1 + p_{r_{1+1}} + \dots + p_{r_2} - q_2 + p_{r_{2+1}} + \dots + p_{r_3} - q_3 + \dots$. Diese Umordnung divergiert gegen $+\infty$.
+            Umordnung $p_0 - q_0 + p_1 + \dots + p_{r_1} - q_1 + p_{r_{1+1}} + \dots + p_{r_2} - q_2 + p_{r_{2+1}} + \dots + p_{r_3} - q_3 + \dots$.
+            \begin{align*}
+              = p_0 - q_0 + \sum_{\vartheta = 1}^{\infty}\pair{ \pair{\sum_{r_{\vartheta - 1} + 1}^{r_{\vartheta}} p_l} - q_{\vartheta}}\\
+              \text{Partialsummen der Umordnung}\\
+              t_{k} = p_0 - q_0 + \sum_{\vartheta = 1}^{k}\pair{ \pair{\sum_{r_{\vartheta - 1} + 1}^{r_{\vartheta}} p_l} - q_{\vartheta}}\\
+              = p_0 + p_1 + \dots + p_{r_k} - \pair{q_0 + q_1 + \dots + q_k} > k \text{ unbeschränkt}\\
+              \impl \pair{t_n}_n \text{ divergiert nach } + \infty \text { im Wiederspruch zur Annahme.}\\
+            \end{align*}
         \end{proof}
     \end{satz}
-
-    \newpage
 
     %%%%%%%%%%%%%%%%%%%%%%%%
     % 14. Dezember 2023
