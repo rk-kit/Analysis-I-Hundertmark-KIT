@@ -1868,8 +1868,8 @@
             \abs{\frac{z}{z_1}} &\leq \frac{r}{\abs{z_1}} = \theta < 1\\
             \impl \abs{\sum_{n=k+1}^{\infty} a_n z^n} &= \sum_{n=k+1}^{\infty} \abs{a_n z^n}\\
             &\leq \sum_{n=k+1}^{\infty} K \cdot \abs{\frac{z}{z_1}}^n\\
-            &= k\cdot \abs{\frac{z}{z_1}}^{k+1} \cdot \sum_{n=0}^{k} \abs{\frac{z}{z_1}}^n\\
-            &= \frac{k}{1-\theta} \abs{\frac{z}{z_1}}^{k+1} = \frac{K}{1-\frac{r}{??}}\cdot ??
+            &= K\cdot \abs{\frac{z}{z_1}}^{k+1} \cdot \sum_{n=0}^{k} \abs{\frac{z}{z_1}}^n\\
+            &= \frac{K}{1-\theta} \abs{\frac{z}{z_1}}^{k+1} = \underbrace{ \frac{K}{1-\abs{\frac{r}{z_1}}} }_{M_{r,z_1}}\cdot \pair{\frac{\abs{z}}{\abs{z_1}}}^{k+1}
         \end{align*}
     \end{proof}
 
@@ -1890,8 +1890,8 @@
                 \impl a_0 &= a_1 = \dots = a_{n_0-1} = 0\quad a_{n_0}\neq 0\\
                 f(z) &= \sum_{n=0}^{\infty} a_n z^n = \sum_{n=n_0}^{\infty} a_n z^n = a_{n_0} z^{n_0} + \sum_{n=n_0 + 1}^{\infty} a_n z^n\\
                 f(z_1) &= 0\quad\forall j\quad z_j \neq 0\quad z_j\fromto 0\\
-                \impl \abs{a_{n_0} (z_j)^{n_0}} &= \abs{- \sum_{n=n_0 + 1}^{\infty} a_n z_j^n} \leq M_{r, z_1} \pair{\frac{\abs{z_j}}{\abs{z_1}}}^{n+1}\\
-                \impl \abs{a_{n_0}} \leq M_{r,z} \abs{z_1}^{-(n_0+1)}\quad \abs{z_j} \fromto 0\quad j\fromto\infty\\
+                \impl \abs{a_{n_0} (z_j)^{n_0}} &= \abs{- \sum_{n=n_0 + 1}^{\infty} a_n z_j^n} \leq M_{r, z_1} \pair{\frac{\abs{z_j}}{\abs{z_1}}}^{n_0 +1}\\
+                \impl \abs{a_{n_0}} \leq M_{r,z} \abs{z_1}^{-(n_0+1)} \abs{z_j} \fromto 0\quad j\fromto\infty\\
                 \impl a_{n_0} &= 0\tag{Widerspruch}
             \end{align*}
         \end{proof}
