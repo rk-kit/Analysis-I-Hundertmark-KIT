@@ -228,7 +228,7 @@
     Bedeutung von endlichen Summen ist klar.\\
     Frage: Gegeben eine reelle Folge $a_n$. Was ist $\pair{a_1 + a_2 + a_3 + \dots = \sum_{n=1}^{\infty} a_n}$?
 
-    \subsection{[*] Konvergenz-Kriterien für Reihen}
+    \subsection{Konvergenz-Kriterien für Reihen}
 
     \begin{definition}[Reihen als Partialsummen] % Definition 1
         Das Symbol
@@ -257,7 +257,7 @@
 
     \begin{satz}[Monotone Konvergenz für Reihen] % Satz 2
         \label{satz:mont-konv-reihen}
-        Sei $a_n$ eine reelle Folge mit $\forall n\colon a_n\geq 0$. Dann konvergiert die Reihe $\sum_{j=1}^{\infty} a_j$ genau dann, wenn die Folge der Partialsummen $s_n$ nach oben beschränkt ist.
+        Sei $a_n$ eine reelle Folge mit $\forall n\colon a_n\geq 0$. Dann konvergiert die Reihe $\sum_{j=1}^{\infty} a_j$ genau dann, wenn die Folge der Partialsummen $(s_n)_n$ nach oben beschränkt ist.
 
         \begin{proof}
             Betrachte
@@ -288,13 +288,13 @@
             s_n &\definedas a_0 + \sum_{j=1}^{\infty} a_j\tag{$n\in\N$}
             \intertext{Sofern ein Limes existiert, gilt dann}
             \sum_{n=0}^{\infty} a_n &\definedas \lim s_n\\[10pt]
-            \intertext{Allgemein für $v\in\Z\quad a_v, a_{v+1}, a_{v+2}, \dots$}
+            \intertext{Allgemein für $v\in\Z$ und $a_v, a_{v+1}, a_{v+2}, \ldots\in\R$}
             \sum_{n=v}^{\infty} a_n &= a_v + a_{v+1} + \dots\\
             s_n &\definedas \sum_{j=v}^{n} a_j\text{ def. Folge $(s_n)_{n\geq v}$}
         \end{align*}
     \end{bemerkung}
 
-    \begin{beispiel}[Geometrische Folge und Reihe]
+    \begin{beispiel}[Geometrische Summe und Reihe]
         \footnote{Wir setzen $0^0 = 1$}
         \begin{align*}
             q\neq 1 \impl \sum_{j=0}^{n} q^j = \frac{1-q^{n+1}}{1-q}\quad\forall n\in\N_0\\
@@ -304,7 +304,7 @@
         \begin{align*}
             \sum_{j=0}^{n} q^j &= \frac{1-q^{n+1}}{1-q}\\
             \equivalent \pair{1-q}\cdot \sum_{j=0}^{n} q^j &= 1-q^{n+1}\\
-            \frac{1}{2}\sum_{j=0}^{n} \pair{\frac{1}{2}}^j &= 1 - \pair{\frac{1}{2}}^{n+1}\\
+            \frac{1}{2}\cdot\sum_{j=0}^{n} \pair{\frac{1}{2}}^j &= 1 - \pair{\frac{1}{2}}^{n+1}\\
             \impl 1 - \pair{\frac{1}{2}}^{n+1} &= \sum_{j=0}^{n} \frac{1}{2}\cdot\pair{\frac{1}{2}}^j\\
             &= \sum_{j=0}^{n} \pair{\frac{1}{2}}^{j+1} = \sum_{j=1}^{n+1} \pair{\frac{1}{2}}^j
         \end{align*}
@@ -344,14 +344,16 @@
         \end{bemerkung}
     \end{beispiel}
 
-    % TODO: Wahrscheinlichkeitstheoretische Anschauung
-    \newpage
-
     \begin{beispiel}[Harmonische Reihe]
         \begin{align*}
             s_n &\definedas \sum_{j=1}^{n} \frac{1}{j}
         \end{align*}
-        $(s_n)_n$ ist monoton wachsend, aber nicht nach oben beschränkt. Das heißt $\lim_{n\fromto\infty} s_n = \infty \impl \sum_{n=1}^{\infty} \frac{1}{n} = \infty$.
+        $(s_n)_n$ ist monoton wachsend, aber nicht nach oben beschränkt. Das heißt
+        \begin{align*}
+            \lim_{n\fromto\infty} s_n = \infty \impl \sum_{n=1}^{\infty} \frac{1}{n} = \infty
+        \end{align*}
+
+        \newpage
 
         \begin{proof}
             \begin{align*}
@@ -389,8 +391,6 @@
         \end{proof}
     \end{satz}
 
-    \newpage
-
     \begin{satz}[Majoranten-Kriterium] % Satz 7
         \label{satz:majoranten-kriterium}
         Gegeben zwei Folgen $0\leq a_n \leq b_n~\forall n\in\N$. Konvergiert
@@ -415,7 +415,7 @@
                 \annot{\impl}{\ref{satz:mont-konv-reihen}} &\lim_{n\fromto\infty} s_n\text{ existiert }\\
                 \quad s &\definedas \lim_{n\fromto\infty} s_n \leq \lim_{n\fromto\infty} t_n = \sum_{n=1}^{\infty} b_n\qedhere\\
                 \intertext{Außerdem gilt:}
-                t_n - s_n &= \sum_{j=1}^{n} b_j - \sum_{j=1}^{n} a_j = \sum_{j=1}^{n} n \pair{b_j-a_j} \geq 0
+                t_n - s_n &= \sum_{j=1}^{n} b_j - \sum_{j=1}^{n} a_j = \sum_{j=1}^{n} \underbrace{b_j-a_j}_{\geq 0} \geq 0
             \end{align*}
         \end{proof}
     \end{satz}
@@ -450,14 +450,14 @@
     \begin{beispiel}[Anwendung des Majoranten-Kriteriums]
         Es sei wieder $c>0$. Dann folgt aus
         \begin{align*}
-            0\leq a_n \leq c\cdot q^n\land 0\leq q < 1
+            0\leq a_n \leq c\cdot q^n\tag{$0\leq q < 1$}
             \intertext{nach Majoranten-Kriterium und dem Konvergenzkriterium der geometrischen Reihe, dass}
             \impl \sum_{n=1}^{\infty} a_n\text{ konvergiert}\tag{$b_n=c\cdot q^n$}
         \end{align*}
     \end{beispiel}
 
     \begin{bemerkung}[Abgeschwächtes Majoranten-Kriterium]
-        Die Konvergenz/Divergenz von Reihen (und Folgen) ändert sich nicht, wenn man endlich viele Summanden (Folgeglieder) abändert.\\
+        Die Konvergenz/Divergenz von Reihen (und Folgen) ändert sich nicht, wenn man endlich viele Summanden (Folgeglieder) abändert.
         Für das Majoranten-Kriterium reicht also, dass $0\leq a_n \leq b_n$ für fast alle $n\in\N$, damit
         \begin{align*}
             \sum_{n=1}^{\infty} b_n\text{ konvergiert }\impl \sum_{n=1}^{\infty} a_n\text{ konvergiert}
@@ -465,7 +465,7 @@
         Das gleiche gilt analog für das Minoranten-Kriterium
     \end{bemerkung}
 
-    \newpage
+    \vfill
 
     \begin{satz}[Cauchyscher Verdichtungssatz] % Satz 9
         \label{satz:cauchy-verdichtung}
@@ -477,42 +477,36 @@
         \begin{proof}
             \anf{$\Leftarrow$} 1. Schritt. Zu zeigen: $a_n\geq 0\quad\forall n\in\N$.
             \begin{align*}
-                a_n&\geq a_{n+1} \geq a_{n+2} \geq \dots \geq a_{n+l} \fromto 0\text{ für } l\fromto\infty\\
+                a_n\geq a_{n+1} &\geq a_{n+2} \geq \dots \geq a_{n+l} \fromto 0\text{ für } l\fromto\infty\\
                 \impl a_n &\geq 0\quad\forall n\in\N
+                \intertext{2. Schritt}
+                s_n \definedas \sum_{j=0}^{n} a_j \quad&\quad t_n \definedas \sum_{\nu=0}^{n} 2^{\nu} \cdot a_{\pair{2^\nu}}
+                \intertext{Jedes $\overline{n}\in\N$ können wir eindeutig schreiben als $\overline{n}=2^\nu + l$ mit $\nu\in\N_0,~0\leq l < 2^\nu$. Sei $1\leq n< 2^k$ für ein $k\in\N_0$}
             \end{align*}
-            2. Schritt:
+            \newpage
+            \noindent Damit gilt
             \begin{align*}
-                s_n &\definedas \sum_{j=0}^{n} a_j\\
-                t_n &\definedas \sum_{\nu=0}^{n} 2^{\nu} \cdot a_{\pair{2^\nu}}
-                \intertext{Jedes $\overline{n}\in\N$ können wir eindeutig schreiben als $\overline{n}=2^\nu + l$ mit $\nu\in\N_0,~0\leq l < 2^\nu$~\footnotemark.\endgraf \noindent Sei $1\leq n< 2^k$ für ein $k\in\N_0$}
                 s_n &= \sum_{j=0}^{n} a_j = a_0 + \sum_{j=1}^{n} a_j\\
                 &\leq a_0 + \sum_{j=1}^{2^k-1} a_j = a_0 + \sum_{\nu=0}^{k-1} \pair{\sum_{l=0}^{2^\nu - 1} \underbrace{a_{\pair{2^\nu + l}}}_{\leq a_{\pair{2^\nu}}}}\\
                 &\leq a_0 + \sum_{\nu=0}^{k-1} \pair{\sum_{l=0}^{2^\nu-1} a_{\pair{2^\nu}}}\\
-                &= a_0 + \sum_{\nu = 0}^{k-1} 2^{\nu}\cdot a_{\pair{2^\nu}}\\
-                &= a_0 + t_{k-1}\\[10pt]
-                \impl &\forall n < 2^k\text{ gilt }s_n\leq a_0 + t_{k-1}
-            \end{align*}
-            \footnotetext{Es lässt sich zeigen, dass $l$ und $\nu$ in diesem Fall eindeutig sind.}
-            Angenommen
-            \begin{align*}
+                &= a_0 + \sum_{\nu = 0}^{k-1} 2^{\nu}\cdot a_{\pair{2^\nu}} = a_0 + t_{k-1}\\[10pt]
+                \impl \forall n < 2^k\text{ gilt }s_n&\leq a_0 + t_{k-1}
+                \intertext{Angenommen}
                 \sum_{\nu = 0}^{\infty} 2^{\nu} \cdot a_{2^\nu}\text{ konvergent} &\equivalent \lim_{n\fromto\infty} t_n = t\text{ existiert}\\
-                &\impl s_n \leq a_0 + \lim_{k\fromto\infty} t_{k-1} = a_0 + t\quad\forall n\in\N
-                \intertext{Somit ist $a_0 + l$ eine obere Schranke von $(s_n)_n$. Da $s_n\leq s_{n+1} \annot{\impl}{\ref{satz:monoton-konv}} \lim_{n\fromto\infty} s_n$ existiert}
+                \impl s_n \leq a_0 + \lim_{k\fromto\infty} t_{k-1} &= a_0 + t\quad\forall n\in\N
+                \intertext{Somit ist $a_0 + t$ eine obere Schranke von $(s_n)_n$. Da $s_n\leq s_{n+1} \annot{\impl}{\ref{satz:monoton-konv}} \biglim{n\fromto\infty} s_n$ existiert}
                 \impl \sum_{n=0}^{\infty} a_n&\text{ konvergent}
-            \end{align*}
-            \anf{$\impl$} Sei $n\geq 2^k$
-            \begin{align*}
+                \intertext{\anf{$\impl$} Sei $n\geq 2^k$}
                 s_n &= \sum_{j=0}^{n} a_j \geq \sum_{j=0}^{2^k} a_j\\
-                &= \sum_{\nu=0}^{k} \pair{\sum_{l=0}^{2^\nu-1} \underbrace{a_{\pair{2^\nu + l}}}_{\geq a_{\pair{2^\nu+1}}}}\\
-                &\geq \sum_{\nu=0}^{k} \pair{\sum_{l=0}^{2^\nu-1} a_{\pair{2^\nu+1}}} = \sum_{\nu=0}^{k} 2^{\nu}\cdot a_{\pair{2^\nu}} + 1\\
+                &= \sum_{\nu=0}^{k} \pair{\sum_{l=0}^{2^\nu-1} \underbrace{a_{\pair{2^\nu + l}}}_{\geq a_{\pair{2^{\nu+1}}}}}\\
+                &\geq \sum_{\nu=0}^{k} \pair{\sum_{l=0}^{2^\nu-1} a_{\pair{2^{\nu+1}}}} = \sum_{\nu=0}^{k} 2^{\nu}\cdot a_{\pair{2^{\nu + 1}}}\\
                 &= \sum_{\nu = 1}^{k+1} 2^{\nu-1} a_{\pair{2^\nu}} = \frac{1}{2}\sum_{\nu=1}^{k+1} 2^{\nu} a_{\pair{2^\nu}}\\
                 &= \frac{1}{2}\pair{\sum_{\nu=0}^{k+1} 2^\nu a_{\pair{2^\nu}} - a_0}\\
                 &= t_{k+1} - a_0\\
                 \impl t_k \leq t_{k+1} &\leq s_n + a_0\quad\forall 2^k \geq n\\
-                \impl t_k &\leq \lim_{n\fromto\infty} s_n + a_0 = s + a_0 < \infty\\
-                \text{sofern} \sum_{n=0}^{\infty} a_0\text{ konvergiert}
+                \impl t_k \leq \lim_{n\fromto\infty} s_n + a_0 &= s + a_0 < \infty\text{ sofern } \sum_{n=0}^{\infty} a_n\text{ konvergiert}
             \end{align*}
-            Da $t_k < t_{k+1}$ konvergiert, konvergiert auch $\sum_{\nu=0}^{\infty} 2^\nu \cdot a_{2^\nu}$
+            Da $t_k \leq t_{k+1}$ konvergiert, konvergiert auch $\sum_{\nu=0}^{\infty} 2^\nu \cdot a_{2^\nu}$
         \end{proof}
     \end{satz}
 
@@ -520,13 +514,19 @@
         Es sei
         \begin{align*}
             a_n &= \frac{1}{n^\alpha}\\
-            2^{n} \cdot a_{\pair{2^\nu}} &= \frac{2^n}{(2^n)^\alpha} = \frac{2^n}{2^{n\cdot\alpha}}\\
+            2^{n} \cdot a_{\pair{2^n}} &= \frac{2^n}{(2^n)^\alpha} = \frac{2^n}{2^{n\cdot\alpha}}\\
             &= 2^{n-n\cdot\alpha} = 2^{(1-\alpha)\cdot n} = \pair{2^{1-\alpha}}^n = q^n
             \intertext{Damit $q^n$ und damit auch $(a_n)_n$ konvergiert muss wie bereits gezeigt gelten}
             q &\definedas 2^{1-\alpha} < 1 \equivalent 1-\alpha < 0 \equivalent \alpha > 1
-            \intertext{Es sei}
-            a_n &= \frac{1}{n}\\
-            2^n \cdot a_{\pair{2^\nu}} &= 2^n \cdot \frac{1}{2^n} = 1\impl (a_n)_n\text{ konvergiert}
+        \end{align*}
+    \end{beispiel}
+
+    \begin{beispiel}[Cauchyscher Verdichtungssatz bei Divergenz]
+        Es sei $a_n = \frac{1}{n}$
+        \begin{align*}
+            2^n \cdot a_{\pair{2^n}} &= 2^n \cdot \frac{1}{2^n} = 1
+            \intertext{Weil die verdichtete Folge keine Nullfolge ist, gilt}
+            \impl \sum_{n=0}^{\infty} a_n &\text{ divergiert}
         \end{align*}
     \end{beispiel}
 
@@ -557,7 +557,7 @@
             \begin{align*}
                 s_n &\definedas \sum_{j=1}^{n} (-1)^{j+1} \cdot a_j\\
                 s_{2(n+1)} &= \sum_{j=1}^{2n+2} (-1)^{j+1} \cdot a_j\\
-                &= \sum_{j=1}^{2n} (-1)^{j+1} \cdot a_j + (-1)^{(2n+1)+1} \cdot a_{2n+1} + (-1)^{(2n+2)+1} \cdot a_{2n+2}\\
+                &= \pair{\sum_{j=1}^{2n} (-1)^{j+1} \cdot a_j} + (-1)^{(2n+1)+1} \cdot a_{2n+1} + (-1)^{(2n+2)+1} \cdot a_{2n+2}\\
                 &= s_{2n} + \underbrace{a_{2n+1} - a_{2n+2}}_{\geq 0}\\
                 &\geq s_{2n}
                 \intertext{Also ist $(s_{2n})_n$ monoton wachsend}
@@ -578,10 +578,11 @@
                 \impl (s_n)_n&\text{ konvergiert gegen $s=s_g=s_u$}\qedhere
             \end{align*}
         \end{proof}
-        \begin{uebung}
-            Weisen Sie nach, dass eine Folge konvergiert, wenn die Teilfolgen der geraden und der ungeraden Folgeglieder konvergieren und die Differenz eine Nullfolge ist.
-        \end{uebung}
     \end{satz}
+
+    \begin{uebung}
+        Weisen Sie nach, dass eine Folge konvergiert, wenn die Teilfolgen der geraden und der ungeraden Folgeglieder konvergieren und die Differenz eine Nullfolge ist.
+    \end{uebung}
 
     \begin{beispiel}
         \begin{align*}
@@ -607,7 +608,7 @@
                 s_n &\definedas \sum_{j=1}^{n} a_j\\
                 \intertext{$(s_n)_n$ konvergiert nach Satz~\ref{satz:jede-konv-cauchy} genau dann, wenn es eine Cauchy-Folge ist. Das heißt}
                 \forall\varepsilon > 0~\exists N_{\varepsilon}\in\N\colon &\abs{s_{m} - s_{n}} < \varepsilon\quad\forall m> n \geq N_{\varepsilon}\\
-                \abs{s_m - s_n} &= \sum_{j=1}^{m} a_j = \sum_{j=1}^{n} a_j\\
+                \abs{s_m - s_n} &= \sum_{j=1}^{m} a_j - \sum_{j=1}^{n} a_j\\
                 &= \sum_{j=n+1}^{m} a_j\qedhere
             \end{align*}
         \end{proof}
@@ -617,7 +618,7 @@
         \label{korollar:folge-von-reihe-nullfolge}
         Ist die reelle Reihe $\sum_{n=1}^{\infty} a_n$ konvergent, so ist $(a_n)_n$ eine Nullfolge.
         \begin{proof}
-            Nach Satz~\ref{satz:cauchy-kriterium} $\impl$
+            Nach Satz~\ref{satz:cauchy-kriterium} gilt
             \begin{align*}
                 \forall \varepsilon > 0~\exists N_{\varepsilon}\in\N\colon &\abs{\sum_{j=n+1}^{n+p} a_j} < \varepsilon\quad\forall n\geq N_{\varepsilon}, p\in\N\\
                 \intertext{Wähle $p=1$}
@@ -628,6 +629,8 @@
             \end{align*}
         \end{proof}
     \end{korollar}
+
+    \newpage
 
     \subsection{[*] Absolut konvergente Reihen und Umordnungen}
 
@@ -965,7 +968,7 @@
             Behauptung: $\sum_{n=0}^{\infty} p_n = \infty$ und $\sum_{n=0}^{\infty} q_n = \infty$. \\[10pt]
             Angenommen $0\leq \sum_{n=0}^{\infty} p_n < \infty$.
             \begin{align*}
-              \impl \sum_{n=0}^{\infty} \underbrace{\pair{p_n - a_n}}_{=q_n}\text{ konvergiert}\\
+                \impl \sum_{n=0}^{\infty} \underbrace{\pair{p_n - a_n}}_{=q_n}\text{ konvergiert}\\
                 \impl \sum_{n=0}^{\infty} q_n < \infty
                 \intertext{Da $\abs{a_n} = p_n + q_n$}
                 \impl \sum_{n=0}^{\infty} \abs{a_n} = \sum_{n=0}^{\infty} \pair{p_n+q_n} = \sum_{n=0}^{\infty} p_n + \sum_{n=0}^{\infty} q_n < \infty\\
@@ -977,11 +980,11 @@
             Machen induktiv weiter: Gegeben $r_n$ wähle $r_{n+1} =$ kleinste natürliche Zahl $\geq r_n + 1$ mit $p_0 + p_1 + \dots + p_{r_{n+1}} > n + q_0 + q_1 + \dots + q_n$.\\[10pt]
             Umordnung $p_0 - q_0 + p_1 + \dots + p_{r_1} - q_1 + p_{r_{1+1}} + \dots + p_{r_2} - q_2 + p_{r_{2+1}} + \dots + p_{r_3} - q_3 + \dots$.
             \begin{align*}
-              = p_0 - q_0 + \sum_{\vartheta = 1}^{\infty}\pair{ \pair{\sum_{r_{\vartheta - 1} + 1}^{r_{\vartheta}} p_l} - q_{\vartheta}}\\
-              \text{Partialsummen der Umordnung}\\
-              t_{k} = p_0 - q_0 + \sum_{\vartheta = 1}^{k}\pair{ \pair{\sum_{r_{\vartheta - 1} + 1}^{r_{\vartheta}} p_l} - q_{\vartheta}}\\
-              = p_0 + p_1 + \dots + p_{r_k} - \pair{q_0 + q_1 + \dots + q_k} > k \text{ unbeschränkt}\\
-              \impl \pair{t_n}_n \text{ divergiert nach } + \infty \text { im Wiederspruch zur Annahme.}\\
+                = p_0 - q_0 + \sum_{\vartheta = 1}^{\infty}\pair{ \pair{\sum_{r_{\vartheta - 1} + 1}^{r_{\vartheta}} p_l} - q_{\vartheta}}\\
+                \text{Partialsummen der Umordnung}\\
+                t_{k} = p_0 - q_0 + \sum_{\vartheta = 1}^{k}\pair{ \pair{\sum_{r_{\vartheta - 1} + 1}^{r_{\vartheta}} p_l} - q_{\vartheta}}\\
+                = p_0 + p_1 + \dots + p_{r_k} - \pair{q_0 + q_1 + \dots + q_k} > k \text{ unbeschränkt}\\
+                \impl \pair{t_n}_n \text{ divergiert nach } + \infty \text { im Wiederspruch zur Annahme.}\\
             \end{align*}
         \end{proof}
     \end{satz}
@@ -2253,6 +2256,7 @@
 
     \section{Ableitung (engl. Differention)}
     \input{Kapitel/Ableitung}
+
 
     \section{Konvexität}
     \input{Kapitel/Konvexitaet}
