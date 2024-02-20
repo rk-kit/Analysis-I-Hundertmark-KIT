@@ -678,20 +678,24 @@
     \input{Kapitel/Polynome}
 
 
-    \section{[*] Cauchyprodukt und Exponentialfunktionen}
+    \section{Cauchyprodukt und Exponentialfunktionen}
     \thispagestyle{pagenumberonly}
 
-    \subsection{[*] Cauchyprodukt}
-    Frage: Gegeben Reihen $\sum_{n=0}^{\infty} a_n$, $\sum_{n=0}^{\infty} b_n$, beide konvergent. Wie kann man das Produkt $\pair{\sum_{n=0}^{\infty} a_n}\cdot\pair{\sum_{n=0}^{\infty} b_n}$ geschickt berechnen?\\
+    \subsection{Cauchyprodukt}
+    Frage: Gegeben Reihen $\sum_{n=0}^{\infty} a_n$, $\sum_{n=0}^{\infty} b_n$, beide konvergent. Wie kann man das Produkt
     \begin{align*}
-        u &= \sum_{n=0}^{\infty} a_n = \lim_{n\fromto\infty} s_n\quad s_n \definedas \sum_{l=0}^{n} a_l\\
-        v &= \sum_{n=0}^{\infty} b_n = \lim_{n\fromto\infty} t_n \quad t_n \definedas \sum_{j=0}^{n} b_j\\
+        \pair{\sum_{n=0}^{\infty} a_n}\cdot\pair{\sum_{n=0}^{\infty} b_n}
+    \end{align*}
+    geschickt berechnen?
+    \begin{alignat*}{2}
+        u &= \sum_{n=0}^{\infty} a_n = \lim_{n\fromto\infty} s_n\quad &s_n \definedas \sum_{l=0}^{n} a_l\\
+        v &= \sum_{n=0}^{\infty} b_n = \lim_{n\fromto\infty} t_n \quad &t_n \definedas \sum_{j=0}^{n} b_j\\
         \impl u\cdot v &= \lim_{n\fromto\infty} s_n \cdot \lim_{n\fromto\infty} t_n = \lim_{n\fromto\infty} \pair{s_n\cdot t_n}\\[10pt]
         s_n \cdot t_n &= \sum_{l=0}^{n} a_l \cdot \sum_{j=0}^{n} b_j = \sum_{l=0}^{n} \sum_{j=0}^{n} a_l\cdot b_j
-    \end{align*}
+    \end{alignat*}
     Fakt: Indexmenge der Produkte $a_l b_j$ ist $\N_0 \times \N_0$.
     \begin{align*}
-        = \set{(l,j):~l,j\in\N_0} &= \N_0\times\N_0
+        \set{(l,j):~l,j\in\N_0} &= \N_0\times\N_0
     \end{align*}
     Es gibt (viele) Bijektionen $\sigma: \N_0 \fromto \N_0\times\N_0$ zum Beispiel durch Schrägabzählen.\\
     Frage: Ist $\sigma: \N_0 \fromto \N_0\times\N_0$ eine beliebige Bijektion, gilt dann
@@ -709,27 +713,18 @@
             \intertext{Das heißt mit $\sigma(n)=\pair{\sigma_1(n), \sigma_2(n)}$}
             c_n &\definedas a_{\sigma_1(n)}\cdot b_{\sigma_2(n)}\\
             u\cdot v &= \sum_{n=0}^{\infty} c_n
-            \intertext{mit der Reihe $\sum_{n=0}^{\infty} c_n$ auch absolut konvergent}
+            \intertext{mit der Reihe $\sum_{n=0}^{\infty} c_n$ auch absolut konvergent. Ferner gilt}
+            u\cdot v = \underbrace{\sum_{l=0}^{\infty} \pair{\sum_{j=0}^{\infty} a_l\cdot b_j}}_{\text{Vertikal abzählen}} &= \underbrace{\sum_{j=0}^{\infty} \pair{\sum_{l=0}^{\infty} a_l\cdot b_j}}_{\text{Horizontal abzählen}} = \underbrace{\sum_{k=0}^{\infty} \pair{\sum_{\substack{0\leq j\\l+j=k}}^{} a_l\cdot b_j}}_{\text{Schräg abzählen}}
         \end{align*}
-        Ferner gilt
         \begin{align*}
-            u\cdot v &= \sum_{l=0}^{\infty} \pair{\sum_{j=0}^{\infty} a_l\cdot b_j} \tag{Vertikal zuerst}\\
-            &= \sum_{j=0}^{\infty} \pair{\sum_{l=0}^{\infty} a_l\cdot b_j}\tag{Horizontal zuerst}
-        \end{align*}
-        und
-        \begin{align*}
-            u\cdot v &= \sum_{k=0}^{\infty} \pair{\sum_{0\leq j,l~l+j=k}^{} a_l\cdot b_j} \tag{Schräg abzählen}
-        \end{align*}
-
-        \begin{align*}
-            \sum_{k=0}^{L} \abs{a_{\sigma_1(k)}\cdot b_{\sigma_2(k)}} &\leq \sum_{0\leq l\leq M_L~0\leq j\leq M_L}^{} \abs{a_l\cdot b_j} = \pair{\sum_{l=0}^{M_L} \abs{a_l}} \cdot \pair{\sum_{j=0}^{M_L} \abs{b_j}}\\
-            &\leq \pair{\sum_{l=0}^{\infty} \abs{a_l}} \cdot \pair{\sum_{j=0}^{\infty} \abs{b_j}}\\
-            M_L &\definedas \max_{0\leq k\leq L}\pair{\max\pair{\sigma_1(k), \sigma_2(k)}}
+            M_L &\definedas \max_{0\leq k\leq L}\pair{\max\pair{\sigma_1(k), \sigma_2(k)}}\\
+            \sum_{k=0}^{L} \abs{a_{\sigma_1(k)}\cdot b_{\sigma_2(k)}} &\leq \sum_{\substack{0\leq l\leq M_L\\0\leq j\leq M_L}}^{} \abs{a_l\cdot b_j} = \pair{\sum_{l=0}^{M_L} \abs{a_l}} \cdot \pair{\sum_{j=0}^{M_L} \abs{b_j}}\\
+            &\leq \pair{\sum_{l=0}^{\infty} \abs{a_l}} \cdot \pair{\sum_{j=0}^{\infty} \abs{b_j}} < \infty\\
         \end{align*}
         \marginnote{[11. Jan]}
         Insbesondere gilt
         \begin{align*}
-            \pair{\sum_{j=0}^{\infty} a_j}\cdot\pair{\sum_{k=0}^{\infty} b_k} &= \sum_{n=0}^{\infty} \pair{\sum_{j,k\geq 0~j+k=n}^{} a_j\cdot b_k}\\
+            \pair{\sum_{j=0}^{\infty} a_j}\cdot\pair{\sum_{k=0}^{\infty} b_k} &= \sum_{n=0}^{\infty} \pair{\sum_{\substack{j,k\geq 0\\j+k=n}}^{} a_j\cdot b_k}\\
             &= \sum_{n=0}^{\infty} \pair{a_n b_0 + a_{n-1} b_1 + \dots + a_0 b_n}\tag{Cauchy-Produkt}
         \end{align*}
 
@@ -738,19 +733,17 @@
         %%%%%%%%%%%%%%%%%%%%%%%%
 
         \begin{proof}
-            1. Schritt:
+            Schritt 1:
             \begin{align*}
                 k' \definedas \sum_{j=0}^{\infty} \abs{a_j} &< \infty\\
                 k'' \definedas \sum_{k=0}^{\infty} \abs{b_k} &< \infty\\
-                n\in\N_0: \pair{\sum_{j=0}^{n} \abs{a_j}}\cdot\pair{\sum_{k=0}^{n} \abs{b_k}}\\
-                &= \sum_{j=0}^{n} \sum_{k=0}^{n} \abs{a_j}\abs{b_k} \leq k'\cdot k''\quad\forall n\in\N_0
+                \pair{\sum_{j=0}^{n} \abs{a_j}}\cdot\pair{\sum_{k=0}^{n} \abs{b_k}} &= \sum_{j=0}^{n} \sum_{k=0}^{n} \abs{a_j}\abs{b_k} \leq k'\cdot k''\quad\forall n\in\N_0
                 \intertext{Sei}
-                \sigma: \N_0\fromto\N\times\N
+                \sigma: \N_0&\fromto\N\times\N
                 \intertext{eine beliebige Bijektion. Behauptung 1: $ \sum_{n=0}^{\infty} c_n$ ist absolut konvergent, wobei}
                 c_n &\definedas a_{\sigma_1(n)}b_{\sigma_2(n)} = a_j b_k\tag{$j=\sigma_1(n)$, $k=\sigma_2(n)$}
                 \intertext{Sei $L\in\N_0$}
-                M_L^1 &\definedas \max_{n=0,1,\dots, L}\pair{\sigma_1(n)}\\
-                M_L^2 &\definedas \max_{n=0,1,\dots, L}\pair{\sigma_2(n)}\\
+                M_L^1 &\definedas \max_{0\leq n\leq L}\pair{\sigma_1(n)}\quad M_L^2 \definedas \max_{0\leq n\leq L}\pair{\sigma_2(n)}\\
                 M_L &\definedas \max\pair{M_L^1, M_L^2}\\[10pt]
                 \impl \abs{c_n} &\leq \abs{a_j}\abs{b_n} \text{ für } 0\leq j \leq M_L^1, 0\leq n \leq M_L^2\\
                 \sum_{n=0}^{L} \abs{c_n} &\leq \sum_{j=0}^{M_L} \sum_{k=0}^{M_L} \abs{a_j}\abs{b_k}\\
@@ -764,9 +757,7 @@
                 s &= \pair{\sum_{n=0}^{\infty} a_n}\cdot\pair{\sum_{n=0}^{\infty} b_n}
                 \intertext{Sei $\sigma:\N_0\fromto\N_0\times\N_0$ Bijektion durch Quadratabzählen. ($c_0=a_{0} b_0$, $c_1 = a_1 b_0$, $c_2=a_1, b_1$, $c_3=a_0 b_2$)}
                 \text{Partialsumme } \sum_{k=0}^{n} c_k &= \sum_{k=0}^{n} a_{\sigma_1(k)} b_{\sigma_2(k)} \text{ mit $\sigma$ Quadratabzählen }
-                \intertext{Wir betrachten die Folge}
-                \sum_{j=0}^{L} \sum_{k=0}^{L} a_j b_k
-                \intertext{Da $\sum_{j=0}^{L} \sum_{k=0}^{L} a_j b_k$ die Summe der geschlossenen Quadrate ist, ist diese eine Teilfolge von $\sum_{k=0}^{n} c_k$ und beide haben den gleichen Grenzwert.}
+                \intertext{Wir betrachten die Folge $\displaystyle\sum_{j=0}^{L} \sum_{k=0}^{L} a_j b_k$. Da $\displaystyle\sum_{j=0}^{L} \sum_{k=0}^{L} a_j b_k$ die Summe der geschlossenen Quadrate ist, ist diese eine Teilfolge von $\sum_{k=0}^{n} c_k$ und beide haben den gleichen Grenzwert.}
                 \impl s=\sum_{k=0}^{n} c_k &= \lim_{L\fromto\infty} \sum_{j=0}^{L} \sum_{k=0}^{L} a_j b_k = \lim_{L\fromto\infty} \pair{\sum_{j=0}^{L} a_j}\cdot\pair{\sum_{k=0}^{L} b_k}\\
                 &= \pair{\sum_{j=0}^{\infty} a_j}\cdot\pair{\sum_{k=0}^{\infty} b_k}
                 \intertext{Schritt 4: Cauchy-Produkt}
@@ -776,7 +767,8 @@
             \end{align*}
         \end{proof}
     \end{satz}
-    \vspace{0.5cm}
+
+    \newpage
 
     \par\noindent\rule[0.25\baselineskip]{.37\textwidth}{0.4pt}\hfill Einschub: Abzählungen\hfill\rule[0.25\baselineskip]{.37\textwidth}{0.4pt}
 
@@ -806,8 +798,8 @@
             \sum_{l=1}^{k} l &= \frac{k(k+1)}{2}
             \intertext{Schreibe}
             n &= \frac{k(k+1)}{2} + r\quad r\in\set{0,1,2,\dots, k}, k\in\N
-            \intertext{Das ist eine Eindeutige Zerlegung von $\N$. Definiere}
-            \sigma{n} &= \pair{\sigma_1(n), \sigma_2(n)}\\
+            \intertext{Das ist eine eindeutige Zerlegung von $\N$. Definiere}
+            \sigma\of{n} &= \pair{\sigma_1(n), \sigma_2(n)}\\
             &\definedas \pair{k-r, r}\\
             \sigma_1(n) &= k-r\\
             \sigma_2(n) &= r
@@ -820,24 +812,16 @@
 
     \par\noindent\rule{\textwidth}{0.4pt}
 
-    %%%%%%%%%%%%%%%%%%%%%%%%
-    % 16. Januar 2024
-    %%%%%%%%%%%%%%%%%%%%%%%%
-
-    \begin{bemerkung}
-        \marginnote{[16. Jan]}
-        Letzter Schritt: Cauchy-Produkt:
-        \begin{align*}
-            \sum_{n=0}^{\infty} &= \sum_{n=0}^{\infty} \sum_{\nu=0}^{\infty} a_{\nu}\cdot b_{n-\nu}\\
-            &= \pair{\sum_{j=0}^{n} a_j}\cdot\pair{\sum_{k=0}^{\infty} b_k}
-        \end{align*}
-    \end{bemerkung}
-
     \newpage
 
     \subsection{Exponentialfunktionen}\label{subsec:exp}
 
+    %%%%%%%%%%%%%%%%%%%%%%%%
+    % 16. Januar 2024
+    %%%%%%%%%%%%%%%%%%%%%%%%
+
     \begin{definition}[Exponentialfunktion]
+        \marginnote{[16. Jan]}
         Es sei $z\in\C$. Dann gilt
         \begin{align*}
             e^z = \exp(z)\definedas \sum_{n=0}^{\infty} \frac{z^n}{n!}
