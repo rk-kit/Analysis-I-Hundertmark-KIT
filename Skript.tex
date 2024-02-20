@@ -635,7 +635,7 @@
     \subsection{[*] Absolut konvergente Reihen und Umordnungen}
 
     \begin{definition}[Absolute Konvergenz] % Definition 1
-        Eine Reihe$\sum_{n=1}^{\infty} a_n$ heißt absolut konvergent, falls
+        Eine Reihe $\displaystyle\sum_{n=1}^{\infty} a_n$ heißt absolut konvergent, falls
         \begin{align*}
             \sum_{n=1}^{\infty} \abs{a_n}
         \end{align*}
@@ -657,7 +657,7 @@
             \begin{align*}
                 \abs{\sum_{j=n+1}^{m} a_j} \leq \sum_{j=n+1}^{m} \abs{a_j}
             \end{align*}
-            Wir nehmen an, dass $\sum_{n=1}^{\infty} \abs{a_n}$ konvergiert. Das heißt Cauchy ist erfüllt.
+            Wir nehmen an, dass $\displaystyle\sum_{n=1}^{\infty} \abs{a_n}$ konvergiert. Das heißt das Cauchy-Kriterium ist erfüllt.
             \begin{align*}
                 \impl \forall \varepsilon > 0~\exists N_{\varepsilon}\colon \sum_{j=n+1}^{m} \abs{a_j} &< \varepsilon \quad\forall m> n\geq N_{\varepsilon}\\
                 \impl \abs{\sum_{j=n+1}^{m} a_j} &< \varepsilon\quad\forall m>n\geq N_{\varepsilon}\\
@@ -667,6 +667,7 @@
     \end{satz}
 
     \begin{beispiel}[Konvergenz ohne absolute Konvergenz]
+        Die Reihe
         \begin{align*}
             \sum_{n=1}^{\infty} (-1)^{n+1}\cdot \frac{1}{n}
         \end{align*}
@@ -678,7 +679,7 @@
         \begin{align*}
             \sum_{n=1}^{\infty} c_n\quad c_n\geq 0~\forall n\in\N
         \end{align*}
-        ist eine Majorante der Reihe $\sum_{n}^{\infty} a_n$ falls
+        ist eine Majorante der Reihe $\sum_{n=1}^{\infty} a_n$ falls
         \begin{align*}
             \abs{a_n} &\leq c_n\text{ für fast alle }n\in\N
             \intertext{Das heißt}
@@ -710,11 +711,11 @@
             Wir haben $n_0\in\N$
             \begin{align*}
                 \frac{\abs{a_{n+1}}}{\abs{a_n}} &\leq q\quad\forall n\geq n_0\\[10pt]
-                \abs{a_{n+1}} \leq q\cdot\abs{a_n} &\leq q^2 \cdot \abs{a_{n-1}} \leq q^3 \cdot \abs{a_{n-2}}\\[10pt]
-                \leq \dots &\leq q^{p+1} \cdot\abs{a_{n_0}} = q^{n-n_0+1} \cdot\abs{a_{n_0}}\tag{$p\in\N$, $n=n_0+p$}\\[10pt]
+                \abs{a_{n+1}} &\leq q\cdot\abs{a_n} \leq q^2 \cdot \abs{a_{n-1}} \leq q^3 \cdot \abs{a_{n-2}}\\[10pt]
+                &\leq \dots \leq q^{p+1} \cdot\abs{a_{n_0}} = q^{n-n_0+1} \cdot\abs{a_{n_0}}\tag{$p\in\N$, $n=n_0+p$}\\[10pt]
                 &= q^{n+1} \cdot q^{-n_0} \cdot\abs{a_{n_0}}\\[10pt]
                 \impl \abs{a_n} &\leq \underbrace{q^n \cdot K}_{\definedasbackwards c_n}\tag{$K \definedas q^{-n_0} \cdot \abs{a_{n_0}}$}\\
-                \impl \abs{a_{n_0}} &\leq c_n\quad\forall n\geq n_0\\
+                \impl \abs{a_{n}} &\leq c_n\quad\forall n\geq n_0\\
                 \intertext{und}
                 \sum_{n=0}^{\infty} c_n &= \sum_{n=0}^{\infty} K\cdot q^{n} = K\cdot \sum_{n=0}^{\infty} q^{n} < \infty
                 \intertext{Da $0< q < 1$}
@@ -727,25 +728,25 @@
     \begin{bemerkung}[Quotientenkriterium über $\limsup$ und $\liminf$]
         \theoremescape
         \begin{enumerate}[label=(\roman*)]
-            \item Ist $\limsup_{n\fromto\infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} < 1 \equivalent$ Quotientenkriterium
-            \item Ist $\liminf_{n\fromto\infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} > 1\impl \sum_{n=0}^{\infty} a_n$ divergent
-            \item Ist $\limsup_{n\fromto\infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} = 1\impl \text{Keine Aussage über absolute Konvergenz von } \sum_{n=0}^{\infty} a_n$ möglich
+            \item Ist $\displaystyle \limsup_{n\fromto\infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} < 1 \equivalent$ Quotientenkriterium
+            \item Ist $\displaystyle \liminf_{n\fromto\infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} > 1\impl \sum_{n=0}^{\infty} a_n$ divergent
+            \item Ist $\displaystyle \limsup_{n\fromto\infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} = 1\impl \text{Keine Aussage über absolute Konvergenz von } \sum_{n=0}^{\infty} a_n$ möglich
         \end{enumerate}
         \begin{proof}[Beweis (ii).]
             \begin{align*}
                 \text{Ist } \overline{q}\definedas\liminf_{n\fromto\infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} &> 1\\[8pt]
-                \impl \forall \varepsilon > 0~\exists n_0\colon \frac{\abs{a_{n+1}}}{\abs{a_n}} \geq \overline{q} - \varepsilon = \frac{\overline{q}+1}{2} &\:= q > 1\tag{Wähle $\varepsilon=\frac{\overline{q}-1}{2} > 0$}\\[8pt]
-                \impl \frac{\abs{a_n+1}}{\abs{a_n}} &\geq q > 1\quad\forall n\geq n_0
+                \impl \forall \varepsilon > 0~\exists n_0\colon \frac{\abs{a_{n+1}}}{\abs{a_n}} \geq \overline{q} - \varepsilon = \frac{\overline{q}+1}{2} &\definedasbackwards q > 1\tag{Wähle $\varepsilon=\frac{\overline{q}-1}{2} > 0$}\\[8pt]
+                \impl \frac{\abs{a_{n+1}}}{\abs{a_n}} &\geq q > 1\quad\forall n\geq n_0
                 \intertext{Wir wenden ein ähnliches Prinzip wie im vorherigen Beweis an}
                 \impl \abs{a_{n+1}} &\geq q^{n+1} \cdot q^{-n_0}\cdot\abs{a_{n_0}}\\[8pt]
                 \impl \abs{a_n} &\geq q^n\cdot K\tag{$K=q^{-n_0}\cdot\abs{a_{n_0}}$}\\[8pt]
-                \impl \sum a_j\text{ divergiert nach}&\text{ Korollar~\ref{korollar:folge-von-reihe-nullfolge}}\qedhere
+                \impl \sum_{n=0}^{\infty} a_j\text{ divergiert nach}&\text{ Korollar~\ref{korollar:folge-von-reihe-nullfolge}}&&\qedhere
             \end{align*}
         \end{proof}
     \end{bemerkung}
 
     \begin{beispiel}[Divergenz bei nicht-eindeutigem Quotientenkriterium]
-        $a_n \definedas \frac{1}{n}$
+        Es sei $a_n \definedas \frac{1}{n}$
         \begin{align*}
             \frac{\abs{a_{n+1}}}{\abs{a_n}} = \frac{a_{n+1}}{a_n} &= \frac{n}{n+1} = 1 + \frac{1}{n} \fromto 1
             \intertext{Und}
@@ -754,15 +755,15 @@
     \end{beispiel}
 
     \begin{beispiel}[Konvergenz bei nicht-eindeutigem Quotientenkriterium]
-        $a_n \definedas \frac{1}{n^2}$
+        Es sei $a_n \definedas \frac{1}{n^2}$
         \begin{align*}
             \frac{a_{n+1}}{a_n} = \frac{n^2}{(n+1)^2} &= \pair{\frac{n}{n+1}}^2 = \pair{1-\frac{1}{n+1}}^2 \fromto 1
             \intertext{Aber}
             \sum_{n=1}^{\infty} &a_n
             \intertext{konvergiert absolut:}
             \pair{1-\frac{1}{n}}^2 &= 1 - \frac{2}{n+1}+ \pair{\frac{1}{n+1}}^2\\
-            &= 1 - \frac{2}{n+1}\cdot\pair{1-\frac{1}{2(n+1)}}\\
-            &\leq 1- \frac{s-\delta}{n+1}\tag{Für $\delta>0$ und fast alle $n$}
+            &= 1 - \frac{2}{n+1}\cdot\pair{1-\frac{1}{2\cdot(n+1)}}\\
+            &\leq 1- \frac{2-\delta}{n+1}\tag{Für $\delta>0$ und fast alle $n$}
         \end{align*}
     \end{beispiel}
 
@@ -776,29 +777,27 @@
         ist absolut konvergent.
         \begin{align*}
             a_n &= \frac{1}{n!}\\
-            \frac{a_{n+1}}{a_n} &= \frac{n!}{(n+1)!} = \frac{1}{n+1}\fromto 0
+            \frac{a_{n+1}}{a_n} = \frac{n!}{(n+1)!} &= \frac{1}{n+1}\fromto 0
         \end{align*}
         Behauptung:
         \begin{align*}
             e'\definedas\sum_{n=0}^{\infty} \frac{1}{n!} &= e\tag{Eulersche Zahl}
         \end{align*}
         \begin{proof}
-            Wir wenden die bereits gezeigt Formel für $e$ an:
+            Wir wenden die bereits gezeigte Formel $e=\biglim{\ntoinf} \pair{1+\frac{1}{n}}^n$ an:
             \begin{align*}
-                e &= \lim_{\ntoinf} \pair{1+\frac{1}{n}}^n\\[10pt]
                 \pair{1+\frac{1}{n}}^n &= \sum_{k=0}^{n}\binom{n}{k} \pair{\frac{1}{n}}^k\\
-                &= \sum_{k=0}^{n} \frac{n\cdot(n-1)\cdot \dots \cdot (n-k+1)}{k!\cdot n^k}\\
-                &= \sum_{k=0}^{n} \frac{1}{k!} \cdot \underbrace{\prod_{j=0}^{k-1}}_{\leq 1} \frac{n-j}{n}\\
-                &\leq \sum_{k=0}^{n} \frac{1}{k!} \leq \sum_{k=0}^{\infty} \frac{1}{k!}\\[10pt]
+                &= \sum_{k=0}^{n} \frac{n\cdot(n-1)\cdot \ldots \cdot (n-k+1)}{k!\cdot n^k}\\
+                &= \sum_{k=0}^{n} \frac{1}{k!} \cdot \underbrace{\prod_{j=0}^{k-1} \frac{n-j}{n}}_{\leq 1} \leq \sum_{k=0}^{n} \frac{1}{k!}\\
                 \impl e &\leq \sum_{n=0}^{\infty} \frac{1}{n!}
                 \intertext{Noch zu zeigen: $e'\leq e$}
-                \pair{1+\frac{1}{n}}^n &= \sum_{k=0}^{n} \frac{1}{k!} \cdot \prod_{j=0}^{k-1} 1-\frac{j}{n}\\
+                \pair{1+\frac{1}{n}}^n &= \sum_{k=0}^{n} \frac{1}{k!} \cdot \prod_{j=0}^{k-1} \pair{1-\frac{j}{n}}\\
                 &\geq \sum_{k=0}^{m} \frac{1}{k!}\cdot \prod_{j=0}^{k-1} \pair{1-\frac{j}{n}}\tag{$\forall n>m$}\\
                 \intertext{Wir halten $m\in\N$ fest}
                 \impl e &= \lim_{\ntoinf} \pair{1+\frac{1}{n}}^n \geq \lim_{\ntoinf} \sum_{k=0}^{m} \frac{1}{k!}\cdot \prod_{j=0}^{k-1} \pair{1-\frac{j}{n}}\\
                 &= \sum_{k=0}^{m} \frac{1}{k!} \cdot \prod_{j=0}^{k-1} \underbrace{\lim_{\ntoinf} \pair{1-\frac{j}{n}}}_{=1}\\
                 &= \sum_{n=0}^{m} \frac{1}{k!}\tag{$\forall m\in\N$}\\
-                \impl e&\geq \lim_{\ntoinf} \sum_{k=0}^{m} \frac{1}{k!} = \sum_{k=0}^{\infty} \frac{1}{k!} = e\\
+                \impl e\geq \lim_{\ntoinf} \sum_{k=0}^{m} \frac{1}{k!} &= \sum_{k=0}^{\infty} \frac{1}{k!} = e\\
                 \impl e &\leq e' \land e'\leq e\\
                 \impl e &= e'\qedhere
             \end{align*}
@@ -840,7 +839,7 @@
             a_n &\definedas\sum_{n=0}^{\infty} \frac{x^n}{n!}\\
             \frac{\abs{a_{n+1}}}{\abs{a_n}} &= \abs{\frac{x^{n+1}\cdot n!}{(n+1)!\cdot x^n}} = \frac{\abs{x}}{n+1}\fromto 0
         \end{align*}
-        Diese Konvergenz werden wir in einem späteren Kapitel nutzen, um die Exponentialfunktion über
+        Diese Konvergenz werden wir später in Kapitel~\ref{subsec:exp} nutzen, um die Exponentialfunktion über
         \begin{align*}
             \exp(x) &= \sum_{k=0}^{\infty} \frac{x^n}{n!} = e^x
         \end{align*}
@@ -864,15 +863,13 @@
         \end{proof}
     \end{satz}
 
-    \newpage
-
     \begin{satz}[Wurzelkriterium] % Satz 8
         \label{satz:wurzelkriterium}
         Sei $(a_n)_n$ eine reelle Folge.
         \begin{enumerate}[label=(\roman*)]
-            \item Ist $\limsup_{\ntoinf} \sqrt[n]{\abs{a_n}} < 1$, dann konvergiert $\sum_{n=0}^{\infty} a_n$ absolut.
-            \item Ist $\limsup_{\ntoinf} \sqrt[n]{\abs{a_n}} > 1$, dann ist $\sum_{n=0}^{\infty} a_n$ divergent.
-            \item Ist $\limsup_{\ntoinf} \sqrt[n]{\abs{a_n}} = 1$, so ist keine Aussage möglich.
+            \item Ist $\displaystyle \limsup_{\ntoinf} \sqrt[n]{\abs{a_n}} < 1$, dann konvergiert $\sum_{n=0}^{\infty} a_n$ absolut.
+            \item Ist $\displaystyle \limsup_{\ntoinf} \sqrt[n]{\abs{a_n}} > 1$, dann ist $\sum_{n=0}^{\infty} a_n$ divergent.
+            \item Ist $\displaystyle \limsup_{\ntoinf} \sqrt[n]{\abs{a_n}} = 1$, so ist keine Aussage möglich.
         \end{enumerate}
         \begin{proof}[Beweis (iii)]
             \begin{align*}
@@ -887,10 +884,10 @@
             \begin{align*}
                 \hat{q}&\definedas \limsup \sqrt[n]{\abs{a_n}} < 1
                 \intertext{Wähle $\varepsilon\definedas \frac{1-\hat{q}}{2} > 0$}
-                \annot{\impl}{\ref{lemma:limsup-charak}} \sqrt[n]{\abs{a_n}} &< \hat{q} + \varepsilon = \frac{1+\hat{q}}{2}\text{ für fast alle $n$}\\
+                \annot{\impl}{\ref{lemma:limsup-charak}} \sqrt[n]{\abs{a_n}} &< \hat{q} + \varepsilon = \frac{1+\hat{q}}{2}\definedasbackwards q < 1\text{ für fast alle $n$}\\
                 \impl \exists n_{0}\in\N\colon \sqrt[n]{\abs{a_n}} &\leq q\quad\forall n\geq n_0\\
                 \equivalent \abs{a_n} &\leq q^n\quad\forall n\geq n_0\\
-                \intertext{Das heißt $\sum_{n=0}^{\infty} q^n$ ist eine konvergente Majorante für $\sum a_n$}
+                \intertext{Das heißt $\sum_{n=0}^{\infty} q^n$ ist eine konvergente Majorante für $\sum_{n=0}^{\infty} a_n$}
                 \impl \sum_{n=0}^{\infty} a_n&\text{ ist absolut konvergent}\qedhere
             \end{align*}
         \end{proof}
@@ -900,15 +897,13 @@
                 \hat{q}&\definedas \limsup_{\ntoinf} \sqrt[n]{\abs{a_n}} > 1\\
                 \varepsilon &\definedas \frac{\hat{q}-1}{2}>0\\
                 q&\definedas \hat{q}-\varepsilon = \frac{1+\hat{q}}{2} > 1\\
-                \impl \sqrt[n]{\abs{a_n}} &> \hat{q}-\varepsilon \definedasbackwards q > 1\tag{für unendlich viele $n$}\\
+                \impl \sqrt[n]{\abs{a_n}} &> \hat{q}-\varepsilon = q > 1\tag{für unendlich viele $n$}\\
                 \impl \abs{a_n} &> q^n\tag{für unendlich viele $n$}\\
                 \impl (a_n)_n&\text{ keine Nullfolge}
             \end{align*}
-            Somit konvergiert $\sum a_n$ nicht.
+            Somit konvergiert $\sum_{n=0}^{\infty} a_n$ nicht.
         \end{proof}
     \end{satz}
-
-    \newpage
 
     \begin{definition}[Umordnung von Reihen] % Definition 9
         Seien
@@ -935,56 +930,56 @@
     \begin{satz}[Dirichlet 1837] % Satz 11
         Eine Reihe $\sum_{n=0}^{\infty} a_n$, $a_n\in\R$ ist absolut konvergent genau dann, wenn sie unbedingt konvergiert.
         \begin{proof}
-            \anf{$\impl$} Sei
+            \anf{$\impl$} Sei $\sum_{n=0}^{\infty} a_n$ absolut konvergent
             \begin{align*}
-                \sum_{n=0}^{\infty} a_n\text{ absolut konvergent}\\
-                \impl \sum_{n=0}^{\infty} \abs{a_n}\text{ konvergent}\\
-                \equivalent \sum_{n=0}^{\infty} \abs{a_n} < \infty
+                \impl \sum_{n=0}^{\infty} \abs{a_n}\text{ konvergent} &\equivalent \sum_{n=0}^{\infty} \abs{a_n} < \infty
                 \intertext{Wir wenden das Cauchy-Kriterium an}
-                \forall \varepsilon>0~\exists N\in\N\colon \sum_{j=n+1}^{n+p} \abs{a_j} < \varepsilon\quad\forall n\geq N, p\in\N\\
-                \impl \sum_{j=n+1}^{\infty}\abs{a_j} = \lim_{p\fromto\infty} \sum_{j=n+1}^{n+p} \abs{a_j} \leq \varepsilon\quad\forall n\geq N\tag{3}
+                \forall \varepsilon>0~\exists N\in\N\colon \sum_{j=n+1}^{n+p} \abs{a_j} &< \varepsilon\quad\forall n\geq N, p\in\N\\
+                \impl \sum_{j=n+1}^{\infty}\abs{a_j} = \lim_{p\fromto\infty} \sum_{j=n+1}^{n+p} \abs{a_j} &\leq \varepsilon\quad\forall n\geq N\tag{3}
                 \intertext{Wir definieren}
-                s_n \definedas \sum_{j=0}^{n} a_j\quad \sum_{n=0}^{\infty} b_n\text{ Umordnung von } \sum_{n=0}^{\infty} a_n\\
-                b_n = a_{\sigma(n)}\quad \sigma: \N_0 \fromto\N_0\text{ Bijektion}\\
-                t_n \definedas \sum_{j=0}^{n} b_j
+                s_n \definedas \sum_{j=0}^{n} a_j&\quad \sum_{n=0}^{\infty} b_n\text{ Umordnung von } \sum_{n=0}^{\infty} a_n\\
+                b_n &= a_{\sigma(n)}\tag{$\sigma: \N_0 \fromto\N_0$ Bijektion}\\
+                t_n &\definedas \sum_{j=0}^{n} b_j
                 \intertext{Wir wissen $s_n\fromto s$. Zu zeigen: $t_n\fromto s$}
-                \set{1,2,\dots, N} \subseteq \set{\sigma(1), \sigma(2), \dots, \sigma(M)}\tag{Nehmen $M\in\N$}\\
+                \set{1,2,\dots, N} &\subseteq \set{\sigma(1), \sigma(2), \dots, \sigma(M)}\tag{Nehmen $M\in\N$}\\
                 \intertext{Ist dann $n\geq M$, dann ist}
-                \set{a_1, a_2, a_3, \dots, a_N}\subseteq \set{b_1, b_2, \dots b_M} = \set{a_{\sigma(1)}, a_{\sigma(2)}, \dots, a_{\sigma(M)}}\\
-                \impl\text{ Alle Glieder $a_1, \dots, a_n$ in der Summe $s_n$ treten in $t_n = t_1 + t_2 + \dots + t_n$ auf}\\
-                \impl\text{ Diese Terme heben sich in $s_n-t_n$ gegenseitig auf, sofern $n\geq M$ ist}\\
-                \impl \abs{s_n-t_n} \leq \sum_{j\geq N+1, j=\sigma(k) \text{ für ein }k\in\set{1,\dots, M}}^{} \abs{a_j}\\
-                \leq \sum_{j=N+1}^{\infty} \abs{a_j} \leq \varepsilon\\
-                \impl s_n - t_n \fromto 0\text{ für }\ntoinf
+                \set{a_1, a_2, a_3, \dots, a_N}\subseteq \set{b_1, b_2, \dots b_M} &= \set{a_{\sigma(1)}, a_{\sigma(2)}, \dots, a_{\sigma(M)}}
+                \intertext{Also treten alle Glieder $a_1, \dots, a_n$ in der Summe $s_n$ in $t_n = t_1 + t_2 + \dots + t_n$ auf. Diese Terme heben sich in $s_n-t_n$ gegenseitig auf, sofern $n\geq M$ ist}
+                \impl \abs{s_n-t_n} &\leq \sum_{\substack{j\geq N+1\\ j=\sigma(k)}}^{} \abs{a_j}\tag{für ein $k\in\set{1,\dots, M}$}\\
+                &\leq \sum_{j=N+1}^{\infty} \abs{a_j} \leq \varepsilon\\
+                \impl s_n - t_n &\fromto 0\text{ für }\ntoinf
             \end{align*}
             Da $(s_n)_n$ gegen $s$ konvergiert, konvergiert auch $(t_n)_n$ gegen $s$. Somit konvergiert $\sum_{n=0}^{\infty} b_n$ und hat die selbe Summe wie $\sum_{n=0}^{\infty} a_n$.\\[10pt]
             \anf{$\Leftarrow$} Angenommen $\sum_{n=0}^{\infty} a_n$ ist unbedingt konvergent, aber nicht absolut konvergent.
             \begin{align*}
-                p_n &\definedas (a_n)_{+} \definedas \max\pair{0, a_n}\\
-                q_n &\definedas (a_n)_{-} \definedas \max\pair{0,-a_n} = -\min\pair{0,a_n}\\
+                p_n \definedas (a_n)_{+} &\definedas \max\pair{0, a_n}\\
+                q_n \definedas (a_n)_{-} &\definedas \max\pair{0,-a_n} = -\min\pair{0,a_n}\\
                 \impl \abs{a_n} &= p_n + q_n\quad\forall n\in\N_0\\
-                \intertext{Wir haben $\sum_{n=0}^{\infty} a_n$ konvergiert, aber $\sum_{n=0}^{\infty} \abs{a_n} = \infty$}
-            \end{align*}
-            Behauptung: $\sum_{n=0}^{\infty} p_n = \infty$ und $\sum_{n=0}^{\infty} q_n = \infty$. \\[10pt]
-            Angenommen $0\leq \sum_{n=0}^{\infty} p_n < \infty$.
-            \begin{align*}
-                \impl \sum_{n=0}^{\infty} \underbrace{\pair{p_n - a_n}}_{=q_n}\text{ konvergiert}\\
-                \impl \sum_{n=0}^{\infty} q_n < \infty
+                \intertext{Wir haben $\sum_{n=0}^{\infty} a_n$ konvergiert, aber $\sum_{n=0}^{\infty} \abs{a_n} = \infty$. Behauptung:}
+                \sum_{n=0}^{\infty} p_n = \infty &\text{ und } \sum_{n=0}^{\infty} q_n = \infty
+                \intertext{Angenommen $0\leq \sum_{n=0}^{\infty} p_n < \infty$.}
+                \impl \sum_{n=0}^{\infty} \overbrace{\pair{p_n - a_n}}^{=q_n}&\text{ konvergiert}\\
+                \impl \sum_{n=0}^{\infty} q_n &< \infty
                 \intertext{Da $\abs{a_n} = p_n + q_n$}
-                \impl \sum_{n=0}^{\infty} \abs{a_n} = \sum_{n=0}^{\infty} \pair{p_n+q_n} = \sum_{n=0}^{\infty} p_n + \sum_{n=0}^{\infty} q_n < \infty\\
-                \text{Widerspruch zu } \sum_{n=0}^{\infty} a_n\text{ ist nicht absolut konvergent}
+                \impl \sum_{n=0}^{\infty} \abs{a_n} = \sum_{n=0}^{\infty} \pair{p_n+q_n} &= \sum_{n=0}^{\infty} p_n + \sum_{n=0}^{\infty} q_n < \infty
             \end{align*}
-            Jetzt setze $r_0=0$ und bestimme induktiv $(r_n)_n~r_n < r_{n+1}$ mit $p_0 + p_1 + \dots + p_{r_n} > n + q_0 + q_1 + \dots + q_n~\forall n\in\N$.
-            $r_q\definedas$ kleinste natürliche Zahl mit $p_0 + p_q + \dots + p_{r_1} > 1 + q_0 + q_1$.\\
-            $r_2\definedas$ kleinste natürliche Zahl $\geq r_1 + 1$: $p_0 + \dots + p_{r_2} > 2 + q_0 + q_1 + q_2$.\\
-            Machen induktiv weiter: Gegeben $r_n$ wähle $r_{n+1} =$ kleinste natürliche Zahl $\geq r_n + 1$ mit $p_0 + p_1 + \dots + p_{r_{n+1}} > n + q_0 + q_1 + \dots + q_n$.\\[10pt]
-            Umordnung $p_0 - q_0 + p_1 + \dots + p_{r_1} - q_1 + p_{r_{1+1}} + \dots + p_{r_2} - q_2 + p_{r_{2+1}} + \dots + p_{r_3} - q_3 + \dots$.
+            Widerspruch zu $\sum_{n=0}^{\infty} a_n$ ist nicht absolut konvergent.\qedhere\newpage
+            \noindent \textit{Konstruktiver Beweis für Rückrichtung}. Setze $\sigma_0=0$ und bestimme induktiv $(\sigma_n)_n,~\sigma_n < \sigma_{n+1}$ mit
             \begin{align*}
-                = p_0 - q_0 + \sum_{\vartheta = 1}^{\infty}\pair{ \pair{\sum_{r_{\vartheta - 1} + 1}^{r_{\vartheta}} p_l} - q_{\vartheta}}\\
-                \text{Partialsummen der Umordnung}\\
-                t_{k} = p_0 - q_0 + \sum_{\vartheta = 1}^{k}\pair{ \pair{\sum_{r_{\vartheta - 1} + 1}^{r_{\vartheta}} p_l} - q_{\vartheta}}\\
-                = p_0 + p_1 + \dots + p_{r_k} - \pair{q_0 + q_1 + \dots + q_k} > k \text{ unbeschränkt}\\
-                \impl \pair{t_n}_n \text{ divergiert nach } + \infty \text { im Wiederspruch zur Annahme.}\\
+                p_0 + p_1 + \dots + p_{\sigma_n} > n + q_0 + q_1 + \dots + q_n~\forall n\in\N
+            \end{align*}
+            $\sigma_1\definedas$ kleinste natürliche Zahl mit $p_0 + p_1 + p_{\sigma_1} > 1 + q_0 + q_1$.\\
+            $\sigma_2\definedas$ kleinste natürliche Zahl $\geq \sigma_1 + 1\colon p_0 + \dots + p_{\sigma_2} > 2 + q_0 + q_1 + q_2$.\\
+            Machen induktiv weiter. Gegeben $\sigma_n$ wähle $\sigma_{n+1} =$ kleinste natürliche Zahl $\geq \sigma_n + 1$ mit
+            \begin{align*}
+                p_0 + p_1 + \dots + p_{\sigma_{n+1}} > n + q_0 + q_1 + \dots + q_{n+1}
+            \end{align*}
+            Umordnung $p_0 - q_0 + p_1 + \dots + p_{\sigma_1} - q_1 + p_{\sigma_{1+1}} + \dots + p_{\sigma_2} - q_2 + p_{\sigma_{2+1}} + \dots + p_{\sigma_3} - q_3 + \dots$.
+            \begin{align*}
+                &= p_0 - q_0 + \sum_{\vartheta = 1}^{\infty}\pair{ \pair{\sum_{l=\sigma_{\vartheta - 1} + 1}^{\sigma_{\vartheta}} p_l} - q_{\vartheta}}\\
+                t_{k} &= p_0 - q_0 + \sum_{\vartheta = 1}^{k}\pair{ \pair{\sum_{l=\sigma_{\vartheta - 1} + 1}^{\sigma_{\vartheta}} p_l} - q_{\vartheta}}\tag{Partialsummen der Umordnung}\\
+                &= p_0 + p_1 + \dots + p_{\sigma_k} - \pair{q_0 + q_1 + \dots + q_k} > k \text{ unbeschränkt}\\
+                \impl &\pair{t_n}_n \text{ divergiert nach } +\infty \text { im Widerspruch zur Annahme.}\\
             \end{align*}
         \end{proof}
     \end{satz}
@@ -995,12 +990,11 @@
 
     \begin{satz}[Nach Riemann 1854]
         \marginnote{[14. Dez]}
-        Ist $\sum_n a_n$ konvergent, aber nicht absolut konvergent. Dann gibt es zu jedem $c\in\R$ eine Umordnung $\sum_{n}^{} b_n$ von $\sum_{n}^{} a_n$ so, dass $\sum_n b_n$ konvergiert und den Wert $c$ hat ($\sum_{n} b_n = c$).
+        Ist $\sum a_n$ konvergent, aber nicht absolut konvergent. Dann gibt es zu jedem $c\in\R$ eine Umordnung $\sum_{}^{} b_n$ von $\sum_{}^{} a_n$ so, dass $\sum b_n$ konvergiert und den Wert $c$ hat ($\sum b_n = c$).
 
         \begin{proof}
         (Später)
         \end{proof}
-        % Skizze zu Riemann-Satz
     \end{satz}
 
     \newpage
@@ -1615,7 +1609,7 @@
 
     \newpage
 
-    \subsection{Exponentialfunktionen}
+    \subsection{Exponentialfunktionen}\label{subsec:exp}
 
     \begin{definition}[Exponentialfunktion]
         Es sei $z\in\C$. Dann gilt
