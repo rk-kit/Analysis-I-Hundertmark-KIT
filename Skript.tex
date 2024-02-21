@@ -226,7 +226,7 @@
     \input{Kapitel/Reihen}
 
 
-    \section{[*] $\R^d$, Konvergenz im $\R^d$, die komplexen Zahlen $\C$ und der Raum $\C^d$}
+    \section{$\R^d$, Konvergenz im $\R^d$, die komplexen Zahlen $\C$ und der Raum $\C^d$}
 
     \subsection{Der Raum $\R^d$ und Normen}
 
@@ -609,118 +609,129 @@
     % 21. Dezember 2023
     %%%%%%%%%%%%%%%%%%%%%%%%
 
-    \subsection{[*] Der Raum $\C^d$}
-
-    \marginnote{[21. Dez]}
-    Wie $\R^d$ wollen wir nun auch $\C^d$ definieren.
+    \subsection{Der Raum $\C^d$}
 
     \begin{definition}[Der Raum $\C^d$]
+        \marginnote{[21. Dez]}
+        Wie $\R^d$ wollen wir nun auch $\C^d$ definieren.
         \begin{align*}
-            \C^d &\definedas \set{\pair{z_1, \dots, z_d} ~\middle | ~ z_j \in\C}\\
-            u &= \pair{u_1, \dots, u_d} \in\R^d\\
-            w &= \pair{w_1, \dots, w_d} \in\R^d\\
-            u+w &= \pair{u_1+w_1,\dots,u_d+w_d}\\
-            \lambda\cdot u &= \pair{\lambda u_1,\dots,\lambda u_d}\tag{$\lambda\in\C$}
+            \C^d &\definedas \set{\pair{z_1, \dots, z_d} ~\middle | ~ z_j \in\C}
         \end{align*}
+        Es sei $u=\pair{u_1, \dots, u_d}\in\C^d$, $w=\pair{w_q,\dots, w_d}\in\C^d$, $\lambda\in\C$. Wir definieren
+        \begin{enumerate}[label=(\roman*)]
+            \item Addition: $u+w = \pair{u_1+w_1,\dots,u_d+w_d}$
+            \item Skalarmultiplikation: $\lambda\cdot u = \pair{\lambda u_1,\dots,\lambda u_d}$
+        \end{enumerate}
         $\C^d$ ist ein komplexer Vektorraum.
-
         \begin{align*}
-            \abs{u} &\definedas \sqrt{\pair{\sum_{j=1}^{d} \abs{u_j}^2}}\tag{Euklidische Länge}\\
+            \norm{u} &\definedas \sqrt{\pair{\sum_{j=1}^{d} \abs{u_j}^2}}\tag{Euklidische Länge}\\
             u &= \pair{u_1, \dots, u_d}\\
             &= \pair{x_1+y_1i, x_2 + y_2 i,\dots, x_d + y_d i}\\
-            &= \pair{x_1, x_2,\dots,x_d} + \pair{y_1,y_2,\dots,y_d}i\\
-            ???
+            &= \pair{x_1, x_2,\dots,x_d} + \pair{y_1,y_2,\dots,y_d}\cdot i = x + y\cdot i\tag{$x,y\in\R^d$}
         \end{align*}
     \end{definition}
 
-    \begin{definition}[]
+    \begin{definition}[Komplexe Konjugation im $\C^d$]
+        Für $u\in\C^d$ und $u=x+i\cdot y$ definieren wir
         \begin{align*}
-            \overline{u} &\definedas x - yi\quad (u=x+iy, x,y\in\R^d)\\
-            \C^d &= \R^{2d}\\[10pt]
-            u &= x + yi\\
-            x &= \frac{1}{2}\pair{u+\overline{u}}\quad y = \frac{1}{2i}\pair{u-\overline{u}}
+            \overline{u} &\definedas x - i\cdot y\tag{$x,y\in\R^d$}
+            \intertext{Damit gilt}
+            x &= \frac{1}{2}\pair{u+\overline{u}}\tag{Realteil}\\
+            y &= \frac{1}{2i}\pair{u-\overline{u}}\tag{Imaginärteil}
         \end{align*}
+        $\C^d \cong \R^{2d}$
     \end{definition}
 
-    Zu ?? im $\R^d$
-    \begin{align*}
-        \norm{x}_2 &= \sqrt{\pair{\sum_{j=1}^{d} \abs{x_j}^2}} \geq c\\
-        \norm{\lambda x}_2 &= \sqrt{\pair{\sum_{j=1}^{d} \abs{\lambda x_j}^2}} = \abs{\lambda}\norm{x}_2
-    \end{align*}
+    \subsection[Skalarprodukte]{Skalarprodukte\protect\footnotemark}
+    \footnotetext{Dieses Unterkapitel weicht in der Reihenfolge und in der Definition des Skalarprodukts leicht von der VL - in der nur die Eigenschaften (i) bis (iv) vorgestellt wurden - ab}
 
-    Wann gilt die Dreiecksungleichung?\\
-    Auf $\R^d$ gibt es ein Skalarprodukt.\\
-    \begin{align*}
-        \sprod{x,y} &\definedas \sum_{j=1}^{d} x_j\cdot y_j\tag{$x,y\in\R^d$}\\
-        \impl \sprod{x,x} &\definedas \sum_{j=1}^{d} \pair{x_j}^2 = \norm{x}^2_2\\
-        \norm{x}_2 &= \sqrt {\sprod{x,x}}
-        \intertext{Auch}
-        \sprod{x_1+x_2,y} &= \sprod{x_1,y} + \sprod{x_2,y}\\
-        \sprod{x,y_1+y_2} &= \sprod{x,y_1} + \sprod{x,y_2}\\
-        \sprod{\alpha x,y} &= \alpha \sprod{x,y}\\
-        \sprod{x,\alpha y} &= \alpha \sprod{x,y}
-    \end{align*}
+    Zurück im $\R^d$. Wann gilt die Dreiecksungleichung? Auf $\R^d$ gibt es ein Skalarprodukt.
+
+    \begin{definition}[Skalarprodukt]
+        Ein Skalarprodukt $\sprod{\cdot, \cdot}: \R^d \times \R^d \fromto \R$ hat folgende Eigenschaften:
+        \begin{enumerate}[label=(\roman*)]
+            \item $\sprod{x_1+x_2,y} = \sprod{x_1,y} + \sprod{x_2,y}$
+            \item $\sprod{x,y_1+y_2} = \sprod{x,y_1} + \sprod{x,y_2}$
+            \item $\sprod{\alpha x,y} = \alpha \sprod{x,y}$
+            \item $\sprod{x,\alpha y} = \alpha \sprod{x,y}$
+            \item $\sprod{x,y} = \sprod{y,x}$
+            \item $\sprod{x,x} \geq 0$
+            \item $\sprod{x,x} = 0 \equivalent x = 0$
+        \end{enumerate}
+    \end{definition}
+
+    \begin{beispiel}
+        Wir können zum Beispiel folgendes Skalarprodukt in $\R^d$ definieren
+        \begin{align*}
+            \sprod{x,y} &\definedas \sum_{j=1}^{d} x_j\cdot y_j\tag{$x,y\in\R^d$}\\
+            \impl \sprod{x,x} &\definedas \sum_{j=1}^{d} \pair{x_j}^2 = \norm{x}^2_2 \geq 0\\
+            \norm{x}_2 &= \sqrt {\sprod{x,x}}
+        \end{align*}
+    \end{beispiel}
 
     \begin{uebung}
-        Rechnen Sie die vorherigen Eigenschaften des Skalarprodukts nach.
+        Rechnen Sie die Eigenschaften des definierten Skalarprodukts nach.
     \end{uebung}
 
-    \begin{align*}
-        \norm{x}_2^2 &= \sprod{x,x}\quad\forall x\in\R^d
-        \intertext{Es sei $t\in\R$}
-        \norm{x+ty}^2_2 &= \sprod{x+ty, x+ty}\\
-        &= \sprod{x,x+ty} + \sprod{ty,x+ty}\\
-        &= \sprod{x,x} + \sprod{x+ty} + \sprod{ty,x} + \sprod{ty+ty}\\
-        &= t\sprod{x,y}\\
-        &= \sprod{x,x} + 2t\sprod{x,y} + t^2\sprod{y,y}
-        \intertext{Genauso}
-        \norm{x-ty}_2^2 &= \sprod{x-ty, x-ty}\\
-        &= \sprod{x,x} - 2t\sprod{x,y} + t^2\sprod{y,y}\\
-        &= \norm{x}_2^2 t^2 - 2\sprod{x,y}t + \norm{x}_2^2
-        \intertext{Sei $y\neq 0$}
-        &= \norm{x}_2^2 \cdot\pair{t^2 - \frac{2\sprod{x,y}}{\norm{y}^2} + \pair{\frac{\sprod{x,y}}{\norm{y}^2}}^2 - \pair{\frac{\sprod{x,y}}{\norm{y}^2}}^2} + \norm{x}_2^2\\
-        \intertext{Wir erhalten im Sinne eines Polynoms $a = \norm{y}_2^2\quad b= \sprod{x,y}\quad c= \norm{x}_2^2$}
-        &= a\cdot\pair{t^2 - \frac{2b}{a}t + \pair{\frac{b}{a}}^2} + c\\
-        &= a\cdot\pair{t-b}^2 - \frac{b^2}{a}+c
-        \intertext{Da wir am Anfang der Rechnung eine Norm verwendet haben, muss der Ausdruck nicht-negativ sein}
-        a\cdot\pair{t-b}^2 - \frac{b^2}{a}+c &\geq 0\quad\forall t\in\R
-        \intertext{Das heißt wir müssen haben}
-        \frac{b^2}{a} + c &\geq 0\\
-        \equivalent b^2 \leq ac\\
-        \equivalent \sprod{x,y}^2 &\leq \norm{y}_2^2 \cdot\norm{x}_2^2\\
-        \equivalent \abs{\sprod{x,y}} &\leq \norm{y}_2 \norm{x}_2\tag{Cauchy-Schwarzer-Ungl.}
-    \end{align*}
-
-    Und ist $y \neq 0$ und gilt $\abs{\prod{x+y}} = \norm{x}_2 \norm{y}_2$. Dann sind $x$ und $y$ linear abhängig. Das heißt
-    \begin{align*}
-        \exists t\in\R \text{ mit } x = ty
-    \end{align*}
-    \begin{proof}
-        Dann gilt
+    \begin{beobachtung}[Cauchy-Schwarzer-Ungleichung]
         \begin{align*}
-            b^2 &= ac\quad \frac{b^2}{a} ac = 0\\
-            \impl 0 &\leq \norm{x-ty}^2_2 = a\abs{t-b}^2\\
-            &= 0 \text{ für $t=b$ }\\
-            \impl \norm{x-ty}_2 &= 0 \text{ für } t=b\\
-            \impl x-ty &= 0\\
-            \impl x&= ty\qedhere
+            \norm{x}_2^2 &= \sprod{x,x}\quad\forall x\in\R^d
+            \intertext{Es sei $t\in\R$}
+            \norm{x+ty}^2_2 &= \sprod{x+ty, x+ty}\\
+            &= \sprod{x,x+ty} + \sprod{ty,x+ty}\\
+            &= \sprod{x,x} + \sprod{x+ty} + \sprod{ty,x} + \sprod{ty+ty}\\
+            &= \sprod{x,x} + 2t\sprod{x,y} + t^2\sprod{y,y}
+            \intertext{Genauso}
+            \norm{x-ty}_2^2 &= \sprod{x-ty, x-ty}\\
+            &= \sprod{x,x} - 2t\sprod{x,y} + t^2\sprod{y,y}\\
+            &= \norm{y}_2^2 t^2 - 2\sprod{x,y}t + \norm{x}_2^2
+            \intertext{Sei $y\neq 0$}
+            &= \norm{y}_2^2 \cdot\pair{t^2 - \frac{2\sprod{x,y}}{\norm{y}_2^2} + \pair{\frac{\sprod{x,y}}{\norm{y}_2^2}}^2 - \pair{\frac{\sprod{x,y}}{\norm{y}_2^2}}^2} + \norm{x}_2^2\\
+            \intertext{Wir setzen $a = \norm{y}_2^2$, $b= \sprod{x,y}$, $c= \norm{x}_2^2$}
+            &= a\cdot\Bigg(\underbrace{t^2 - \frac{2b}{a}\cdot t + \pair{\frac{b}{a}}^2}_{=\pair{t-\frac{b}{a}}^2} - \pair{\frac{b}{a}}^2\Bigg) + c\\
+            &= a\cdot\pair{t-b}^2 - \frac{b^2}{a}+c
         \end{align*}
-    \end{proof}
-    Erkentnis: Aus Cauchy-Schwarzer folgt die Dreiecksungleichung für die Euklidische Norm.
+        Da wir am Anfang der Rechnung eine Norm verwendet haben, muss der Ausdruck nicht-negativ sein
+        \begin{align*}
+            a\cdot\pair{t-b}^2 - \frac{b^2}{a}+c &\geq 0\quad\forall t\in\R
+            \intertext{Das heißt wir müssen haben}
+            -\frac{b^2}{a} + c &\geq 0\\
+            \equivalent b^2 &\leq ac\\
+            \equivalent \sprod{x,y}^2 &\leq \norm{y}_2^2 \cdot\norm{x}_2^2\\
+            \equivalent \abs{\sprod{x,y}} &\leq \norm{y}_2\cdot \norm{x}_2\tag{Cauchy-Schwarzer-Ungl.}
+        \end{align*}
+    \end{beobachtung}
 
-    \begin{align*}
-        \norm{x+y}_2^2 &= \sprod{x+y,x+y}\\
-        &= \sprod{x,x+y}+ \sprod{y,x+y}\\
-        &= \sprod{x,x} + 2 \sprod{x,y} + \sprod{y,y}\\
-        &= \norm{x}_2^2 + 2\sprod{x,y} + \norm{y}_2^2\\
-        &\leq \norm{x}_2^2 + 2\abs{\sprod{x,y}} + \norm{y}_2^2\\
-        &\leq \norm{x}_2^2 + 2\norm{x}_2 \norm{y}_2 + \norm{y}^2\\
-        &= \pair{\norm{x}_2 + \norm{y}_2}^2\\
-        \impl \norm{x+y}_2 &\leq \norm{x}_2 + \norm{y}_2\tag{Dreiecksungleichung für Eukl. Norm}
-    \end{align*}
+    \begin{bemerkung}
+        Und ist $y \neq 0$ und gilt $\abs{\sprod{x+y}} = \norm{x}_2\cdot \norm{y}_2$. Dann sind $x$ und $y$ linear abhängig. Das heißt
+        \begin{align*}
+            \exists t\in\R \text{ mit } x = ty
+        \end{align*}
+        \begin{proof}
+            Dann gilt $b^2 = ac$
+            \begin{align*}
+                \impl -\frac{b^2}{a} + c &= 0\\
+                \impl 0 \leq \norm{x-ty}^2_2 &= a\cdot\pair{t-\frac{b}{a}}^2 = 0 \text{ für } t=\frac{b}{a}\\
+                \impl x-ty &= 0\\
+                \impl x&= ty\qedhere
+            \end{align*}
+        \end{proof}
+    \end{bemerkung}
 
-    \noindent Frage: Was passiert, wenn $\norm{x+y}_2 = \norm{x}_2 + \norm{y}_2$?\\
-    (Später)
+    \begin{bemerkung}
+        Erkenntnis: Aus Cauchy-Schwarzer folgt die Dreiecksungleichung für die Euklidische Norm.
+        \begin{align*}
+            \norm{x+y}_2^2 &= \sprod{x+y,x+y}\\
+            &= \sprod{x,x+y}+ \sprod{y,x+y}\\
+            &= \sprod{x,x} + 2 \sprod{x,y} + \sprod{y,y}\\
+            &= \norm{x}_2^2 + 2\sprod{x,y} + \norm{y}_2^2\\
+            &\leq \norm{x}_2^2 + 2\abs{\sprod{x,y}} + \norm{y}_2^2\\
+            &\leq \norm{x}_2^2 + 2\norm{x}_2 \norm{y}_2 + \norm{y}^2\\
+            &= \pair{\norm{x}_2 + \norm{y}_2}^2\\
+            \impl \norm{x+y}_2 &\leq \norm{x}_2 + \norm{y}_2\tag{Dreiecksungleichung für Eukl. Norm}
+        \end{align*}
+        Frage: Was passiert, wenn $\norm{x+y}_2 = \norm{x}_2 + \norm{y}_2$? (Später)
+    \end{bemerkung}
 
     \newpage
 
