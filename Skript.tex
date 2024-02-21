@@ -507,7 +507,7 @@
         Ist eine Reihe $\sum_{n=1}^{\infty} a_n$ in $\R^d$ absolut konvergent, so konvergieren alle Umordnungen gegen den selben Wert. Und es gilt die Umkehrung! (Satz von Dirichlet in $\R^d$)
     \end{bemerkung}
 
-    \subsection{[*] Die Komplexen Zahlen $\C$}
+    \subsection{Die Komplexen Zahlen $\C$}
 
     Was sind die komplexen Zahlen?\\
     $x^2+1$ ist nie Null $\forall x\in\R$. Wir definieren eine Zahl $i$ mit $i^2=-1$ und schreiben $x+iy$ mit $x,y\in\R$. Dann ergeben sich folgende Rechenregeln:
@@ -529,9 +529,9 @@
             &\definedas \pair{x_1 x_2 - y_1 y_2,~x_1 y_2 + x_2 y_1}
             \intertext{Wir definieren den Betrag}
             \abs{z} &\definedas\text{ Länge des Vektors } (x,y) = \sqrt {x^2+y^2}\\
-            \intertext{Wir nennen}
-            x&: \text{ Realteil von } z\\
-            y&: \text{ Imaginärteil von } z\\
+            \intertext{Wir nennen $x$ den Realteil von $z$ und $y$ den Imaginärteil von $z$ und schreiben}
+            \Re\of{z} &= x\\
+            \Im\of{z} &= y
         \end{align*}
     \end{definition}
 
@@ -540,12 +540,19 @@
         \begin{figure}[H]
             \centering
             \begin{tikzpicture}
-                \draw[->] (-3,0) -- (3,0);
-                \draw[->] (0,-3) -- (0,3);
+                \draw[->] (-3,0) -- (3,0) node[below] {$\Re$};
+                \draw[->] (0,-3) -- (0,3) node[right] {$\Im$};
+                \draw (0.5,0.1) -- (0.5,-0.1) node[below] {$1$};
+                \draw (0.1,0.5) -- (-0.1,0.5) node[left] {$1$};
+                \draw[->, blue] (0,0) -- (1,1) node[right, black] {$\pair{2+2i}$};
+                \draw[->, blue] (0,0) -- (-2,0) node[below, black] {$\pair{-4+0i}$};
+                \draw[->, blue] (0,0) -- (-1,-2.5) node[below, black] {$\pair{-1-5i}$};
             \end{tikzpicture}
-            \caption{}
+            \caption{Komplexe Zahlen in der Euklidischen Ebene}
         \end{figure}
     \end{visualisierung}
+
+    \newpage
 
     \begin{bemerkung}
         Man rechnet einfach nach, dass Multiplikation und Addition die Assoziativität, Kommutativität und Distributivität erfüllen. (Übung)\\
@@ -554,36 +561,47 @@
         (1,0)
             \cdot (1,0) &= (1,0)\\
             z\cdot (1,0) &= (x,y)\cdot(1,0)= (x,y) = z
+            \intertext{Wir definieren $e_1\definedas \pair{1,0}$, $e_2\definedas\pair{0,1}$ und erhalten}
+            \pair{x,y} &= x\cdot e_1 + y\cdot e_{2}
+            \intertext{Außerdem gilt}
+            \pair{e_1}^2 &= e_1\\
+            \pair{e_2}^2 &= -e_2
+            \intertext{Zur Vereinfachung schreiben wir $1$ für $e_1$ und $i$ für $e_2$}
+            z &= (x,y) = x\cdot e_1 + y\cdot e_2\\
+            &= x\cdot 1 + y\cdot i\\
+            &= x + y\cdot i
         \end{align*}
     \end{bemerkung}
 
-    \begin{align*}
-    (1,0)
-        \cdot (1,0) &= (1,0)\\
-        (0,1) \cdot (0,1) &= (0-1,0) = -(1,0)\\
-        z\cdot (1,0) &= (x,y)\cdot(1,0)= (x,y) = z
-        \intertext{in $\R^2$}
-        (x,y) &= x\cdot e_1 + y \cdot e_2\tag{$e_1 = (1,0)$, $e_2 = (0,1)$}\\
-        (e_1)^2 &= e_1\quad (e_2)^2 = -e_1
-    \end{align*}
-    Wir schreiben $1$ für $e_1$ und $i$ für $e_2$.
-    \begin{align*}
-        z &= (x,y) = x\cdot e_1 + y\cdot e_2\\
-        &= x\cdot 1 + y\cdot i\\
-        &= x + y\cdot i
-    \end{align*}
-    $\C = \R^2$ mit obiger Multiplikation und Addition. Wir identifizieren $\R$ mit $\R\times\set{0}$ als Teilmenge von $\C$.\\
-    Was ist das Inverse von $z=x+y\cdot i$?
+    \begin{bemerkung}
+        $\C = \R^2$ mit obiger Multiplikation und Addition. Wir identifizieren $\R$ mit $\R\times\set{0}$ als Teilmenge von $\C$.
+    \end{bemerkung}
+
     \begin{definition}[Komplexe Konjugation]
-        $\overline{z} \definedas \overline{x+yi} \definedas x-yi$
+        Was ist das Inverse von $z=x+y\cdot i$? Wir definieren
+        \begin{align*}
+            \overline{z} &\definedas \overline{x+yi} \definedas x-yi
+            \intertext{Damit gilt}
+            z\cdot\overline{z} &= (x+yi) \cdot (x-yi)\\
+            &= (x^2-(yi)^2) = x^2+y^2 = \abs{z}^2\\
+            \impl \abs{z} &= \sqrt{z\cdot\overline{z}}\\[10pt]
+            \frac{1}{z} &= \frac{\overline{z}}{z\cdot\overline{z}} = \frac{z}{\abs{z}^2} = \frac{x-yi}{x^2+y^2} = \frac{x}{x^2+y^2} - \frac{y}{x^2+y^2}\cdot i
+        \end{align*}
     \end{definition}
 
-    \begin{align*}
-        z\cdot\overline{z} &= (x+yi) \cdot (x-yi)\\
-        &= (x^2-(yi)^2) = x^2+y^2 = \abs{z}^2\\
-        \impl \abs{z} &= \sqrt{z\cdot\overline{z}}\\
-        \frac{1}{z} &= \frac{\overline{z}}{z\cdot\overline{z}} = \frac{z}{\abs{z}^2} = \frac{x-yi}{x^2+y^2} = \frac{x}{x^2+y^2} - \frac{y}{x^2+y^2}\cdot i
-    \end{align*}
+    \begin{visualisierung}[Komplexe Konjugation]
+        \theoremescape
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \draw[->] (-3,0) -- (3,0) node[below] {$\Re$};
+                \draw[->] (0,-3) -- (0,3) node[right] {$\Im$};
+                \draw[->, blue] (0,0) -- (1,1.5) node[right, black] {$z_1$};
+                \draw[->, blue] (0,0) -- (1,-1.5) node[right, black] {$\overline{z_1}$};
+            \end{tikzpicture}
+            \caption{Komplexe Konjugation in der Euklidischen Ebene}
+        \end{figure}
+    \end{visualisierung}
 
     \newpage
 
@@ -591,9 +609,10 @@
     % 21. Dezember 2023
     %%%%%%%%%%%%%%%%%%%%%%%%
 
-    \marginnote{[21. Dez]}
+    \subsection{[*] Der Raum $\C^d$}
 
-    Wie $\R^d$ wollen wir auch $\C^d$ definieren.
+    \marginnote{[21. Dez]}
+    Wie $\R^d$ wollen wir nun auch $\C^d$ definieren.
 
     \begin{definition}[Der Raum $\C^d$]
         \begin{align*}
