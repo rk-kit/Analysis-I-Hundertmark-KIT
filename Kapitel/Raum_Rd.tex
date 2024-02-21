@@ -1,0 +1,506 @@
+\subsection{Der Raum $\R^d$ und Normen}
+
+\thispagestyle{pagenumberonly}
+
+\begin{definition}
+    \begin{align*}
+        \R^d &\definedas\text{ Vektorraum der reellen $d$-Tupel}\\
+        &=\set{\pair{x_1, x_2, \dots, x_d} ~\middle|~ x_j\in\R,~ j=1,\dots,d }\\
+    \end{align*}
+\end{definition}
+
+\begin{notation}[Linearkombination von Vektoren]
+    Es sei
+    \begin{align*}
+        x&= \pair{x_1, \dots, x_d}\\
+        y&= \pair{y_1, \dots, y_d}
+        \intertext{und $\alpha, \beta \in \R$, dann gilt}
+        \alpha x + \beta y &\definedas \pair{\alpha x_1 + \beta y_1, \alpha x_2 + \beta y_2, \dots, \alpha x_d + \beta y_d}
+    \end{align*}
+\end{notation}
+
+\begin{notation}[Vektorschreibweise]
+    \begin{align*}
+        x = \begin{pmatrix}
+                x_1 \\ \vdots \\ x_d
+        \end{pmatrix}
+    \end{align*}
+\end{notation}
+
+\horizontalline
+Im $\R$ haben wir Konvergenz über den Betrag definiert. Im $\R^d$ benötigen wir daher ein ähnliches Konzept. Wir betrachten dafür zunächst einige Beispiele solcher \textit{Normen}.
+
+\begin{beispiel}[Euklidische Länge eines Vektors]
+    Für $d=2$ gilt für die euklidische Länge $\norm{x}$ eines Vektors $x\in\R^2$
+    \begin{align*}
+        \norm{x}^2 &= (x_1)^2 + (x_2)^2\\
+        \norm{x} &= \sqrt{(x_1)^2 + (x_2)^2}
+    \end{align*}
+    Allgemein gilt
+    \begin{align*}
+        \norm{x} &\definedas \sqrt{\pair{\sum_{j=1}^{d} (x_j) ^2}}\tag{$x\in\R^d$}
+        \intertext{Wir schreiben auch}
+        \norm{x}_2 &\definedas \sqrt{\pair{\sum_{j=1}^{d} (x_j) ^2}}\tag{$x\in\R^d$}
+    \end{align*}
+\end{beispiel}
+
+\begin{beispiel}[Andere Normen]
+    Neben der euklidischen lassen sich noch weitere Normen definieren. Zum Beispiel
+    \begin{align*}
+        \norm{x}_1 &\definedas \sum_{j=1}^{d} \abs{x_j} \tag{Manhattan-Norm}\\
+        \norm{x}_{\infty} &\definedas \max_{1\leq j \leq d} \abs{x_j}\tag{Maximums-Norm}
+    \end{align*}
+\end{beispiel}
+
+\begin{definition}[Norm] % Definition 1
+    Eine Norm auf $\R^d$ (oder einem reellen Vektorraum) ist eine Abbildung
+    \begin{align*}
+        \norm{.}: \R^d\fromto \R
+    \end{align*}
+    mit folgenden Eigenschaften:
+    \begin{enumerate}[label=\alph*)]
+        \item $\norm{x} \geq 0~\forall x\in\R^d$ sowie $\norm{x} = 0\impl x=0$
+        \item $\forall\lambda\in\R,~x\in\R^d\colon \norm{\lambda x} = \abs{\lambda}\cdot\norm{x}$
+        \item $\forall x,y\in\R^d\colon\norm{x+y} \leq \norm{x} + \norm{y}$\quad\text{(Dreiecksungleichung)}
+    \end{enumerate}
+\end{definition}
+
+\begin{bemerkung}
+    Dass a), b) und c) für $\norm{\cdot}_1$ und $\norm{\cdot}_{\infty}$ gelten, ist einfach zu zeigen. Außerdem sind a) und b) für $\norm{\cdot}_2$ einfach zu zeigen, c) ist tricky. (Übung)
+\end{bemerkung}
+
+\begin{definition}[Äquivalenz von Normen]
+    2 Normen $\norm{\cdot}_a$ und $\norm{\cdot}_b$ sind äquivalent, falls
+    \begin{align*}
+        \exists c_1, c_2\in\R\colon c_1\cdot\norm{x}_a \leq \norm{x}_b \leq c_2 \norm{x}_a\quad\forall x\in V
+    \end{align*}
+\end{definition}
+
+\begin{beispiel}[Äquivalenz von euklidischer und Maximums-Norm]
+    \label{beispiel:norm-equiv}
+    Wir zeigen, dass $\norm{\cdot}_{\infty}$ und $\norm{\cdot}_{2}$ äquivalent sind.
+    \begin{align*}
+        \abs{x_k} &\leq \sqrt{\sum_{j=1}^{d} \abs{x_j}^2} = \norm{x}_2\tag{$1\leq k \leq d$}\\
+        \impl \norm{x}_{\infty} &= \max_{k=1,\dots, d} \abs{x_k} \leq \norm{x}_2\tag{1}
+        \intertext{Umgekehrt}
+        \norm{x}_2^2 = \sum_{j=1}^{d} \abs{x_j}^2 &\leq \sum_{j=1}^{d} \pair{\max_{k=1,\dots, d}\pair{\abs{x_k}}}^2 = d \cdot \norm{x}_{\infty}^2\\
+        \impl \norm{x}_2 &\leq \sqrt {d}\cdot \norm{x}_{\infty}\tag{2}
+        \intertext{Mit (1) und (2) gilt dann}
+        \impl \frac{1}{\sqrt{d}}\cdot \norm{x}_2 &\leq\norm{x}_{\infty} \leq \norm{x}_2
+    \end{align*}
+\end{beispiel}
+
+\begin{uebung}
+    Weisen Sie die Äquivalenz von $\norm{x}_1$ und $\norm{x}_\infty$ analog zu Beispiel~\ref{beispiel:norm-equiv} nach.
+\end{uebung}
+
+\subsection{Konvergenz im $\R^d$}
+
+\begin{bemerkung}[Abstand zwischen 2 Vektoren im $\R^d$]
+    Zu jeder Norm auf $\R^d$ (oder reellen Vektorräumen) definieren wir den Abstand von 2 Vektoren $x,y\in\R^d$ als $\norm{x-y}$.
+    \begin{align*}
+        d(x,y) &\definedas \norm{x-y}
+        \intertext{Mit $z$ als weiterem Vektor gilt}
+        \norm{x-y} &= \norm{x-z+z-y}\\
+        &\leq \norm{x-z} + \norm{z-y}\\
+        \norm{x-y} &= \norm{-(y-x)} = \abs{-1}\cdot \norm{y-x} = \norm{y-x}
+    \end{align*}
+\end{bemerkung}
+
+\begin{folgerung}[Mehrdimensionale $\varepsilon$-Umgebung]
+    Bisher basierte unser Konvergenz-Begriff auf dem Abstand von $(x_n)_n$ und $x$ und somit auf einer eindimensionalen $\varepsilon$-Umgebung.\\
+    Wir verallgemeinern dieses Konzept für eine offene Kugel im $\R^d$ mit $x\in\R^d$
+    \begin{align*}
+        B_\varepsilon(x) \definedas \set{y\in\R^d\middle |~ \norm{x-y}_2 < \varepsilon}
+    \end{align*}
+\end{folgerung}
+
+\begin{visualisierung}[Zweidimensionale $\varepsilon$-Umgebung]
+    Wir formen die Bedingung um
+    \begin{align*}
+        \norm{x-y}_2 &< \varepsilon\\
+        \impl \sqrt{(x_1-y_1)^2 + (x_2 - y_2)^2} &< \varepsilon\\
+        \impl \pair{x_1-y_1}^2 + \pair{x_2-y_2}^2 &< \varepsilon^2
+    \end{align*}
+    In der Visualisierung erhalten wir einen offenen Ball um $x$ mit Radius $\varepsilon$.
+
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}
+            \draw[fill=\rgbcolor{230}{230}{230}, dashed] (0,0) circle (0.75cm);
+            \draw[fill=\rgbcolor{230}{230}{230}, dashed] (2,1) circle (0.75cm);
+            \draw[->] (-3,0) -- (3,0);
+            \draw[->] (0,-3) -- (0,3);
+            \draw[->] (0,0) node {$\times$} -- (0.52, 0.52) node[below, pos=0.8] {$\varepsilon$};
+            \draw[->] (2,1) node {$\times$} -- (2, 1.75) node[right, pos=0.5] {$\varepsilon$};
+            \draw (-0.25, 0.35) -- (-1.5, 0.35) node[left] {$B_{\varepsilon}\pair{(0,0)}$};
+            \draw (1.75, 1.35) -- (-1.5, 1.35) node[left] {$B_{\varepsilon}\pair{(x_1,x_2)}$};
+            \node at (-0.75,-0.75) {1.};
+            \node at (2.75,0.25) {2.};
+            \node at (3,-2) {\begin{tabular}{l}
+                                 1. $x=(0,0)$ \\ 2. $x=(x_1, x_2)$
+            \end{tabular}};
+        \end{tikzpicture}
+        \caption{Zweidimensionale $\varepsilon$-Umgebungen}
+    \end{figure}
+\end{visualisierung}
+
+\begin{definition}[Konvergenz im $\R^d$] % Definition 2
+    Sei $(x_n)_n$ eine Folge in $\R^d$ mit $x_n\in\R^d~\forall n$. Dann konvergiert $(x_n)_n$ gegen $x\in\R^d$, falls
+    \begin{alignat*}{2}
+        \forall\varepsilon > 0~\exists N\in\N\colon& \norm{x_n-x}_2 <\varepsilon\quad&&\forall n\geq N
+        \intertext{Das heißt}
+        \forall\varepsilon > 0~\exists N\in\N\colon& x_n\in B_{\varepsilon}(x)\quad&&\forall n\geq N
+    \end{alignat*}
+\end{definition}
+
+\begin{beobachtung}
+    \label{beobachtung:rd-konvergenz}
+    Es sei ${x_n}\in\R^d$ mit $x_n = \pair{x_n^1, x_n^2, \dots, x_n^d}$\footnote{Koordinaten von $(x_n)_n$}. Damit ergeben sich die Folgen $(x_n^1)_n$, $(x_n^2)_n$, \dots, $(x_n^d)_n$ in $\R$.
+    Angenommen $(x_n)_n$ konvergiert gegen $x\in\R^d$. Dann konvergieren alle Folgen $(x_n^l)_n$ in $\R$ und $\biglim{\ntoinf} x_n^l = x^l$
+
+    \begin{proof}
+        \begin{align*}
+            \abs{x_n^{l} - x^{l}}^2 &\leq \sum_{j=1}^{d} \abs{x_n^{j}-x^{j}}^2 = \norm{x_n -x}_2^2\quad \forall l=1,\dots, d\\
+            \impl \abs{x_n^l-x^l} &\leq \norm{x_n-x}_2 \fromto 0\text{ für } n\fromto\infty
+        \end{align*}
+        Also konvergiert $(x_n^l)$ gegen $x^l$ in $\R$ für alle $l=1,\dots,d$.\qedhere
+    \end{proof}
+\end{beobachtung}
+
+\noindent Es gilt sogar die Umkehrung:
+
+\begin{satz}[Konvergenz in $\R$ und $\R^d$]
+    \label{satz:Rd-R-konvergenz}
+    Eine Folge $(x_n)_n$ in $\R^d$ konvergiert genau dann, wenn jede der Koordinatenfolge $(x_n^l)_n$ in $\R$ konvergiert $\forall l=1,\dots, d$.
+
+    \begin{proof}
+        \theoremescape
+        \anf{$\impl$} Siehe Beobachtung~\ref{beobachtung:rd-konvergenz}.\\
+        \anf{$\Leftarrow$} Angenommen
+        \begin{alignat*}{3}
+            \exists x^l &\definedas \lim_{\ntoinf} x^l_n\quad&&\forall l=1,\dots, d\\
+            \impl \abs{x_n^l - x^l} &\fromto 0 \text{ für }\ntoinf\quad&&\forall l=1,\dots, d\\
+            \intertext{Das heißt}
+            \forall\varepsilon > 0~\exists N_l\in\N&\colon \abs{x_n^l - x^l} < \frac{\varepsilon}{\sqrt{d}}\quad&&\forall n\geq N_{l}
+            \intertext{Wir definieren $N\definedas\max\pair{N_1, N_2, \dots, N_d}$. Dann gilt}
+            \norm{x_n-x}^2_2 &= \sum_{j=1}^{d} \abs{x_n^j - x^j}^2 < \sum_{j=1}^{d} \pair{\frac{\varepsilon}{\sqrt{d}}}^2\quad&&\forall n\geq N\\
+            &= d\cdot\frac{\varepsilon^2}{d} = \varepsilon^2\\
+            \impl \norm{x_n-x}_2 &< \varepsilon\quad&&\forall n\geq N
+            \intertext{Wir definieren den Grenzwert}
+            x&\definedas (x^1, x^2, \dots, x^d)\\
+            x^j&\definedas \lim_{\ntoinf} x_n^j&&&\qedhere
+        \end{alignat*}
+    \end{proof}
+\end{satz}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% 19. Dezember 2023
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{bemerkung}[Reihen im $\R^d$]
+    \marginnote{[19. Dez]}
+    Sei $(a_n)_n\sbset\R^d$ mit $a_n = \pair{a_n^1, a_n^2, \dots, a_n^d}$. Wie können wir die Reihe $\sum_{n=1}^{\infty} a_n$ dann definieren?. Wir betrachten die Partialsummen
+    \begin{align*}
+        s_n &\definedas \sum_{j=1}^{n} a_j
+    \end{align*}
+    und können damit die Konvergenz definieren.
+\end{bemerkung}
+
+\begin{definition}[Konvergenz von Reihen im $\R^d$]
+    Die Reihe $\sum_{n} a_n$ konvergiert, falls die Folge der Partialsummen $(s_n)_n$ im $\R^d$ konvergiert.
+\end{definition}
+
+\begin{satz}[Cauchy-Kriterium für Konvergenz im $\R^d$]
+    \label{satz:cauchy-Rd}
+    Eine Folge $(x_n)_n$ ist genau dann in $\R^d$ konvergent, wenn $(x_n)_n$ eine Cauchy-Folge ist. Das heißt
+    \begin{align*}
+        \forall\varepsilon > 0~\exists N\in\N\colon \norm{x_n-x_m}_2 < \varepsilon\quad\forall n,m\geq N
+    \end{align*}
+
+    \begin{proof}
+        \anf{$\impl$}: Wie im Fall $\R$.\\
+        \anf{$\Leftarrow$}: Sei $(x_n)_n$ Cauchy-Folge. Dann sind alle Koordinaten $(x_n^j)_n$ Cauchy-Folgen in $\R$, weil
+        \begin{align*}
+            \abs{x_n^j-x_m^j} = \sqrt {\abs{x_n^j-x_m^j}^2} &\leq \sqrt {\sum_{l=1}^{d} \abs{x_n^l - x_m^l}^2} = \norm{x_1-x_m}_2\\
+            \impl x_n &\definedas \lim_{\ntoinf} x_n^j\text{ existiert}\\
+            \impl x &= \lim_{\ntoinf} x_n\text{ existiert}\qedhere
+        \end{align*}
+    \end{proof}
+\end{satz}
+
+\begin{beobachtung}[Bolzano-Weierstraß im $\R^d$]
+    Wir wollen Satz~\ref{satz:bolzano-weierstrass} im $\R^d$ zeigen:
+    Jede beschränkte Folge $(x_n)_n$ in $\R^d$ besitzt eine konvergente Teilfolge. Wir sagen $(x_n)_n$ ist im $\R^d$ beschränkt, wenn
+    \begin{align*}
+        \exists R\geq 0\colon \norm{x_n}_2 \leq R\quad\forall n\in\N\\
+        \text{bzw.} \quad x_n\in\set{y\in\R^d \middle|~ \norm{y}_2 \leq R}
+    \end{align*}
+    \begin{proof}
+        \begin{align*}
+            \forall j=1,\dots, d\colon &(x_n^j)_n\text{ beschränkte Folge}\\
+            \impl \exists\text{ Teilfolge } &(x_n^1)_k\text{ von } (x_n^1)_n\text{, welche in }\R\text{ konvergiert}
+            \intertext{Das heißt es gibt eine Ausdünnung $\sigma: \N\fromto\N$ mit $\sigma(k) < \sigma(k+1)$. Dann existiert der Grenzwert}
+            x_1 &\definedas \lim_{\ntoinf} x_{\sigma(k)}
+            \intertext{Genauso für $(x^2_n)_n$}
+            \annot{\impl}{\ref{satz:bolzano-weierstrass}} \exists \kappa\colon \N\fromto\N\colon &(x^2_{\kappa(k)})_k\text{ konvergent}
+            \intertext{Catch: $(x^1_{\sigma(k)}, x^2_{\kappa(k)})_k$ ist im Allgemeinen keine Teilfolge von $(x^1_n, x^2_n)_n$. Lösung: Betrachte}
+            \pair{x_{\sigma(k)}}_k\text{ Teilfolge von }&(x_n)_n = \pair{x^1_{\sigma(k)}, \dots, x^d_{\sigma(k)}}
+            \intertext{Mache mit $(x^2_{\sigma(k)})_k$ weiter}
+            \annot{\impl}{\ref{satz:bolzano-weierstrass}} \exists\text{ konvergente} &\text{ Teilfolge von } (x^2_{\sigma(k)})_k\\
+            \intertext{Wir erhalten eine Ausdünnung $\sigma_2: \N\fromto\N$}
+            \impl &\pair{x^2_{\sigma(\sigma_2(k))}}_k\text{ konvergent}\\
+            \kappa_2 &\definedas \sigma \circ \sigma_{2}\\
+            \impl\text{ Neue Teilfolge } &(x_{\kappa_{2}(k)}) = (x^1_{\kappa_{2}(k)},\dots, x^d_{\kappa_{2}(k)})
+        \end{align*}
+        Für die Teilfolge existieren $\biglim{k\fromto\infty} x^1_{\kappa_{2}(k)}$ und $\biglim{k\fromto\infty} x^2_{\kappa_{2}(k)}$. Wir machen induktiv so weiter, nach maximal $d$ Schritten sind wir fertig.
+    \end{proof}
+\end{beobachtung}
+
+\begin{beobachtung}[Beschränktheit von Cauchy-Folgen im $\R^d$]
+    Jede Cauchy-Folge in $\R^d$ ist beschränkt.
+    \begin{proof}
+        Sei $\varepsilon = 1$
+        \begin{align*}
+            \impl \exists N\colon\norm{x_n-x_m}_2 &\leq 1\quad\forall n,m\geq N\\
+            \impl \forall n,m\geq N\colon \norm{x_n}_2 &= \norm{x_n-x_N+x_N}_2\\
+            &\leq \norm{x_n-x_N}_2 + \norm{x_N}_2 < 1 + \norm{x_N}\\
+            \impl \norm{x}_2 &\leq \max\pair{\norm{x_1}_2, \norm{x_2}_2,\dots\norm{x_{N-1}}_2, 1+\norm{x_N}_2}\qedhere
+        \end{align*}
+    \end{proof}
+\end{beobachtung}
+
+\begin{bemerkung}
+    Außerdem gilt: Eine Cauchy-Folge im $\R^d$ ist genau dann konvergent, wenn sie eine konvergente Teilfolge besitzt. (Beweis wie im Fall $d=1$).\\
+    Alle bisherigen Konvergenz-Sätze, welche keine Anordnung benötigen, übertragen sich auf $\R^d$.\\
+    Insbesondere: Reihe $\sum_{n=1}^{\infty} a_n$ ist absolut konvergent, falls $\sum_{n=1}^{\infty} \norm{a_n}_2 < \infty$.\\
+    Ist eine Reihe $\sum_{n=1}^{\infty} a_n$ in $\R^d$ absolut konvergent, so konvergieren alle Umordnungen gegen den selben Wert. Und es gilt die Umkehrung! (Satz von Dirichlet in $\R^d$)
+\end{bemerkung}
+
+\subsection{Die Komplexen Zahlen $\C$}
+
+Was sind die komplexen Zahlen?\\
+$x^2+1$ ist nie Null $\forall x\in\R$. Wir definieren eine Zahl $i$ mit $i^2=-1$ und schreiben $x+iy$ mit $x,y\in\R$. Dann ergeben sich folgende Rechenregeln:
+\begin{align*}
+(x_1 + y_1\cdot i)
+    \cdot (x_2 + y_2\cdot i) &= x_1\cdot x_2 + x_1\cdot y_2\cdot i + y_1 \cdot x_2 \cdot i + y_1\cdot y_2\cdot i^2\\
+    &= x_1\cdot x_2 - y_1\cdot y_2 + \pair{x_1\cdot y_2 + y_1\cdot x_2}\cdot i\\
+    (x_1+y_1\cdot i) + (x_2 + y_2\cdot i) &= x_1 + x_2 + \pair{y_1+y_2}\cdot i
+\end{align*}
+
+\begin{definition}[Rechenregeln von Komplexen Zahlen]
+    Wir betrachten die euklidische Ebene $\R^2 \definedas \set{(x,y) ~\middle|~ x,y\in\R}$.
+    \begin{align*}
+        z &= (x,y)\in\R^2\\
+        z_1 + z_2 &\definedas (x_1, y_1) + (x_2,y_2)\\
+        &\definedas (x_1 + x_2, y_1 + y_2)
+        \intertext{Wir definieren eine \anf{seltsame} Multiplikation}
+        z_1 \cdot z_2 &\definedas (x_1, y_1)\cdot (x_2, y_2)\\
+        &\definedas \pair{x_1 x_2 - y_1 y_2,~x_1 y_2 + x_2 y_1}
+        \intertext{Wir definieren den Betrag}
+        \abs{z} &\definedas\text{ Länge des Vektors } (x,y) = \sqrt {x^2+y^2}\\
+        \intertext{Wir nennen $x$ den Realteil von $z$ und $y$ den Imaginärteil von $z$ und schreiben}
+        \Re\of{z} &= x\\
+        \Im\of{z} &= y
+    \end{align*}
+\end{definition}
+
+\begin{visualisierung}[Euklidische Ebene]
+    \theoremescape
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}
+            \draw[->] (-3,0) -- (3,0) node[below] {$\Re$};
+            \draw[->] (0,-3) -- (0,3) node[right] {$\Im$};
+            \draw (0.5,0.1) -- (0.5,-0.1) node[below] {$1$};
+            \draw (0.1,0.5) -- (-0.1,0.5) node[left] {$1$};
+            \draw[->, blue] (0,0) -- (1,1) node[right, black] {$\pair{2+2i}$};
+            \draw[->, blue] (0,0) -- (-2,0) node[below, black] {$\pair{-4+0i}$};
+            \draw[->, blue] (0,0) -- (-1,-2.5) node[below, black] {$\pair{-1-5i}$};
+        \end{tikzpicture}
+        \caption{Komplexe Zahlen in der Euklidischen Ebene}
+    \end{figure}
+\end{visualisierung}
+
+\newpage
+
+\begin{bemerkung}
+    Man rechnet einfach nach, dass Multiplikation und Addition die Assoziativität, Kommutativität und Distributivität erfüllen. (Übung)\\
+    Außerdem lässt sich zeigen, dass $(1,0)$ das neutrale Element der Multiplikation ist:
+    \begin{align*}
+    (1,0)
+        \cdot (1,0) &= (1,0)\\
+        z\cdot (1,0) &= (x,y)\cdot(1,0)= (x,y) = z
+        \intertext{Wir definieren $e_1\definedas \pair{1,0}$, $e_2\definedas\pair{0,1}$ und erhalten}
+        \pair{x,y} &= x\cdot e_1 + y\cdot e_{2}
+        \intertext{Außerdem gilt}
+        \pair{e_1}^2 &= e_1\\
+        \pair{e_2}^2 &= -e_2
+        \intertext{Zur Vereinfachung schreiben wir $1$ für $e_1$ und $i$ für $e_2$}
+        z &= (x,y) = x\cdot e_1 + y\cdot e_2\\
+        &= x\cdot 1 + y\cdot i\\
+        &= x + y\cdot i
+    \end{align*}
+\end{bemerkung}
+
+\begin{bemerkung}
+    $\C = \R^2$ mit obiger Multiplikation und Addition. Wir identifizieren $\R$ mit $\R\times\set{0}$ als Teilmenge von $\C$.
+\end{bemerkung}
+
+\begin{definition}[Komplexe Konjugation]
+    Was ist das Inverse von $z=x+y\cdot i$? Wir definieren
+    \begin{align*}
+        \overline{z} &\definedas \overline{x+yi} \definedas x-yi
+        \intertext{Damit gilt}
+        z\cdot\overline{z} &= (x+yi) \cdot (x-yi)\\
+        &= (x^2-(yi)^2) = x^2+y^2 = \abs{z}^2\\
+        \impl \abs{z} &= \sqrt{z\cdot\overline{z}}\\[10pt]
+        \frac{1}{z} &= \frac{\overline{z}}{z\cdot\overline{z}} = \frac{z}{\abs{z}^2} = \frac{x-yi}{x^2+y^2} = \frac{x}{x^2+y^2} - \frac{y}{x^2+y^2}\cdot i
+    \end{align*}
+\end{definition}
+
+\begin{visualisierung}[Komplexe Konjugation]
+    \theoremescape
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}
+            \draw[->] (-3,0) -- (3,0) node[below] {$\Re$};
+            \draw[->] (0,-3) -- (0,3) node[right] {$\Im$};
+            \draw[->, blue] (0,0) -- (1,1.5) node[right, black] {$z_1$};
+            \draw[->, blue] (0,0) -- (1,-1.5) node[right, black] {$\overline{z_1}$};
+        \end{tikzpicture}
+        \caption{Komplexe Konjugation in der Euklidischen Ebene}
+    \end{figure}
+\end{visualisierung}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% 21. Dezember 2023
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Der Raum $\C^d$}
+
+\begin{definition}[Der Raum $\C^d$]
+    \marginnote{[21. Dez]}
+    Wie $\R^d$ wollen wir nun auch $\C^d$ definieren.
+    \begin{align*}
+        \C^d &\definedas \set{\pair{z_1, \dots, z_d} ~\middle | ~ z_j \in\C}
+    \end{align*}
+    Es sei $u=\pair{u_1, \dots, u_d}\in\C^d$, $w=\pair{w_q,\dots, w_d}\in\C^d$, $\lambda\in\C$. Wir definieren
+    \begin{enumerate}[label=(\roman*)]
+        \item Addition: $u+w = \pair{u_1+w_1,\dots,u_d+w_d}$
+        \item Skalarmultiplikation: $\lambda\cdot u = \pair{\lambda u_1,\dots,\lambda u_d}$
+    \end{enumerate}
+    $\C^d$ ist ein komplexer Vektorraum.
+    \begin{align*}
+        \norm{u} &\definedas \sqrt{\pair{\sum_{j=1}^{d} \abs{u_j}^2}}\tag{Euklidische Länge}\\
+        u &= \pair{u_1, \dots, u_d}\\
+        &= \pair{x_1+y_1i, x_2 + y_2 i,\dots, x_d + y_d i}\\
+        &= \pair{x_1, x_2,\dots,x_d} + \pair{y_1,y_2,\dots,y_d}\cdot i = x + y\cdot i\tag{$x,y\in\R^d$}
+    \end{align*}
+\end{definition}
+
+\begin{definition}[Komplexe Konjugation im $\C^d$]
+    Für $u\in\C^d$ und $u=x+i\cdot y$ definieren wir
+    \begin{align*}
+        \overline{u} &\definedas x - i\cdot y\tag{$x,y\in\R^d$}
+        \intertext{Damit gilt}
+        x &= \frac{1}{2}\pair{u+\overline{u}}\tag{Realteil}\\
+        y &= \frac{1}{2i}\pair{u-\overline{u}}\tag{Imaginärteil}
+    \end{align*}
+    $\C^d \cong \R^{2d}$
+\end{definition}
+
+\subsection[Skalarprodukte]{Skalarprodukte\protect\footnotemark}
+\footnotetext{Dieses Unterkapitel weicht in der Reihenfolge und in der Definition des Skalarprodukts leicht von der VL - in der nur die Eigenschaften (i) bis (iv) vorgestellt wurden - ab}
+
+Zurück im $\R^d$. Wann gilt die Dreiecksungleichung? Auf $\R^d$ gibt es ein Skalarprodukt.
+
+\begin{definition}[Skalarprodukt]
+    Ein Skalarprodukt $\sprod{\cdot, \cdot}: \R^d \times \R^d \fromto \R$ hat folgende Eigenschaften:
+    \begin{enumerate}[label=(\roman*)]
+        \item $\sprod{x_1+x_2,y} = \sprod{x_1,y} + \sprod{x_2,y}$
+        \item $\sprod{x,y_1+y_2} = \sprod{x,y_1} + \sprod{x,y_2}$
+        \item $\sprod{\alpha x,y} = \alpha \sprod{x,y}$
+        \item $\sprod{x,\alpha y} = \alpha \sprod{x,y}$
+        \item $\sprod{x,y} = \sprod{y,x}$
+        \item $\sprod{x,x} \geq 0$
+        \item $\sprod{x,x} = 0 \equivalent x = 0$
+    \end{enumerate}
+\end{definition}
+
+\begin{beispiel}
+    Wir können zum Beispiel folgendes Skalarprodukt in $\R^d$ definieren
+    \begin{align*}
+        \sprod{x,y} &\definedas \sum_{j=1}^{d} x_j\cdot y_j\tag{$x,y\in\R^d$}\\
+        \impl \sprod{x,x} &\definedas \sum_{j=1}^{d} \pair{x_j}^2 = \norm{x}^2_2 \geq 0\\
+        \norm{x}_2 &= \sqrt {\sprod{x,x}}
+    \end{align*}
+\end{beispiel}
+
+\begin{uebung}
+    Rechnen Sie die Eigenschaften des definierten Skalarprodukts nach.
+\end{uebung}
+
+\begin{beobachtung}[Cauchy-Schwarzer-Ungleichung]
+    \begin{align*}
+        \norm{x}_2^2 &= \sprod{x,x}\quad\forall x\in\R^d
+        \intertext{Es sei $t\in\R$}
+        \norm{x+ty}^2_2 &= \sprod{x+ty, x+ty}\\
+        &= \sprod{x,x+ty} + \sprod{ty,x+ty}\\
+        &= \sprod{x,x} + \sprod{x+ty} + \sprod{ty,x} + \sprod{ty+ty}\\
+        &= \sprod{x,x} + 2t\sprod{x,y} + t^2\sprod{y,y}
+        \intertext{Genauso}
+        \norm{x-ty}_2^2 &= \sprod{x-ty, x-ty}\\
+        &= \sprod{x,x} - 2t\sprod{x,y} + t^2\sprod{y,y}\\
+        &= \norm{y}_2^2 t^2 - 2\sprod{x,y}t + \norm{x}_2^2
+        \intertext{Sei $y\neq 0$}
+        &= \norm{y}_2^2 \cdot\pair{t^2 - \frac{2\sprod{x,y}}{\norm{y}_2^2} + \pair{\frac{\sprod{x,y}}{\norm{y}_2^2}}^2 - \pair{\frac{\sprod{x,y}}{\norm{y}_2^2}}^2} + \norm{x}_2^2\\
+        \intertext{Wir setzen $a = \norm{y}_2^2$, $b= \sprod{x,y}$, $c= \norm{x}_2^2$}
+        &= a\cdot\Bigg(\underbrace{t^2 - \frac{2b}{a}\cdot t + \pair{\frac{b}{a}}^2}_{=\pair{t-\frac{b}{a}}^2} - \pair{\frac{b}{a}}^2\Bigg) + c\\
+        &= a\cdot\pair{t-b}^2 - \frac{b^2}{a}+c
+    \end{align*}
+    Da wir am Anfang der Rechnung eine Norm verwendet haben, muss der Ausdruck nicht-negativ sein
+    \begin{align*}
+        a\cdot\pair{t-b}^2 - \frac{b^2}{a}+c &\geq 0\quad\forall t\in\R
+        \intertext{Das heißt wir müssen haben}
+        -\frac{b^2}{a} + c &\geq 0\\
+        \equivalent b^2 &\leq ac\\
+        \equivalent \sprod{x,y}^2 &\leq \norm{y}_2^2 \cdot\norm{x}_2^2\\
+        \equivalent \abs{\sprod{x,y}} &\leq \norm{y}_2\cdot \norm{x}_2\tag{Cauchy-Schwarzer-Ungl.}
+    \end{align*}
+\end{beobachtung}
+
+\begin{bemerkung}
+    Und ist $y \neq 0$ und gilt $\abs{\sprod{x+y}} = \norm{x}_2\cdot \norm{y}_2$. Dann sind $x$ und $y$ linear abhängig. Das heißt
+    \begin{align*}
+        \exists t\in\R \text{ mit } x = ty
+    \end{align*}
+    \begin{proof}
+        Dann gilt $b^2 = ac$
+        \begin{align*}
+            \impl -\frac{b^2}{a} + c &= 0\\
+            \impl 0 \leq \norm{x-ty}^2_2 &= a\cdot\pair{t-\frac{b}{a}}^2 = 0 \text{ für } t=\frac{b}{a}\\
+            \impl x-ty &= 0\\
+            \impl x&= ty\qedhere
+        \end{align*}
+    \end{proof}
+\end{bemerkung}
+
+\begin{bemerkung}
+    Erkenntnis: Aus Cauchy-Schwarzer folgt die Dreiecksungleichung für die Euklidische Norm.
+    \begin{align*}
+        \norm{x+y}_2^2 &= \sprod{x+y,x+y}\\
+        &= \sprod{x,x+y}+ \sprod{y,x+y}\\
+        &= \sprod{x,x} + 2 \sprod{x,y} + \sprod{y,y}\\
+        &= \norm{x}_2^2 + 2\sprod{x,y} + \norm{y}_2^2\\
+        &\leq \norm{x}_2^2 + 2\abs{\sprod{x,y}} + \norm{y}_2^2\\
+        &\leq \norm{x}_2^2 + 2\norm{x}_2 \norm{y}_2 + \norm{y}^2\\
+        &= \pair{\norm{x}_2 + \norm{y}_2}^2\\
+        \impl \norm{x+y}_2 &\leq \norm{x}_2 + \norm{y}_2\tag{Dreiecksungleichung für Eukl. Norm}
+    \end{align*}
+    Frage: Was passiert, wenn $\norm{x+y}_2 = \norm{x}_2 + \norm{y}_2$? (Später)
+\end{bemerkung}
+
+\newpage
