@@ -228,7 +228,7 @@
 
     \section{[*] $\R^d$, Konvergenz im $\R^d$, die komplexen Zahlen $\C$ und der Raum $\C^d$}
 
-    \subsection{[*] Der Raum $\R^d$ und Normen}
+    \subsection{Der Raum $\R^d$ und Normen}
 
     \thispagestyle{pagenumberonly}
 
@@ -324,7 +324,7 @@
         Weisen Sie die Äquivalenz von $\norm{x}_1$ und $\norm{x}_\infty$ analog zu Beispiel~\ref{beispiel:norm-equiv} nach.
     \end{uebung}
 
-    \subsection{[*] Konvergenz im $\R^d$}
+    \subsection{Konvergenz im $\R^d$}
 
     \begin{bemerkung}[Abstand zwischen 2 Vektoren im $\R^d$]
         Zu jeder Norm auf $\R^d$ (oder reellen Vektorräumen) definieren wir den Abstand von 2 Vektoren $x,y\in\R^d$ als $\norm{x-y}$.
@@ -378,15 +378,16 @@
     \begin{definition}[Konvergenz im $\R^d$] % Definition 2
         Sei $(x_n)_n$ eine Folge in $\R^d$ mit $x_n\in\R^d~\forall n$. Dann konvergiert $(x_n)_n$ gegen $x\in\R^d$, falls
         \begin{alignat*}{2}
-            \forall\varepsilon > 0~\exists N\in\N\colon& \norm{x_1-x}_2 <\varepsilon\quad&&\forall n\geq N
+            \forall\varepsilon > 0~\exists N\in\N\colon& \norm{x_n-x}_2 <\varepsilon\quad&&\forall n\geq N
             \intertext{Das heißt}
             \forall\varepsilon > 0~\exists N\in\N\colon& x_n\in B_{\varepsilon}(x)\quad&&\forall n\geq N
         \end{alignat*}
     \end{definition}
 
-    \begin{beobachtung}[Konvergenz in $\R$ vs $\R^d$]
+    \begin{beobachtung}
+        \label{beobachtung:rd-konvergenz}
         Es sei ${x_n}\in\R^d$ mit $x_n = \pair{x_n^1, x_n^2, \dots, x_n^d}$\footnote{Koordinaten von $(x_n)_n$}. Damit ergeben sich die Folgen $(x_n^1)_n$, $(x_n^2)_n$, \dots, $(x_n^d)_n$ in $\R$.
-        Angenommen $(x_n)_n$ konvergiert gegen $x\in\R^d$. Dann konvergieren alle Folgen $(x_n^l)_n$ in $\R$ und $\lim_{\ntoinf} x_n^l = x^l$
+        Angenommen $(x_n)_n$ konvergiert gegen $x\in\R^d$. Dann konvergieren alle Folgen $(x_n^l)_n$ in $\R$ und $\biglim{\ntoinf} x_n^l = x^l$
 
         \begin{proof}
             \begin{align*}
@@ -399,132 +400,163 @@
 
     \noindent Es gilt sogar die Umkehrung:
 
-    \begin{satz}[Konvergenz im $\R^d$]
+    \begin{satz}[Konvergenz in $\R$ und $\R^d$]
+        \label{satz:Rd-R-konvergenz}
         Eine Folge $(x_n)_n$ in $\R^d$ konvergiert genau dann, wenn jede der Koordinatenfolge $(x_n^l)_n$ in $\R$ konvergiert $\forall l=1,\dots, d$.
 
         \begin{proof}
-            ~\\\anf{$\impl$} Gerade gezeigt.\\
+            \theoremescape
+            \anf{$\impl$} Siehe Beobachtung~\ref{beobachtung:rd-konvergenz}.\\
             \anf{$\Leftarrow$} Angenommen
-            \begin{align*}
-                \exists x^l &\definedas \lim_{\ntoinf} x^l_n\quad\forall l=1,\dots, d\\
-                \impl \abs{x_n^l - x^l} &\fromto 0 \text{ für }\ntoinf\quad\forall l=1,\dots, d\colon\\
+            \begin{alignat*}{3}
+                \exists x^l &\definedas \lim_{\ntoinf} x^l_n\quad&&\forall l=1,\dots, d\\
+                \impl \abs{x_n^l - x^l} &\fromto 0 \text{ für }\ntoinf\quad&&\forall l=1,\dots, d\\
                 \intertext{Das heißt}
-                \forall\varepsilon > 0~\exists N_l\in\N\colon \abs{x_n^l - x^l} &< \frac{\varepsilon}{\sqrt{d}}\quad\forall n\geq N_{l}
-                \intertext{Wir definieren}
-                N&\definedas\max\pair{N_1, N_2, \dots, N_d}
-                \intertext{Dann gilt $\forall n>N$}
-                \norm{x_n-x}^2_2 &= \sum_{j=1}^{d} \abs{x_n^j - x^j}^2 < \sum_{j=1}^{d} \pair{\frac{\varepsilon}{\sqrt{d}}}^2\\
+                \forall\varepsilon > 0~\exists N_l\in\N&\colon \abs{x_n^l - x^l} < \frac{\varepsilon}{\sqrt{d}}\quad&&\forall n\geq N_{l}
+                \intertext{Wir definieren $N\definedas\max\pair{N_1, N_2, \dots, N_d}$. Dann gilt}
+                \norm{x_n-x}^2_2 &= \sum_{j=1}^{d} \abs{x_n^j - x^j}^2 < \sum_{j=1}^{d} \pair{\frac{\varepsilon}{\sqrt{d}}}^2\quad&&\forall n\geq N\\
                 &= d\cdot\frac{\varepsilon^2}{d} = \varepsilon^2\\
-                \impl \norm{x_n-x}_2 &< \varepsilon\quad\forall n\geq N
+                \impl \norm{x_n-x}_2 &< \varepsilon\quad&&\forall n\geq N
                 \intertext{Wir definieren den Grenzwert}
-                x&\definedas (x^1, x^2, \dots, x^d)\quad x^j\definedas \lim_{\ntoinf} x_n^j\qedhere
-            \end{align*}
+                x&\definedas (x^1, x^2, \dots, x^d)\\
+                x^j&\definedas \lim_{\ntoinf} x_n^j&&&\qedhere
+            \end{alignat*}
         \end{proof}
     \end{satz}
-
-    \newpage
 
     %%%%%%%%%%%%%%%%%%%%%%%%
     % 19. Dezember 2023
     %%%%%%%%%%%%%%%%%%%%%%%%
 
-    \begin{bemerkung}
+    \begin{bemerkung}[Reihen im $\R^d$]
         \marginnote{[19. Dez]}
-        Sei $(a_n)_n\in\R^d$ mit $a_n = \pair{a_n^1, a_n^2, \dots, a_n^d}$. Reihe $\sum_{n=1}^{\infty} a_n = ??$. Wir betrachten die Partialsummen
+        Sei $(a_n)_n\sbset\R^d$ mit $a_n = \pair{a_n^1, a_n^2, \dots, a_n^d}$. Wie können wir die Reihe $\sum_{n=1}^{\infty} a_n$ dann definieren?. Wir betrachten die Partialsummen
         \begin{align*}
             s_n &\definedas \sum_{j=1}^{n} a_j
         \end{align*}
+        und können damit die Konvergenz definieren.
     \end{bemerkung}
 
-    \begin{definition}
-        $\sum_{n} a_n$ konvergiert, falls $(s_n)_n$ im $\R^d$ konvergiert
+    \begin{definition}[Konvergenz von Reihen im $\R^d$]
+        Die Reihe $\sum_{n} a_n$ konvergiert, falls die Folge der Partialsummen $(s_n)_n$ im $\R^d$ konvergiert.
     \end{definition}
 
     \begin{satz}[Cauchy-Kriterium für Konvergenz im $\R^d$]
-        Eine Folge $(x_n)_n$ ist genau dann im $\R^d$ konvergent, wenn $(x_n)_n$ eine Cauchy-Folge ist. Das heißt
+        \label{satz:cauchy-Rd}
+        Eine Folge $(x_n)_n$ ist genau dann in $\R^d$ konvergent, wenn $(x_n)_n$ eine Cauchy-Folge ist. Das heißt
         \begin{align*}
             \forall\varepsilon > 0~\exists N\in\N\colon \norm{x_n-x_m}_2 < \varepsilon\quad\forall n,m\geq N
         \end{align*}
 
         \begin{proof}
-            \anf{$\impl$} Wie im Fall $\R$.\\
-            \anf{$\Leftarrow$} Sei $(x_n)_n$ Cauchy-Folge.
+            \anf{$\impl$}: Wie im Fall $\R$.\\
+            \anf{$\Leftarrow$}: Sei $(x_n)_n$ Cauchy-Folge. Dann sind alle Koordinaten $(x_n^j)_n$ Cauchy-Folgen in $\R$, weil
             \begin{align*}
-                \impl\text{ Alle Koordinaten } &(x_n^j)_n\text{ sind Cauchy-Folgen in }\R\text{, weil}\\
-                \abs{x_n^j-x_m^j} &= \sqrt {\abs{x_n^j-x_m^j}^2} \leq \sqrt {\sum_{l=1}^{d} \abs{x_n^l - x_m^l}^2}\\
-                &= \norm{x_1-x_m}_2\\
+                \abs{x_n^j-x_m^j} = \sqrt {\abs{x_n^j-x_m^j}^2} &\leq \sqrt {\sum_{l=1}^{d} \abs{x_n^l - x_m^l}^2} = \norm{x_1-x_m}_2\\
                 \impl x_n &\definedas \lim_{\ntoinf} x_n^j\text{ existiert}\\
                 \impl x &= \lim_{\ntoinf} x_n\text{ existiert}\qedhere
             \end{align*}
         \end{proof}
-
-        \begin{proof}[2. Beweis]
-            Wir wollen Satz~\ref{satz:bolzano-weierstrass} im $\R^d$ zeigen:
-            Jede beschränkte Folge $(x_n)_n$ in $\R^d$ besitzt eine konvergente Teilfolge. ($(x_n)_n$ ist beschränkt, wenn $\exists R\geq 0\colon \norm{x_n}_2 \leq R~\forall n\in\N$ .Bzw., wenn $x_n\in\set{y\in\R^d \middle|~ \norm{y}_2 \leq R}$ (abgeschlossene Kugel mit Radius $R$ um 0).).\\
-            \begin{align*}
-                \impl \forall j=1,\dots, d\colon (x_n^j)_n\text{ beschränkte Folge im }\R^d\\
-                \impl \exists\text{ Teilfolge } (x_n^1)_k\text{ von } (x_n^1)_n\text{, welche in }\R\text{ konvergiert}\\
-                \impl \text{ Ausdünnung }\sigma: \N\fromto\N\text{ mit } \sigma(k) < \sigma(k+1)\\
-                n_k \definedas \sigma(k)\quad\text{Existenz des Grenzwert} x_1 \definedas \lim_{\ntoinf} x_{\sigma(k)}
-                \intertext{Genauso für $\lim (x^2_n)_n$}
-                \annot{\impl}{\ref{satz:bolzano-weierstrass}} \exists \kappa\colon \N\fromto\N\colon (x^2_{\kappa(k)})_k\text{ konvergent}
-                \intertext{Catch: $(x^1_{\sigma(k)}, x^2_{\sigma(k)})_k$ ist im Allgemeinen keine Teilfolge von $(x^1_n, x^2_n)_n$. Lösung betrachte}
-                \pair{x_{\sigma(k)}}_k\text{ Teilfolge von }(x_n)_n\\
-                = \pair{x^1_{\sigma(k)}, x^2_{\sigma(k)}, x^3_{\sigma(k)}, \dots, x^d_{\sigma(k)}, }
-                \intertext{Mache mit $(x^2_{\sigma(k)})_k$ weiter}
-                \annot{\impl}{\ref{satz:bolzano-weierstrass}} \exists\text{ konvergente Teilfolge von } (x^2_{\sigma(k)})_k\\
-                \impl\text{ Ausdünnung } \sigma_2: \N\fromto\N\\
-                \impl \pair{x^2_{\sigma(\sigma_2(k))}}_k\text{ konvergent}\\
-                x_2 \definedas \sigma \circ \sigma_{2}\\
-                \impl\text{ Neue Teilfolge } (x_{\kappa_{2}(k)}) = (x^1_{\kappa_{2}(k)},x^2_{\kappa_{2}(k)},x^3_{\kappa_{2}(k)},\dots, x^d_{\kappa_{2}(k)})
-                \intertext{mit $\lim_{k\fromto\infty} x^1_{\kappa_{2}(k)}$ und $\lim_{k\fromto\infty} x^2_{\kappa_{2}(k)}$ existent}
-            \end{align*}
-            Mache induktiv so weiter, nach maximal $d$ Schritten sind wir fertig.\\
-            Jede Cauchy-Folge in $\R^d$ ist beschränkt.
-            \begin{proof}
-                \begin{align*}
-                    \varepsilon = 1\\
-                    \impl \exists N\colon\norm{x_n-x_m}_2 \leq 1\quad\forall n,m\geq N\\
-                    \impl \norm{x_n}_2 = \norm{x_n-x_N+x_N}_2 \leq \norm{x_n-x_N}_2 + \norm{x}_2\quad\forall n\geq N\\
-                    < 1 + \norm{x_n}\\
-                    \impl \norm{x}_2 \leq \max\pair{\norm{x_1}_2, \norm{x_2}_2,\dots\norm{x_{N-1}}_2, 1+\norm{x_N}_2}
-                \end{align*}
-            \end{proof}
-            Auch: Eine Cauchy-Folge im $\R^d$ ist genau dann konvergent, wenn sie eine konvergente Teilfolge besitzt. (Beweis wie im Fall $d=1$).\\
-            Alle bisherigen Konvergenz-Sätze, welche nicht die Anordnung im $\R$ benötigen, übertragen sich auf $\R^d$.\\
-            Insbesondere: Reihe $\sum_{n=1}^{\infty} a_n$ ist absolut konvergent, falls $\sum_{n=1}^{\infty} \norm{a_n}_2 < \infty$.\\
-            Ist eine Reihe $\sum_{n=1}^{\infty} a_n$ in $\R^d$ konvergent, so konvergieren alle Umordnungen gegen den selben Wert. Und es gilt die Umkehrung! (Satz von Direcklet in $\R^d$)
-        \end{proof}
     \end{satz}
 
-    \subsection{[*] Die Komplexen Zahlen}
+    \begin{beobachtung}[Bolzano-Weierstraß im $\R^d$]
+        Wir wollen Satz~\ref{satz:bolzano-weierstrass} im $\R^d$ zeigen:
+        Jede beschränkte Folge $(x_n)_n$ in $\R^d$ besitzt eine konvergente Teilfolge. Wir sagen $(x_n)_n$ ist im $\R^d$ beschränkt, wenn
+        \begin{align*}
+            \exists R\geq 0\colon \norm{x_n}_2 \leq R\quad\forall n\in\N\\
+            \text{bzw.} \quad x_n\in\set{y\in\R^d \middle|~ \norm{y}_2 \leq R}
+        \end{align*}
+        \begin{proof}
+            \begin{align*}
+                \forall j=1,\dots, d\colon &(x_n^j)_n\text{ beschränkte Folge}\\
+                \impl \exists\text{ Teilfolge } &(x_n^1)_k\text{ von } (x_n^1)_n\text{, welche in }\R\text{ konvergiert}
+                \intertext{Das heißt es gibt eine Ausdünnung $\sigma: \N\fromto\N$ mit $\sigma(k) < \sigma(k+1)$. Dann existiert der Grenzwert}
+                x_1 &\definedas \lim_{\ntoinf} x_{\sigma(k)}
+                \intertext{Genauso für $(x^2_n)_n$}
+                \annot{\impl}{\ref{satz:bolzano-weierstrass}} \exists \kappa\colon \N\fromto\N\colon &(x^2_{\kappa(k)})_k\text{ konvergent}
+                \intertext{Catch: $(x^1_{\sigma(k)}, x^2_{\kappa(k)})_k$ ist im Allgemeinen keine Teilfolge von $(x^1_n, x^2_n)_n$. Lösung: Betrachte}
+                \pair{x_{\sigma(k)}}_k\text{ Teilfolge von }&(x_n)_n = \pair{x^1_{\sigma(k)}, \dots, x^d_{\sigma(k)}}
+                \intertext{Mache mit $(x^2_{\sigma(k)})_k$ weiter}
+                \annot{\impl}{\ref{satz:bolzano-weierstrass}} \exists\text{ konvergente} &\text{ Teilfolge von } (x^2_{\sigma(k)})_k\\
+                \intertext{Wir erhalten eine Ausdünnung $\sigma_2: \N\fromto\N$}
+                \impl &\pair{x^2_{\sigma(\sigma_2(k))}}_k\text{ konvergent}\\
+                \kappa_2 &\definedas \sigma \circ \sigma_{2}\\
+                \impl\text{ Neue Teilfolge } &(x_{\kappa_{2}(k)}) = (x^1_{\kappa_{2}(k)},\dots, x^d_{\kappa_{2}(k)})
+            \end{align*}
+            Für die Teilfolge existieren $\biglim{k\fromto\infty} x^1_{\kappa_{2}(k)}$ und $\biglim{k\fromto\infty} x^2_{\kappa_{2}(k)}$. Wir machen induktiv so weiter, nach maximal $d$ Schritten sind wir fertig.
+        \end{proof}
+    \end{beobachtung}
+
+    \begin{beobachtung}[Beschränktheit von Cauchy-Folgen im $\R^d$]
+        Jede Cauchy-Folge in $\R^d$ ist beschränkt.
+        \begin{proof}
+            Sei $\varepsilon = 1$
+            \begin{align*}
+                \impl \exists N\colon\norm{x_n-x_m}_2 &\leq 1\quad\forall n,m\geq N\\
+                \impl \forall n,m\geq N\colon \norm{x_n}_2 &= \norm{x_n-x_N+x_N}_2\\
+                &\leq \norm{x_n-x_N}_2 + \norm{x_N}_2 < 1 + \norm{x_N}\\
+                \impl \norm{x}_2 &\leq \max\pair{\norm{x_1}_2, \norm{x_2}_2,\dots\norm{x_{N-1}}_2, 1+\norm{x_N}_2}\qedhere
+            \end{align*}
+        \end{proof}
+    \end{beobachtung}
+
+    \begin{bemerkung}
+        Außerdem gilt: Eine Cauchy-Folge im $\R^d$ ist genau dann konvergent, wenn sie eine konvergente Teilfolge besitzt. (Beweis wie im Fall $d=1$).\\
+        Alle bisherigen Konvergenz-Sätze, welche keine Anordnung benötigen, übertragen sich auf $\R^d$.\\
+        Insbesondere: Reihe $\sum_{n=1}^{\infty} a_n$ ist absolut konvergent, falls $\sum_{n=1}^{\infty} \norm{a_n}_2 < \infty$.\\
+        Ist eine Reihe $\sum_{n=1}^{\infty} a_n$ in $\R^d$ absolut konvergent, so konvergieren alle Umordnungen gegen den selben Wert. Und es gilt die Umkehrung! (Satz von Dirichlet in $\R^d$)
+    \end{bemerkung}
+
+    \subsection{[*] Die Komplexen Zahlen $\C$}
 
     Was sind die komplexen Zahlen?\\
-    $x^2+1$ ist nie Null $\forall x\in\R$. Wir definieren eine Zahl $i$ mit $i^2=-1$.\\
-    Schreiben $x+iy$ mit $x,y\in\R$.
+    $x^2+1$ ist nie Null $\forall x\in\R$. Wir definieren eine Zahl $i$ mit $i^2=-1$ und schreiben $x+iy$ mit $x,y\in\R$. Dann ergeben sich folgende Rechenregeln:
     \begin{align*}
     (x_1 + y_1\cdot i)
-        \cdot (x_2 + y_2\cdot i) &= x_1\cdot x_2 + x_1\cdot i\cdot y_2 + i\cdot y_1 \cdot x_2 + (i\cdot y_1)\cdot(i\cdot y_2)\\
+        \cdot (x_2 + y_2\cdot i) &= x_1\cdot x_2 + x_1\cdot y_2\cdot i + y_1 \cdot x_2 \cdot i + y_1\cdot y_2\cdot i^2\\
         &= x_1\cdot x_2 - y_1\cdot y_2 + \pair{x_1\cdot y_2 + y_1\cdot x_2}\cdot i\\
         (x_1+y_1\cdot i) + (x_2 + y_2\cdot i) &= x_1 + x_2 + \pair{y_1+y_2}\cdot i
     \end{align*}
-    Betrachte $\R^2 = \set{(x,y) \middle|~ x,y\in\R}$.
-    % Visualisierung: Eukldische Ebene
-    \begin{align*}
-        z &= (x,y)\\
-        z_1 + z_2 &\definedas (x_1, y_1) + (x_2,y_2)\\
-        &\definedas (x_1 + x_2, y_1 + y_2)
-        \intertext{Wir definieren eine \anf{seltsame} Multiplikation}
-        z_1 \cdot z_2 &\definedas (x_1, y_1)\cdot (x_2, y_2)\\
-        &= \definedas \pair{x_1 x_2 - y_1 y_2, x_1 y_2 + x_2 y_1}
-        \intertext{Wir definieren den Betrag}
-        \abs{z} &\definedas\text{ Länge des Vektors } (x,y) = \sqrt {x^2+y^2}\\
-        \intertext{Wir nennen}
-        x&= \text{ Realteil von } z\\
-        y&= \text{ Imaginärteil von } z\\
-    \end{align*}
 
-    Man rechnet einfach nach, dass Multiplikation und Addition Assoziativität, Kommutativität und Distributivität erfüllen.
+    \begin{definition}[Rechenregeln von Komplexen Zahlen]
+        Wir betrachten die euklidische Ebene $\R^2 \definedas \set{(x,y) ~\middle|~ x,y\in\R}$.
+        \begin{align*}
+            z &= (x,y)\in\R^2\\
+            z_1 + z_2 &\definedas (x_1, y_1) + (x_2,y_2)\\
+            &\definedas (x_1 + x_2, y_1 + y_2)
+            \intertext{Wir definieren eine \anf{seltsame} Multiplikation}
+            z_1 \cdot z_2 &\definedas (x_1, y_1)\cdot (x_2, y_2)\\
+            &\definedas \pair{x_1 x_2 - y_1 y_2,~x_1 y_2 + x_2 y_1}
+            \intertext{Wir definieren den Betrag}
+            \abs{z} &\definedas\text{ Länge des Vektors } (x,y) = \sqrt {x^2+y^2}\\
+            \intertext{Wir nennen}
+            x&: \text{ Realteil von } z\\
+            y&: \text{ Imaginärteil von } z\\
+        \end{align*}
+    \end{definition}
+
+    \begin{visualisierung}[Euklidische Ebene]
+        \theoremescape
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \draw[->] (-3,0) -- (3,0);
+                \draw[->] (0,-3) -- (0,3);
+            \end{tikzpicture}
+            \caption{}
+        \end{figure}
+    \end{visualisierung}
+
+    \begin{bemerkung}
+        Man rechnet einfach nach, dass Multiplikation und Addition die Assoziativität, Kommutativität und Distributivität erfüllen. (Übung)\\
+        Außerdem lässt sich zeigen, dass $(1,0)$ das neutrale Element der Multiplikation ist:
+        \begin{align*}
+        (1,0)
+            \cdot (1,0) &= (1,0)\\
+            z\cdot (1,0) &= (x,y)\cdot(1,0)= (x,y) = z
+        \end{align*}
+    \end{bemerkung}
+
     \begin{align*}
     (1,0)
         \cdot (1,0) &= (1,0)\\
