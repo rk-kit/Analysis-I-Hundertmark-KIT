@@ -157,10 +157,10 @@ Wir betrachten Folgen von Funktionen. $f_n: D\fromto \R$ (oder $\R^d$) $\leadsto
         \end{align*}
         \anf{$\Leftarrow$}: Für $x\in D$ ist $(f_n(x))_n$ eine Cauchy-Folge. Und $f(x) = \biglim{\ntoinf} f_n(x)$ existiert $\fa x\in D$.
         \begin{align*}
-            \abs{f_n(x) - f(x)} &= \lim_{\ntoinf} \abs{f_n(x) - f_m(x)} < \varepsilon\quad n\geq N
+            \abs{f_n(x) - f(x)} = \lim_{\ntoinf} \abs{f_n(x) - f_m(x)} &< \varepsilon\quad \forall n\geq N
             \intertext{Sei $\varepsilon > 0$}
             \impl \ex N\in\N\colon \abs{f_n(x) - f_m(x)} &< \varepsilon\quad\fa n,m\geq N\\
-            \impl \abs{f_n(x) - f_m(x)} = \lim_{\ntoinf} \abs{f_n(x) - f_m(x)} &< \varepsilon\quad\fa n\geq N\\
+            \impl \abs{f_n(x) - f(x)} = \lim_{m\toinf} \abs{f_n(x) - f_m(x)} &< \varepsilon\quad\fa n\geq N\\
             \impl \sup_{x\in D} \abs{f_n(x) - f(x)} &\leq \varepsilon\quad\fa n\geq N\\
             \impl (f_n)_n \text{ geht gleichmäßig}& \text{  gegen } f\qedhere
         \end{align*}
