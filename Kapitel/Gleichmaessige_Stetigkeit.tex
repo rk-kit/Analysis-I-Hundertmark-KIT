@@ -1,0 +1,252 @@
+\subsection{Gleichmäßige und Lipschitz-Stetigkeit}
+\thispagestyle{pagenumberonly}
+
+\begin{definition}[Gleichmäßige Stetigkeit] % Def 1
+    Sei $f: D\fromto \R$ (oder $\R^d$) und $D\sbset\K$. $f$ heißt gleichmäßig stetig auf $D$, falls
+    \begin{align*}
+        \fa\varepsilon > 0\ex\delta\colon \abs{f(x)-f(y)} < \varepsilon\quad\fa x,y\in D \text{ mit } \abs{x-y} < \delta
+    \end{align*}
+\end{definition}
+
+\begin{bemerkung}
+    Gleichmäßige Stetigkeit ist nach der Definition eine strengere Eigenschaft als Stetigkeit auf $D$. Das heißt jede gleichmäßig stetige Funktion ist auch stetig, aber nicht umgekehrt.
+\end{bemerkung}
+
+\begin{beispiel}
+    \begin{align*}
+        f: \R\fromto\R,~x\mapsto\frac{1}{1+x^2}
+    \end{align*}
+    ist gleichmäßig stetig. (Übung)
+\end{beispiel}
+\begin{beispiel}
+    \begin{align*}
+        f: \rinterv{0,1}\fromto \R,~x\mapsto \frac{1}{x}
+    \end{align*}
+    ist stetig, aber nicht gleichmäßig stetig.
+    \begin{proof}
+        Für $0 < x < y = 2x$ gilt
+        \begin{align*}
+            \abs{f(x)-f(y)} &= \abs{\frac{1}{x} - \frac{1}{y}} = \frac{\abs{y-x}}{xy} = \frac{1}{y}\geq 1\qedhere
+        \end{align*}
+    \end{proof}
+\end{beispiel}
+
+\begin{definition}[Lipschitz-Stetigkeit]
+    Eine Funktion $f: D\fromto\R$ (oder $\R^d$) heißt Lipschitz-stetig, falls
+    \begin{align*}
+        \ex L\geq 0\colon \abs{f(x)-f(y)} \leq L\cdot\abs{x-y}\quad\forall x,y\in D
+    \end{align*}
+    Jede Lipschitz-stetige Funktion ist gleichmäßig stetig. $(\delta = \frac{\varepsilon}{L})$
+\end{definition}
+
+\begin{satz}[Heine, 1872] % Satz 3
+    \label{satz:17-3}
+    Sei $K\sbset\R$ kompakt und $f: K\fromto\R$ (oder $\R^d$) stetig. Dann ist $f$ gleichmäßig stetig.
+    \begin{proof}
+        Angenommen $f$ ist nicht gleichmäßig stetig.
+        \begin{align*}
+            \impl\ex\varepsilon > 0\fa \delta > 0\ex x,y\in &K\colon\abs{x-y} < \delta \text{ und } \abs{f(x)-f(y)} > \varepsilon
+            \intertext{Wähle $\delta = \frac{1}{n}$}
+            \impl\ex x_n, y_n\sbset K\colon \abs{x_n- y_n} &< \frac{1}{n} \text{ aber } \abs{f(x_n)-f(y_n)} \geq \varepsilon > 0\\
+            \impl x_n - y_n &\fromto 0 \text{ für } n\fromto\infty
+            \intertext{Da $K$ kompakt $\ex$Konvergente TF $(y_{n_l})_l$ von $(y_n)_n$ nach Satz~\ref{satz:bolzano-weierstrass}}
+            y &\definedas \lim_{l\toinf} (y_{n_l}) \text{ existiert in } K
+            \intertext{Für eine Teilfolge $(x_{n_l})_l$ von $(x_n)_n$ gilt}
+            \abs{x_{n_l} - y} &= \abs{x_{n_l} - y_{n_l} + y_{n_l} - y}\\
+            &\leq \underbrace{\abs{x_{n_l} - y_{n_l}}}_{<\frac{1}{n}\fromto 0} + \underbrace{\abs{y_{n_l} - y}}_{\fromto 0}\fromto 0\\
+            \impl \abs{f(x_{n_l}) - f(y_{n_l})} &\geq \varepsilon > 0
+            \intertext{Aber}
+            \abs{f(x_{n_l}) - f(y_{n_l})} &= \abs{f(x_{n_l}) - f(y) + f(y) - f(y_{n_l})}\\
+            &\leq \underbrace{\abs{f(x_{n_l}) - f(y)}}_{\fromto 0} + \underbrace{\abs{f(y)-f(y_{n_l})}}_{\fromto 0}
+        \end{align*}
+        Damit ergibt sich ein Widerspruch zur Stetigkeit von $f$ und $f$ ist damit gleichmäßig stetig.
+    \end{proof}
+\end{satz}
+
+\subsection{Punktweise und gleichmäßige Konvergenz von Funktionenfolgen}
+
+Wir betrachten Folgen von Funktionen. $f_n: D\fromto \R$ (oder $\R^d$) $\leadsto$ Folge $(f_n)_n$ von Funktionen.
+
+\begin{definition}[Punktweise Konvergenz] % Def 4
+    Eine Funktionenfolge $(f_n)_n$, $f_n: D\fromto\R$ (oder $\R^d$) konvergiert punktweise falls
+    \begin{align*}
+        \lim_{\ntoinf} f_n(x) \text{ existiert für jedes } x\in D
+    \end{align*}
+    Das heißt $(f_n(x))_n$ ist eine konvergente Folge $\fa x\in\R$. Dann definieren wir
+    \begin{align*}
+        f(x) \definedas \lim_{\ntoinf} f_n(x)
+    \end{align*}
+    eine Funktion $f: D\fromto \R$ (oder $\R^d$). Und sagen $f$ ist der punktweise Limes der Funktionenfolge $f_n(x) \fromto f(x)~\fa x\in D$.
+\end{definition}
+
+\begin{beispiel}
+    Die Funktion
+    \begin{align*}
+        f_n(x) &= x^n\quad 0 \leq x \leq 1
+        \intertext{konvergiert punktweise gegen}
+        f(x) &= \begin{cases}
+                    0\quad &0 \leq x < 1\\
+                    1\quad &x = 1
+        \end{cases}
+    \end{align*}
+\end{beispiel}
+
+\begin{beispiel}
+    Die Funktion
+    \begin{align*}
+        f_n(x) &= x^{\frac{1}{n}}\quad 0 \leq x \leq 1
+        \intertext{ist stetig und punktweise konvergent gegen}
+        f(x) &= \begin{cases}
+                    0\quad&x = 0\\
+                    1\quad&0 < x \leq 1
+        \end{cases}
+    \end{align*}
+\end{beispiel}
+
+\begin{beispiel}
+    Die Funktion
+    \begin{align*}
+        f_n(x) &= \pair{1-x^2}^{\frac{n}{2}}\quad -1 \leq x \leq 1
+        \intertext{ist stetig und punktweise konvergent gegen}
+        f(x) &= \begin{cases}
+                    1\quad&x = 0\\
+                    0\quad&0 < \abs{x}\leq 1
+        \end{cases}
+    \end{align*}
+\end{beispiel}
+
+\begin{definition}[Gleichmäßige Konvergenz - Weierstraß 1841] % Definition 5
+    $D\sbset\R$, Funktionenfolge $f_n: D\fromto\R$ (oder $\R^d$). $(f_n)_n$ konvergiert gleichmäßig gegen $f: D\fromto\R$ (oder $\R^d$) falls
+    \begin{align*}
+        \fa\varepsilon > 0\ex N\in \N \text{ mit } \abs{f_n(x) - f(x)} < \varepsilon\quad\fa n\geq N, x\in D
+    \end{align*}
+\end{definition}
+
+\begin{bemerkung}
+    Also gilt bei gleichmäßiger Konvergenz
+    \begin{align*}
+        \sup_{x\in D} \abs{f_n(x) - f(x)} &\leq \varepsilon\\
+        \impl \lim_{\ntoinf} \sup_{x\in D}\abs{f_n(x) - f(x))} &= 0\\
+        \equivalent \limsup_{\ntoinf} \pair{\abs{f_n(x) - f(x)}} &= 0
+    \end{align*}
+\end{bemerkung}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% 01. Februar 2024
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{notation}[Supremumsnorm]
+    \marginnote{[01. Feb]}
+    Es sei $f: D\fromto \R$ (oder $\R^d$, $\C$). Dann schreiben wir
+    \begin{align*}
+        \norm{f}_{\infty} &\definedas \norm{f}_{D,\infty} = \norm{f}_{L^{\infty}\of{D}}\\
+        &= \sup_{x\in D} \abs{f(x)}
+    \end{align*}
+    Norm auf dem Vektorraum der beschränkten Funktionen auf $D$.
+\end{notation}
+
+\begin{satz}[Cauchy-Kriterium für gleichmäßige Konvergenz]
+    Es sei $(f_n)_n$, $f_n: D\fromto \R$ (oder $\R^d$). Dann konvergiert $(f_n)_n$ genau dann gleichmäßig gegen $f$, wenn
+    \begin{align*}
+        \fa\varepsilon > 0\ex N\in\N\colon \abs{f_n(x) - f_m(x)} < \varepsilon\quad\forall x\in D, n,m\geq N
+    \end{align*}
+    \begin{proof}
+        \anf{$\impl$}: $f(x) = \biglim{\ntoinf} f_n(x)$ existiert $\fa x\in D$. Dann gilt unabhängig von $x\in D$
+        \begin{align*}
+            \impl \abs{f_n(x) - f_m(x)} \leq \underbrace{\abs{f_n(x) - f(x)}}_{<\frac{\varepsilon}{2}} + \underbrace{\abs{f(x) - f_n(x)}}_{<\frac{\varepsilon}{2}} < \varepsilon\quad\fa n,m\geq N
+        \end{align*}
+        \anf{$\Leftarrow$}: Für $x\in D$ ist $(f_n(x))_n$ eine Cauchy-Folge. Und $f(x) = \biglim{\ntoinf} f_n(x)$ existiert $\fa x\in D$.
+        \begin{align*}
+            \abs{f_n(x) - f(x)} &= \lim_{\ntoinf} \abs{f_n(x) - f_m(x)} < \varepsilon\quad n\geq N
+            \intertext{Sei $\varepsilon > 0$}
+            \impl \ex N\in\N\colon \abs{f_n(x) - f_m(x)} &< \varepsilon\quad\fa n,m\geq N\\
+            \impl \abs{f_n(x) - f_m(x)} = \lim_{\ntoinf} \abs{f_n(x) - f_m(x)} &< \varepsilon\quad\fa n\geq N\\
+            \impl \sup_{x\in D} \abs{f_n(x) - f(x)} &\leq \varepsilon\quad\fa n\geq N\\
+            \impl (f_n)_n \text{ geht gleichmäßig}& \text{  gegen } f\qedhere
+        \end{align*}
+    \end{proof}
+\end{satz}
+
+\begin{satz}[Weierstraß 1861] % Satz 7
+    \label{satz:17-7}
+    Seien $f_n: D \fromto \R$ (oder $\R^d$, $\C$) stetige Funktionen, welche gleichmäßig gegen eine Funktion $f$ konvergieren. Dann ist $f$ stetig!
+    \begin{proof}
+        Geg. $x_0\in D$, $x\in D$.
+        \begin{align*}
+            \abs{f(x) - f(x_0)} &= \abs{f(x) - f_n(x) + f_n(x) - f(x_0)}\\
+            &\leq \abs{f(x) - f_n(x)} + \abs{f_n(x) - f_n(x_0)} + \abs{f_n(x) - f(x_0)}
+            \intertext{Wir wenden den $\frac{\varepsilon}{3}$-Trick an}
+            \fa\varepsilon > 0\ex N\in \N\colon \abs{f_n(y) - f(y)} &< \frac{\varepsilon}{3}\quad\forall y\in D, n\geq N
+            \intertext{Wir fixieren $n=N$. Dann ist $f_n$ stetig}
+            \impl \fa\varepsilon > 0\ex \delta > 0\colon \abs{f_n(x) - f_n(x_0)} &< \frac{\varepsilon}{3}\quad \text{ für } \abs{x-x_0} < \delta\\
+            \intertext{Für $x\in D$, $\abs{x-x_0} < \delta$ gilt}
+            \abs{f(x) - f(x_0)} &\leq \abs{f(x) - f_n(x)} + \abs{f_n(x) - f_n(x_0)} + \abs{f_n(x_0) - f(x_0)}\\
+            &< \frac{\varepsilon}{3} + \frac{\varepsilon}{3} + \frac{\varepsilon}{3} = \varepsilon\\
+            \impl f & \text{ ist stetig } \qedhere
+        \end{align*}
+    \end{proof}
+\end{satz}
+
+\begin{satz}[Weierstraß' M-Test] % Satz 8
+    \label{satz:17-8}
+    Eine Reihe $ \sum_{n=0}^{\infty} f_n$ von Funktionen $f_n: D\fromto \R$ (oder $\R^d$) konvergiert gleichmäßig, wenn sie eine konvergente Majorante hat, das heißt $\ex M_n\geq 0, N_0\in \N$ mit
+    \begin{align*}
+        \abs{f_n(x)} &\leq M_n\quad\forall x\in D, n\geq N_0
+        \intertext{und}
+        \sum_{n=0}^{\infty} M_n &< \infty
+    \end{align*}
+    \begin{proof}
+        Partialsummen
+        \begin{align*}
+            s_n(x) &\definedas \sum_{j=0}^{n}  f_j(x)
+            \intertext{Wir betrachten $n,m\geq N_0$}
+            \abs{s_n(x) - s_m(x)} = \abs{\sum_{j=m+1}^{n} f_j(x)} &\leq \sum_{j=m+1}^{n} \underbrace{\abs{f_j(x)}}_{\leq M_j} \leq \sum_{j=m+1}^{n} M_j\\
+            \impl \abs{s_n(x) - s_m(x)} &\leq \sum_{j=m+1}^{\infty} M_j \fromto 0\text{ für } m\fromto\infty
+            \intertext{Haben}
+            \impl \sup_{n\geq m} \sup_{x\in D} \abs{s_n(x) - s_m(x)} &\fromto 0 \text{ für } m\fromto\infty\\
+            \equivalent s_{n} \text{ konvergiert} &\text{ gleichmäßig auf } D\qedhere
+        \end{align*}
+        Außerdem ist $s_n(x)$ stetig, da endliche Summen von stetigen Funktionen stetig sind. Und $s(x) = \biglim{\ntoinf} s_n(x)$ ist stetig nach Satz~\ref{satz:17-7}.
+    \end{proof}
+\end{satz}
+
+\begin{anwendung}[Potenzreihen]
+    Satz~\ref{satz:17-7} und Satz~\ref{satz:17-8} gelten auch für Funktionen $f_n: D\fromto \C$, $D\sbset \C$. Wir betrachten die Potenzreihe
+    \begin{align*}
+        f(x) &= \sum_{n=0}^{\infty} a_n x^n
+        \intertext{und Partialsummen}
+        s_n(x) &= \sum_{j=0}^{n} a_{j} x^j
+        \intertext{Als Summe von Polynomen sind die Partialsummen stetig. Wir wollen Weierstraß' M-Test anwenden. Sei $R > 0$ Konvergenzradius der Potenzreihe}
+        \impl \forall \abs{z} < R \text{ existiert } f(z) &= \sum_{n=0}^{\infty} a_n z^n
+        \intertext{Geg. $\delta > 0, R-\delta > 0$ sei $z_1\in \C$, $\abs{z_1} = R - \frac{\delta}{2} < R$. Aus der Verbesserung von Lemma~\ref{lemma:temp-4} folgt}
+        \ex M \geq 0\colon \abs{\sum_{n=k+1}^{\infty} a_n z^n} &\leq M\cdot \abs{\frac{z}{z_1}}^{k+1}\quad\fa \abs{z}< \abs{z_1} = R - \frac{\delta}{2}
+        \intertext{Sei $\abs{z} \leq R- \delta$}
+        \impl \frac{\abs{z}}{\abs{z_1}} &\leq \frac{R-\delta}{R-\frac{\delta}{2}} = q < 1\\
+        \impl \abs{\sum_{n=k+1}^{\infty} a_n z^n} &\leq M \cdot q^{k+1}\\
+        \impl \abs{s(z) - s_k(z)} &= \abs{\sum_{n=k+1}^{\infty} a_n z^n}\\
+        &\leq M \cdot q^{k+1} \fromto 0 \text{ für } k\fromto \infty\\
+        \sup_{\abs{z} \leq R - \delta} \abs{s(z) - s_k(z)} &\leq M \cdot q^{k+1} \fromto 0 \text{ für } k\fromto\infty
+        \intertext{Das heißt die Partialsumme}
+        s_k(z) &= \sum_{n=0}^{k} a_n z^n
+        \intertext{ konvergiert gleichmäßig gegen $s(z)$ für alle $\abs{z} \leq R-\delta$.}
+        \sum a_n z_1^n \text{ konvergent } &\impl a_n z_1^n \text{ Nullfolge }\\
+        \impl M &= \sup_{n\geq 0} \abs{a_n z_1^n} < \infty\\
+        \abs{a_n z^n} = \abs{a_n z_1^n\cdot\pair{\frac{z}{z_1}}^n} &\leq M \cdot \abs{\frac{z}{z_1}}^n \leq M \cdot q^n\\
+        \abs{z} &\leq R-\delta
+    \end{align*}
+\end{anwendung}
+
+\begin{satz}[Weierstraß] % Satz 9
+    \label{satz:17-9}
+    Sei $a <b$, $f: \interv{a,b}\fromto \R$ stetig. Dann gilt es existiert eine Folge von Polynomen $(P_n)_n$, welche gleichmäßig auf $\interv{a,b}$ gegen $f$ konvergiert. Das heißt
+    \begin{align*}
+        \lim_{n\fromto\infty} \norm{f-P_n}_{\infty}  = \biglim{\ntoinf} \sup_{a \leq x \leq b} \abs{f(x) - P_n(x)} = 0
+    \end{align*}
+
+    \begin{proof}
+    (Der konstruktive Beweis für den Approximationssatz von Weißerstraß mittels Bernstein-Polynomen, der in der Vorlesung behandelt wurde, fehlt hier)
+        .
+    \end{proof}
+\end{satz}
+
+\newpage
