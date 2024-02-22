@@ -491,7 +491,7 @@
     \input{Kapitel/Grenzwerte_Funktionen}
 
 
-    \section{[*] Gleichmäßige Stetigkeit und gleichmäßge Konvergenz}
+    \section{Gleichmäßige Stetigkeit und gleichmäßge Konvergenz}
 
     \subsection{Gleichmäßige und Lipschitz-Stetigkeit}
     \thispagestyle{pagenumberonly}
@@ -558,7 +558,7 @@
         \end{proof}
     \end{satz}
 
-    \subsection{[*] Punktweise und gleichmäßige Konvergenz von Funktionenfolgen}
+    \subsection{Punktweise und gleichmäßige Konvergenz von Funktionenfolgen}
 
     Wir betrachten Folgen von Funktionen. $f_n: D\fromto \R$ (oder $\R^d$) $\leadsto$ Folge $(f_n)_n$ von Funktionen.
 
@@ -634,7 +634,7 @@
         \marginnote{[01. Feb]}
         Es sei $f: D\fromto \R$ (oder $\R^d$, $\C$). Dann schreiben wir
         \begin{align*}
-            \norm{f}_{\infty} &\definedas \norm{f}_{D,\infty} = \norm{f}_{?}\\
+            \norm{f}_{\infty} &\definedas \norm{f}_{D,\infty} = \norm{f}_{L^{\infty}\of{D}}\\
             &= \sup_{x\in D} \abs{f(x)}
         \end{align*}
         Norm auf dem Vektorraum der beschränkten Funktionen auf $D$.
@@ -646,19 +646,18 @@
             \fa\varepsilon > 0\ex N\in\N\colon \abs{f_n(x) - f_m(x)} < \varepsilon\quad\forall x\in D, n,m\geq N
         \end{align*}
         \begin{proof}
-            \anf{$\impl$}: $f(x) = \biglim{\ntoinf} f_n(x)$ existiert $\fa x\in D$.
+            \anf{$\impl$}: $f(x) = \biglim{\ntoinf} f_n(x)$ existiert $\fa x\in D$. Dann gilt unabhängig von $x\in D$
             \begin{align*}
                 \impl \abs{f_n(x) - f_m(x)} \leq \underbrace{\abs{f_n(x) - f(x)}}_{<\frac{\varepsilon}{2}} + \underbrace{\abs{f(x) - f_n(x)}}_{<\frac{\varepsilon}{2}} < \varepsilon\quad\fa n,m\geq N
             \end{align*}
-            unabhängig von $x\in D$.\\
             \anf{$\Leftarrow$}: Für $x\in D$ ist $(f_n(x))_n$ eine Cauchy-Folge. Und $f(x) = \biglim{\ntoinf} f_n(x)$ existiert $\fa x\in D$.
             \begin{align*}
                 \abs{f_n(x) - f(x)} &= \lim_{\ntoinf} \abs{f_n(x) - f_m(x)} < \varepsilon\quad n\geq N
                 \intertext{Sei $\varepsilon > 0$}
                 \impl \ex N\in\N\colon \abs{f_n(x) - f_m(x)} &< \varepsilon\quad\fa n,m\geq N\\
-                \impl \abs{f_n(x) - f(x)} &= \lim_{\ntoinf} \abs{f_n(x) - f_m(x)} < \varepsilon\quad\fa n\geq N\\
+                \impl \abs{f_n(x) - f_m(x)} = \lim_{\ntoinf} \abs{f_n(x) - f_m(x)} &< \varepsilon\quad\fa n\geq N\\
                 \impl \sup_{x\in D} \abs{f_n(x) - f(x)} &\leq \varepsilon\quad\fa n\geq N\\
-                \impl (f_n)_n &\text{ geht gleichmäíg gegen } f\qedhere
+                \impl (f_n)_n \text{ geht gleichmäßig}& \text{  gegen } f\qedhere
             \end{align*}
         \end{proof}
     \end{satz}
@@ -667,16 +666,17 @@
         \label{satz:17-7}
         Seien $f_n: D \fromto \R$ (oder $\R^d$, $\C$) stetige Funktionen, welche gleichmäßig gegen eine Funktion $f$ konvergieren. Dann ist $f$ stetig!
         \begin{proof}
-            Geg. $x_0\in D, x\in D$.
+            Geg. $x_0\in D$, $x\in D$.
             \begin{align*}
                 \abs{f(x) - f(x_0)} &= \abs{f(x) - f_n(x) + f_n(x) - f(x_0)}\\
                 &\leq \abs{f(x) - f_n(x)} + \abs{f_n(x) - f_n(x_0)} + \abs{f_n(x) - f(x_0)}
-                \intertext{$\frac{\varepsilon}{3}$-Trick}
-                \fa\varepsilon > 0\ex N\in \N\colon \abs{f_n(y) - f(y)} < \frac{\varepsilon}{3}\quad\forall y\in D, n\geq N
+                \intertext{Wir wenden den $\frac{\varepsilon}{3}$-Trick an}
+                \fa\varepsilon > 0\ex N\in \N\colon \abs{f_n(y) - f(y)} &< \frac{\varepsilon}{3}\quad\forall y\in D, n\geq N
                 \intertext{Wir fixieren $n=N$. Dann ist $f_n$ stetig}
-                \impl \text{ Geg. }\varepsilon > 0\ex \delta > 0\colon \abs{f_n(x) - f_n(x)} &< \frac{\varepsilon}{3}\quad \text{ für } \abs{x-x_0} < \delta\\
+                \impl \fa\varepsilon > 0\ex \delta > 0\colon \abs{f_n(x) - f_n(x_0)} &< \frac{\varepsilon}{3}\quad \text{ für } \abs{x-x_0} < \delta\\
                 \intertext{Für $x\in D$, $\abs{x-x_0} < \delta$ gilt}
-                \abs{f(x) - f(x_0)} \leq \abs{f(x) - f_n(x)} + \abs{f_n(x) - f_n(x)} + \abs{f_n(x) - f(x_0)} &< \frac{\varepsilon}{3} + \frac{\varepsilon}{3} + \frac{\varepsilon}{3} = \varepsilon\\
+                \abs{f(x) - f(x_0)} &\leq \abs{f(x) - f_n(x)} + \abs{f_n(x) - f_n(x_0)} + \abs{f_n(x_0) - f(x_0)}\\
+                &< \frac{\varepsilon}{3} + \frac{\varepsilon}{3} + \frac{\varepsilon}{3} = \varepsilon\\
                 \impl f & \text{ ist stetig } \qedhere
             \end{align*}
         \end{proof}
@@ -688,95 +688,58 @@
         \begin{align*}
             \abs{f_n(x)} &\leq M_n\quad\forall x\in D, n\geq N_0
             \intertext{und}
-            \sum_{n=0}^{\infty} N_n &< \infty
+            \sum_{n=0}^{\infty} M_n &< \infty
         \end{align*}
         \begin{proof}
             Partialsummen
             \begin{align*}
                 s_n(x) &\definedas \sum_{j=0}^{n}  f_j(x)
                 \intertext{Wir betrachten $n,m\geq N_0$}
-                \abs{s_n(x) - s_m(x)} &= \abs{\sum_{j=m+1}^{n} f_j(x)} \leq \sum_{j=m+1}^{n} \underbrace{\abs{f_j(x)}}_{\leq M_j}\\
-                &\leq \sum_{j=m+1}^{n} M_j\\
-                \impl \abs{s_n(x) - s_m(x)} &\leq \underbrace{\sum_{j=m+1}^{n} M_j}_{\fromto 0}
+                \abs{s_n(x) - s_m(x)} = \abs{\sum_{j=m+1}^{n} f_j(x)} &\leq \sum_{j=m+1}^{n} \underbrace{\abs{f_j(x)}}_{\leq M_j} \leq \sum_{j=m+1}^{n} M_j\\
+                \impl \abs{s_n(x) - s_m(x)} &\leq \sum_{j=m+1}^{\infty} M_j \fromto 0\text{ für } m\fromto\infty
                 \intertext{Haben}
                 \impl \sup_{n\geq m} \sup_{x\in D} \abs{s_n(x) - s_m(x)} &\fromto 0 \text{ für } m\fromto\infty\\
-                \equivalent s_{n} \text{ konvergiert gleichmäßig auf } &D
-                \intertext{$s_n(x)$ stetig, da endliche Summen von stetigen Funktionen stetig sind}
-                \impl s(x) &= \lim_{\ntoinf} s_n(x) \text{ ist stetig nach Satz~\ref{satz:17-7}}\qedhere
+                \equivalent s_{n} \text{ konvergiert} &\text{ gleichmäßig auf } D\qedhere
             \end{align*}
+            Außerdem ist $s_n(x)$ stetig, da endliche Summen von stetigen Funktionen stetig sind. Und $s(x) = \biglim{\ntoinf} s_n(x)$ ist stetig nach Satz~\ref{satz:17-7}.
         \end{proof}
     \end{satz}
 
     \begin{anwendung}[Potenzreihen]
-        Satz~\ref{satz:17-7} und Satz~\ref{satz:17-8} gelten auch für Funktionen $f_n: D\fromto \C$, $D\sbset \C$. Potenzreihe
+        Satz~\ref{satz:17-7} und Satz~\ref{satz:17-8} gelten auch für Funktionen $f_n: D\fromto \C$, $D\sbset \C$. Wir betrachten die Potenzreihe
         \begin{align*}
-            f(x) &= \sum_{n=0}^{\infty} a_n x^n\\
-            s_n(x) &= \sum_{j=0}^{n} \underbrace{a_{j} x^j}_{\text{Polynom, daher stetig}}
-            \intertext{Wir wollen Weierstraß' M-Test anwenden. Sei $R > 0$ Konvergenzradius der Potenzreihe}
+            f(x) &= \sum_{n=0}^{\infty} a_n x^n
+            \intertext{und Partialsummen}
+            s_n(x) &= \sum_{j=0}^{n} a_{j} x^j
+            \intertext{Als Summe von Polynomen sind die Partialsummen stetig. Wir wollen Weierstraß' M-Test anwenden. Sei $R > 0$ Konvergenzradius der Potenzreihe}
             \impl \forall \abs{z} < R \text{ existiert } f(z) &= \sum_{n=0}^{\infty} a_n z^n
-            \intertext{Geg. $\delta > 0, R-\delta > 0$ sei $z_1\in \C$}
-            \abs{z_1} &= R - \frac{\delta}{2} < R
-            \intertext{Aus der Verbesserung von Lemma~\ref{lemma:temp-4} folgt}
-            \ex M \geq 0\colon \abs{\sum_{n=k+1}^{\infty} a_n z^n} &\leq M\cdot \abs{\frac{z}{z_1}}^{k+1}\quad\fa \abs{z}< \abs{z_1} = R - \frac{\delta}{2}\\
-            \abs{z} &\leq R- \delta\\
-            \impl \frac{\abs{z}}{\abs{z_1}} \leq \frac{R-\delta}{R-\frac{\delta}{2}} = q < 1\\
-            \impl \abs{\sum_{n=k+1}^{\infty} a_n z^n} \leq M \cdot q^{k+1}\\
+            \intertext{Geg. $\delta > 0, R-\delta > 0$ sei $z_1\in \C$, $\abs{z_1} = R - \frac{\delta}{2} < R$. Aus der Verbesserung von Lemma~\ref{lemma:temp-4} folgt}
+            \ex M \geq 0\colon \abs{\sum_{n=k+1}^{\infty} a_n z^n} &\leq M\cdot \abs{\frac{z}{z_1}}^{k+1}\quad\fa \abs{z}< \abs{z_1} = R - \frac{\delta}{2}
+            \intertext{Sei $\abs{z} \leq R- \delta$}
+            \impl \frac{\abs{z}}{\abs{z_1}} &\leq \frac{R-\delta}{R-\frac{\delta}{2}} = q < 1\\
+            \impl \abs{\sum_{n=k+1}^{\infty} a_n z^n} &\leq M \cdot q^{k+1}\\
             \impl \abs{s(z) - s_k(z)} &= \abs{\sum_{n=k+1}^{\infty} a_n z^n}\\
             &\leq M \cdot q^{k+1} \fromto 0 \text{ für } k\fromto \infty\\
-            \sup_{\abs{z} < R - \delta} \abs{s(z) - s_k(z)} &\leq M \cdot q^{k+1} \fromto 0 \text{ für } k\fromto\infty
-            \intertext{Partialsummen}
-            s_k(z) &= \sum_{n=0}^{k} a_n z^n \text{ konvergiert gleichmäßig gegen } s(z) \text{ für alle } \abs{z} \leq R-\delta
+            \sup_{\abs{z} \leq R - \delta} \abs{s(z) - s_k(z)} &\leq M \cdot q^{k+1} \fromto 0 \text{ für } k\fromto\infty
+            \intertext{Das heißt die Partialsumme}
+            s_k(z) &= \sum_{n=0}^{k} a_n z^n
+            \intertext{ konvergiert gleichmäßig gegen $s(z)$ für alle $\abs{z} \leq R-\delta$.}
+            \sum a_n z_1^n \text{ konvergent } &\impl a_n z_1^n \text{ Nullfolge }\\
+            \impl M &= \sup_{n\geq 0} \abs{a_n z_1^n} < \infty\\
+            \abs{a_n z^n} = \abs{a_n z_1^n\cdot\pair{\frac{z}{z_1}}^n} &\leq M \cdot \abs{\frac{z}{z_1}}^n \leq M \cdot q^n\\
+            \abs{z} &\leq R-\delta
         \end{align*}
-        liefert Stetigkeit.
     \end{anwendung}
 
     \begin{satz}[Weierstraß] % Satz 9
         \label{satz:17-9}
-        Sei $a <b$, $f: \interv{a,b}\fromto \R$ stetig. Dann gilt es existiert eine Folge von Polynomen $(P_n)_n$, welche gleichmäßig auf $\interv{a,b}$ gegen $f$ konvergiert. Das heißt $\norm{f-P_n}_{\infty}  = \biglim{\ntoinf} \sup_{a \leq x \leq b} \abs{f(x) - P_n(x)} = 0$
+        Sei $a <b$, $f: \interv{a,b}\fromto \R$ stetig. Dann gilt es existiert eine Folge von Polynomen $(P_n)_n$, welche gleichmäßig auf $\interv{a,b}$ gegen $f$ konvergiert. Das heißt
+        \begin{align*}
+            \lim_{n\fromto\infty} \norm{f-P_n}_{\infty}  = \biglim{\ntoinf} \sup_{a \leq x \leq b} \abs{f(x) - P_n(x)} = 0
+        \end{align*}
 
         \begin{proof}
-            O.B.d.A. $a=0$, $b=1$ -- sonst ist $g: \interv{0,1} \fromto \interv{a,b}, x\mapsto (b-a)x + a$ stetig und bijektiv und wir haben $h: \interv{0,1} \fromto \R, x\mapsto h(x) = f(g(x))$.\\
-            Def. Bernstein Polynome
-            \begin{align*}
-                P_n(x) &\definedas \sum_{k=0}^{n} \binom{n}{k} x^k \cdot\pair{1-x}^{n-k} \cdot f\of{\frac{k}{n}}\tag{$n\in\N$}
-                \intertext{Haben}
-                a)&\quad\sum_{k=0}^{n} \binom{n}{k}x^k \cdot \pair{1-x}^{n-k} = \pair{x+(1-x)}^n = 1\tag{Bernoulli}\\
-                b)&\quad \sum_{k=0}^{n} k\binom{n}{k}x^k\cdot (1-x)^{n-k} = n\cdot x\\
-                c)&\quad \sum_{k=0}^{n} k\cdot(k-1)\binom{n}{k}x^k \cdot\pair{1-x}^{n-k} = n\cdot(n-1) \cdot x^2\\
-                b)&\quad k\binom{n}{k} = k\cdot\frac{n!}{k!\cdot(n-k)!} = n\cdot\frac{(n-1)!}{(k-1)!(n+1-(k-1))!} = n\binom{n-1}{k-1}\\
-                \impl \sum_{k=0}^{n} k\binom{n}{k}x^k \cdot (1-x)^{n-k} &= \sum_{k=1}^{n} n \binom{n-1}{k-1} x^k \cdot (1-x)^{n-k}\\
-                &= n\cdot x\cdot \sum_{k=1}^{n} \binom{n-1}{k-1} x^{k-1} (1-x)^{n-1-(k-1)}\\
-                &= \sum_{j=0}^{n-1} \binom{n-1}{j} x^j \cdot (1-x)^{n-1-j} = nx = 1\\
-                c)&\quad \text{ Bernoulli: } k\cdot(k+1) \binom{n}{k} = n\cdot (n-1) \binom{n-2}{k-2}\tag{$k\geq 2$}\\
-                \sum_{k=0}^{n} k(k+1) \binom{n}{k} x^k (1-x)^{n-k} &= n(n-1) x^{k-2} \underbrace{\sum_{k=2}^{n} \binom{n-2}{k-2} x^{k-2} (1-x)^{n-2-(k-2)}}_{=(1+(1-x))^{k-2} = 1}
-            \end{align*}
-
-            \begin{align*}
-                \abs{f(x) - P_n(x)} &= \abs{\sum_{k=0}^{n} \binom{n}{k} x^k\pair{1-x}^{n-k}f(x) - \sum_{k=0}^{n}\binom{n}{k}x^k (1-x)^{n-k} f(\frac{n}{k}) }\\
-                &\leq \sum_{k=0}^{n} \binom{k}{k} x^k (1-k)^{n-k} \cdot \abs{f(x)- f\of{\frac{n}{k}}}
-                \intertext{Nach dem Satz von Heine ist $f$ stetig auf $\interv{0,1}$ das heißt}
-                \fa\varepsilon > 0\ex\delta > 0\colon\abs{f(x)-f(y)} < \varepsilon \text{ für } x,y\in\interv{0,1}, \abs{x-y} < \delta
-                \intertext{Teilen Summen in 2 Gebiete auf}
-                A_1 &\definedas \set{0 \leq k \leq n: \abs{x-\frac{k}{n}} < \delta}\\
-                A_2 &\definedas \set{0 \leq k \leq n: \abs{x-\frac{k}{n}} \geq \delta}\\
-                \impl \abs{f(x) - P_n(x)} \leq \underbrace{\sum_{k<A_1}^{} \binom{n}{k} x^k (1-k)^{n-k} \abs{f(x) - f(\frac{k}{n})}}_{\definedasbackwards \delta_1}\\
-                + \underbrace{\sum_{k<A_2}^{} \binom{n}{k} x^k (1-k)^{n-k} \abs{f(x) - f(\frac{k}{n})}}_{\definedasbackwards \delta_2}\\
-                s_1 < \varepsilon \sum_{k < A1}^{} \binom{n}{k} x^k (1-x)^{n-k} < \varepsilon\\
-                \intertext{$S2$}
-                \abs{x-\frac{k}{n}} < \delta\quad\equivalent\quad \frac{\abs{x-\frac{k}{n}}}{\delta^2} \geq 1
-                \intertext{mit}
-                \abs{f(x)-f(\frac{k}{n})} \leq \abs{f(x)} + \abs{f(\frac{k}{n})} \leq 2\cdot\sup_{0\leq x \leq 1} (f(x)) < \infty\\
-                \impl s_2 &\leq 2 \cdot\norm{f}_{\infty} \cdot \sum_{k=0}^{n} \binom{n}{k} x^k (1-x)^{n-k} \frac{\abs{x-\frac{k}{n}}}{\delta^2}\\
-                &\leq 2 \norm{f}_{\infty} \sum_{k=0}^{n} \binom{n}{k} x^k (1-x)^{n-k} \frac{\abs{x-\frac{k}{n}}}{\delta^2}\\
-                &= \frac{2\norm{f}}{\delta^2 \cdot n^2} \sum_{k=0}^{n} \binom{n}{k} x^k (1-x)^{n-k} \abs{nx -k}^2\\
-                \impl \sum_{k=0}^{n} \binom{n}{k} x^k (1-x)^{n-k} (k^2)\\
-                \vdots\quad ???\\
-                \vdots\quad ???\\
-                \impl \abs{f(x)-P_n(x)} \leq \varepsilon + \frac{\norm{f}_{\infty}}{2\delta^2 n}\\
-                \impl \sup_{0\leq x \leq 1} \abs{f(x) - P_n(x)} \leq \varepsilon + \frac{\norm{f}_{\infty}}{2\delta^2 n}\\
-                \impl \limsup_{\ntoinf} \norm{f-P_n}_{\infty} \leq \varepsilon\quad\fa \varepsilon > 0\\
-                ????
-            \end{align*}
+        (Der konstruktive Beweis für den Approximationssatz von Weißerstraß mittels Bernstein-Polynomen, der in der Vorlesung behandelt wurde, fehlt hier).
         \end{proof}
     \end{satz}
 
