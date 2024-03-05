@@ -153,7 +153,7 @@ Wir betrachten Folgen von Funktionen. $f_n: D\fromto \R$ (oder $\R^d$) $\leadsto
     \begin{proof}
         \anf{$\impl$}: $f(x) = \biglim{\ntoinf} f_n(x)$ existiert $\fa x\in D$. Dann gilt unabhängig von $x\in D$
         \begin{align*}
-            \impl \abs{f_n(x) - f_m(x)} \leq \underbrace{\abs{f_n(x) - f(x)}}_{<\frac{\varepsilon}{2}} + \underbrace{\abs{f(x) - f_n(x)}}_{<\frac{\varepsilon}{2}} < \varepsilon\quad\fa n,m\geq N
+            \impl \abs{f_n(x) - f_m(x)} \leq \underbrace{\abs{f_n(x) - f(x)}}_{<\frac{\varepsilon}{2}} + \underbrace{\abs{f(x) - f_m(x)}}_{<\frac{\varepsilon}{2}} < \varepsilon\quad\fa n,m\geq N
         \end{align*}
         \anf{$\Leftarrow$}: Für $x\in D$ ist $(f_n(x))_n$ eine Cauchy-Folge. Und $f(x) = \biglim{\ntoinf} f_n(x)$ existiert $\fa x\in D$.
         \begin{align*}
