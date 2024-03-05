@@ -95,7 +95,7 @@
     \end{enumerate}
     \begin{proof}[Beweis (iii)]
         \begin{align*}
-            \pair{f+g}'\of{x} &= \lim_{h\fromto 0} \frac{f(x+h)g(x+h) - f(x)g(x)}{h}\\
+            \pair{f\cdot g}'\of{x} &= \lim_{h\fromto 0} \frac{f(x+h)g(x+h) - f(x)g(x)}{h}\\
             &= \lim_{h\fromto 0} \frac{f(x+h)g(x+h) - f(x+h)g(x) + f(x+h)g(x) - f(x)g(x)}{h}\\
             &= \lim_{h\fromto 0} f(x+h)\cdot \underbrace{\frac{g(x+h)-g(x)}{h}}_{\fromto g'(x)} + \lim_{h\fromto 0} g(x) \cdot \underbrace{\frac{f(x+h)-f(x)}{h}}_{\fromto f'(x)}\\
             &= f(x) \cdot g'(x) + g(x)\cdot f'(x)\qedhere
