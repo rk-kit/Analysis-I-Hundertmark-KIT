@@ -173,7 +173,7 @@ Wir betrachten Folgen von Funktionen. $f_n: D\fromto \R$ (oder $\R^d$) $\leadsto
         Geg. $x_0\in D$, $x\in D$.
         \begin{align*}
             \abs{f(x) - f(x_0)} &= \abs{f(x) - f_n(x) + f_n(x) - f(x_0)}\\
-            &\leq \abs{f(x) - f_n(x)} + \abs{f_n(x) - f_n(x_0)} + \abs{f_n(x) - f(x_0)}
+            &\leq \abs{f(x) - f_n(x)} + \abs{f_n(x) - f_n(x_0)} + \abs{f_n(x_0) - f(x_0)}
             \intertext{Wir wenden den $\frac{\varepsilon}{3}$-Trick an}
             \fa\varepsilon > 0\ex N\in \N\colon \abs{f_n(y) - f(y)} &< \frac{\varepsilon}{3}\quad\forall y\in D, n\geq N
             \intertext{Wir fixieren $n=N$. Dann ist $f_n$ stetig}
