@@ -131,8 +131,8 @@
         &=1\cdot x^{n+1} + \sum_{k=1}^{n} \binom{n}{k}\cdot x^{n+1-k}\cdot y^{k}\\
         (x+y)^n\cdot y &= \sum_{k=0}^{n}\binom{n}{k}\cdot x^{n-k}\cdot y^{k+1}\tag{$l\definedas k+1$}\\
         &= \sum_{l=1}^{n+1} \binom{n}{l-1}\cdot x^{n+1-l}\cdot y^{l}\\
-        &= \sum_{k=1}^{n+1} \binom{n}{k+1}\cdot x^{n+1-k} \cdot y^{k}\\[10pt]
-        \impl (x+y)^{n+1} &= x^{n+1} + \sum_{k=1}^{n} \interv{\binom{n}{k}+\binom{n}{k+1}} \cdot x^{n+1-k}\cdot y^k + y^{n+1}\\
+        &= \sum_{k=1}^{n+1} \binom{n}{k-1}\cdot x^{n+1-k} \cdot y^{k}\\[10pt]
+        \impl (x+y)^{n+1} &= x^{n+1} + \sum_{k=1}^{n} \interv{\binom{n}{k}+\binom{n}{k-1}} \cdot x^{n+1-k}\cdot y^k + y^{n+1}\\
         &\annot{=}{\ref{lemma:binom-add}} \sum_{k=0}^{n+1} \binom{n+1}{k}\cdot x^{n+1-k}\cdot y^{k}\qedhere
     \end{align*}
 \end{proof}
